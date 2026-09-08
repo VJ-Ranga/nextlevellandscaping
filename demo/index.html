@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NextLevel Landscaping — Adelaide Landscape Design &amp; Construction</title>
+<meta name="description" content="NextLevel Landscaping designs and builds outdoor spaces across Adelaide — paving, retaining walls, fencing, turf, irrigation and landscape design. Licensed builder BLD320507.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="site-header">
+  <div class="container site-header__row">
+    <a class="brand" href="/">NEXTLEVEL<span>LANDSCAPING</span></a>
+    <nav class="main-nav">
+      <a href="#services">Services</a>
+      <a href="#projects">Our Work</a>
+      <a href="#current">Current Work</a>
+      <a href="#store">Store</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <a class="phone" href="tel:+61404440222"><i class="fa-solid fa-phone"></i> 0404 440 222</a>
+      <a class="btn-ghost" href="#contact">Get a free quote</a>
+      <button class="nav-toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Mobile drawer ===== -->
+<div class="drawer" id="drawer">
+  <div class="drawer__top">
+    <span class="brand" style="color:#fff">NEXTLEVEL<span>LANDSCAPING</span></span>
+    <button class="drawer__close" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#projects">Our Work</a>
+    <a href="#current">Current Work</a>
+    <a href="#store">Store</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="drawer__foot">
+    <a href="tel:+61404440222">0404 440 222</a><br>
+    Shop 1/41 Woodlands Terrace, Edwardstown SA 5039
+  </div>
+</div>
+
+<main>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="hero__media">
+      <!-- Ambient showreel goes here when client footage is supplied:
+           <video autoplay muted loop playsinline poster="…">…</video> -->
+      <img src="https://nextlevellandscaping.com.au/wp-content/uploads/2025/01/02102023_AUS_Urrbrae-landscape_24-Photo-Naveendra.jpg" alt="A completed NextLevel Landscaping garden transformation in Adelaide">
+    </div>
+    <div class="container hero__tag">
+      <span>Adelaide &bull; South Australian owned &bull; Licensed builder BLD320507</span>
+      <h2 style="margin-top:.8rem;max-width:16ch">Bring your garden to life</h2>
+    </div>
+    <div class="hero__cue">Scroll</div>
+  </section>
+
+  <!-- ===== Headline band ===== -->
+  <section class="band band--dark headline contour">
+    <div class="container">
+      <div class="row-split">
+        <div class="reveal">
+          <span class="eyebrow">First-choice Adelaide landscapers</span>
+          <h1>Taking Adelaide gardens to the next level</h1>
+          <p class="lead measure">Over a decade of design and construction across South Australia — paving, retaining walls, fencing, turf, irrigation and full landscape design, delivered by one experienced team.</p>
+          <div class="btns">
+            <a class="btn-ghost btn-ghost--fill" href="#contact">Get a free quote</a>
+            <a class="btn-ghost" href="#projects">See our work</a>
+          </div>
+        </div>
+        <div class="headline__aside reveal d1">
+          <strong>10+ yrs</strong>
+          Transforming front and back yards into spaces filled with love and laughter — from initial 2D &amp; 3D design through to the final planting.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Stats strip ===== -->
+  <section class="band band--tight">
+    <div class="container">
+      <div class="stats reveal" id="stats"></div>
+    </div>
+  </section>
+
+  <!-- ===== Services ===== -->
+  <section class="band" id="services">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">What we do</span>
+        <h2>One team for the whole garden</h2>
+        <p class="lead">From initial design all the way through to complete implementation at affordable rates — NextLevel Landscaping does it all.</p>
+      </div>
+      <div id="services-list"></div>
+    </div>
+  </section>
+
+  <!-- ===== Signature projects ===== -->
+  <section class="band band--dark contour" id="projects">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Our work</span>
+        <h2>Signature transformations</h2>
+        <p class="lead">Full-property builds across metro Adelaide — designed, engineered and finished in house.</p>
+      </div>
+      <div class="swiper proj-swiper" id="projects-swiper">
+        <div class="swiper-wrapper" id="projects-track"></div>
+      </div>
+      <div class="swiper-controls">
+        <button id="proj-prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
+        <button id="proj-next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Current work ===== -->
+  <section class="band" id="current">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Happening now</span>
+        <h2>Current work, live</h2>
+        <p class="lead">The jobs our teams are on this week — and exactly what stage each one is at. Updated as the build progresses.</p>
+      </div>
+      <div class="cw-grid" id="current-list"></div>
+      <p style="margin-top:3rem" class="reveal"><a class="btn-ghost" href="#">View all current projects</a></p>
+    </div>
+  </section>
+
+  <!-- ===== Process ===== -->
+  <section class="band band--dark" id="process">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">How we work</span>
+        <h2>From first visit to aftercare</h2>
+      </div>
+      <div class="proc-grid" id="process-list"></div>
+    </div>
+  </section>
+
+  <!-- ===== Store ===== -->
+  <section class="band" id="store">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">NextLevel Outdoors</span>
+        <h2>We don't just build it — we stock it</h2>
+        <p class="lead">An extensive range of landscaping products at our Edwardstown store. Authorised distributor of Lawn Solutions Australia.</p>
+      </div>
+      <div class="store-grid" id="store-list"></div>
+      <p style="margin-top:3rem" class="reveal"><a class="btn-ghost" href="#">Visit the store</a></p>
+    </div>
+  </section>
+
+  <!-- ===== Reviews ===== -->
+  <section class="band band--dark contour" id="reviews">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">From our clients</span>
+        <h2>Honest, reliable, on budget</h2>
+      </div>
+      <div class="swiper rev-swiper" id="reviews-swiper">
+        <div class="swiper-wrapper" id="reviews-track"></div>
+      </div>
+      <div class="swiper-controls">
+        <button id="rev-prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
+        <button id="rev-next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section class="band band--lg" id="contact">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Get in touch</span>
+        <h2>Tell us about your space</h2>
+        <p class="lead">Submit your details and one of our friendly team will be in touch soon.</p>
+      </div>
+      <div class="contact-wrap">
+        <form id="quote-form" class="reveal" novalidate>
+          <div id="form-ok" class="form-ok">Thanks — your enquiry has been received. We'll be in touch shortly. <em>(Demo form — nothing was sent.)</em></div>
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input type="text" id="f-name" name="name" required>
+            <span class="msg">Please enter your name.</span>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input type="email" id="f-email" name="email" required>
+            <span class="msg">Please enter a valid email.</span>
+          </div>
+          <div class="field">
+            <label for="f-phone">Phone</label>
+            <input type="tel" id="f-phone" name="phone" required>
+            <span class="msg">Please enter your phone number.</span>
+          </div>
+          <div class="field">
+            <label for="f-msg">What are you planning?</label>
+            <textarea id="f-msg" name="message" required></textarea>
+            <span class="msg">Please add a short message.</span>
+          </div>
+          <button type="submit" class="btn-ghost btn-ghost--fill">Send enquiry</button>
+          <p class="form-note">Prefer to talk? Call <a href="tel:+61404440222">0404 440 222</a>.</p>
+        </form>
+        <div class="contact-info reveal d1">
+          <dl>
+            <dt><i class="fa-solid fa-phone"></i></dt>
+            <dd><a href="tel:+61404440222">0404 440 222</a></dd>
+            <dt><i class="fa-solid fa-envelope"></i></dt>
+            <dd><a href="mailto:info@nextlevellandscaping.com.au">info@nextlevellandscaping.com.au</a></dd>
+            <dt><i class="fa-solid fa-location-dot"></i></dt>
+            <dd>Shop 1/41 Woodlands Terrace,<br>Edwardstown SA 5039</dd>
+            <dt><i class="fa-solid fa-clock"></i></dt>
+            <dd class="tbc">Trading hours — to be confirmed</dd>
+            <dt><i class="fa-brands fa-instagram"></i></dt>
+            <dd><a href="https://www.instagram.com/nextlevellandscaping41/" target="_blank" rel="noopener">@nextlevellandscaping41</a></dd>
+          </dl>
+          <div class="media arch--sm" style="margin-top:2rem;aspect-ratio:16/10">
+            <img loading="lazy" src="https://nextlevellandscaping.com.au/wp-content/uploads/2025/01/08082023_AUS_SG_Verdun-Landscape_14-Photo.jpg" alt="NextLevel Landscaping project">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="brand">NEXTLEVEL<span>LANDSCAPING</span></span>
+        <p>A proudly South Australian owned and operated landscaping business. Design, construction and garden supplies.</p>
+      </div>
+      <div>
+        <h4>EXPLORE</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Our Work</a></li>
+          <li><a href="#current">Current Work</a></li>
+          <li><a href="#store">Store</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>STORE</h4>
+        <ul>
+          <li><a href="#store">Indoor &amp; Outdoor Pots</a></li>
+          <li><a href="#store">Plants &amp; Plant Care</a></li>
+          <li><a href="#store">Lawns &amp; Lawn Care</a></li>
+          <li><a href="#store">Garden Beds &amp; Edging</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>NEXTLEVEL LANDSCAPING</h4>
+        <ul>
+          <li>Shop 1/41 Woodlands Terrace, Edwardstown SA 5039</li>
+          <li><a href="tel:+61404440222">0404 440 222</a></li>
+          <li><a href="mailto:info@nextlevellandscaping.com.au">info@nextlevellandscaping.com.au</a></li>
+          <li>Adelaide Express Services Pty Ltd &bull; ABN 15 642 563 513</li>
+          <li>Builders Licence BLD320507 &bull; MLSA member</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span>&copy; <span id="year">2026</span> NextLevel Landscaping. Demo design by Cloudycode.</span>
+      <span><a href="#">Privacy &amp; Security</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/61404440222" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
