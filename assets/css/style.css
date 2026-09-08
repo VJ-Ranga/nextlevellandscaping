@@ -755,15 +755,7 @@ p:last-child{margin-bottom:0}
   --btn-radius:999px;  --h-weight:400;  --scoop:1;
 }
 
-/* --- B. SLATE BLUE (the earlier palette) -------------------- */
-[data-theme="slate"]{
-  --ink:#1C1F1A;   --bg:#FAF8F4;
-  --surface-dark:#23271F;  --surface-dark-2:#1B1E17;
-  --muted:#6B6F66; --line:#E4E0D8;
-  --accent-dark:#5B87F5;   --accent-ink-dark:#0E1730;
-  --accent-light:#1A56DB;  --accent-ink-light:#ffffff;
-  --btn-radius:999px;  --h-weight:400;  --scoop:0;
-}
+
 
 /* --- C. CARBON + LIME (bold, architectural) ----------------- */
 [data-theme="carbon"]{
@@ -785,13 +777,10 @@ p:last-child{margin-bottom:0}
 h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 
 /* themes B and C are straight-edged — no scoop anywhere */
-[data-theme="slate"] .band--scoop,
 [data-theme="carbon"] .band--scoop{
   border-radius:0;margin-top:0;padding-top:var(--pad-band);
 }
-[data-theme="slate"] .hero__media,
 [data-theme="carbon"] .hero__media{border-radius:0}
-[data-theme="slate"] .site-footer--scoop,
 [data-theme="carbon"] .site-footer--scoop{border-radius:0;margin-top:0;padding-top:72px}
 /* carbon also squares off the small stuff */
 [data-theme="carbon"] .media,
@@ -838,7 +827,6 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 
 /* sticky header: explicit per theme, no var indirection */
 [data-theme="brand"]  .site-header.is-stuck{background-color:#5A6428}
-[data-theme="slate"]  .site-header.is-stuck{background-color:#23271F}
 [data-theme="carbon"] .site-header.is-stuck{background-color:#17190F}
 
 /* =============================================================
@@ -1045,7 +1033,6 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 }
 [data-hero="sticky"] main > .band{position:relative;z-index:1}
 /* square themes keep the cover, lose the radius */
-[data-hero="sticky"][data-theme="slate"] .hero + .band,
 [data-hero="sticky"][data-theme="carbon"] .hero + .band{border-radius:0}
 /* the hero's own bottom sweep is pointless once it gets covered */
 [data-hero="sticky"] .hero__media{border-radius:0}
