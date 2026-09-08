@@ -173,7 +173,7 @@ p:last-child{margin-bottom:0}
 .site-header{
   position:fixed;top:0;left:0;right:0;z-index:100;
   padding:22px 0;
-  transition:background .3s var(--ease),padding .3s var(--ease),box-shadow .3s;
+  transition:background-color .3s var(--ease),padding .3s var(--ease),box-shadow .3s;
 }
 .site-header__row{display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
 .brand{display:flex;flex-direction:column;line-height:1;letter-spacing:.14em;font-weight:500;font-size:.98rem;color:#fff;transition:color .3s}
@@ -187,7 +187,7 @@ p:last-child{margin-bottom:0}
 .nav-toggle{display:none;background:none;border:1px solid rgba(255,255,255,.5);border-radius:999px;width:44px;height:44px;color:#fff;font-size:1rem;cursor:pointer}
 
 /* scrolled state */
-.site-header.is-stuck{background:var(--bg);padding:12px 0;box-shadow:0 1px 0 var(--line)}
+.site-header.is-stuck{background-color:var(--surface-dark);padding:12px 0;box-shadow:0 1px 0 rgba(0,0,0,.18)}
 .site-header.is-stuck .brand,
 .site-header.is-stuck .main-nav a,
 .site-header.is-stuck .header-cta .phone{color:var(--ink)}
@@ -732,7 +732,6 @@ p:last-child{margin-bottom:0}
 .prog__bar span{background:var(--accent)}
 
 /* header: stays olive when stuck so the white logo keeps working */
-.site-header.is-stuck{background:var(--surface-dark);box-shadow:0 1px 0 rgba(0,0,0,.18)}
 .site-header.is-stuck .main-nav a,
 .site-header.is-stuck .header-cta .phone{color:rgba(255,255,255,.88)}
 .site-header.is-stuck .main-nav a:hover{color:#fff}
@@ -790,7 +789,6 @@ p:last-child{margin-bottom:0}
 /* design traits driven by the theme */
 .btn-ghost{border-radius:var(--btn-radius)}
 h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
-.site-header.is-stuck{background:var(--surface-dark)}
 
 /* themes B and C are straight-edged — no scoop anywhere */
 [data-theme="slate"] .band--scoop,
