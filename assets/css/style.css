@@ -841,3 +841,8 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
   .theme-opt .txt{display:none}
   .site-header{top:44px}
 }
+
+/* sticky header: explicit per theme, no var indirection */
+[data-theme="brand"]  .site-header.is-stuck{background-color:#5A6428}
+[data-theme="slate"]  .site-header.is-stuck{background-color:#23271F}
+[data-theme="carbon"] .site-header.is-stuck{background-color:#17190F}
