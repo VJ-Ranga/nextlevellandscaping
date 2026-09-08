@@ -915,3 +915,18 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 @media(max-width:900px){
   .svc-left .section-head{margin-bottom:1.6rem}
 }
+
+/* =============================================================
+   36. Footer — simple radius on BOTH top corners
+   (replaces the large single-corner sweep)
+   ============================================================= */
+:root{--r-footer-scoop:clamp(28px,4vw,56px)}
+.site-footer--scoop{
+  border-radius:var(--r-footer-scoop) var(--r-footer-scoop) 0 0;
+  margin-top:calc(-1 * var(--r-footer-scoop));
+  padding-top:calc(72px + var(--r-footer-scoop));
+}
+/* the band above only needs to absorb the (now small) pull */
+#contact{padding-bottom:calc(var(--pad-band-lg) + var(--r-footer-scoop))}
+/* footer following a dark band: curve would be invisible, keep it flat */
+.band--dark + .site-footer--scoop{margin-top:0;border-radius:0;padding-top:72px}
