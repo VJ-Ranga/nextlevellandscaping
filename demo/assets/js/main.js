@@ -51,7 +51,7 @@
     carTrack.innerHTML = D.heroSlides.map(function (s, i) {
       return '<div class="hero-slide' + (i ? "" : " is-on") + '">' +
         '<h1>' + s.line + '</h1>' +
-        (s.cta ? '<a class="btn-ghost" href="' + esc(s.href || "#") + '">' + esc(s.cta) + '</a>' : '') +
+        (s.cta ? '<a class="btn-ghost btn-ghost--fill" href="' + esc(s.href || "#") + '">' + esc(s.cta) + '</a>' : '') +
       '</div>';
     }).join("");
     var slides = $$(".hero-slide", carTrack), ci = 0, timer;
