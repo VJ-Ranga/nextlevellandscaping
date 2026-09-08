@@ -644,3 +644,54 @@ p:last-child{margin-bottom:0}
 .store-card:nth-child(3) .media,
 .svc-accordion-media .media,
 .about__media .media{border-radius:4px}
+
+/* =============================================================
+   27. Band shape variant: both top corners (tab)
+   ============================================================= */
+.band--scoop-top{border-radius:var(--r-scoop) var(--r-scoop) 0 0}
+
+/* =============================================================
+   28. Full-bleed project image strip
+   Fixed height, natural widths — landscape and portrait shots
+   give the row its varied rhythm.
+   ============================================================= */
+.strip-band{position:relative;padding-block:var(--pad-band) 0}
+.strip-head{margin-bottom:2rem}
+.strip{overflow:hidden;width:100%}
+.strip .swiper-slide{
+  width:auto;
+  height:clamp(230px,32vw,440px);
+  position:relative;
+}
+.strip .swiper-slide img{
+  height:100%;width:auto;max-width:none;display:block;object-fit:cover;
+}
+.strip .swiper-slide button{
+  padding:0;border:0;background:none;cursor:pointer;display:block;height:100%;
+}
+.strip__cap{
+  position:absolute;left:14px;bottom:14px;z-index:2;
+  padding:.42em 1em;border-radius:999px;
+  background:rgba(20,22,18,.6);backdrop-filter:blur(4px);
+  color:#fff;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+  opacity:0;transform:translateY(6px);transition:.3s var(--ease);pointer-events:none;
+}
+.strip .swiper-slide:hover .strip__cap{opacity:1;transform:none}
+
+.strip__nav{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:5;
+  width:54px;height:54px;border-radius:50%;border:0;
+  background:rgba(255,255,255,.92);color:var(--ink);
+  font-size:1rem;cursor:pointer;box-shadow:0 6px 22px rgba(0,0,0,.22);
+  transition:background .25s,transform .25s var(--ease);
+}
+.strip__nav:hover{background:#fff;transform:translateY(-50%) scale(1.07)}
+.strip__prev{left:18px}
+.strip__next{right:18px}
+.strip__nav.swiper-button-disabled{opacity:.35;pointer-events:none}
+
+@media(max-width:640px){
+  .strip__nav{width:44px;height:44px}
+  .strip__prev{left:10px}
+  .strip__next{right:10px}
+}
