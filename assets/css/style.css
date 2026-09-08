@@ -13,8 +13,6 @@
 
   --ink:#1C2412;              /* deep green-black — body text */
   --bg:#F6F5EF;               /* warm off-white ground        */
-  --surface-dark:var(--moss);
-  --surface-dark-2:var(--moss-deep);
   --muted:#6E7358;            /* secondary text on light */
   --muted-dark:rgba(255,255,255,.74);
   --line:#E2E0D5;
@@ -22,8 +20,6 @@
 
   /* accent = lime. NEVER as text on light — fails contrast.
      On light backgrounds use --moss instead.                 */
-  --accent:var(--lime);
-  --accent-on-light:var(--moss);
   --scrim:rgba(20,26,14,.55);
 
   --r-arch:clamp(64px,12vw,176px);
@@ -710,9 +706,9 @@ p:last-child{margin-bottom:0}
    accent resolves to moss on light and lime on dark. Anything
    sitting ON the accent uses --accent-ink.
    ============================================================= */
-:root{ --accent:var(--moss); --accent-ink:#fff; }
+/* superseded by the theme block below */
 .band--dark, .site-footer, .subhero, .drawer, .site-header,
-.strip-band, .lightbox { --accent:var(--lime); --accent-ink:var(--ink); }
+.strip-band, .lightbox { /* superseded by the theme block below */ }
 
 .btn-ghost--fill{
   background:var(--accent);
@@ -724,7 +720,7 @@ p:last-child{margin-bottom:0}
 .btn-ghost--fill:hover{color:var(--accent)}
 .site-header .header-cta .btn-ghost--fill,
 .site-header.is-stuck .header-cta .btn-ghost--fill{
-  background:var(--lime);border-color:var(--lime);color:var(--ink);
+  background:var(--accent);border-color:var(--accent);color:var(--accent-ink);
 }
 .site-header .header-cta .btn-ghost--fill::before{background:#fff}
 .site-header .header-cta .btn-ghost--fill:hover{color:var(--ink)}
@@ -736,7 +732,7 @@ p:last-child{margin-bottom:0}
 .prog__bar span{background:var(--accent)}
 
 /* header: stays olive when stuck so the white logo keeps working */
-.site-header.is-stuck{background:var(--moss);box-shadow:0 1px 0 rgba(0,0,0,.18)}
+.site-header.is-stuck{background:var(--surface-dark);box-shadow:0 1px 0 rgba(0,0,0,.18)}
 .site-header.is-stuck .main-nav a,
 .site-header.is-stuck .header-cta .phone{color:rgba(255,255,255,.88)}
 .site-header.is-stuck .main-nav a:hover{color:#fff}
