@@ -36,7 +36,7 @@
     '</div>';
 
   var footer =
-    '<footer class="site-footer">' +
+    '<footer class="site-footer site-footer--scoop">' +
       '<div class="container">' +
         '<div class="footer-grid">' +
           '<div class="footer-brand">' +

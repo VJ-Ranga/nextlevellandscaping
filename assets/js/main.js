@@ -172,7 +172,7 @@
       return '' +
         '<div class="swiper-slide">' +
           '<a class="proj-card" href="project.html?slug=' + esc(p.slug) + '">' +
-            '<div class="media arch"><img loading="lazy" src="' + esc(p.img) + '" alt="' + esc(p.name) + '"></div>' +
+            '<div class="media"><img loading="lazy" src="' + esc(p.img) + '" alt="' + esc(p.name) + '"></div>' +
             '<div class="proj-card__meta"><span>' + esc(p.suburb) + '</span><span>&bull;</span><span>' + esc(p.date) + '</span></div>' +
             '<h3>' + esc(p.name) + '</h3>' +
             '<p>' + esc(p.blurb) + '</p>' +
@@ -196,7 +196,7 @@
       var pct = Math.round(((j.stageIndex + 1) / total) * 100);
       return '' +
         '<a class="cw-card reveal" href="current-work-detail.html?slug=' + esc(j.slug) + '">' +
-          '<div class="media arch--sm arch"><img loading="lazy" src="' + esc(j.img) + '" alt="' + esc(j.title) + '"></div>' +
+          '<div class="media"><img loading="lazy" src="' + esc(j.img) + '" alt="' + esc(j.title) + '"></div>' +
           '<div class="cw-card__meta"><span>' + esc(j.suburb) + '</span><span>ETA ' + esc(j.eta) + '</span></div>' +
           '<h3>' + esc(j.title) + '</h3>' +
           '<ul class="stepper">' + bars + '</ul>' +
@@ -223,7 +223,7 @@
     storeEl.innerHTML = D.store.map(function (s) {
       return '' +
         '<article class="store-card reveal">' +
-          '<div class="media arch--sm"><img loading="lazy" src="' + esc(s.img) + '" alt=""></div>' +
+          '<div class="media"><img loading="lazy" src="' + esc(s.img) + '" alt=""></div>' +
           '<h3>' + s.name + '</h3><p>' + s.desc + '</p>' +
         '</article>';
     }).join("");

@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1788877537">
+<link rel="stylesheet" href="assets/css/style.css?v=1788879060">
 </head>
 <body>
 <div id="site-header-slot"></div>
@@ -26,7 +26,7 @@
     </div>
   </section>
 
-  <section class="band">
+  <section class="band band--scoop band--scoop-tr band--scoop-lg">
     <div class="container">
       <div class="detail-body">
         <div class="narrative reveal" id="p-narrative"></div>
@@ -41,7 +41,7 @@
     </div>
   </section>
 
-  <section class="band band--dark contour">
+  <section class="band band--dark contour band--scoop band--scoop-lg">
     <div class="container">
       <div class="section-head reveal"><span class="eyebrow">More of our work</span><h2>Related projects</h2></div>
       <div class="work-grid" id="p-related"></div>
@@ -58,9 +58,9 @@
   <button class="lb-next" aria-label="Next">&rarr;</button>
 </div>
 
-<script src="assets/js/partials.js?v=1788877537"></script>
-<script src="assets/data.js?v=1788877537"></script>
-<script src="assets/js/main.js?v=1788877537"></script>
+<script src="assets/js/partials.js?v=1788879060"></script>
+<script src="assets/data.js?v=1788879060"></script>
+<script src="assets/js/main.js?v=1788879060"></script>
 <script>
 (function(){
   var slug=new URLSearchParams(location.search).get('slug');
@@ -95,7 +95,7 @@
   var rel=list.filter(function(x){return x.slug!==p.slug;}).slice(0,3);
   document.getElementById('p-related').innerHTML=rel.map(function(r){
     return '<a href="project.html?slug='+r.slug+'"><article class="work-card">'+
-      '<div class="media arch"><img loading="lazy" src="'+r.img+'" alt="'+r.name+'"></div>'+
+      '<div class="media"><img loading="lazy" src="'+r.img+'" alt="'+r.name+'"></div>'+
       '<div class="work-card__meta"><span>'+r.suburb+'</span><span>&bull;</span><span>'+r.date+'</span></div>'+
       '<h3>'+r.name+'</h3></article></a>';
   }).join('');
