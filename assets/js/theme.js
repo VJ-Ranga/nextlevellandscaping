@@ -14,6 +14,15 @@
   var KEY = "nll-theme";
   var LKEY = "nll-layout";
   var LAYOUTS = [{ id: "classic", name: "Classic header" }, { id: "centred", name: "Centred header" }];
+  var HKEY = "nll-hero";
+  var HEROES = [{ id: "static", name: "Static hero" }, { id: "sticky", name: "Sticky hero" }];
+
+  function applyHero(id) {
+    document.documentElement.setAttribute("data-hero", id);
+    try { localStorage.setItem(HKEY, id); } catch (e) {}
+    var b = document.querySelectorAll(".hero-opt");
+    for (var i = 0; i < b.length; i++) b[i].setAttribute("aria-pressed", b[i].dataset.hero === id ? "true" : "false");
+  }
 
   function applyLayout(id) {
     document.documentElement.setAttribute("data-layout", id);
@@ -53,10 +62,18 @@
         return '<button class="theme-opt layout-opt" type="button" data-layout="' + l.id + '" aria-pressed="false">' +
           '<span class="txt">' + l.name + '</span></button>';
       }).join("") +
+    '</div>' +
+    '<div class="theme-bar__opts theme-bar__layouts">' +
+      HEROES.map(function (h) {
+        return '<button class="theme-opt hero-opt" type="button" data-hero="' + h.id + '" aria-pressed="false">' +
+          '<span class="txt">' + h.name + '</span></button>';
+      }).join("") +
     '</div>';
 
   document.body.insertAdjacentElement("afterbegin", bar);
   bar.addEventListener("click", function (e) {
+    var h = e.target.closest(".hero-opt");
+    if (h) { applyHero(h.dataset.hero); return; }
     var l = e.target.closest(".layout-opt");
     if (l) { applyLayout(l.dataset.layout); return; }
     var b = e.target.closest(".theme-opt");
@@ -65,6 +82,9 @@
 
   var savedLayout = "classic";
   try { savedLayout = localStorage.getItem(LKEY) || "classic"; } catch (e) {}
+  var savedHero = "static";
+  try { savedHero = localStorage.getItem(HKEY) || "static"; } catch (e) {}
   apply(saved);
   applyLayout(savedLayout);
+  applyHero(savedHero);
 })();
