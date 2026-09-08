@@ -29,19 +29,48 @@
   };
 
   /* ---- 1. Sticky header ------------------------------------- */
-  var header = $(".site-header");
+  var headers = $$(".site-header, .hdr2");
   var onScroll = function () {
-    header.classList.toggle("is-stuck", window.scrollY > 80);
+    var stuck = window.scrollY > 80;
+    headers.forEach(function (h) { h.classList.toggle("is-stuck", stuck); });
   };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
   /* ---- 2. Mobile drawer ----------------------------------- */
   var drawer = $(".drawer");
-  $(".nav-toggle").addEventListener("click", function () { drawer.classList.add("is-open"); document.body.style.overflow = "hidden"; });
+  $$(".nav-toggle").forEach(function (t) { t.addEventListener("click", function () { drawer.classList.add("is-open"); document.body.style.overflow = "hidden"; }); });
   $(".drawer__close").addEventListener("click", closeDrawer);
   $$(".drawer nav a").forEach(function (a) { a.addEventListener("click", closeDrawer); });
   function closeDrawer() { drawer.classList.remove("is-open"); document.body.style.overflow = ""; }
+
+
+  /* ---- Hero headline carousel (layout B) --------------- */
+  var carTrack = $("#hero-car-track");
+  if (carTrack && D.heroSlides && D.heroSlides.length) {
+    carTrack.innerHTML = D.heroSlides.map(function (s, i) {
+      return '<div class="hero-slide' + (i ? "" : " is-on") + '">' +
+        '<h1>' + s.line + '</h1>' +
+        (s.cta ? '<a class="btn-ghost" href="' + esc(s.href || "#") + '">' + esc(s.cta) + '</a>' : '') +
+      '</div>';
+    }).join("");
+    var slides = $$(".hero-slide", carTrack), ci = 0, timer;
+    function go(n) {
+      ci = (n + slides.length) % slides.length;
+      slides.forEach(function (el, k) { el.classList.toggle("is-on", k === ci); });
+    }
+    function auto() {
+      clearInterval(timer);
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      timer = setInterval(function () { go(ci + 1); }, 6000);
+    }
+    var carEl = $("#hero-car");
+    $(".hero-car__next", carEl).addEventListener("click", function () { go(ci + 1); auto(); });
+    $(".hero-car__prev", carEl).addEventListener("click", function () { go(ci - 1); auto(); });
+    carEl.addEventListener("mouseenter", function () { clearInterval(timer); });
+    carEl.addEventListener("mouseleave", auto);
+    auto();
+  }
 
   /* ---- 3. Render: stats ---------------------------------- */
   var statsEl = $("#stats");

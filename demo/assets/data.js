@@ -7,6 +7,13 @@
 
 window.NLL = {
 
+  /* --- hero headline carousel (centred layout) -------------- */
+  heroSlides: [
+    { line: "Adelaide's first choice landscapers", cta: "Get a free quote", href: "#contact" },
+    { line: "From 2D &amp; 3D design to finished garden", cta: "See our work", href: "our-work.html" },
+    { line: "Ten years transforming South Australian gardens", cta: "What we're building now", href: "current-work.html" }
+  ],
+
   /* --- count-up numbers (no boxes) --------------------------- */
   stats: [
     { value: 10,  suffix: "+", label: "Years transforming<br>Adelaide gardens" },
