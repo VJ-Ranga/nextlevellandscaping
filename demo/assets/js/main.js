@@ -8,6 +8,26 @@
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var esc = function (s) { return String(s); }; // data is trusted (local file)
 
+  /* ---- Gallery lightbox (shared) ------------------- */
+  window.NLLlightbox = function (imgs) {
+    var lb = $("#lightbox");
+    if (!lb) return;
+    var pic = $("img", lb), i = 0;
+    function show(n) { i = (n + imgs.length) % imgs.length; pic.src = imgs[i]; }
+    lb.addEventListener("click", function (e) {
+      if (e.target === lb || e.target.classList.contains("lb-close")) lb.classList.remove("open");
+      if (e.target.classList.contains("lb-next")) show(i + 1);
+      if (e.target.classList.contains("lb-prev")) show(i - 1);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (!lb.classList.contains("open")) return;
+      if (e.key === "Escape") lb.classList.remove("open");
+      if (e.key === "ArrowRight") show(i + 1);
+      if (e.key === "ArrowLeft") show(i - 1);
+    });
+    return function open(n) { show(n); lb.classList.add("open"); };
+  };
+
   /* ---- 1. Sticky header ------------------------------------- */
   var header = $(".site-header");
   var onScroll = function () {
@@ -207,6 +227,33 @@
     }).join("");
   }
 
+  /* ---- 6b. Full-bleed project image strip -------------- */
+  var stripTrack = $("#strip-track");
+  if (stripTrack && D.projectStrip) {
+    stripTrack.innerHTML = D.projectStrip.map(function (s, i) {
+      return '<div class="swiper-slide">' +
+        '<button data-i="' + i + '" aria-label="View photo ' + (i + 1) + '">' +
+          '<img loading="lazy" src="' + esc(s.img) + '" alt="' + esc(s.cap || "") + '">' +
+          '<span class="strip__cap">' + esc(s.cap || "") + '</span>' +
+        '</button>' +
+      '</div>';
+    }).join("");
+
+    if (window.Swiper) {
+      new Swiper("#strip", {
+        slidesPerView: "auto",
+        spaceBetween: 0,
+        freeMode: { enabled: true, momentum: true },
+        navigation: { nextEl: "#strip-next", prevEl: "#strip-prev" }
+      });
+    }
+    var openStrip = window.NLLlightbox(D.projectStrip.map(function (s) { return s.img; }));
+    stripTrack.addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-i]");
+      if (b && openStrip) openStrip(+b.dataset.i);
+    });
+  }
+
   /* ---- 7. Render: process ------------------------------ */
   var procEl = $("#process-list");
   if (procEl && D.process) {
@@ -294,23 +341,4 @@
   /* ---- 13. Footer year ---------------------------- */
   var y = $("#year"); if (y) y.textContent = new Date().getFullYear();
 
-  /* ---- 14. Gallery lightbox (sub-pages) ----------- */
-  window.NLLlightbox = function (imgs) {
-    var lb = $("#lightbox");
-    if (!lb) return;
-    var pic = $("img", lb), i = 0;
-    function show(n) { i = (n + imgs.length) % imgs.length; pic.src = imgs[i]; }
-    lb.addEventListener("click", function (e) {
-      if (e.target === lb || e.target.classList.contains("lb-close")) lb.classList.remove("open");
-      if (e.target.classList.contains("lb-next")) show(i + 1);
-      if (e.target.classList.contains("lb-prev")) show(i - 1);
-    });
-    document.addEventListener("keydown", function (e) {
-      if (!lb.classList.contains("open")) return;
-      if (e.key === "Escape") lb.classList.remove("open");
-      if (e.key === "ArrowRight") show(i + 1);
-      if (e.key === "ArrowLeft") show(i - 1);
-    });
-    return function open(n) { show(n); lb.classList.add("open"); };
-  };
 })();

@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1788879309">
+<link rel="stylesheet" href="assets/css/style.css?v=1788880542">
 </head>
 <body>
 
@@ -178,8 +178,20 @@
     </div>
   </section>
 
+
+  <!-- ===== Full-bleed project image strip ===== -->
+  <section class="band band--dark strip-band" id="project-strip">
+    <div class="container strip-head reveal">
+      <span class="eyebrow">In the field</span>
+      <h2>Straight from our sites</h2>
+    </div>
+    <div class="swiper strip" id="strip"><div class="swiper-wrapper" id="strip-track"></div></div>
+    <button class="strip__nav strip__prev" id="strip-prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
+    <button class="strip__nav strip__next" id="strip-next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
+  </section>
+
   <!-- ===== Current work ===== -->
-  <section class="band band--scoop band--scoop-tr band--scoop-sm" id="current">
+  <section class="band band--scoop band--scoop-top band--scoop-lg" id="current">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Happening now</span>
@@ -233,7 +245,7 @@
   </section>
 
   <!-- ===== Contact ===== -->
-  <section class="band band--lg band--scoop band--scoop-tr band--scoop-lg" id="contact">
+  <section class="band band--lg band--scoop band--scoop-top band--scoop-lg" id="contact">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">Get in touch</span>
@@ -336,8 +348,15 @@
 
 <a class="wa-float" href="https://wa.me/61404440222" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
 
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" aria-label="Close">&times;</button>
+  <button class="lb-prev" aria-label="Previous">&larr;</button>
+  <img src="" alt="">
+  <button class="lb-next" aria-label="Next">&rarr;</button>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="assets/data.js?v=1788879309"></script>
-<script src="assets/js/main.js?v=1788879309"></script>
+<script src="assets/data.js?v=1788880542"></script>
+<script src="assets/js/main.js?v=1788880542"></script>
 </body>
 </html>

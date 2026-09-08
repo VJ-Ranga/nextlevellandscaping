@@ -192,6 +192,28 @@ window.NLL = {
     }
   ],
 
+  /* --- full-bleed project image strip ----------------------- */
+  /* landscape and portrait deliberately interleaved so the row
+     gets varied widths at a common height                      */
+  projectStrip: [
+    { img: "assets/img/projects/grange.jpg",       cap: "Grange" },
+    { img: "assets/img/gallery/northhaven-3.jpg",  cap: "North Haven" },
+    { img: "assets/img/gallery/somerton-1.jpg",    cap: "Somerton Park" },
+    { img: "assets/img/gallery/cw-a2.jpg",         cap: "Detail" },
+    { img: "assets/img/gallery/klemzig-3.jpg",     cap: "Klemzig" },
+    { img: "assets/img/gallery/northhaven-1.jpg",  cap: "North Haven" },
+    { img: "assets/img/gallery/grange-2.jpg",      cap: "Grange" },
+    { img: "assets/img/gallery/cw-b1.jpg",         cap: "Planting" },
+    { img: "assets/img/gallery/somerton-3.jpg",    cap: "Somerton Park" },
+    { img: "assets/img/gallery/klemzig-4.jpg",     cap: "Klemzig" },
+    { img: "assets/img/gallery/northhaven-4.jpg",  cap: "Edging" },
+    { img: "assets/img/gallery/grange-4.jpg",      cap: "Grange" },
+    { img: "assets/img/gallery/cw-c1.jpg",         cap: "Paving" },
+    { img: "assets/img/gallery/somerton-4.jpg",    cap: "Somerton Park" },
+    { img: "assets/img/gallery/cw-a1.jpg",         cap: "Retaining walls" },
+    { img: "assets/img/gallery/grange-3.jpg",      cap: "Grange" }
+  ],
+
   /* --- NextLevel Outdoors store categories ------------------ */
   store: [
     { name: "Indoor &amp; Outdoor Pots", desc: "Drainage, self-watering and plant-friendly designs.", img: "assets/img/store/pots.jpg" },
