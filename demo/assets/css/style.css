@@ -6,10 +6,6 @@
 
 /* ---------- 1. Tokens ------------------------------------------------ */
 :root{
-  /* --- brand: taken from the NextLevel logo ------------------ */
-  --lime:#C2E807;             /* the leaf + "LANDSCAPING" */
-  --moss:#5A6428;             /* the logo's olive square    */
-  --moss-deep:#4A5321;        /* deeper olive, footer       */
 
   --ink:#1C2412;              /* deep green-black — body text */
   --bg:#F6F5EF;               /* warm off-white ground        */
@@ -18,8 +14,6 @@
   --line:#E2E0D5;
   --line-dark:rgba(255,255,255,.22);
 
-  /* accent = lime. NEVER as text on light — fails contrast.
-     On light backgrounds use --moss instead.                 */
   --scrim:rgba(20,26,14,.55);
 
   --r-arch:clamp(64px,12vw,176px);
