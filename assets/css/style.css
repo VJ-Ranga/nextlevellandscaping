@@ -1028,3 +1028,33 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 }
 .theme-bar__layouts{margin-left:1rem;padding-left:1rem;border-left:1px solid rgba(255,255,255,.2)}
 @media(max-width:760px){ .theme-bar__layouts{display:none} }
+
+/* =============================================================
+   38. STICKY HERO — the section after the hero scrolls up and
+   covers it (stillfield-style). The hero pins at top:0 with a
+   stacking context; every .band is already position:relative,
+   so later sections paint over it in DOM order.
+   ============================================================= */
+:root{--r-cover:clamp(28px,4vw,64px)}
+
+.hero{position:sticky;top:0;z-index:0}
+
+/* first band after the hero rides up over it */
+.hero + .band{
+  position:relative;z-index:1;
+  border-radius:var(--r-cover) var(--r-cover) 0 0;
+  background-color:var(--surface-dark);
+}
+/* everything after must also sit above the pinned hero */
+main > .band{position:relative;z-index:1}
+
+/* square themes keep the cover but lose the radius */
+[data-theme="slate"] .hero + .band,
+[data-theme="carbon"] .hero + .band{border-radius:0}
+
+/* the hero's own bottom-left sweep is hidden once covered */
+.hero__media{border-radius:0}
+
+@media(prefers-reduced-motion:reduce){
+  .hero{position:relative}
+}
