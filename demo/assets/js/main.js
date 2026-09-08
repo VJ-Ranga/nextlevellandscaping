@@ -30,9 +30,18 @@
 
   /* ---- 1. Sticky header ------------------------------------- */
   var headers = $$(".site-header, .hdr2");
+  var heroVid = $(".hero__media video");
+  var coverBand = $(".hero + .band");
   var onScroll = function () {
     var stuck = window.scrollY > 80;
     headers.forEach(function (h) { h.classList.toggle("is-stuck", stuck); });
+    // sticky hero stays pinned behind the whole page — stop the video
+    // compositing once it is fully covered.
+    if (heroVid && coverBand) {
+      var covered = coverBand.getBoundingClientRect().top <= 0;
+      if (covered && !heroVid.paused) heroVid.pause();
+      else if (!covered && heroVid.paused) heroVid.play().catch(function () {});
+    }
   };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
