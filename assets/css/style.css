@@ -1053,3 +1053,9 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 @media(prefers-reduced-motion:reduce){
   [data-hero="sticky"] .hero{position:relative}
 }
+
+/* --- sticky hero: every band must be opaque, or the pinned
+   video shows through the transparent light sections -------- */
+[data-hero="sticky"] main > .band{background-color:var(--bg)}
+[data-hero="sticky"] main > .band--dark{background-color:var(--surface-dark)}
+[data-hero="sticky"] main > .strip-band{background-color:var(--surface-dark)}
