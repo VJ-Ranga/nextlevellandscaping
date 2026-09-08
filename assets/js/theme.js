@@ -12,6 +12,15 @@
     { id: "carbon-soft", name: "Carbon soft", swatch: ["#17190F", "#C2E807", "#F2F2EC"] }
   ];
   var KEY = "nll-theme";
+  var LKEY = "nll-layout";
+  var LAYOUTS = [{ id: "classic", name: "Classic header" }, { id: "centred", name: "Centred header" }];
+
+  function applyLayout(id) {
+    document.documentElement.setAttribute("data-layout", id);
+    try { localStorage.setItem(LKEY, id); } catch (e) {}
+    var b = document.querySelectorAll(".layout-opt");
+    for (var i = 0; i < b.length; i++) b[i].setAttribute("aria-pressed", b[i].dataset.layout === id ? "true" : "false");
+  }
 
   function apply(id) {
     document.documentElement.setAttribute("data-theme", id);
@@ -38,13 +47,24 @@
           '<span class="txt">' + t.name + '</span>' +
         '</button>';
       }).join("") +
+    '</div>' +
+    '<div class="theme-bar__opts theme-bar__layouts">' +
+      LAYOUTS.map(function (l) {
+        return '<button class="theme-opt layout-opt" type="button" data-layout="' + l.id + '" aria-pressed="false">' +
+          '<span class="txt">' + l.name + '</span></button>';
+      }).join("") +
     '</div>';
 
   document.body.insertAdjacentElement("afterbegin", bar);
   bar.addEventListener("click", function (e) {
+    var l = e.target.closest(".layout-opt");
+    if (l) { applyLayout(l.dataset.layout); return; }
     var b = e.target.closest(".theme-opt");
-    if (b) apply(b.dataset.theme);
+    if (b && b.dataset.theme) apply(b.dataset.theme);
   });
 
+  var savedLayout = "classic";
+  try { savedLayout = localStorage.getItem(LKEY) || "classic"; } catch (e) {}
   apply(saved);
+  applyLayout(savedLayout);
 })();
