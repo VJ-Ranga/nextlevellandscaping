@@ -7,14 +7,34 @@
 
 window.NLL = {
 
-  /* --- top credibility strip --------------------------------- */
+  /* --- count-up numbers (no boxes) --------------------------- */
   stats: [
-    { icon: "fa-solid fa-calendar-check", big: "10+ yrs", label: "Transforming Adelaide gardens" },
-    { icon: "fa-solid fa-house-chimney",  big: "4",       label: "Signature full-property builds" },
-    { icon: "fa-solid fa-helmet-safety",  big: "BLD320507", label: "Licensed builder" },
-    { icon: "fa-solid fa-award",          big: "MLSA",    label: "Master Landscapers SA member" },
-    { icon: "fa-solid fa-seedling",       big: "LSA",     label: "Lawn Solutions Australia distributor" }
+    { value: 10,  suffix: "+", label: "Years transforming<br>Adelaide gardens" },
+    { value: 8,   suffix: "",  label: "Services under<br>one roof" },
+    { value: 4,   suffix: "",  label: "Signature full-property<br>transformations" },
+    { value: 100, suffix: "%", label: "South Australian<br>owned &amp; operated" }
   ],
+
+  /* --- credential line under the numbers -------------------- */
+  credentials: [
+    { icon: "fa-solid fa-helmet-safety", text: "Licensed builder <b>BLD320507</b>" },
+    { icon: "fa-solid fa-award",         text: "<b>Master Landscapers</b> South Australia" },
+    { icon: "fa-solid fa-seedling",      text: "<b>Lawn Solutions Australia</b> authorised" }
+  ],
+
+  /* --- before / after slider -------------------------------- */
+  /* PLACEHOLDER PAIR — swap for real before/after shots of the
+     same site once the client supplies them.                   */
+  beforeAfter: {
+    eyebrow: "Before &amp; after",
+    title: "Drag to see the difference",
+    copy: "Most of our jobs start as a bare block, a tired lawn or a construction site. Drag the handle to wipe between where a space starts and where it ends up.",
+    before: "assets/img/current/henley.jpg",
+    after:  "assets/img/current/burnside.jpg",
+    beforeLabel: "Before",
+    afterLabel: "After",
+    placeholderNote: "Demo placeholder — these are two different NextLevel projects. Real before/after pairs of the same site to be supplied by the client."
+  },
 
   /* --- 8 services (verbatim copy from the live site) --------- */
   services: [
