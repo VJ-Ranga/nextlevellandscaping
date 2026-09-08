@@ -7,7 +7,6 @@
 
   var THEMES = [
     { id: "brand",  name: "Brand olive", swatch: ["#5A6428", "#C2E807", "#F6F5EF"] },
-    { id: "slate",  name: "Slate blue",  swatch: ["#23271F", "#1A56DB", "#FAF8F4"] },
     { id: "carbon", name: "Carbon lime", swatch: ["#17190F", "#C2E807", "#FFFFFF"] },
     { id: "carbon-soft", name: "Carbon soft", swatch: ["#17190F", "#C2E807", "#F2F2EC"] }
   ];
@@ -42,6 +41,8 @@
 
   var saved = "brand";
   try { saved = localStorage.getItem(KEY) || "brand"; } catch (e) {}
+  // a removed theme may still be stored from an earlier visit
+  if (!THEMES.some(function (t) { return t.id === saved; })) saved = "brand";
 
   var bar = document.createElement("div");
   bar.className = "theme-bar";
