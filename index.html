@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1788858531">
+<link rel="stylesheet" href="assets/css/style.css?v=1788870345">
 </head>
 <body>
 
@@ -94,10 +94,27 @@
     </div>
   </section>
 
-  <!-- ===== Stats strip ===== -->
-  <section class="band band--tight">
+  <!-- ===== Numbers + credentials ===== -->
+  <section class="band contour" id="numbers">
     <div class="container">
-      <div class="stats reveal" id="stats"></div>
+      <div class="statline reveal" id="stats"></div>
+      <div class="credline reveal d1" id="credline"></div>
+    </div>
+  </section>
+
+  <!-- ===== Before / after slider ===== -->
+  <section class="band" id="beforeafter">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Before &amp; after</span>
+        <h2>Drag to see the difference</h2>
+        <p class="lead" id="ba-copy"></p>
+      </div>
+      <div class="ba-wrap reveal">
+        <div class="ba" id="ba"></div>
+        <p class="ba-hint"><i class="fa-solid fa-left-right"></i> Drag the handle &mdash; or click it and use the &larr; &rarr; keys</p>
+        <p class="ba-note" id="ba-note"></p>
+      </div>
     </div>
   </section>
 
@@ -132,7 +149,13 @@
         <h2>One team for the whole garden</h2>
         <p class="lead">From initial design all the way through to complete implementation at affordable rates — NextLevel Landscaping does it all.</p>
       </div>
-      <div id="services-list"></div>
+      <div class="svc-explorer reveal">
+        <ul class="svc-list" id="svc-list"></ul>
+        <div class="svc-stage">
+          <div class="svc-figure" id="svc-figure"></div>
+          <div class="svc-copy" id="svc-copy"></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -314,7 +337,7 @@
 <a class="wa-float" href="https://wa.me/61404440222" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="assets/data.js?v=1788858531"></script>
-<script src="assets/js/main.js?v=1788858531"></script>
+<script src="assets/data.js?v=1788870345"></script>
+<script src="assets/js/main.js?v=1788870345"></script>
 </body>
 </html>

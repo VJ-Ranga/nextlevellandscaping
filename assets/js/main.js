@@ -27,31 +27,142 @@
   var statsEl = $("#stats");
   if (statsEl && D.stats) {
     statsEl.innerHTML = D.stats.map(function (s) {
-      return '<div class="stat">' +
-        (s.icon ? '<i class="' + esc(s.icon) + '"></i>' : '') +
-        '<b>' + esc(s.big) + '</b><span>' + esc(s.label) + '</span></div>';
+      return '<div class="stat-n">' +
+        '<b data-to="' + s.value + '"><span>0</span><i>' + esc(s.suffix || "") + '</i></b>' +
+        '<span>' + s.label + '</span></div>';
+    }).join("");
+
+    // count up when the row scrolls into view
+    var counted = false;
+    var cio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting || counted) return;
+        counted = true;
+        $$("b[data-to]", statsEl).forEach(function (b) {
+          var to = +b.dataset.to, out = $("span", b), t0 = null, dur = 1400;
+          if (matchMedia("(prefers-reduced-motion: reduce)").matches) { out.textContent = to; return; }
+          requestAnimationFrame(function step(ts) {
+            if (!t0) t0 = ts;
+            var p = Math.min((ts - t0) / dur, 1);
+            out.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
+            if (p < 1) requestAnimationFrame(step);
+          });
+        });
+      });
+    }, { threshold: 0.4 });
+    cio.observe(statsEl);
+  }
+
+  var credEl = $("#credline");
+  if (credEl && D.credentials) {
+    credEl.innerHTML = D.credentials.map(function (c) {
+      return '<span><i class="' + esc(c.icon) + '"></i>' + c.text + '</span>';
     }).join("");
   }
 
-  /* ---- 4. Render: services (alternating arch bands) ------ */
-  var svcEl = $("#services-list");
-  if (svcEl && D.services) {
-    svcEl.innerHTML = D.services.map(function (s, i) {
-      var archMod = i % 2 ? "arch arch--tr" : "arch";
-      return '' +
-        '<article class="svc reveal">' +
-          '<div class="svc__media"><div class="media ' + archMod + '">' +
-            '<img loading="lazy" src="' + esc(s.img) + '" alt="' + esc(s.name.replace(/&amp;/g, "&")) + '">' +
-          '</div></div>' +
-          '<div class="svc__body">' +
-            '<span class="svc__no">' + (s.icon ? '<i class="' + esc(s.icon) + '"></i>' : '') + esc(s.no) + ' / Service</span>' +
-            '<h3>' + s.name + '</h3>' +
-            '<p class="measure">' + s.desc + '</p>' +
-            '<ul class="chips">' + s.tags.map(function (t) { return "<li>" + t + "</li>"; }).join("") + '</ul>' +
-            '<p style="margin-top:1.4rem"><a class="tlink" href="#">Explore ' + s.name + ' <i class="fa-solid fa-arrow-right"></i></a></p>' +
-          '</div>' +
-        '</article>';
+  /* ---- 4. Services explorer (hover/click to swap) -------- */
+  var svcList = $("#svc-list"), svcFig = $("#svc-figure"), svcCopy = $("#svc-copy");
+  if (svcList && D.services) {
+    svcList.innerHTML = D.services.map(function (s, i) {
+      return '<li>' +
+        '<button class="svc-item' + (i ? "" : " is-active") + '" data-i="' + i + '" type="button">' +
+          '<span class="svc-item__no">' + esc(s.no) + '</span>' +
+          '<span class="svc-item__name">' + s.name + '</span>' +
+          '<span class="svc-item__go"><i class="fa-solid fa-arrow-right"></i></span>' +
+        '</button>' +
+        '<div class="svc-accordion-media"><div class="inner">' +
+          '<div class="media"><img loading="lazy" src="' + esc(s.img) + '" alt=""></div>' +
+          '<p>' + s.desc + '</p>' +
+          '<ul class="chips">' + s.tags.map(function (t) { return "<li>" + t + "</li>"; }).join("") + '</ul>' +
+        '</div></div>' +
+      '</li>';
     }).join("");
+
+    if (svcFig) {
+      svcFig.innerHTML = D.services.map(function (s, i) {
+        return '<img class="' + (i ? "" : "is-on") + '" src="' + esc(s.img) + '" alt="' +
+               esc(s.name.replace(/&amp;/g, "&")) + '" ' + (i ? 'loading="lazy"' : "") + '>';
+      }).join("");
+    }
+
+    var cur = -1;
+    function paint(i) {
+      if (i === cur || !D.services[i]) return;
+      cur = i;
+      var s = D.services[i];
+      $$(".svc-item", svcList).forEach(function (b) { b.classList.toggle("is-active", +b.dataset.i === i); });
+      if (svcFig) $$("img", svcFig).forEach(function (im, k) { im.classList.toggle("is-on", k === i); });
+      if (svcCopy) {
+        var inner = $(".svc-copy__inner", svcCopy);
+        if (inner) inner.classList.remove("is-on");
+        setTimeout(function () {
+          svcCopy.innerHTML = '<div class="svc-copy__inner">' +
+            '<h3>' + s.name + '</h3><p>' + s.desc + '</p>' +
+            '<ul class="chips">' + s.tags.map(function (t) { return "<li>" + t + "</li>"; }).join("") + '</ul>' +
+            '<p style="margin-top:1.3rem"><a class="tlink" href="#">Explore ' + s.name +
+            ' <i class="fa-solid fa-arrow-right"></i></a></p></div>';
+          requestAnimationFrame(function () { $(".svc-copy__inner", svcCopy).classList.add("is-on"); });
+        }, inner ? 160 : 0);
+      }
+    }
+    paint(0);
+
+    var wide = matchMedia("(min-width: 901px)");
+    svcList.addEventListener("click", function (e) {
+      var b = e.target.closest(".svc-item"); if (!b) return;
+      if (!wide.matches && b.classList.contains("is-active")) { // mobile: tap again to close
+        b.classList.remove("is-active"); cur = -1; return;
+      }
+      paint(+b.dataset.i);
+    });
+    svcList.addEventListener("mouseover", function (e) {
+      var b = e.target.closest(".svc-item");
+      if (b && wide.matches) paint(+b.dataset.i);
+    });
+  }
+
+  /* ---- 4b. Before / after drag slider ------------------- */
+  var baWrap = $("#ba");
+  if (baWrap && D.beforeAfter) {
+    var ba = D.beforeAfter;
+    baWrap.innerHTML =
+      '<img class="ba__after" src="' + esc(ba.after) + '" alt="' + esc(ba.afterLabel) + '">' +
+      '<img class="ba__before" src="' + esc(ba.before) + '" alt="' + esc(ba.beforeLabel) + '">' +
+      '<span class="ba__tag ba__tag--b">' + esc(ba.beforeLabel) + '</span>' +
+      '<span class="ba__tag ba__tag--a">' + esc(ba.afterLabel) + '</span>' +
+      '<span class="ba__line"></span>' +
+      '<span class="ba__grip"><i class="fa-solid fa-left-right"></i></span>';
+    baWrap.tabIndex = 0;
+    baWrap.setAttribute("role", "slider");
+    baWrap.setAttribute("aria-label", "Before and after comparison");
+    baWrap.setAttribute("aria-valuemin", "0");
+    baWrap.setAttribute("aria-valuemax", "100");
+
+    var pos = 50, dragging = false;
+    function set(p) {
+      pos = Math.max(0, Math.min(100, p));
+      baWrap.style.setProperty("--x", pos + "%");
+      baWrap.setAttribute("aria-valuenow", Math.round(pos));
+    }
+    function fromEvent(e) {
+      var r = baWrap.getBoundingClientRect();
+      var x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+      set((x / r.width) * 100);
+    }
+    set(50);
+    baWrap.addEventListener("pointerdown", function (e) { dragging = true; baWrap.setPointerCapture(e.pointerId); fromEvent(e); });
+    baWrap.addEventListener("pointermove", function (e) { if (dragging) fromEvent(e); });
+    baWrap.addEventListener("pointerup", function () { dragging = false; });
+    baWrap.addEventListener("pointercancel", function () { dragging = false; });
+    baWrap.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") { set(pos - 4); e.preventDefault(); }
+      if (e.key === "ArrowRight") { set(pos + 4); e.preventDefault(); }
+    });
+
+    var baCopy = $("#ba-copy");
+    if (baCopy && ba.copy) baCopy.innerHTML = ba.copy;
+    var baNote = $("#ba-note");
+    if (baNote && ba.placeholderNote) baNote.textContent = ba.placeholderNote;
   }
 
   /* ---- 5. Render: projects (swiper) --------------------- */
