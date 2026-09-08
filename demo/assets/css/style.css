@@ -887,3 +887,19 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
   --btn-radius:999px;  --h-weight:400;  --scoop:1;
 }
 [data-theme="carbon-soft"] .site-header.is-stuck{background-color:#17190F}
+
+/* =============================================================
+   34. SCOOP OVERLAP FIX
+   A scooped band pulls itself up over the previous one with an
+   opaque background. If that pull exceeds the previous band's
+   bottom padding it paints over real content. Compensate.
+   ============================================================= */
+:root{--r-footer-scoop:clamp(64px,11vw,150px)}
+.site-footer--scoop{
+  border-radius:0 var(--r-footer-scoop) 0 0;
+  margin-top:calc(-1 * var(--r-footer-scoop));
+  padding-top:calc(72px + var(--r-footer-scoop) * .55);
+}
+/* the band above the footer must own enough padding to be eaten */
+#contact{padding-bottom:calc(var(--pad-band-lg) + var(--r-footer-scoop))}
+.band--dark + .site-footer--scoop{margin-top:0;border-radius:0;padding-top:72px}
