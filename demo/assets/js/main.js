@@ -27,7 +27,9 @@
   var statsEl = $("#stats");
   if (statsEl && D.stats) {
     statsEl.innerHTML = D.stats.map(function (s) {
-      return '<div class="stat"><b>' + esc(s.big) + '</b><span>' + esc(s.label) + '</span></div>';
+      return '<div class="stat">' +
+        (s.icon ? '<i class="' + esc(s.icon) + '"></i>' : '') +
+        '<b>' + esc(s.big) + '</b><span>' + esc(s.label) + '</span></div>';
     }).join("");
   }
 
@@ -35,14 +37,14 @@
   var svcEl = $("#services-list");
   if (svcEl && D.services) {
     svcEl.innerHTML = D.services.map(function (s, i) {
-      var archMod = i % 2 ? "arch--tr" : "";
+      var archMod = i % 2 ? "arch arch--tr" : "arch";
       return '' +
         '<article class="svc reveal">' +
           '<div class="svc__media"><div class="media ' + archMod + '">' +
             '<img loading="lazy" src="' + esc(s.img) + '" alt="' + esc(s.name.replace(/&amp;/g, "&")) + '">' +
           '</div></div>' +
           '<div class="svc__body">' +
-            '<span class="svc__no">' + esc(s.no) + ' / Service</span>' +
+            '<span class="svc__no">' + (s.icon ? '<i class="' + esc(s.icon) + '"></i>' : '') + esc(s.no) + ' / Service</span>' +
             '<h3>' + s.name + '</h3>' +
             '<p class="measure">' + s.desc + '</p>' +
             '<ul class="chips">' + s.tags.map(function (t) { return "<li>" + t + "</li>"; }).join("") + '</ul>' +
@@ -98,7 +100,9 @@
   var procEl = $("#process-list");
   if (procEl && D.process) {
     procEl.innerHTML = D.process.map(function (p) {
-      return '<div class="proc reveal"><div class="proc__num">' + esc(p.no) + '</div><h3>' + esc(p.name) + '</h3><p>' + p.desc + '</p></div>';
+      return '<div class="proc reveal">' +
+        '<div class="proc__num"><i class="' + esc(p.icon || "fa-solid fa-circle") + '"></i><span>' + esc(p.no) + '</span></div>' +
+        '<h3>' + esc(p.name) + '</h3><p>' + p.desc + '</p></div>';
     }).join("");
   }
 
