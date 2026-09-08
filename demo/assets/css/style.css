@@ -903,3 +903,15 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 /* the band above the footer must own enough padding to be eaten */
 #contact{padding-bottom:calc(var(--pad-band-lg) + var(--r-footer-scoop))}
 .band--dark + .site-footer--scoop{margin-top:0;border-radius:0;padding-top:72px}
+
+/* =============================================================
+   35. Services explorer — header inside the left column so the
+   image column runs the full height of the section instead of
+   leaving dead space beside the heading.
+   ============================================================= */
+.svc-left{display:flex;flex-direction:column}
+.svc-left .section-head{margin-bottom:2.2rem;max-width:100%}
+.svc-stage{align-self:start}
+@media(max-width:900px){
+  .svc-left .section-head{margin-bottom:1.6rem}
+}
