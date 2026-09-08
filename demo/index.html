@@ -58,9 +58,12 @@
   <!-- ===== Hero ===== -->
   <section class="hero">
     <div class="hero__media">
-      <!-- Ambient showreel goes here when client footage is supplied:
-           <video autoplay muted loop playsinline poster="…">…</video> -->
-      <img src="https://nextlevellandscaping.com.au/wp-content/uploads/2025/01/02102023_AUS_Urrbrae-landscape_24-Photo-Naveendra.jpg" alt="A completed NextLevel Landscaping garden transformation in Adelaide">
+      <video autoplay muted loop playsinline preload="metadata"
+             poster="assets/video/hero-poster.jpg"
+             aria-label="Aerial footage of landscaped homes and gardens">
+        <source src="assets/video/hero.mp4" type="video/mp4">
+      </video>
+      <div class="hero__overlay"></div>
     </div>
     <div class="container hero__tag">
       <span>Adelaide &bull; South Australian owned &bull; Licensed builder BLD320507</span>
