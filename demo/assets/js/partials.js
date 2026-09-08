@@ -17,7 +17,7 @@
   var header =
     '<header class="site-header">' +
       '<div class="container site-header__row">' +
-        '<a class="brand" href="index.html">NEXTLEVEL<span>LANDSCAPING</span></a>' +
+        '<a class="brand" href="index.html"><img src="assets/img/brand/logo.png" alt="NextLevel Landscaping"></a>' +
         '<nav class="main-nav">' + navLinks + '</nav>' +
         '<div class="header-cta">' +
           '<a class="phone" href="tel:+61404440222"><i class="fa-solid fa-phone"></i> 0404 440 222</a>' +
@@ -28,7 +28,7 @@
     '</header>' +
     '<div class="drawer" id="drawer">' +
       '<div class="drawer__top">' +
-        '<span class="brand" style="color:#fff">NEXTLEVEL<span>LANDSCAPING</span></span>' +
+        '<span class="brand"><img src="assets/img/brand/logo.png" alt="NextLevel Landscaping"></span>' +
         '<button class="drawer__close" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>' +
       '</div>' +
       '<nav>' + navLinks + '</nav>' +
@@ -40,7 +40,7 @@
       '<div class="container">' +
         '<div class="footer-grid">' +
           '<div class="footer-brand">' +
-            '<span class="brand">NEXTLEVEL<span>LANDSCAPING</span></span>' +
+            '<span class="brand"><img src="assets/img/brand/logo.png" alt="NextLevel Landscaping"></span>' +
             '<p>A proudly South Australian owned and operated landscaping business. Design, construction and garden supplies.</p>' +
           '</div>' +
           '<div><h4>EXPLORE</h4><ul>' +
