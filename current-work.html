@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-AU" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.remove('no-js');</script>
+<title>Current Work — NextLevel Landscaping</title>
+<meta name="description" content="Landscaping projects NextLevel Landscaping is building right now across Adelaide — with a live look at what stage each one is at.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css?v=1788858531">
+</head>
+<body>
+<div id="site-header-slot"></div>
+
+<main>
+  <section class="subhero contour">
+    <div class="container">
+      <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Current Work</p>
+      <h1>Current Work, Live</h1>
+      <p class="lead">The projects our teams are on right now. Each one shows exactly which stage it's at and what happened most recently — updated by the office as the build progresses.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="cw-grid" id="cw-index"></div>
+    </div>
+  </section>
+
+  <section class="band band--dark contour">
+    <div class="container" style="text-align:center">
+      <h2>Want your project on this page next?</h2>
+      <p class="lead" style="margin:1rem auto 2rem;max-width:46ch">Start with a free on-site consultation and design.</p>
+      <a class="btn-ghost" href="index.html#contact">Get a free quote</a>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer-slot"></div>
+
+<script src="assets/js/partials.js?v=1788858531"></script>
+<script src="assets/data.js?v=1788858531"></script>
+<script src="assets/js/main.js?v=1788858531"></script>
+<script>
+(function(){
+  var D=window.NLL, total=(D.stages||[]).length||10;
+  document.getElementById('cw-index').innerHTML=(D.currentWork||[]).map(function(j){
+    var bars='';
+    for(var k=0;k<total;k++){var c=k<j.stageIndex?'done':(k===j.stageIndex?'now':'');bars+='<li class="'+c+'"></li>';}
+    var pct=Math.round(((j.stageIndex+1)/total)*100);
+    return '<a class="reveal" href="current-work-detail.html?slug='+j.slug+'">'+
+      '<article class="cw-card">'+
+        '<div class="media arch arch--sm"><img loading="lazy" src="'+j.img+'" alt="'+j.title+'"></div>'+
+        '<div class="cw-card__meta"><span>'+j.suburb+'</span><span>ETA '+j.eta+'</span></div>'+
+        '<h3>'+j.title+'</h3>'+
+        '<ul class="stepper">'+bars+'</ul>'+
+        '<p class="cw-card__stage">Stage '+(j.stageIndex+1)+' of '+total+' &middot; '+pct+'%<small>'+(D.stages[j.stageIndex]||'')+'</small></p>'+
+        '<p class="cw-card__note" style="margin-top:.9rem">'+j.note+'</p>'+
+        '<span class="tlink">View progress <i class="fa-solid fa-arrow-right"></i></span>'+
+      '</article></a>';
+  }).join('');
+  document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+})();
+</script>
+</body>
+</html>

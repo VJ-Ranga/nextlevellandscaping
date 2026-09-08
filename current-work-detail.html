@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-AU" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.remove('no-js');</script>
+<title>Current project — NextLevel Landscaping</title>
+<meta name="description" content="Live progress on a NextLevel Landscaping project in Adelaide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css?v=1788858531">
+</head>
+<body>
+<div id="site-header-slot"></div>
+
+<main>
+  <section class="subhero">
+    <div class="subhero__media" id="subhero-media"></div>
+    <div class="container">
+      <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <a href="current-work.html">Current Work</a> &nbsp;/&nbsp; <span id="crumb-name">Project</span></p>
+      <h1 id="j-title">—</h1>
+      <div class="subhero__meta" id="j-meta"></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="detail-body">
+        <div class="reveal">
+          <div class="section-head" style="margin-bottom:1.5rem"><span class="eyebrow">Progress</span><h2>Where it's at</h2></div>
+          <div class="prog"><div class="prog__bar"><span id="j-progbar"></span></div><span class="prog__pct" id="j-progpct"></span></div>
+          <p id="j-note" style="color:var(--muted);margin-bottom:2.5rem"></p>
+          <ol class="stepper-v" id="j-stepper"></ol>
+          <div class="cms-note"><b>How this stays current:</b> in the WordPress admin the office opens this job, changes the <b>Current stage</b> dropdown and adds a short note. That updates the tracker above and adds a line to the timeline &mdash; no developer needed.</div>
+        </div>
+        <aside class="reveal">
+          <div class="spec">
+            <dl id="j-spec"></dl>
+          </div>
+          <p style="margin-top:2rem"><a class="btn-ghost" href="index.html#contact">Start a project like this</a></p>
+        </aside>
+      </div>
+
+      <div style="margin-top:4rem" class="reveal">
+        <div class="section-head" style="margin-bottom:1.2rem"><span class="eyebrow">On site</span><h2>Latest photos</h2></div>
+        <div class="gallery-grid" id="j-gallery"></div>
+      </div>
+
+      <div style="margin-top:4rem" class="reveal">
+        <div class="section-head" style="margin-bottom:1.2rem"><span class="eyebrow">Updates</span><h2>Progress timeline</h2></div>
+        <ul class="timeline" id="j-timeline"></ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer-slot"></div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" aria-label="Close">&times;</button>
+  <button class="lb-prev" aria-label="Previous">&larr;</button>
+  <img src="" alt="">
+  <button class="lb-next" aria-label="Next">&rarr;</button>
+</div>
+
+<script src="assets/js/partials.js?v=1788858531"></script>
+<script src="assets/data.js?v=1788858531"></script>
+<script src="assets/js/main.js?v=1788858531"></script>
+<script>
+(function(){
+  var D=window.NLL, STAGES=D.stages||[], total=STAGES.length;
+  var slug=new URLSearchParams(location.search).get('slug');
+  var list=D.currentWork||[];
+  var j=list.find(function(x){return x.slug===slug;})||list[0];
+  var pct=Math.round(((j.stageIndex+1)/total)*100);
+
+  document.title=j.title+' — NextLevel Landscaping';
+  document.getElementById('crumb-name').textContent=j.title;
+  document.getElementById('j-title').textContent=j.title;
+  document.getElementById('subhero-media').innerHTML='<img src="'+j.img+'" alt="">';
+  document.getElementById('j-meta').innerHTML=
+    '<span>Suburb <b>'+j.suburb+'</b></span>'+
+    '<span>Started <b>'+(j.start||'—')+'</b></span>'+
+    '<span>Est. completion <b>'+j.eta+'</b></span>'+
+    '<span>Stage <b>'+(j.stageIndex+1)+' of '+total+'</b></span>';
+
+  document.getElementById('j-progbar').style.width=pct+'%';
+  document.getElementById('j-progpct').textContent=pct+'% complete';
+  document.getElementById('j-note').textContent=j.note;
+
+  document.getElementById('j-stepper').innerHTML=STAGES.map(function(s,k){
+    var c=k<j.stageIndex?'done':(k===j.stageIndex?'now':'');
+    return '<li class="'+c+'"><span class="dot"></span><span class="st-name">'+s+'</span></li>';
+  }).join('');
+
+  document.getElementById('j-spec').innerHTML=
+    '<dt>Suburb</dt><dd>'+j.suburb+'</dd>'+
+    '<dt>Services</dt><dd>'+j.services.join(', ')+'</dd>'+
+    '<dt>Est. completion</dt><dd>'+j.eta+'</dd>';
+
+  var g=document.getElementById('j-gallery');
+  var gal=j.gallery||[j.img];
+  g.innerHTML=gal.map(function(src,idx){return '<button data-i="'+idx+'"><img loading="lazy" src="'+src+'" alt="'+j.title+' photo '+(idx+1)+'"></button>';}).join('');
+  var open=window.NLLlightbox(gal);
+  g.addEventListener('click',function(e){var b=e.target.closest('button');if(b&&open)open(+b.dataset.i);});
+
+  document.getElementById('j-timeline').innerHTML=(j.updates||[]).map(function(u){
+    return '<li><time>'+u.date+'</time><div><span class="tl-stage">'+(STAGES[u.stage]||'')+'</span><p>'+u.text+'</p></div></li>';
+  }).join('');
+
+  document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+})();
+</script>
+</body>
+</html>
