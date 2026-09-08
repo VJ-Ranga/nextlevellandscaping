@@ -638,3 +638,9 @@ p:last-child{margin-bottom:0}
   .band--scoop{padding-top:calc(var(--pad-band) + var(--r-scoop) * .35)}
 }
 .band--scoop.contour::before{border-radius:inherit}
+/* leftover per-card arch rules — images stay plain */
+.store-card .media,
+.store-card:nth-child(2) .media,
+.store-card:nth-child(3) .media,
+.svc-accordion-media .media,
+.about__media .media{border-radius:4px}
