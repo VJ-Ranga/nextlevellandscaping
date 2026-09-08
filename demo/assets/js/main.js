@@ -60,13 +60,13 @@
     projWrap.innerHTML = D.projects.map(function (p) {
       return '' +
         '<div class="swiper-slide">' +
-          '<article class="proj-card">' +
+          '<a class="proj-card" href="project.html?slug=' + esc(p.slug) + '">' +
             '<div class="media arch"><img loading="lazy" src="' + esc(p.img) + '" alt="' + esc(p.name) + '"></div>' +
             '<div class="proj-card__meta"><span>' + esc(p.suburb) + '</span><span>&bull;</span><span>' + esc(p.date) + '</span></div>' +
             '<h3>' + esc(p.name) + '</h3>' +
             '<p>' + esc(p.blurb) + '</p>' +
             '<ul class="chips">' + p.tags.map(function (t) { return "<li>" + t + "</li>"; }).join("") + '</ul>' +
-          '</article>' +
+          '</a>' +
         '</div>';
     }).join("");
   }
@@ -84,15 +84,15 @@
       var stageName = (D.stages && D.stages[j.stageIndex]) || "";
       var pct = Math.round(((j.stageIndex + 1) / total) * 100);
       return '' +
-        '<article class="cw-card reveal">' +
+        '<a class="cw-card reveal" href="current-work-detail.html?slug=' + esc(j.slug) + '">' +
           '<div class="media arch--sm arch"><img loading="lazy" src="' + esc(j.img) + '" alt="' + esc(j.title) + '"></div>' +
           '<div class="cw-card__meta"><span>' + esc(j.suburb) + '</span><span>ETA ' + esc(j.eta) + '</span></div>' +
           '<h3>' + esc(j.title) + '</h3>' +
           '<ul class="stepper">' + bars + '</ul>' +
           '<p class="cw-card__stage">Stage ' + (j.stageIndex + 1) + ' of ' + total + ' &middot; ' + pct + '%<small>' + esc(stageName) + '</small></p>' +
           '<p class="cw-card__note" style="margin-top:.9rem">' + esc(j.note) + '</p>' +
-          '<a class="tlink" href="#">View progress <i class="fa-solid fa-arrow-right"></i></a>' +
-        '</article>';
+          '<span class="tlink">View progress <i class="fa-solid fa-arrow-right"></i></span>' +
+        '</a>';
     }).join("");
   }
 
@@ -182,4 +182,24 @@
 
   /* ---- 13. Footer year ---------------------------- */
   var y = $("#year"); if (y) y.textContent = new Date().getFullYear();
+
+  /* ---- 14. Gallery lightbox (sub-pages) ----------- */
+  window.NLLlightbox = function (imgs) {
+    var lb = $("#lightbox");
+    if (!lb) return;
+    var pic = $("img", lb), i = 0;
+    function show(n) { i = (n + imgs.length) % imgs.length; pic.src = imgs[i]; }
+    lb.addEventListener("click", function (e) {
+      if (e.target === lb || e.target.classList.contains("lb-close")) lb.classList.remove("open");
+      if (e.target.classList.contains("lb-next")) show(i + 1);
+      if (e.target.classList.contains("lb-prev")) show(i - 1);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (!lb.classList.contains("open")) return;
+      if (e.key === "Escape") lb.classList.remove("open");
+      if (e.key === "ArrowRight") show(i + 1);
+      if (e.key === "ArrowLeft") show(i - 1);
+    });
+    return function open(n) { show(n); lb.classList.add("open"); };
+  };
 })();

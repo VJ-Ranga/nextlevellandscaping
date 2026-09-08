@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-AU" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.remove('no-js');</script>
+<title>Our Work — NextLevel Landscaping</title>
+<meta name="description" content="Completed landscaping projects by NextLevel Landscaping across metro Adelaide — paving, retaining walls, fencing, turf and full backyard transformations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css?v=1788858531">
+</head>
+<body>
+<div id="site-header-slot"></div>
+
+<main>
+  <section class="subhero contour">
+    <div class="container">
+      <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Our Work</p>
+      <h1>Our Work</h1>
+      <p class="lead">Full-property builds across metro Adelaide — each one designed, engineered and finished by our own team. Here is a closer look at four recent transformations.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="filterbar" id="filterbar">
+        <button class="is-active">All</button>
+        <button>Residential</button>
+        <button>Paving</button>
+        <button>Retaining walls</button>
+        <button>Fencing</button>
+        <button>Turf</button>
+      </div>
+      <div class="work-grid" id="work-grid"></div>
+    </div>
+  </section>
+
+  <section class="band band--dark contour">
+    <div class="container" style="text-align:center">
+      <h2>Have a space in mind?</h2>
+      <p class="lead" style="margin:1rem auto 2rem;max-width:48ch">Tell us what you're picturing and we'll come out for a look.</p>
+      <a class="btn-ghost" href="index.html#contact">Get a free quote</a>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer-slot"></div>
+
+<script src="assets/js/partials.js?v=1788858531"></script>
+<script src="assets/data.js?v=1788858531"></script>
+<script src="assets/js/main.js?v=1788858531"></script>
+<script>
+(function(){
+  var grid=document.getElementById('work-grid');
+  grid.innerHTML=(window.NLL.projects||[]).map(function(p){
+    return '<a class="reveal" href="project.html?slug='+p.slug+'">'+
+      '<article class="work-card">'+
+        '<div class="media arch"><img loading="lazy" src="'+p.img+'" alt="'+p.name+'"></div>'+
+        '<div class="work-card__meta"><span>'+p.suburb+'</span><span>&bull;</span><span>'+p.date+'</span></div>'+
+        '<h3>'+p.name+'</h3><p>'+p.blurb+'</p>'+
+        '<ul class="chips">'+p.tags.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul>'+
+      '</article></a>';
+  }).join('');
+  // demo filter bar — visual only
+  var fb=document.getElementById('filterbar');
+  fb.addEventListener('click',function(e){
+    if(e.target.tagName!=='BUTTON')return;
+    fb.querySelectorAll('button').forEach(function(b){b.classList.remove('is-active');});
+    e.target.classList.add('is-active');
+  });
+  document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+})();
+</script>
+</body>
+</html>

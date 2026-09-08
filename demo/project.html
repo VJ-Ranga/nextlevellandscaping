@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-AU" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.remove('no-js');</script>
+<title>Project — NextLevel Landscaping</title>
+<meta name="description" content="A NextLevel Landscaping project in metro Adelaide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css?v=1788858531">
+</head>
+<body>
+<div id="site-header-slot"></div>
+
+<main>
+  <section class="subhero" id="subhero">
+    <div class="subhero__media" id="subhero-media"></div>
+    <div class="container">
+      <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <a href="our-work.html">Our Work</a> &nbsp;/&nbsp; <span id="crumb-name">Project</span></p>
+      <h1 id="p-name">—</h1>
+      <p class="lead" id="p-blurb"></p>
+      <div class="subhero__meta" id="p-meta"></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="detail-body">
+        <div class="narrative reveal" id="p-narrative"></div>
+        <aside class="reveal">
+          <div class="spec">
+            <dl id="p-spec"></dl>
+            <ul class="scope-list" id="p-scope"></ul>
+          </div>
+        </aside>
+      </div>
+      <div class="gallery-grid" id="p-gallery"></div>
+    </div>
+  </section>
+
+  <section class="band band--dark contour">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">More of our work</span><h2>Related projects</h2></div>
+      <div class="work-grid" id="p-related"></div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer-slot"></div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" aria-label="Close">&times;</button>
+  <button class="lb-prev" aria-label="Previous">&larr;</button>
+  <img src="" alt="">
+  <button class="lb-next" aria-label="Next">&rarr;</button>
+</div>
+
+<script src="assets/js/partials.js?v=1788858531"></script>
+<script src="assets/data.js?v=1788858531"></script>
+<script src="assets/js/main.js?v=1788858531"></script>
+<script>
+(function(){
+  var slug=new URLSearchParams(location.search).get('slug');
+  var list=window.NLL.projects||[];
+  var p=list.find(function(x){return x.slug===slug;})||list[0];
+  document.title=p.name+' — NextLevel Landscaping';
+  document.getElementById('crumb-name').textContent=p.name;
+  document.getElementById('p-name').textContent=p.name;
+  document.getElementById('p-blurb').textContent=p.blurb;
+  document.getElementById('subhero-media').innerHTML='<img src="'+p.img+'" alt="">';
+  document.getElementById('p-meta').innerHTML=
+    '<span>Location <b>'+p.suburb+', SA</b></span>'+
+    '<span>Completed <b>'+p.date+'</b></span>'+
+    '<span>Scope <b>'+p.tags.join(' · ')+'</b></span>';
+  document.getElementById('p-narrative').innerHTML='<p>'+p.narrative+'</p>';
+  document.getElementById('p-spec').innerHTML=
+    '<dt>Suburb</dt><dd>'+p.suburb+'</dd>'+
+    '<dt>Completed</dt><dd>'+p.date+'</dd>'+
+    '<dt>Services</dt><dd>'+p.tags.join(', ')+'</dd>';
+  document.getElementById('p-scope').innerHTML='<li style="margin-bottom:.4rem;color:var(--ink);font-weight:500;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase">What we did</li>'+
+    p.scope.map(function(s){return '<li><i class="fa-solid fa-circle"></i><span>'+s+'</span></li>';}).join('');
+
+  var g=document.getElementById('p-gallery');
+  g.innerHTML=p.gallery.map(function(src,idx){
+    return '<button data-i="'+idx+'"><img loading="lazy" src="'+src+'" alt="'+p.name+' photo '+(idx+1)+'"></button>';
+  }).join('');
+  var open=window.NLLlightbox(p.gallery);
+  g.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(b&&open) open(+b.dataset.i);
+  });
+
+  var rel=list.filter(function(x){return x.slug!==p.slug;}).slice(0,3);
+  document.getElementById('p-related').innerHTML=rel.map(function(r){
+    return '<a href="project.html?slug='+r.slug+'"><article class="work-card">'+
+      '<div class="media arch"><img loading="lazy" src="'+r.img+'" alt="'+r.name+'"></div>'+
+      '<div class="work-card__meta"><span>'+r.suburb+'</span><span>&bull;</span><span>'+r.date+'</span></div>'+
+      '<h3>'+r.name+'</h3></article></a>';
+  }).join('');
+
+  document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+})();
+</script>
+</body>
+</html>
