@@ -21,7 +21,7 @@
         '<nav class="main-nav">' + navLinks + '</nav>' +
         '<div class="header-cta">' +
           '<a class="phone" href="tel:+61404440222"><i class="fa-solid fa-phone"></i> 0404 440 222</a>' +
-          '<a class="btn-ghost" href="index.html#contact">Get a free quote</a>' +
+          '<a class="btn-ghost btn-ghost--fill" href="index.html#contact">Get a free quote</a>' +
           '<button class="nav-toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>' +
         '</div>' +
       '</div>' +
