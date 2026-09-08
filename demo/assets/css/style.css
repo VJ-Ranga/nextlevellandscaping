@@ -599,3 +599,42 @@ p:last-child{margin-bottom:0}
   background:rgba(20,22,18,.25);
   backdrop-filter:blur(3px);
 }
+
+/* =============================================================
+   26. SECTION SCOOPS
+   The big curve belongs to the band, not to every image.
+   A band pulls up over the one above it and cuts one corner,
+   revealing the previous band's colour through the curve.
+   ============================================================= */
+.band--scoop{
+  --r-scoop:clamp(64px,11vw,150px);
+  position:relative;
+  z-index:1;
+  background:var(--bg);
+  border-radius:var(--r-scoop) 0 0 0;
+  margin-top:calc(-1 * var(--r-scoop));
+  padding-top:calc(var(--pad-band) + var(--r-scoop) * .55);
+}
+.band--scoop.band--dark{background:var(--surface-dark)}
+.band--scoop-tr{border-radius:0 var(--r-scoop) 0 0}
+.band--scoop-sm{--r-scoop:clamp(44px,6vw,90px)}
+.band--scoop-lg{--r-scoop:clamp(90px,16vw,220px)}
+.band--scoop-xl{--r-scoop:clamp(110px,22vw,300px)}
+
+/* footer gets one too */
+.site-footer--scoop{
+  position:relative;z-index:1;
+  border-radius:0 clamp(64px,11vw,150px) 0 0;
+  margin-top:calc(-1 * clamp(64px,11vw,150px));
+  padding-top:calc(72px + clamp(64px,11vw,150px) * .55);
+}
+
+/* images: plain now — the shape lives on the sections */
+.media{border-radius:4px}
+.svc-figure{border-radius:4px}
+.gallery-grid button{border-radius:4px}
+
+@media(max-width:640px){
+  .band--scoop{padding-top:calc(var(--pad-band) + var(--r-scoop) * .35)}
+}
+.band--scoop.contour::before{border-radius:inherit}
