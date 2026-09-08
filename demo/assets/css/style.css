@@ -846,3 +846,31 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 [data-theme="brand"]  .site-header.is-stuck{background-color:#5A6428}
 [data-theme="slate"]  .site-header.is-stuck{background-color:#23271F}
 [data-theme="carbon"] .site-header.is-stuck{background-color:#17190F}
+
+/* =============================================================
+   32. CONTRAST PASS
+   --muted and --line were light-context only, so any secondary
+   text landing on a dark band came out near-invisible. Flip them
+   with context, the same way --accent already does.
+   ============================================================= */
+.band--dark, .site-footer, .subhero, .drawer, .strip-band, .hero{
+  --muted:rgba(255,255,255,.76);
+  --line:rgba(255,255,255,.22);
+}
+
+/* store cards live on a light band now — stop forcing white text */
+.store-card p{color:var(--muted)}
+.band--dark .store-card p{color:var(--muted)}
+
+/* service numbers were --line (≈1.2:1) — invisible */
+.svc-item__no{color:var(--muted);opacity:.7}
+.svc-item.is-active .svc-item__no,
+.svc-item:hover .svc-item__no{color:var(--accent);opacity:1}
+
+/* review attribution + avatar */
+.rev-card__who b{color:inherit}
+.rev-card__who span span{color:var(--muted)}
+.rev-avatar{background:var(--accent);color:var(--accent-ink)}
+
+/* project card body copy sits on a dark band */
+.proj-card p{color:var(--muted)}
