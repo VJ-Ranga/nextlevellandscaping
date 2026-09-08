@@ -876,3 +876,20 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 .proj-card p{color:var(--muted)}
 /* avatar is a <span>, so it needs to outrank .rev-card__who span */
 .rev-card__who .rev-avatar{background:var(--accent);color:var(--accent-ink);display:flex}
+
+/* =============================================================
+   33. THEME D — Carbon soft
+   Carbon lime's palette with Brand olive's design treatment:
+   pill buttons, weight-400 headings, and the big scoop curves.
+   (Deliberately NOT listed in the squared/no-scoop rules above,
+   so it inherits the curved defaults.)
+   ============================================================= */
+[data-theme="carbon-soft"]{
+  --ink:#14150F;   --bg:#FFFFFF;
+  --surface-dark:#17190F;  --surface-dark-2:#0D0E08;
+  --muted:#6A6C60; --line:#E6E6E0;
+  --accent-dark:#C2E807;   --accent-ink-dark:#14150F;
+  --accent-light:#3E4A16;  --accent-ink-light:#ffffff;
+  --btn-radius:999px;  --h-weight:400;  --scoop:1;
+}
+[data-theme="carbon-soft"] .site-header.is-stuck{background-color:#17190F}
