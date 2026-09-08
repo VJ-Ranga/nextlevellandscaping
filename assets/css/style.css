@@ -748,3 +748,102 @@ p:last-child{margin-bottom:0}
 .site-header.is-stuck .brand img{height:36px}
 .drawer .brand img,.site-footer .brand img{height:40px}
 @media(max-width:640px){ .brand img{height:34px} }
+
+/* =============================================================
+   30. THEMES — three complete looks for the client to compare.
+   Each varies palette AND design treatment (shape + button +
+   heading weight), not just colour.
+   ============================================================= */
+
+/* --- A. BRAND OLIVE (the logo's own colours) ---------------- */
+:root,
+[data-theme="brand"]{
+  --ink:#1C2412;   --bg:#F6F5EF;
+  --surface-dark:#5A6428;  --surface-dark-2:#4A5321;
+  --muted:#6E7358; --line:#E2E0D5;
+  --accent-dark:#C2E807;   --accent-ink-dark:#1C2412;
+  --accent-light:#5A6428;  --accent-ink-light:#ffffff;
+  --btn-radius:999px;  --h-weight:400;  --scoop:1;
+}
+
+/* --- B. SLATE BLUE (the earlier palette) -------------------- */
+[data-theme="slate"]{
+  --ink:#1C1F1A;   --bg:#FAF8F4;
+  --surface-dark:#23271F;  --surface-dark-2:#1B1E17;
+  --muted:#6B6F66; --line:#E4E0D8;
+  --accent-dark:#5B87F5;   --accent-ink-dark:#0E1730;
+  --accent-light:#1A56DB;  --accent-ink-light:#ffffff;
+  --btn-radius:999px;  --h-weight:400;  --scoop:0;
+}
+
+/* --- C. CARBON + LIME (bold, architectural) ----------------- */
+[data-theme="carbon"]{
+  --ink:#14150F;   --bg:#FFFFFF;
+  --surface-dark:#17190F;  --surface-dark-2:#0D0E08;
+  --muted:#6A6C60; --line:#E6E6E0;
+  --accent-dark:#C2E807;   --accent-ink-dark:#14150F;
+  --accent-light:#3E4A16;  --accent-ink-light:#ffffff;
+  --btn-radius:2px;    --h-weight:500;  --scoop:0;
+}
+
+/* context-aware accent, driven by the active theme */
+:root{ --accent:var(--accent-light); --accent-ink:var(--accent-ink-light); }
+.band--dark, .site-footer, .subhero, .drawer, .site-header,
+.strip-band, .lightbox, .hero{ --accent:var(--accent-dark); --accent-ink:var(--accent-ink-dark); }
+
+/* design traits driven by the theme */
+.btn-ghost{border-radius:var(--btn-radius)}
+h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
+.site-header.is-stuck{background:var(--surface-dark)}
+
+/* themes B and C are straight-edged — no scoop anywhere */
+[data-theme="slate"] .band--scoop,
+[data-theme="carbon"] .band--scoop{
+  border-radius:0;margin-top:0;padding-top:var(--pad-band);
+}
+[data-theme="slate"] .hero__media,
+[data-theme="carbon"] .hero__media{border-radius:0}
+[data-theme="slate"] .site-footer--scoop,
+[data-theme="carbon"] .site-footer--scoop{border-radius:0;margin-top:0;padding-top:72px}
+/* carbon also squares off the small stuff */
+[data-theme="carbon"] .media,
+[data-theme="carbon"] .svc-figure,
+[data-theme="carbon"] .gallery-grid button,
+[data-theme="carbon"] .chips li,
+[data-theme="carbon"] .strip__cap,
+[data-theme="carbon"] .ba__tag{border-radius:0}
+[data-theme="carbon"] .field input,
+[data-theme="carbon"] .field textarea{border-radius:0}
+
+/* =============================================================
+   31. Demo theme switcher bar (sits above the header)
+   ============================================================= */
+.theme-bar{
+  position:fixed;top:0;left:0;right:0;z-index:150;
+  height:46px;display:flex;align-items:center;gap:1rem;
+  padding:0 var(--gutter);
+  background:#0E100B;color:rgba(255,255,255,.8);
+  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+}
+.theme-bar__label{white-space:nowrap;opacity:.62}
+.theme-bar__opts{display:flex;gap:.5rem;margin-left:auto}
+.theme-opt{
+  display:flex;align-items:center;gap:.55em;
+  padding:.5em .9em;border:1px solid rgba(255,255,255,.22);border-radius:999px;
+  background:none;color:rgba(255,255,255,.72);cursor:pointer;
+  font:500 .68rem/1 var(--f);letter-spacing:.1em;text-transform:uppercase;
+  transition:.2s;
+}
+.theme-opt:hover{border-color:rgba(255,255,255,.55);color:#fff}
+.theme-opt[aria-pressed="true"]{background:#fff;color:#14150F;border-color:#fff}
+.theme-opt .sw{display:flex;gap:2px}
+.theme-opt .sw i{width:10px;height:10px;border-radius:50%;display:block}
+.site-header{top:46px}
+.theme-bar + .site-header{top:46px}
+@media(max-width:760px){
+  .theme-bar{height:44px;gap:.5rem;font-size:.62rem}
+  .theme-bar__label{display:none}
+  .theme-opt{padding:.45em .7em;font-size:.6rem}
+  .theme-opt .txt{display:none}
+  .site-header{top:44px}
+}
