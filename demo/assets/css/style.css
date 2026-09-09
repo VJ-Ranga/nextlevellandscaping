@@ -282,13 +282,13 @@ p:last-child{margin-bottom:0}
 .cw-card__stage small{display:block;color:var(--muted);font-weight:400;letter-spacing:.04em;margin-top:2px}
 
 /* ---------- 13. Process ---------------------------------- */
-.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem}
-.proc__num{position:relative;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--line-dark);
-  display:flex;align-items:center;justify-content:center;font-size:1.35rem;margin-bottom:1.3rem;color:var(--accent)}
-.proc__num span{position:absolute;right:-4px;top:-4px;width:24px;height:24px;border-radius:50%;
-  background:var(--accent);color:#fff;font-size:.7rem;display:flex;align-items:center;justify-content:center}
-.proc h3{font-size:1.05rem;margin-bottom:.6rem}
-.proc p{font-size:.92rem;color:var(--muted)}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3.25rem}
+.proc__num{position:relative;width:92px;height:92px;border-radius:50%;border:1.5px solid var(--line-dark);
+  display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:1.6rem;color:var(--accent)}
+.proc__num span{position:absolute;right:-4px;top:-4px;width:26px;height:26px;border-radius:50%;
+  background:var(--accent);color:#fff;font-size:.72rem;display:flex;align-items:center;justify-content:center}
+.proc h3{font-size:1.2rem;margin-bottom:.7rem}
+.proc p{font-size:1rem;line-height:1.65;color:var(--muted)}
 
 /* ---------- 14. Store ----------------------------------- */
 .store-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem}
@@ -302,7 +302,8 @@ p:last-child{margin-bottom:0}
 /* ---------- 15. Reviews -------------------------------- */
 .rev-swiper{overflow:visible}
 .rev-card{border-top:1px solid var(--line);padding-top:1.6rem}
-.rev-card p{font-size:1.02rem;line-height:1.7;margin-bottom:1.4rem}
+.rev-card p{font-size:1.02rem;line-height:1.7;margin-bottom:1.4rem;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:6;line-clamp:6;overflow:hidden}
 .rev-card__who{display:flex;align-items:center;gap:.9rem}
 .rev-avatar{width:46px;height:46px;border-radius:50% 50% 50% 0;background:var(--accent);color:#fff;
   display:flex;align-items:center;justify-content:center;font-size:.9rem;letter-spacing:.04em;flex:none}
@@ -653,8 +654,7 @@ p:last-child{margin-bottom:0}
    Fixed height, natural widths — landscape and portrait shots
    give the row its varied rhythm.
    ============================================================= */
-.strip-band{position:relative;padding-block:var(--pad-band) 0}
-.strip-head{margin-bottom:2rem}
+.strip-band{position:relative;padding-block:0;background:var(--surface-dark)}
 .strip{overflow:hidden;width:100%}
 .strip .swiper-slide{
   width:auto;
