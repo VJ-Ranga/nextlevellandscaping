@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-AU" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.remove('no-js');try{document.documentElement.setAttribute("data-theme",(function(t){return ["brand","carbon","carbon-soft","plan","nocturne"].indexOf(t)>-1?t:"brand"})(localStorage.getItem("nll-theme")));document.documentElement.setAttribute("data-layout",localStorage.getItem("nll-layout")||"classic");document.documentElement.setAttribute("data-hero",localStorage.getItem("nll-hero")||"static")}catch(e){}</script>
+<title>Service — NextLevel Landscaping</title>
+<meta name="description" content="Landscaping services across Adelaide by NextLevel Landscaping — licensed builder BLD320507.">
+<link rel="icon" href="assets/img/brand/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="assets/css/style.css?v=1788937749">
+<link rel="stylesheet" href="assets/css/style-plan.css?v=1788937749">
+<link rel="stylesheet" href="assets/css/style-nocturne.css?v=1788937749">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="site-header-slot"></div>
+
+<main id="main" tabindex="-1">
+  <section class="subhero">
+    <div class="subhero__media" id="subhero-media"></div>
+    <div class="container">
+      <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <a href="index.html#services">Services</a> &nbsp;/&nbsp; <span id="crumb-name">Service</span></p>
+      <h1 id="s-name">—</h1>
+      <p class="lead" id="s-desc"></p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="detail-body">
+        <div class="reveal">
+          <div class="section-head" style="margin-bottom:1.4rem"><span class="eyebrow">What's included</span><h2>Options &amp; materials</h2></div>
+          <ul class="chips" id="s-tags"></ul>
+          <p style="margin-top:2rem" class="measure" id="s-more"></p>
+        </div>
+        <aside class="reveal">
+          <div class="spec"><dl id="s-spec"></dl></div>
+          <p style="margin-top:2rem"><a class="btn-ghost btn-ghost--fill" href="index.html#contact">Get a free quote</a></p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--dark contour">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">Related work</span><h2>Where we've done this</h2></div>
+      <div class="work-grid" id="s-related"></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">All services</span><h2>We do it all</h2></div>
+      <ul class="chips" id="s-all"></ul>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer-slot"></div>
+<a class="wa-float" href="https://wa.me/61404440222" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+<script src="assets/js/partials.js?v=1788937749"></script>
+<script src="assets/data.js?v=1788937749"></script>
+<script src="assets/js/main.js?v=1788937749"></script>
+<script>
+(function(){
+  var D=window.NLL, list=D.services||[];
+  var slug=new URLSearchParams(location.search).get('slug');
+  var s=list.find(function(x){return x.slug===slug;})||list[0];
+  var plain=s.name.replace(/&amp;/g,'&');
+  document.title=plain+' — NextLevel Landscaping';
+  document.getElementById('crumb-name').textContent=plain;
+  document.getElementById('s-name').innerHTML=s.name;
+  document.getElementById('s-desc').innerHTML=s.desc;
+  document.getElementById('subhero-media').innerHTML='<img src="'+s.img+'" alt="">';
+  document.getElementById('s-tags').innerHTML=s.tags.map(function(t){return '<li>'+t+'</li>';}).join('');
+  document.getElementById('s-spec').innerHTML=
+    '<dt>Service</dt><dd>'+s.name+'</dd>'+
+    '<dt>Area</dt><dd>Adelaide &amp; surrounds</dd>'+
+    '<dt>Licence</dt><dd>BLD320507</dd>';
+  document.getElementById('s-more').innerHTML='Every job starts with an on-site consultation and a 2D &amp; 3D design, so you can see the finished space before we begin. One team handles the whole build.';
+  // related projects: match a service tag against project tags
+  var key=plain.split(' ')[0].toLowerCase();
+  var rel=(D.projects||[]).filter(function(p){
+    return p.tags.some(function(t){return t.toLowerCase().indexOf(key)>-1;});
+  });
+  if(!rel.length) rel=(D.projects||[]).slice(0,3);
+  document.getElementById('s-related').innerHTML=rel.slice(0,3).map(function(r){
+    return '<a href="project.html?slug='+r.slug+'"><article class="work-card">'+
+      '<div class="media"><img loading="lazy" src="'+r.img+'" alt="'+r.name+'"></div>'+
+      '<div class="work-card__meta"><span>'+r.suburb+'</span><span>&bull;</span><span>'+r.date+'</span></div>'+
+      '<h3>'+r.name+'</h3></article></a>';
+  }).join('');
+  document.getElementById('s-all').innerHTML=list.map(function(x){
+    return '<li'+(x.slug===s.slug?' style="border-color:var(--accent)"':'')+'><a href="service.html?slug='+x.slug+'">'+x.name+'</a></li>';
+  }).join('');
+  document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+})();
+</script>
+<script src="assets/js/theme.js?v=1788937749"></script>
+</body>
+</html>
