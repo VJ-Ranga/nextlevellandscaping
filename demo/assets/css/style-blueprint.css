@@ -141,10 +141,7 @@ html[data-theme="blueprint"]{
 html[data-theme="blueprint"] .hero,
 html[data-theme="blueprint"] main > .band.band--dark,
 html[data-theme="blueprint"] main > #intro,
-html[data-theme="blueprint"] main > #projects,
-html[data-theme="blueprint"] main > #project-strip,
-html[data-theme="blueprint"] main > #process,
-html[data-theme="blueprint"] main > #about{
+html[data-theme="blueprint"] main > #projects{
   background:var(--bp-night); background-color:var(--bp-night);
   --bp-ink:var(--bp-on-night);
   --bp-muted:var(--bp-night-muted);
@@ -313,11 +310,9 @@ html[data-theme="blueprint"] main > .band > .container::before{
 html[data-theme="blueprint"] main > #intro        {--bp-label:"Overview"}
 html[data-theme="blueprint"] main > #services     {--bp-label:"What We Do"}
 html[data-theme="blueprint"] main > #projects     {--bp-label:"Selected Work"}
-html[data-theme="blueprint"] main > #project-strip{--bp-label:"Site Record"}
 html[data-theme="blueprint"] main > #current      {--bp-label:"Current Work"}
 html[data-theme="blueprint"] main > #process      {--bp-label:"Method"}
 html[data-theme="blueprint"] main > #reviews      {--bp-label:"Clients"}
-html[data-theme="blueprint"] main > #about        {--bp-label:"Practice"}
 html[data-theme="blueprint"] main > #store        {--bp-label:"Supply"}
 html[data-theme="blueprint"] main > #contact      {--bp-label:"Enquiry"}
 
