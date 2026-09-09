@@ -6,9 +6,9 @@
   "use strict";
 
   var THEMES = [
+    { id: "carbon-soft", name: "Carbon soft", swatch: ["#17190F", "#C2E807", "#F2F2EC"] },
     { id: "brand",  name: "Brand olive", swatch: ["#5A6428", "#C2E807", "#F6F5EF"] },
     { id: "carbon", name: "Carbon lime", swatch: ["#17190F", "#C2E807", "#FFFFFF"] },
-    { id: "carbon-soft", name: "Carbon soft", swatch: ["#17190F", "#C2E807", "#F2F2EC"] },
     { id: "plan",      name: "Plan",      swatch: ["#F7F6F1", "#16180F", "#C2E807"] },
     { id: "nocturne",  name: "Nocturne",  swatch: ["#101109", "#F2F1E9", "#C2E807"] },
     { id: "blueprint", name: "Blueprint", swatch: ["#101109", "#C2E807", "#F2F1E9"] }
@@ -51,10 +51,10 @@
     }
   }
 
-  var saved = "brand";
-  try { saved = localStorage.getItem(KEY) || "brand"; } catch (e) {}
+  var saved = "carbon-soft";
+  try { saved = localStorage.getItem(KEY) || "carbon-soft"; } catch (e) {}
   // a removed theme may still be stored from an earlier visit
-  if (!THEMES.some(function (t) { return t.id === saved; })) saved = "brand";
+  if (!THEMES.some(function (t) { return t.id === saved; })) saved = "carbon-soft";
 
   var bar = document.createElement("div");
   bar.className = "theme-bar";
