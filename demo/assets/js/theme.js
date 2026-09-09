@@ -17,6 +17,15 @@
   var LAYOUTS = [{ id: "classic", name: "Classic header" }, { id: "centred", name: "Centred header" }];
   var HKEY = "nll-hero";
   var HEROES = [{ id: "static", name: "Static hero" }, { id: "sticky", name: "Sticky hero" }];
+  var IKEY = "nll-intro";
+  var INTROS = [{ id: "split", name: "Split intro" }, { id: "stacked", name: "Stacked intro" }];
+
+  function applyIntro(id) {
+    document.documentElement.setAttribute("data-intro", id);
+    try { localStorage.setItem(IKEY, id); } catch (e) {}
+    var b = document.querySelectorAll(".intro-opt");
+    for (var i = 0; i < b.length; i++) b[i].setAttribute("aria-pressed", b[i].dataset.intro === id ? "true" : "false");
+  }
 
   function applyHero(id) {
     document.documentElement.setAttribute("data-hero", id);
@@ -71,10 +80,18 @@
         return '<button class="theme-opt hero-opt" type="button" data-hero="' + h.id + '" aria-pressed="false">' +
           '<span class="txt">' + h.name + '</span></button>';
       }).join("") +
+    '</div>' +
+    '<div class="theme-bar__opts theme-bar__layouts">' +
+      INTROS.map(function (n) {
+        return '<button class="theme-opt intro-opt" type="button" data-intro="' + n.id + '" aria-pressed="false">' +
+          '<span class="txt">' + n.name + '</span></button>';
+      }).join("") +
     '</div>';
 
   document.body.insertAdjacentElement("afterbegin", bar);
   bar.addEventListener("click", function (e) {
+    var n = e.target.closest(".intro-opt");
+    if (n) { applyIntro(n.dataset.intro); return; }
     var h = e.target.closest(".hero-opt");
     if (h) { applyHero(h.dataset.hero); return; }
     var l = e.target.closest(".layout-opt");
@@ -87,7 +104,11 @@
   try { savedLayout = localStorage.getItem(LKEY) || "classic"; } catch (e) {}
   var savedHero = "static";
   try { savedHero = localStorage.getItem(HKEY) || "static"; } catch (e) {}
+  var savedIntro = "split";
+  try { savedIntro = localStorage.getItem(IKEY) || "split"; } catch (e) {}
+  if (["split","stacked"].indexOf(savedIntro) < 0) savedIntro = "split";
   apply(saved);
   applyLayout(savedLayout);
   applyHero(savedHero);
+  applyIntro(savedIntro);
 })();
