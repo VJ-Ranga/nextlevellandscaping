@@ -298,19 +298,31 @@
     stripTrack.innerHTML = D.projectStrip.map(function (s, i) {
       return '<div class="swiper-slide">' +
         '<button data-i="' + i + '" aria-label="View photo ' + (i + 1) + '">' +
-          '<img loading="lazy" src="' + esc(s.img) + '" alt="' + esc(s.cap || "") + '">' +
+          '<img loading="lazy" decoding="async"' +
+            (s.w ? ' width="' + s.w + '" height="' + s.h + '"' : '') +
+            ' src="' + esc(s.img) + '" alt="' + esc(s.cap || "") + '">' +
           '<span class="strip__cap">' + esc(s.cap || "") + '</span>' +
         '</button>' +
       '</div>';
     }).join("");
 
     if (window.Swiper) {
-      new Swiper("#strip", {
+      var stripSwiper = new Swiper("#strip", {
         slidesPerView: "auto",
         spaceBetween: 0,
         freeMode: { enabled: true, momentum: true },
+        observer: true,
+        observeParents: true,
+        watchOverflow: true,
         navigation: { nextEl: "#strip-next", prevEl: "#strip-prev" }
       });
+      // slides are width:auto and the images are lazy, so Swiper can measure
+      // them at ~0px and lock the arrows. Re-measure as each one arrives.
+      $$("img", stripTrack).forEach(function (im) {
+        if (im.complete) return;
+        im.addEventListener("load", function () { stripSwiper.update(); }, { once: true });
+      });
+      window.addEventListener("load", function () { stripSwiper.update(); });
     }
     var openStrip = window.NLLlightbox(D.projectStrip.map(function (s) { return s.img; }));
     stripTrack.addEventListener("click", function (e) {
