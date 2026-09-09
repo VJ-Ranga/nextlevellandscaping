@@ -289,17 +289,17 @@ html[data-theme="carbon-soft-v2"] .hero-pause:focus-visible{outline-color:#C2E80
 
 
 /* =============================================================
-   5. THE FOLDED IMAGE STRIP (inside #projects)
-   A full-bleed band folded into the dark projects section. It gets
-   NO scoop and NO negative margin of its own; it simply reads on
-   the night ground with off-white copy and lime marks.
+   5. THE IMAGE STRIP — quiet full-bleed photo band before #contact
+   A silent row of site photos (no heading) sitting on the night
+   ground between the store band and the contact form. It gets NO
+   scoop of its own; #contact rides up over it with the closing
+   curve.
    ============================================================= */
-html[data-theme="carbon-soft-v2"] main > #projects > .strip-band,
+html[data-theme="carbon-soft-v2"] main > #project-strip,
 html[data-theme="carbon-soft-v2"] .strip-band{
-  background:transparent;
+  background:var(--v2-night);
   color:var(--v2-on-night);
 }
-html[data-theme="carbon-soft-v2"] .strip-head .eyebrow{color:var(--v2-lime)}
 html[data-theme="carbon-soft-v2"] .strip__cap{
   background:rgba(23,25,15,.66);
   color:#F2F2EC;
