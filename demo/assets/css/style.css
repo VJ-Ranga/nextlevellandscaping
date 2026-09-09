@@ -1078,3 +1078,5 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
   .hero-pause__txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 }
 [data-theme="plan"] .hero-pause,[data-theme="nocturne"] .hero-pause{border-radius:0}
+/* line-based themes square off the skip link too */
+[data-theme="plan"] .skip-link,[data-theme="nocturne"] .skip-link{border-radius:0}
