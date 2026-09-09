@@ -10,7 +10,8 @@
     { id: "carbon", name: "Carbon lime", swatch: ["#17190F", "#C2E807", "#FFFFFF"] },
     { id: "carbon-soft", name: "Carbon soft", swatch: ["#17190F", "#C2E807", "#F2F2EC"] },
     { id: "plan",      name: "Plan",      swatch: ["#F7F6F1", "#16180F", "#C2E807"] },
-    { id: "nocturne",  name: "Nocturne",  swatch: ["#101109", "#F2F1E9", "#C2E807"] }
+    { id: "nocturne",  name: "Nocturne",  swatch: ["#101109", "#F2F1E9", "#C2E807"] },
+    { id: "blueprint", name: "Blueprint", swatch: ["#101109", "#C2E807", "#F2F1E9"] }
   ];
   var KEY = "nll-theme";
   var LKEY = "nll-layout";
