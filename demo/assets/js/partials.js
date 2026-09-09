@@ -9,7 +9,7 @@
     ["index.html#services", "Services"],
     ["our-work.html", "Our Work"],
     ["current-work.html", "Current Work"],
-    ["index.html#store", "Store"],
+    ["store.html", "Store"],
     ["index.html#contact", "Contact"]
   ];
   var navLinks = nav.map(function (n) { return '<a href="' + n[0] + '">' + n[1] + '</a>'; }).join("");
@@ -47,14 +47,15 @@
             '<li><a href="index.html#services">Services</a></li>' +
             '<li><a href="our-work.html">Our Work</a></li>' +
             '<li><a href="current-work.html">Current Work</a></li>' +
-            '<li><a href="index.html#store">Store</a></li>' +
+            '<li><a href="store.html">Store</a></li>' +
+            '<li><a href="about.html">About</a></li>' +
             '<li><a href="index.html#contact">Contact</a></li>' +
           '</ul></div>' +
           '<div><h4>STORE</h4><ul>' +
-            '<li><a href="index.html#store">Indoor &amp; Outdoor Pots</a></li>' +
-            '<li><a href="index.html#store">Plants &amp; Plant Care</a></li>' +
-            '<li><a href="index.html#store">Lawns &amp; Lawn Care</a></li>' +
-            '<li><a href="index.html#store">Garden Beds &amp; Edging</a></li>' +
+            '<li><a href="store.html">Indoor &amp; Outdoor Pots</a></li>' +
+            '<li><a href="store.html">Plants &amp; Plant Care</a></li>' +
+            '<li><a href="store.html">Lawns &amp; Lawn Care</a></li>' +
+            '<li><a href="store.html">Garden Beds &amp; Edging</a></li>' +
           '</ul></div>' +
           '<div><h4>NEXTLEVEL LANDSCAPING</h4><ul>' +
             '<li>Shop 1/41 Woodlands Terrace, Edwardstown SA 5039</li>' +
@@ -66,7 +67,7 @@
         '</div>' +
         '<div class="footer-bar">' +
           '<span>&copy; <span id="year">2026</span> NextLevel Landscaping. Demo design by Cloudycode.</span>' +
-          '<span><a href="index.html#">Privacy &amp; Security</a></span>' +
+          '<span><a href="privacy.html">Privacy &amp; Security</a></span>' +
         '</div>' +
       '</div>' +
     '</footer>' +
