@@ -242,7 +242,7 @@ html[data-theme="plan"] main > .band > .container::before{
 
 /* section names — edit these to relabel the index */
 html[data-theme="plan"] main > .hero + .band{--plan-label:"Overview"}
-html[data-theme="plan"] main > #numbers      {--plan-label:"Credentials"}
+html[data-theme="plan"] main > #intro        {--plan-label:"Overview"}
 html[data-theme="plan"] main > #about        {--plan-label:"Practice"}
 html[data-theme="plan"] main > #services     {--plan-label:"Services"}
 html[data-theme="plan"] main > #projects     {--plan-label:"Selected Work"}
