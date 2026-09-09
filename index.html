@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>document.documentElement.classList.remove('no-js');try{document.documentElement.setAttribute("data-theme",(function(t){return ["brand","carbon","carbon-soft","nocturne","blueprint"].indexOf(t)>-1?t:"carbon-soft"})(localStorage.getItem("nll-theme")));document.documentElement.setAttribute("data-layout",localStorage.getItem("nll-layout")||"classic");document.documentElement.setAttribute("data-hero",localStorage.getItem("nll-hero")||"static");document.documentElement.setAttribute("data-intro",(function(v){return ["split","stacked"].indexOf(v)>-1?v:"split"})(localStorage.getItem("nll-intro")))}catch(e){}</script>
+<script>document.documentElement.classList.remove('no-js');try{document.documentElement.setAttribute("data-theme",(function(t){return ["brand","carbon","carbon-soft","carbon-soft-v2","nocturne","blueprint"].indexOf(t)>-1?t:"carbon-soft"})(localStorage.getItem("nll-theme")));document.documentElement.setAttribute("data-layout",localStorage.getItem("nll-layout")||"classic");document.documentElement.setAttribute("data-hero",localStorage.getItem("nll-hero")||"static");document.documentElement.setAttribute("data-intro",(function(v){return ["split","stacked"].indexOf(v)>-1?v:"split"})(localStorage.getItem("nll-intro")))}catch(e){}</script>
 <title>NextLevel Landscaping — Adelaide Landscape Design &amp; Construction</title>
 <meta name="description" content="NextLevel Landscaping designs and builds outdoor spaces across Adelaide — paving, retaining walls, fencing, turf, irrigation and landscape design. Licensed builder BLD320507.">
 
@@ -13,9 +13,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1788954160">
-<link rel="stylesheet" href="assets/css/style-nocturne.css?v=1788954160">
-<link rel="stylesheet" href="assets/css/style-blueprint.css?v=1788954160">
+<link rel="stylesheet" href="assets/css/style.css?v=1788962259">
+<link rel="stylesheet" href="assets/css/style-nocturne.css?v=1788962259">
+<link rel="stylesheet" href="assets/css/style-blueprint.css?v=1788962259">
+<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1788962259">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -158,6 +159,7 @@
           <span class="eyebrow">First-choice Adelaide landscapers</span>
           <h1>Taking Adelaide gardens to the next level</h1>
           <p class="lead measure">Over a decade of design and construction across South Australia — paving, retaining walls, fencing, turf, irrigation and full landscape design, delivered by one experienced team.</p>
+          <p class="measure" style="margin-top:1rem;font-size:.95rem">Proudly South Australian owned and operated. One team from first site visit to final handover &mdash; <a class="tlink" href="about.html">more about us</a>.</p>
           <div class="btns">
             <a class="btn-ghost btn-ghost--fill" href="#contact">Get a free quote</a>
             <a class="btn-ghost" href="our-work.html">See our work</a>
@@ -208,17 +210,14 @@
       </div>
       <p style="margin-top:2.5rem" class="reveal"><a class="btn-ghost" href="our-work.html">View all projects</a></p>
     </div>
-  </section>
 
-  <!-- ===== Full-bleed project image strip ===== -->
-  <section class="band band--dark strip-band" id="project-strip">
-    <div class="container strip-head reveal">
-      <span class="eyebrow">In the field</span>
-      <h2>Straight from our sites</h2>
+    <!-- image strip — folded into Our Work -->
+    <div class="strip-band strip-inline" id="project-strip">
+      <p class="container strip-head reveal"><span class="eyebrow">In the field &mdash; straight from our sites</span></p>
+      <div class="swiper strip" id="strip"><div class="swiper-wrapper" id="strip-track"></div></div>
+      <button class="strip__nav strip__prev" id="strip-prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
+      <button class="strip__nav strip__next" id="strip-next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
     </div>
-    <div class="swiper strip" id="strip"><div class="swiper-wrapper" id="strip-track"></div></div>
-    <button class="strip__nav strip__prev" id="strip-prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
-    <button class="strip__nav strip__next" id="strip-next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
   </section>
 
   <!-- ===== Current work ===== -->
@@ -234,19 +233,8 @@
     </div>
   </section>
 
-  <!-- ===== Process ===== -->
-  <section class="band band--dark" id="process">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">How we work</span>
-        <h2>From first visit to aftercare</h2>
-      </div>
-      <div class="proc-grid" id="process-list"></div>
-    </div>
-  </section>
-
   <!-- ===== Reviews ===== -->
-  <section class="band contour" id="reviews">
+  <section class="band band--dark contour" id="reviews">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">From our clients</span>
@@ -262,26 +250,19 @@
     </div>
   </section>
 
-  <!-- ===== About ===== -->
-  <section class="band band--dark contour" id="about">
+  <!-- ===== Process ===== -->
+  <section class="band" id="process">
     <div class="container">
-      <div class="row-split about-split">
-        <div class="about__media reveal">
-          <div class="media"><img loading="lazy" width="1440" height="1080" src="assets/img/projects/klemzig.jpg" alt="A NextLevel Landscaping backyard build in Adelaide"></div>
-        </div>
-        <div class="about__body reveal d1">
-          <span class="eyebrow">Who we are</span>
-          <h2>South Australian owned, start to finish</h2>
-          <p class="lead measure">We're NextLevel Landscaping — a proudly South Australian owned and operated business delivering reliable, affordable landscaping to families and businesses across the state.</p>
-          <p class="measure">One team handles it all: 2D &amp; 3D design, paving, retaining walls, fencing, turf, irrigation and planting — from the first site visit to the final handover.</p>
-          <p style="margin-top:1.8rem"><a class="btn-ghost" href="about.html">More about us</a></p>
-        </div>
+      <div class="section-head reveal">
+        <span class="eyebrow">How we work</span>
+        <h2>From first visit to aftercare</h2>
       </div>
+      <div class="proc-grid" id="process-list"></div>
     </div>
   </section>
 
   <!-- ===== Store ===== -->
-  <section class="band" id="store">
+  <section class="band band--dark contour" id="store">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">NextLevel Outdoors</span>
@@ -405,8 +386,8 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="assets/data.js?v=1788954160"></script>
-<script src="assets/js/main.js?v=1788954160"></script>
-<script src="assets/js/theme.js?v=1788954160"></script>
+<script src="assets/data.js?v=1788962259"></script>
+<script src="assets/js/main.js?v=1788962259"></script>
+<script src="assets/js/theme.js?v=1788962259"></script>
 </body>
 </html>

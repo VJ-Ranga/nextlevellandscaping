@@ -1,0 +1,692 @@
+/* =============================================================
+   NextLevel Landscaping — THEME "CARBON SOFT v2"
+   Carbon soft's palette and type, turned into a ribbon.
+
+   One design move carries the whole identity: a large single-
+   corner "scoop" curve on every band, the corner ROTATING from
+   section to section so each band sweeps up out of the one above
+   it like a hand-drawn ribbon instead of a repeated stamp.
+
+   The client already loved this on the Our Work band — a top
+   sweep with a negative-margin pull (see the base file's section
+   42 rule). v2 generalises that one move to the whole page:
+
+     hero (bottom)        . . . bottom-LEFT on the media  0 0 0 V
+     #intro   (dark)      . . . flat — meets the hero     0 0 0 0
+     #services(light)     . . . top-LEFT                 V 0 0 0
+     #projects(dark)      . . . top-RIGHT                0 V 0 0
+     #current (light)     . . . top-LEFT                 V 0 0 0
+     #reviews (dark)      . . . top-RIGHT                0 V 0 0
+     #process (light)     . . . top-LEFT                 V 0 0 0
+     #store   (dark)      . . . top-RIGHT                0 V 0 0
+     #contact (light)     . . . top-LEFT + top-RIGHT     V V 0 0
+     .site-footer (dark)  . . . top-LEFT                 V 0 0 0
+     (V = var(--v2-scoop))
+
+   PALETTE (Carbon soft's) — two grounds:
+     night  #17190F  . . . #intro #projects #reviews #store,
+                             .hero, .site-footer — off-white text
+     ground #F2F2EC  . . . #services #current #process #contact
+   Lime is FILLS + MARKS only. Accent TEXT is olive #3E4A16 on
+   light, lime #C2E807 on night. --accent-ink stays #17190F, so
+   any lime fill prints near-black.
+
+   EVERY selector in this file is scoped under
+   html[data-theme="carbon-soft-v2"] so it beats the base sheet
+   regardless of load order. The only unscoped things are
+   @media/@supports wrappers and comments. The demo .theme-bar
+   is left untouched.
+
+   NOTE: the spec's --v2-muted suggestion #6E7265 only reaches
+   4.39:1 on #F2F2EC, so it has been darkened one step to
+   #6B6F62 for a 4.59:1 AA pass. The base carbon-soft #6A6C60
+   was tuned for #FFFFFF; this is tuned for the warm ground.
+   ============================================================= */
+
+
+/* =============================================================
+   1. PALETTE + TOKENS
+   Re-point the base design system so inherited rules resolve to
+   the correct ground automatically. Light values are the default
+   context; night values are swapped in by section 2.
+   ============================================================= */
+html[data-theme="carbon-soft-v2"]{
+
+  /* --- the two grounds -------------------------------------- */
+  --v2-ground   : #F2F2EC;   /* warm light ground for the light bands */
+  --v2-night    : #17190F;   /* near-black for the dark bands          */
+  --v2-ink      : #17190F;   /* text on light                          */
+  --v2-on-night : #F2F2EC;   /* text on dark                           */
+  --v2-muted    : #6B6F62;   /* secondary on light   (4.59:1 on ground)*/
+  --v2-muted-nt : rgba(242,242,236,.72);  /* secondary on dark        */
+  --v2-line     : rgba(23,25,15,.14);     /* hairline on light        */
+  --v2-line-nt  : rgba(242,242,236,.16);  /* hairline on dark         */
+  --v2-line-ui  : rgba(23,25,15,.5);      /* interactive border, >=3:1 */
+
+  /* --- accent: fills + marks --------------------------------- */
+  --v2-lime     : #C2E807;   /* FILLS + MARKS; never TEXT on light    */
+  --v2-lime-ink : #3E4A16;   /* olive — accent TEXT on light (~8.5:1) */
+
+  /* --- re-point the base system (light defaults) ------------- */
+  --bg:var(--v2-ground);
+  --surface-dark:var(--v2-night);
+  --surface-dark-2:var(--v2-night);
+  --ink:var(--v2-ink);
+  --muted:var(--v2-muted);
+  --muted-dark:var(--v2-muted-nt);
+  --line:var(--v2-line);
+  --line-dark:var(--v2-line-nt);
+  --scrim:rgba(23,25,15,.42);
+
+  /* accent is context-aware: olive accent TEXT on light, lime on
+     night. Ink printed ON an accent fill stays near-black. */
+  --accent:var(--v2-lime-ink);
+  --accent-light:var(--v2-lime-ink);
+  --accent-dark:var(--v2-lime);
+  --accent-ink:#17190F;
+  --accent-ink-light:#17190F;
+  --accent-ink-dark:#17190F;
+
+  /* carbon-soft's look: pill buttons, weight-400 all-caps heads */
+  --btn-radius:999px;
+  --h-weight:400;
+
+  /* --- THE SIGNATURE MOVE — one radius token ----------------- */
+  --v2-scoop: clamp(56px, 11vw, 150px);
+}
+@media(max-width:640px){
+  html[data-theme="carbon-soft-v2"]{ --v2-scoop: 44px; }
+}
+
+
+/* =============================================================
+   2. THE TWO GROUNDS
+   Every band declares an explicit ground so the pinned sticky-hero
+   video can never bleed through a transparent section. These
+   selectors carry their own background AND class-doubled ids so
+   they beat the base [data-hero="sticky"] opacity rules.
+   ============================================================= */
+html[data-theme="carbon-soft-v2"]{ background:var(--v2-ground); }
+html[data-theme="carbon-soft-v2"] body{
+  background:var(--v2-ground);
+  color:var(--v2-ink);
+}
+html[data-theme="carbon-soft-v2"] main{ background:var(--v2-ground); }
+
+/* --- LIGHT bands -------------------------------------------- */
+html[data-theme="carbon-soft-v2"] main > #services,
+html[data-theme="carbon-soft-v2"] main > #current,
+html[data-theme="carbon-soft-v2"] main > #process,
+html[data-theme="carbon-soft-v2"] main > #contact{
+  background:var(--v2-ground);
+  background-color:var(--v2-ground);
+  color:var(--v2-ink);
+}
+
+/* --- NIGHT bands: flip tokens + ink ------------------------- */
+html[data-theme="carbon-soft-v2"] .hero,
+html[data-theme="carbon-soft-v2"] main > #intro,
+html[data-theme="carbon-soft-v2"] main > .band.band--dark,
+html[data-theme="carbon-soft-v2"] main > #projects,
+html[data-theme="carbon-soft-v2"] main > #reviews,
+html[data-theme="carbon-soft-v2"] main > #store,
+html[data-theme="carbon-soft-v2"] main > .strip-band,
+html[data-theme="carbon-soft-v2"] .site-footer,
+html[data-theme="carbon-soft-v2"] .drawer,
+html[data-theme="carbon-soft-v2"] .subhero{
+  background:var(--v2-night);
+  background-color:var(--v2-night);
+  color:var(--v2-on-night);
+  --ink:var(--v2-on-night);
+  --muted:var(--v2-muted-nt);
+  --muted-dark:var(--v2-muted-nt);
+  --line:var(--v2-line-nt);
+  --line-dark:var(--v2-line-nt);
+  --surface-dark:var(--v2-night);
+  --accent:var(--v2-lime);
+  --accent-light:var(--v2-lime);
+  --accent-dark:var(--v2-lime);
+  --accent-ink:#17190F;
+  --accent-ink-light:#17190F;
+  --accent-ink-dark:#17190F;
+}
+
+
+/* =============================================================
+   3. THE SIGNATURE MOVE — rotating single-corner scoop
+   Every main band is a positioned layer that pulls itself up over
+   the band above with a negative margin, its OWN single corner
+   rounding to reveal the band underneath through the curve.
+
+   - #intro meets the hero flat (the hero owns the curve).
+   - every band after it rides up out of its predecessor with one
+     corner cut, alternating top-left / top-right.
+   - #contact is the closer: both top corners cut.
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] main > .band{
+  position:relative;
+  z-index:1;
+}
+
+/* the riders — same geometry, corner rotates per section */
+html[data-theme="carbon-soft-v2"] main > #services,
+html[data-theme="carbon-soft-v2"] main > #projects,
+html[data-theme="carbon-soft-v2"] main > #current,
+html[data-theme="carbon-soft-v2"] main > #reviews,
+html[data-theme="carbon-soft-v2"] main > #process,
+html[data-theme="carbon-soft-v2"] main > #store,
+html[data-theme="carbon-soft-v2"] main > #contact{
+  margin-top:calc(-1 * var(--v2-scoop));
+  padding-top:calc(var(--pad-band) + var(--v2-scoop) * .45);
+}
+
+/* the corner map */
+html[data-theme="carbon-soft-v2"] main > #intro{
+  border-radius:0 0 0 0;                 /* flat — hero owns the curve */
+  margin-top:0;
+}
+html[data-theme="carbon-soft-v2"] main > #services{ border-radius:var(--v2-scoop) 0 0 0; }
+html[data-theme="carbon-soft-v2"] main > #projects{ border-radius:0 var(--v2-scoop) 0 0; }
+html[data-theme="carbon-soft-v2"] main > #current{  border-radius:var(--v2-scoop) 0 0 0; }
+html[data-theme="carbon-soft-v2"] main > #reviews{  border-radius:0 var(--v2-scoop) 0 0; }
+html[data-theme="carbon-soft-v2"] main > #process{  border-radius:var(--v2-scoop) 0 0 0; }
+html[data-theme="carbon-soft-v2"] main > #store{    border-radius:0 var(--v2-scoop) 0 0; }
+html[data-theme="carbon-soft-v2"] main > #contact{  border-radius:var(--v2-scoop) var(--v2-scoop) 0 0; }
+
+/* the band ABOVE each scoop needs room to be pulled into.
+   #intro also gets it (services sweeps up over its bottom). */
+html[data-theme="carbon-soft-v2"] main > #intro,
+html[data-theme="carbon-soft-v2"] main > #services,
+html[data-theme="carbon-soft-v2"] main > #current,
+html[data-theme="carbon-soft-v2"] main > #reviews,
+html[data-theme="carbon-soft-v2"] main > #process,
+html[data-theme="carbon-soft-v2"] main > #store{
+  padding-bottom:calc(var(--pad-band) + var(--v2-scoop));
+}
+/* #projects is followed by its own folded strip, then #current
+   sweeps over the section's night margin — so the projects band
+   itself compensates (never the full-bleed strip) */
+html[data-theme="carbon-soft-v2"] main > #projects{
+  padding-bottom:calc(var(--pad-band) + var(--v2-scoop));
+}
+/* the last light band is pulled into by the footer */
+html[data-theme="carbon-soft-v2"] main > #contact{
+  padding-bottom:calc(var(--pad-band-lg) + var(--v2-scoop));
+}
+
+/* clip the contour texture to the curve so the sweep stays clean */
+html[data-theme="carbon-soft-v2"] #intro.contour::before,
+html[data-theme="carbon-soft-v2"] #projects.contour::before,
+html[data-theme="carbon-soft-v2"] #reviews.contour::before,
+html[data-theme="carbon-soft-v2"] #store.contour::before{
+  border-radius:inherit;
+}
+
+/* sticky-hero variant: bands keep their own grounds and the hero
+   keeps its pinned behaviour — square the hero media once covered */
+html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > .band{position:relative;z-index:1}
+html[data-theme="carbon-soft-v2"][data-hero="sticky"] .hero__media{border-radius:0}
+html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > #intro{border-radius:0}
+html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > #services,
+html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > #projects,
+html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > #current,
+html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > #reviews,
+html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > #process,
+html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > #store,
+html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > #contact{
+  background-color:var(--v2-ground);
+}
+html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > #intro,
+html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > #projects,
+html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > #reviews,
+html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > #store{
+  background-color:var(--v2-night);
+}
+
+/* the swiper carousels inside scooped bands never clip a shadow
+   that breaks the curve; clip only that paint, never sticky */
+html[data-theme="carbon-soft-v2"] main > #projects,
+html[data-theme="carbon-soft-v2"] main > #reviews{
+  overflow:clip;
+}
+
+
+/* =============================================================
+   4. HERO — bottom-LEFT sweep, no pull
+   The hero is the opening image; it does not ride up over anything.
+   Its media owns the bottom-left curve (the scroll cue sits in it).
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] .hero{
+  background:var(--v2-night);
+  min-height:100svh;
+}
+html[data-theme="carbon-soft-v2"] .hero__media{
+  border-radius:0 0 0 var(--v2-scoop);   /* bottom-left sweep */
+  background:var(--v2-night);
+}
+html[data-theme="carbon-soft-v2"] .hero__media::after{
+  background:linear-gradient(180deg,rgba(23,25,15,.6) 0%,rgba(23,25,15,.16) 34%,rgba(23,25,15,.22) 58%,rgba(23,25,15,.78) 100%);
+}
+html[data-theme="carbon-soft-v2"] .hero__overlay{background:rgba(23,25,15,.3)}
+html[data-theme="carbon-soft-v2"] .hero__tag h2{color:#fff;text-shadow:0 2px 26px rgba(23,25,15,.55)}
+html[data-theme="carbon-soft-v2"] .hero__tag span{color:rgba(242,242,236,.78)}
+html[data-theme="carbon-soft-v2"] .hero__cue{color:rgba(242,242,236,.8)}
+html[data-theme="carbon-soft-v2"] .hero__cue::after{background:rgba(242,242,236,.5)}
+html[data-theme="carbon-soft-v2"] .hero-scroll{color:rgba(242,242,236,.8)}
+html[data-theme="carbon-soft-v2"] .hero-car__nav{border-color:rgba(242,242,236,.4);color:#F2F2EC}
+html[data-theme="carbon-soft-v2"] .hero-car__nav:hover{background:rgba(242,242,236,.16);border-color:#F2F2EC}
+
+html[data-theme="carbon-soft-v2"] .hero-pause{
+  border-color:rgba(242,242,236,.55);
+  background:rgba(23,25,15,.45);
+  color:#F2F2EC;
+}
+html[data-theme="carbon-soft-v2"] .hero-pause:hover{background:rgba(23,25,15,.72);border-color:#F2F2EC}
+html[data-theme="carbon-soft-v2"] .hero-pause:focus-visible{outline-color:#C2E807}
+
+
+/* =============================================================
+   5. THE FOLDED IMAGE STRIP (inside #projects)
+   A full-bleed band folded into the dark projects section. It gets
+   NO scoop and NO negative margin of its own; it simply reads on
+   the night ground with off-white copy and lime marks.
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] main > #projects > .strip-band,
+html[data-theme="carbon-soft-v2"] .strip-band{
+  background:transparent;
+  color:var(--v2-on-night);
+}
+html[data-theme="carbon-soft-v2"] .strip-head .eyebrow{color:var(--v2-lime)}
+html[data-theme="carbon-soft-v2"] .strip__cap{
+  background:rgba(23,25,15,.66);
+  color:#F2F2EC;
+}
+html[data-theme="carbon-soft-v2"] .strip__nav{
+  background:rgba(242,242,236,.92);
+  color:#17190F;
+}
+html[data-theme="carbon-soft-v2"] .strip__nav:hover{
+  background:#C2E807;
+  color:#17190F;
+  border-color:#C2E807;
+}
+html[data-theme="carbon-soft-v2"] .strip__nav.swiper-button-disabled{opacity:.35;pointer-events:none}
+
+
+/* =============================================================
+   6. TYPOGRAPHY
+   Carbon soft's voice: weight-400 all-caps headings (Poppins),
+   off-white on night, near-black on light. The eyebrow and lead
+   flip with the ground via the tokens set in section 2.
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] h1,
+html[data-theme="carbon-soft-v2"] h2,
+html[data-theme="carbon-soft-v2"] h3,
+html[data-theme="carbon-soft-v2"] h4,
+html[data-theme="carbon-soft-v2"] h5,
+html[data-theme="carbon-soft-v2"] h6{font-weight:400}
+
+/* night headings off-white (base paints them #fff) */
+html[data-theme="carbon-soft-v2"] .band--dark h1,
+html[data-theme="carbon-soft-v2"] .band--dark h2,
+html[data-theme="carbon-soft-v2"] .band--dark h3,
+html[data-theme="carbon-soft-v2"] .band--dark h4,
+html[data-theme="carbon-soft-v2"] .site-footer h4{color:var(--v2-on-night)}
+
+html[data-theme="carbon-soft-v2"] .band--dark .eyebrow,
+html[data-theme="carbon-soft-v2"] main > #projects .eyebrow,
+html[data-theme="carbon-soft-v2"] main > #reviews .eyebrow,
+html[data-theme="carbon-soft-v2"] main > #store .eyebrow{color:var(--v2-lime)}
+
+html[data-theme="carbon-soft-v2"] .section-head{max-width:54ch}
+
+html[data-theme="carbon-soft-v2"] .lead{color:var(--v2-muted)}
+html[data-theme="carbon-soft-v2"] .band--dark .lead,
+html[data-theme="carbon-soft-v2"] main > #intro .lead{color:var(--v2-muted-nt)}
+
+html[data-theme="carbon-soft-v2"] .band--dark p{color:var(--v2-on-night)}
+
+
+/* =============================================================
+   7. INTRO (#intro) — positioning + trust, on night
+   Base rules give this section dark stat/cred colours; v2 keeps the
+   split/stacked layouts and re-inks every literal to off-white.
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] #intro .statline{margin-top:3.5rem}
+html[data-theme="carbon-soft-v2"] #intro .stat-n b{color:var(--v2-on-night)}
+html[data-theme="carbon-soft-v2"] #intro .stat-n b i{color:var(--v2-lime)}
+html[data-theme="carbon-soft-v2"] #intro .stat-n > span{color:var(--v2-muted-nt)}
+html[data-theme="carbon-soft-v2"] #intro .stat-n::before{background:var(--v2-line-nt)}
+
+html[data-theme="carbon-soft-v2"] #intro .credline{border-top-color:var(--v2-line-nt)}
+html[data-theme="carbon-soft-v2"] #intro .credline span{color:var(--v2-muted-nt)}
+html[data-theme="carbon-soft-v2"] #intro .credline i{color:var(--v2-lime)}
+html[data-theme="carbon-soft-v2"] #intro .credline b{color:var(--v2-on-night)}
+
+html[data-theme="carbon-soft-v2"] #intro .headline h1{color:var(--v2-on-night)}
+html[data-theme="carbon-soft-v2"] #intro .eyebrow{color:var(--v2-lime)}
+html[data-theme="carbon-soft-v2"] #intro .btn-ghost--fill{
+  background:#C2E807;border-color:#C2E807;color:#17190F;--c:#C2E807;
+}
+html[data-theme="carbon-soft-v2"] #intro .btn-ghost--fill:hover{color:#C2E807}
+html[data-theme="carbon-soft-v2"] #intro .btn-ghost--fill::before{background:#17190F}
+html[data-theme="carbon-soft-v2"] #intro .btn-ghost{border-color:rgba(242,242,236,.85);color:#F2F2EC;--c:#F2F2EC}
+html[data-theme="carbon-soft-v2"] #intro .btn-ghost:hover{color:#17190F}
+
+/* the intro figures sit right of the copy in split layout */
+html[data-theme="carbon-soft-v2"] #intro .intro-figures{align-self:center}
+
+
+/* =============================================================
+   8. SERVICES (#services) — light ground, list + sticky image
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] .svc-list{border-top-color:var(--v2-line)}
+html[data-theme="carbon-soft-v2"] .svc-item{border-bottom-color:var(--v2-line);color:var(--v2-muted)}
+html[data-theme="carbon-soft-v2"] .svc-item__no{color:var(--v2-muted);opacity:.7}
+html[data-theme="carbon-soft-v2"] .svc-item:hover,
+html[data-theme="carbon-soft-v2"] .svc-item.is-active{color:var(--v2-ink)}
+html[data-theme="carbon-soft-v2"] .svc-item:hover .svc-item__no,
+html[data-theme="carbon-soft-v2"] .svc-item.is-active .svc-item__no{color:var(--v2-lime-ink);opacity:1}
+html[data-theme="carbon-soft-v2"] .svc-item__go{color:var(--v2-lime-ink)}
+html[data-theme="carbon-soft-v2"] .svc-copy p{color:var(--v2-muted)}
+html[data-theme="carbon-soft-v2"] .svc-accordion-media p{color:var(--v2-muted)}
+
+/* chips read their ground: olive-marked on light */
+html[data-theme="carbon-soft-v2"] .chips li{color:var(--v2-muted);border-color:var(--v2-line)}
+html[data-theme="carbon-soft-v2"] .band--dark .chips li,
+html[data-theme="carbon-soft-v2"] #reviews .chips li{color:var(--v2-muted-nt);border-color:var(--v2-line-nt)}
+
+
+/* =============================================================
+   9. PROJECTS (#projects) — dark ground, signature swiper
+   The folded strip inside keeps the night ground (section 5).
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] .proj-card h3{color:var(--v2-on-night)}
+html[data-theme="carbon-soft-v2"] .proj-card__meta{color:var(--v2-muted-nt)}
+html[data-theme="carbon-soft-v2"] .proj-card p{color:var(--v2-muted-nt)}
+html[data-theme="carbon-soft-v2"] .proj-card .media{background:var(--v2-night)}
+
+html[data-theme="carbon-soft-v2"] .swiper-controls button{
+  border-color:rgba(242,242,236,.42);color:#F2F2EC;background:none;
+}
+html[data-theme="carbon-soft-v2"] .swiper-controls button:hover{background:#F2F2EC;color:#17190F}
+
+
+/* =============================================================
+   10. CURRENT WORK (#current) — light ground, live stages
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] .cw-card h3{color:var(--v2-ink)}
+html[data-theme="carbon-soft-v2"] .cw-card__meta{color:var(--v2-muted)}
+html[data-theme="carbon-soft-v2"] .cw-card__note{color:var(--v2-muted)}
+html[data-theme="carbon-soft-v2"] .cw-card__stage{color:var(--v2-ink)}
+html[data-theme="carbon-soft-v2"] .cw-card__stage small{color:var(--v2-muted)}
+html[data-theme="carbon-soft-v2"] .cw-card .media{background:var(--v2-night)}
+
+html[data-theme="carbon-soft-v2"] .stepper li{background:var(--v2-line)}
+html[data-theme="carbon-soft-v2"] .stepper li.done,
+html[data-theme="carbon-soft-v2"] .stepper li.now{background:var(--v2-lime-ink)}
+html[data-theme="carbon-soft-v2"] .stepper li.now{box-shadow:0 0 0 3px color-mix(in srgb,var(--v2-lime) 30%,transparent)}
+
+html[data-theme="carbon-soft-v2"] .cw-card:hover h3{color:var(--v2-lime-ink)}
+
+
+/* =============================================================
+   11. PROCESS (#process) — light ground, bare numerals
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] .proc__num{
+  border-color:var(--v2-line-ui);
+  color:var(--v2-lime-ink);
+}
+html[data-theme="carbon-soft-v2"] .proc__num span{
+  background:var(--v2-lime);
+  color:#17190F;
+  border:2px solid var(--v2-ground);
+}
+html[data-theme="carbon-soft-v2"] .proc h3{color:var(--v2-ink)}
+html[data-theme="carbon-soft-v2"] .proc p{color:var(--v2-muted)}
+
+
+/* =============================================================
+   12. STORE (#store) — dark ground, product grid
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] .store-card h3{color:var(--v2-on-night)}
+html[data-theme="carbon-soft-v2"] .store-card p,
+html[data-theme="carbon-soft-v2"] .band--dark .store-card p{color:var(--v2-muted-nt)}
+html[data-theme="carbon-soft-v2"] .store-card .media{background:var(--v2-night)}
+
+
+/* =============================================================
+   13. REVIEWS (#reviews) — dark ground, quote swiper
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] .rev-card{border-top-color:var(--v2-line-nt)}
+html[data-theme="carbon-soft-v2"] .rev-card p{color:var(--v2-on-night)}
+html[data-theme="carbon-soft-v2"] .rev-card__who b{color:var(--v2-on-night)}
+html[data-theme="carbon-soft-v2"] .rev-card__who span span{color:var(--v2-muted-nt)}
+html[data-theme="carbon-soft-v2"] .rev-avatar,
+html[data-theme="carbon-soft-v2"] .rev-card__who .rev-avatar{
+  background:var(--v2-lime);
+  color:#17190F;
+  border-radius:50% 50% 50% 0;
+}
+
+
+/* =============================================================
+   14. CONTACT (#contact) — light ground, the closer
+   Fields get a firmer resting border (>=3:1) and an olive focus.
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] .contact-wrap{grid-template-columns:1.05fr .95fr}
+html[data-theme="carbon-soft-v2"] .field label{color:var(--v2-muted)}
+html[data-theme="carbon-soft-v2"] .field input,
+html[data-theme="carbon-soft-v2"] .field textarea{
+  border-color:var(--v2-line-ui);
+  background:#fff;
+  color:var(--v2-ink);
+}
+html[data-theme="carbon-soft-v2"] .field input:hover,
+html[data-theme="carbon-soft-v2"] .field textarea:hover{border-color:var(--v2-ink)}
+html[data-theme="carbon-soft-v2"] .field input:focus,
+html[data-theme="carbon-soft-v2"] .field textarea:focus{
+  outline:none;border-color:var(--v2-lime-ink);
+}
+html[data-theme="carbon-soft-v2"] .field input:focus-visible,
+html[data-theme="carbon-soft-v2"] .field textarea:focus-visible{
+  outline:2px solid var(--v2-lime-ink);
+  outline-offset:2px;
+}
+html[data-theme="carbon-soft-v2"] .field .msg{color:#9C2B1B}
+html[data-theme="carbon-soft-v2"] .form-note{color:var(--v2-muted)}
+html[data-theme="carbon-soft-v2"] .form-ok{
+  background:color-mix(in srgb,var(--v2-lime) 14%,#fff);
+  border-color:color-mix(in srgb,var(--v2-lime-ink) 45%,#fff);
+}
+html[data-theme="carbon-soft-v2"] .contact-info dt{color:var(--v2-lime-ink)}
+html[data-theme="carbon-soft-v2"] .contact-info dd{color:var(--v2-muted)}
+html[data-theme="carbon-soft-v2"] .contact-info dd a:hover{color:var(--v2-ink);text-decoration:underline}
+html[data-theme="carbon-soft-v2"] .contact-info .tbc{color:var(--v2-muted);opacity:.75}
+
+
+/* =============================================================
+   15. FOOTER — dark close, top-LEFT scoop over the light contact
+   The footer keeps the night ground as the page's dark sign-off
+   and sweeps up out of the light contact band with one corner.
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] .site-footer--scoop{
+  --r-footer-scoop:var(--v2-scoop);
+  position:relative;
+  z-index:1;
+  border-radius:var(--v2-scoop) 0 0 0;    /* top-left scoop */
+  margin-top:calc(-1 * var(--v2-scoop));
+  padding-top:calc(72px + var(--v2-scoop) * .55);
+  background:var(--v2-night);
+  background-color:var(--v2-night);
+}
+html[data-theme="carbon-soft-v2"] .site-footer{
+  color:var(--v2-muted-nt);
+  border-top:0;
+}
+html[data-theme="carbon-soft-v2"] .site-footer a:hover{color:#fff}
+html[data-theme="carbon-soft-v2"] .site-footer .footer-brand p{color:var(--v2-muted-nt)}
+html[data-theme="carbon-soft-v2"] .footer-bar{border-top-color:var(--v2-line-nt);color:var(--v2-muted-nt)}
+
+
+/* =============================================================
+   16. HEADERS (both variants) + DRAWER
+   Over the night hero the headers stay transparent with off-white
+   links; stuck they drop onto the night ground. The drawer is
+   night too. Lime is reserved for marks + focus.
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] .site-header{background-color:transparent}
+html[data-theme="carbon-soft-v2"] .site-header.is-stuck{
+  background-color:var(--v2-night);
+  box-shadow:0 1px 0 rgba(242,242,236,.08);
+}
+html[data-theme="carbon-soft-v2"] .hdr2{background-color:transparent}
+html[data-theme="carbon-soft-v2"][data-layout="centred"] .hdr2.is-stuck{
+  background-color:var(--v2-night);
+  box-shadow:0 1px 0 rgba(242,242,236,.08);
+}
+html[data-theme="carbon-soft-v2"] .hdr2__util{border-bottom-color:rgba(242,242,236,.16)}
+
+/* navigation links stay off-white in both header states; hover lime */
+html[data-theme="carbon-soft-v2"] .site-header .main-nav a,
+html[data-theme="carbon-soft-v2"] .site-header .header-cta .phone,
+html[data-theme="carbon-soft-v2"] .hdr2__nav a,
+html[data-theme="carbon-soft-v2"] .hdr2__util a,
+html[data-theme="carbon-soft-v2"] .hdr2__util-right a{
+  color:rgba(242,242,236,.88);
+  text-shadow:none;
+}
+html[data-theme="carbon-soft-v2"] .site-header .main-nav a:hover,
+html[data-theme="carbon-soft-v2"] .hdr2__nav a:hover{color:#C2E807}
+
+html[data-theme="carbon-soft-v2"] .site-header .brand,
+html[data-theme="carbon-soft-v2"] .hdr2__brand{color:#F2F2EC}
+html[data-theme="carbon-soft-v2"] .site-header:not(.is-stuck) .brand span{color:rgba(242,242,236,.6)}
+
+html[data-theme="carbon-soft-v2"] .header-cta .btn-ghost--fill,
+html[data-theme="carbon-soft-v2"] .site-header .header-cta .btn-ghost--fill,
+html[data-theme="carbon-soft-v2"] .site-header.is-stuck .header-cta .btn-ghost--fill{
+  background:#C2E807;border-color:#C2E807;color:#17190F;--c:#C2E807;
+}
+html[data-theme="carbon-soft-v2"] .header-cta .btn-ghost--fill::before,
+html[data-theme="carbon-soft-v2"] .site-header .header-cta .btn-ghost--fill::before,
+html[data-theme="carbon-soft-v2"] .site-header.is-stuck .header-cta .btn-ghost--fill::before{background:#17190F}
+html[data-theme="carbon-soft-v2"] .header-cta .btn-ghost--fill:hover,
+html[data-theme="carbon-soft-v2"] .site-header .header-cta .btn-ghost--fill:hover,
+html[data-theme="carbon-soft-v2"] .site-header.is-stuck .header-cta .btn-ghost--fill:hover{color:#C2E807}
+
+html[data-theme="carbon-soft-v2"] .nav-toggle,
+html[data-theme="carbon-soft-v2"] .hdr2__toggle,
+html[data-theme="carbon-soft-v2"] .drawer__close{
+  border-color:rgba(242,242,236,.5);
+  color:#F2F2EC;
+  background:none;
+  box-shadow:none;
+  backdrop-filter:none;
+}
+html[data-theme="carbon-soft-v2"] .nav-toggle:hover,
+html[data-theme="carbon-soft-v2"] .hdr2__toggle:hover,
+html[data-theme="carbon-soft-v2"] .drawer__close:hover{background:rgba(242,242,236,.16)}
+
+html[data-theme="carbon-soft-v2"] .drawer{background:var(--v2-night)}
+html[data-theme="carbon-soft-v2"] .drawer nav a{border-bottom-color:var(--v2-line-nt);color:#F2F2EC}
+html[data-theme="carbon-soft-v2"] .drawer nav a:hover{color:#C2E807}
+html[data-theme="carbon-soft-v2"] .drawer__foot{color:var(--v2-muted-nt)}
+
+
+/* =============================================================
+   17. BUTTONS + LINKS — pills, lime fills only
+   The primary fill is LIME on both grounds (never olive: olive is
+   reserved for accent TEXT on light) and prints near-black ink.
+   Ghosts stay ink-on-light / off-white-on-night pills.
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] .btn-ghost{border-radius:999px}
+html[data-theme="carbon-soft-v2"] .btn-ghost--fill,
+html[data-theme="carbon-soft-v2"] .band--dark .btn-ghost--fill,
+html[data-theme="carbon-soft-v2"] main > #services .btn-ghost--fill,
+html[data-theme="carbon-soft-v2"] main > #contact .btn-ghost--fill{
+  background:#C2E807;
+  border-color:#C2E807;
+  color:#17190F;
+  --c:#C2E807;
+}
+html[data-theme="carbon-soft-v2"] .btn-ghost--fill::before,
+html[data-theme="carbon-soft-v2"] .band--dark .btn-ghost--fill::before{background:#17190F}
+html[data-theme="carbon-soft-v2"] .btn-ghost--fill:hover,
+html[data-theme="carbon-soft-v2"] .band--dark .btn-ghost--fill:hover{
+  color:#C2E807;
+  border-color:#17190F;
+}
+
+/* ghost buttons read their ground */
+html[data-theme="carbon-soft-v2"] .band--dark .btn-ghost{--c:rgba(242,242,236,.9);color:rgba(242,242,236,.9)}
+html[data-theme="carbon-soft-v2"] .band--dark .btn-ghost:hover{color:#17190F}
+
+/* text links flip with the ground */
+html[data-theme="carbon-soft-v2"] .tlink{color:inherit}
+html[data-theme="carbon-soft-v2"] .tlink i{color:var(--v2-lime-ink)}
+html[data-theme="carbon-soft-v2"] .band--dark .tlink i{color:var(--v2-lime)}
+
+/* skip link: lime fill with near-black text, always on the page */
+html[data-theme="carbon-soft-v2"] .skip-link{
+  background:#C2E807;
+  color:#17190F;
+  border-radius:999px;
+}
+html[data-theme="carbon-soft-v2"] .skip-link:focus{
+  top:12px;
+  outline:2px solid #17190F;
+  outline-offset:3px;
+}
+
+
+/* =============================================================
+   18. FOCUS — always visible, accent-coloured
+   Lime on night (and over the night hero), olive on light. >=2px.
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] a:focus-visible,
+html[data-theme="carbon-soft-v2"] button:focus-visible,
+html[data-theme="carbon-soft-v2"] input:focus-visible,
+html[data-theme="carbon-soft-v2"] textarea:focus-visible,
+html[data-theme="carbon-soft-v2"] select:focus-visible,
+html[data-theme="carbon-soft-v2"] [tabindex]:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:3px;
+}
+html[data-theme="carbon-soft-v2"] .hero a:focus-visible,
+html[data-theme="carbon-soft-v2"] .site-header a:focus-visible,
+html[data-theme="carbon-soft-v2"] .site-header button:focus-visible,
+html[data-theme="carbon-soft-v2"] .hdr2 a:focus-visible,
+html[data-theme="carbon-soft-v2"] .hdr2 button:focus-visible,
+html[data-theme="carbon-soft-v2"] .drawer a:focus-visible,
+html[data-theme="carbon-soft-v2"] .drawer button:focus-visible{outline-color:#C2E807}
+
+
+/* =============================================================
+   19. MISC + RESPONSIVE + MOTION
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] ::selection{background:var(--v2-lime);color:#17190F}
+
+/* media plates read the night ground while a figure loads */
+html[data-theme="carbon-soft-v2"] .media,
+html[data-theme="carbon-soft-v2"] .svc-figure,
+html[data-theme="carbon-soft-v2"] .gallery-grid button,
+html[data-theme="carbon-soft-v2"] .about__media .media,
+html[data-theme="carbon-soft-v2"] .svc-accordion-media .media,
+html[data-theme="carbon-soft-v2"] .ba{border-radius:4px}
+
+/* the subhero (sub-pages) keeps the night ground + off-white ink */
+html[data-theme="carbon-soft-v2"] .subhero h1,
+html[data-theme="carbon-soft-v2"] .subhero h2{color:var(--v2-on-night)}
+
+@media(max-width:992px){
+  html[data-theme="carbon-soft-v2"] .contact-wrap{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  html[data-theme="carbon-soft-v2"] .hero__tag h2{font-size:1.5rem}
+}
+@media(prefers-reduced-motion:reduce){
+  html[data-theme="carbon-soft-v2"] .hero__cue::after,
+  html[data-theme="carbon-soft-v2"] .hero-scroll::after{animation:none}
+  html[data-theme="carbon-soft-v2"] .reveal{transform:none}
+}
