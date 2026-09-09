@@ -1,9 +1,15 @@
 /* =============================================================
-   NextLevel Landscaping — THEME "BLUEPRINT" v2
-   A landscape plan sheet, drawn in white ink.
+   NextLevel Landscaping — THEME "BLUEPRINT" v3
+   A landscape plan sheet, drawn on alternating paper and night.
 
-   Blueprint v2 = Nocturne's layout/structure  +  Plan's
-   monospace technical voice  +  a LIGHT (white) ground.
+   Blueprint v3 = Nocturne's layout/structure + Plan's monospace
+   technical voice + the site's DARK/LIGHT band rhythm, re-inked:
+
+   DARK (Nocturne ground #101109, off-white text)
+     .hero · #intro · #projects · #project-strip · #process · #about
+   LIGHT (white paper, near-black #16180F text)
+     #services · #current · #reviews · #store · #contact
+   The footer closes the sheet dark, on #0C0D07.
 
    STRUCTURE (from Nocturne)
    - Flat, full-width bands; NO per-section grid, NO sticky
@@ -23,12 +29,17 @@
      labels, svc numbers, proj meta, cw meta/stage, strip caps,
      footer, breadcrumbs, section labels — uppercase, ~0.16em.
 
-   PALETTE — light / white
-   - The whole page is one #FFFFFF paper ground (the optional
-     #F6F5F0 inset is kept on #projects + #reviews — a whisper,
-     not a stripe).
-   - Lime #C2E807 is FILLS and small MARKS ONLY — never text on
-     paper. Accent *text* uses olive #3E4A16.
+   PALETTE — two grounds, one shared token set
+   - Light bands are #FFFFFF paper with #16180F ink; dark bands are
+     Nocturne #101109 with #F2F1E9 ink. The shared --bp-* tokens are
+     declared for the paper ground and FLIPPED on the dark contexts
+     (section 1b), so every component written against
+     var(--bp-ink)/--bp-muted/--bp-faint/--bp-rule/--bp-rule-ui/
+     --accent reads correctly on whichever ground its section has.
+   - Lime #C2E807 is FILLS + small MARKS everywhere, and it is safe
+     as small TEXT on night (~13:1). On paper, accent *text* uses
+     olive #3E4A16. Accent follows the ground via --accent.
+   - Buttons: --fill stays lime with #16180F text on both grounds.
 
    EVERY selector in this file is scoped to
    html[data-theme="blueprint"] so it reliably wins over the base
@@ -42,27 +53,37 @@
    1. PALETTE + TOKENS
    Tune the whole style from here. The base stylesheet's own
    tokens are re-pointed at these so inherited rules resolve to
-   the light ground automatically.
+   the correct ground automatically. The light (paper) values are
+   the defaults; the dark (night) values live beside them and are
+   swapped in by the context rules in 1b.
    ============================================================= */
 html[data-theme="blueprint"]{
 
-  /* --- ground --- */
+  /* --- LIGHT ground (paper) — the default context ----------- */
   --bp-paper:#FFFFFF;          /* the ground — clean white        */
-  --bp-paper-2:#F6F5F0;        /* barely-warm inset for 2 sections */
-
-  /* --- ink --- */
   --bp-ink:#16180F;            /* near-black text        ~17.9:1  */
   --bp-muted:#5C6152;          /* secondary copy          ~6.4:1  */
-  --bp-faint:#6E7265;          /* captions / meta   4.93 white /
-                                  4.52 on the paper-2 inset (>=4.5) */
+  --bp-faint:#6E7265;          /* captions / meta          ~4.9:1  */
   --bp-rule:rgba(22,24,15,.16);      /* hairlines                 */
   --bp-rule-soft:rgba(22,24,15,.08); /* decorative dividers       */
   --bp-rule-ui:rgba(22,24,15,.48);   /* interactive borders ~3.2:1 */
 
-  /* --- the single accent --- */
-  --bp-lime:#C2E807;           /* FILLS + MARKS only (1.4:1)      */
+  /* --- DARK ground (Nocturne) palette ----------------------- */
+  --bp-night:#101109;          /* Nocturne ground                  */
+  --bp-night-2:#0C0D07;        /* footer / deepest                 */
+  --bp-on-night:#F2F1E9;       /* text on night       ~16:1        */
+  --bp-night-muted:#A9A99C;    /* secondary on night   ~7.9:1      */
+  --bp-night-faint:#8A8A7E;    /* captions on night    ~5.4:1      */
+  --bp-night-rule:rgba(255,255,255,.14);
+  --bp-night-ruleUI:rgba(255,255,255,.42);
+
+  /* --- the single accent ------------------------------------ */
+  --bp-lime:#C2E807;           /* FILLS + MARKS (and night TEXT)   */
   --bp-lime-ink:#3E4A16;       /* olive — accent TEXT on paper 9.6:1 */
-  --bp-error:#A6301B;          /* form errors             ~6.9:1  */
+  --bp-error:#A6301B;          /* form errors             ~6.9:1   */
+
+  /* text printed on an ink fill — inverts per ground */
+  --bp-ink-inv:#FFFFFF;        /* on paper, an ink fill reads white */
 
   /* --- typography --- */
   --bp-tech:ui-monospace,"SFMono-Regular",Menlo,Consolas,
@@ -72,22 +93,22 @@ html[data-theme="blueprint"]{
   /* --- rhythm --- */
   --bp-space:clamp(64px,8vw,112px);
 
-  /* --- re-point the base design system --- */
+  /* --- re-point the base design system (paper defaults) ----- */
   --ink:var(--bp-ink);
   --bg:var(--bp-paper);
-  --surface-dark:var(--bp-paper);
-  --surface-dark-2:var(--bp-paper);
+  --surface-dark:var(--bp-night);     /* base dark surfaces → night  */
+  --surface-dark-2:var(--bp-night-2);
   --muted:var(--bp-muted);
-  --muted-dark:var(--bp-muted);
+  --muted-dark:var(--bp-night-muted); /* text on night surfaces */
   --line:var(--bp-rule);
-  --line-dark:var(--bp-rule);
+  --line-dark:var(--bp-night-rule);   /* rules on night surfaces */
   --scrim:rgba(18,20,12,.42);
 
-  /* on the paper ground the accent resolves to olive for any
-     accent TEXT; dark ink sits ON a lime fill. */
+  /* accent is CONTEXT-AWARE: olive accent text on paper, lime on
+     night. Ink sitting ON an accent fill stays #16180F everywhere. */
   --accent:var(--bp-lime-ink);
   --accent-light:var(--bp-lime-ink);
-  --accent-dark:var(--bp-lime-ink);
+  --accent-dark:var(--bp-lime);
   --accent-ink:#16180F;
   --accent-ink-light:#16180F;
   --accent-ink-dark:#16180F;
@@ -107,30 +128,70 @@ html[data-theme="blueprint"]{
   --pad-band-sm:48px;
 }
 
-/* neutralise every dark surface: the whole page is one paper
-   ground. Lime becomes a mark, ink stays near-black. Class-doubled
-   so these outrank the base AND the [data-hero="sticky"] opacity
-   rules. */
-html[data-theme="blueprint"] .band--dark,
-html[data-theme="blueprint"] .site-footer,
-html[data-theme="blueprint"] .subhero,
-html[data-theme="blueprint"] .drawer,
-html[data-theme="blueprint"] .strip-band,
-html[data-theme="blueprint"] .lightbox,
-html[data-theme="blueprint"] .hero{
-  --accent:var(--bp-lime-ink);
+
+/* =============================================================
+   1b. THE DARK BANDS — context-aware token flip.
+   Every dark section (by class AND by id, in case a section loses
+   its band--dark class) re-inks itself onto the Nocturne ground and
+   flips the shared tokens, so all components built from var(--bp-*)
+   read off-white without a single per-section override. These
+   selectors also carry their own explicit background so they win
+   over the base [data-hero="sticky"] opacity rules.
+   ============================================================= */
+html[data-theme="blueprint"] .hero,
+html[data-theme="blueprint"] main > .band.band--dark,
+html[data-theme="blueprint"] main > #intro,
+html[data-theme="blueprint"] main > #projects,
+html[data-theme="blueprint"] main > #project-strip,
+html[data-theme="blueprint"] main > #process,
+html[data-theme="blueprint"] main > #about{
+  background:var(--bp-night); background-color:var(--bp-night);
+  --bp-ink:var(--bp-on-night);
+  --bp-muted:var(--bp-night-muted);
+  --bp-faint:var(--bp-night-faint);
+  --bp-rule:var(--bp-night-rule);
+  --bp-rule-ui:var(--bp-night-ruleUI);
+  --ink:var(--bp-on-night); --muted:var(--bp-night-muted);
+  --line:var(--bp-night-rule); --line-dark:var(--bp-night-rule);
+  --bp-ink-inv:var(--bp-night);
+  --accent:var(--bp-lime);
+  --accent-light:var(--bp-lime);
+  --accent-dark:var(--bp-lime);
   --accent-ink:#16180F;
-  --muted:var(--bp-muted);
-  --muted-dark:var(--bp-muted);
-  --line:var(--bp-rule);
-  --line-dark:var(--bp-rule);
+  --accent-ink-light:#16180F;
+  --accent-ink-dark:#16180F;
+  color:var(--bp-on-night);
+}
+
+/* the FOOTER follows #contact (light) — it is the deliberate dark
+   close of the sheet, on the deepest night ground with the same
+   flipped tokens so its ruled typography reads off-white. */
+html[data-theme="blueprint"] .site-footer{
+  background:var(--bp-night-2); background-color:var(--bp-night-2);
+  --bp-ink:var(--bp-on-night);
+  --bp-muted:var(--bp-night-muted);
+  --bp-faint:var(--bp-night-faint);
+  --bp-rule:var(--bp-night-rule);
+  --bp-rule-ui:var(--bp-night-ruleUI);
+  --ink:var(--bp-on-night); --muted:var(--bp-night-muted);
+  --line:var(--bp-night-rule); --line-dark:var(--bp-night-rule);
+  --bp-ink-inv:var(--bp-night);
+  --accent:var(--bp-lime);
+  --accent-light:var(--bp-lime);
+  --accent-dark:var(--bp-lime);
+  --accent-ink:#16180F;
+  --accent-ink-light:#16180F;
+  --accent-ink-dark:#16180F;
+  color:var(--bp-on-night);
 }
 
 
 /* =============================================================
-   2. THE CONTINUOUS GROUND
-   One white paper, unbroken, hero to footer. Dark bands and the
-   decorative contour texture are all neutralised to paper.
+   2. THE TWO GROUNDS
+   Every main band declares an explicit ground — white paper by
+   default, flipped to night in 1b — so the pinned sticky-hero video
+   can never bleed through. The decorative contour texture and the
+   scoop/arch geometry are removed entirely.
    ============================================================= */
 html[data-theme="blueprint"]{background:var(--bp-paper)}
 
@@ -143,12 +204,8 @@ html[data-theme="blueprint"] body{
 
 html[data-theme="blueprint"] main{background:var(--bp-paper)}
 
-html[data-theme="blueprint"] .band,
-html[data-theme="blueprint"] .band--dark,
-html[data-theme="blueprint"] .band--lg,
-html[data-theme="blueprint"] .strip-band,
-html[data-theme="blueprint"] .site-footer,
-html[data-theme="blueprint"] .subhero{
+/* light bands are opaque paper, square and flush */
+html[data-theme="blueprint"] main > .band{
   background:var(--bp-paper);
   background-color:var(--bp-paper);
   color:var(--bp-ink);
@@ -157,12 +214,16 @@ html[data-theme="blueprint"] .subhero{
   margin-top:0;
 }
 
-/* the two warm-inset sections — a whisper, not a stripe.
-   (Kept: it stops pure white reading clinically flat.) */
-html[data-theme="blueprint"] main > #projects,
-html[data-theme="blueprint"] main > #reviews{
-  background:var(--bp-paper-2);
-  background-color:var(--bp-paper-2);
+/* neutralise every base dark-surface default and every scoop —
+   each band now declares its own ground (paper in 1, night in 1b) */
+html[data-theme="blueprint"] .band--dark,
+html[data-theme="blueprint"] .band--lg,
+html[data-theme="blueprint"] .strip-band,
+html[data-theme="blueprint"] .site-footer,
+html[data-theme="blueprint"] .subhero{
+  border-radius:0;
+  box-shadow:none;
+  margin-top:0;
 }
 
 /* the topographic texture belongs to the old block design */
@@ -185,22 +246,12 @@ html[data-theme="blueprint"] .arch--br,
 html[data-theme="blueprint"] .arch--bl,
 html[data-theme="blueprint"] .arch--sm{border-radius:0}
 
-/* every dark band's text falls back to the paper inks */
-html[data-theme="blueprint"] main > .band.band--dark h1,
-html[data-theme="blueprint"] main > .band.band--dark h2,
-html[data-theme="blueprint"] main > .band.band--dark h3,
-html[data-theme="blueprint"] main > .band.band--dark h4{color:var(--bp-ink)}
-html[data-theme="blueprint"] main > .band.band--dark .lead,
-html[data-theme="blueprint"] main > .band.band--dark p{color:var(--bp-muted)}
-html[data-theme="blueprint"] main > .band.band--dark .measure,
-html[data-theme="blueprint"] main > .band.band--dark li,
-html[data-theme="blueprint"] main > .band.band--dark b,
-html[data-theme="blueprint"] main > .band.band--dark strong{color:inherit}
-
 
 /* =============================================================
    3. SEPARATION — ONE FULL-BLEED HAIRLINE PER SECTION.
-   The only device that divides sections.
+   The only device that divides sections. Each band rules itself:
+   the --bp-rule token reads dark on paper bands and light on night
+   bands, so the hairline is always visible on the ground it tops.
    ============================================================= */
 html[data-theme="blueprint"] main > .band{
   border-top:1px solid var(--bp-rule);
@@ -237,8 +288,8 @@ html[data-theme="blueprint"] .site-footer{
    A ::before on each .band > .container, numbered by CSS counter
    plus a per-id label string, rendered as a NORMAL block heading
    above the content (NOT sticky, NOT in a side column).
-   A short 2px lime tick (28px) is the one place lime touches the
-   light ground.
+   A short 2px lime tick (28px) is the one lime mark on paper; on
+   night it stays lime, which is safe as a small mark there too.
    ============================================================= */
 html[data-theme="blueprint"] main{counter-reset:bpsec}
 html[data-theme="blueprint"] main > .band{counter-increment:bpsec}
@@ -277,8 +328,8 @@ html[data-theme="blueprint"] main > #contact      {--bp-label:"Enquiry"}
    — eyebrow, meta, stat figures, credline, chips, field labels,
    svc numbers, proj meta, cw meta/stage, strip caps, footer,
    breadcrumbs, section labels — is the system monospace voice,
-   uppercase, letterspaced. This is what makes it read as
-   "Blueprint" and not just "Nocturne in white".
+   uppercase, letterspaced. Ink tokens flip with the ground, so the
+   same voice works on paper AND on night.
    ============================================================= */
 html[data-theme="blueprint"] h1,
 html[data-theme="blueprint"] h2,
@@ -327,14 +378,15 @@ html[data-theme="blueprint"] .band--dark .lead{
 }
 html[data-theme="blueprint"] .measure{max-width:58ch}
 
-/* eyebrow: a technical annotation, olive (the accent text voice) */
+/* eyebrow: a technical annotation in the ACCENT text voice — olive
+   on paper, lime on night (safe as small text there ~13:1) */
 html[data-theme="blueprint"] .eyebrow,
 html[data-theme="blueprint"] .band--dark .eyebrow{
   display:block;
   font:400 .64rem/1.4 var(--bp-tech);
   letter-spacing:var(--bp-ls);
   text-transform:uppercase;
-  color:var(--bp-lime-ink);
+  color:var(--accent);
   margin-bottom:1rem;
 }
 
@@ -346,7 +398,7 @@ html[data-theme="blueprint"] .section-head .lead{margin-top:.9rem}
 
 html[data-theme="blueprint"] ::selection{
   background:var(--bp-lime);
-  color:#16180F;
+  color:var(--accent-ink);
 }
 
 
@@ -354,6 +406,8 @@ html[data-theme="blueprint"] ::selection{
    6. IMAGERY — clean, edge-to-edge.
    No warm "glow" brightness lift (that was for the black ground).
    At most a very slight contrast bump; a subtle lift on hover.
+   Media plates are transparent so an un-loaded figure simply shows
+   its section's own ground.
    ============================================================= */
 html[data-theme="blueprint"] .media,
 html[data-theme="blueprint"] .svc-figure,
@@ -362,7 +416,7 @@ html[data-theme="blueprint"] .about__media .media,
 html[data-theme="blueprint"] .store-card .media,
 html[data-theme="blueprint"] .svc-accordion-media .media{
   border-radius:0;
-  background:var(--bp-paper-2);
+  background:transparent;
   box-shadow:none;
 }
 
@@ -384,15 +438,15 @@ html[data-theme="blueprint"] .media__scrim{background:var(--scrim)}
 
 /* =============================================================
    7. HERO — the video stays, full-bleed and prominent.
-   The hero is the one dark moment on the sheet.
+   The hero opens the sheet on the Nocturne ground.
    ============================================================= */
 html[data-theme="blueprint"] .hero{
   min-height:100svh;
-  background:#16180F;
+  background:var(--bp-night);
 }
 html[data-theme="blueprint"] .hero__media{
   border-radius:0;
-  background:#16180F;
+  background:var(--bp-night);
 }
 html[data-theme="blueprint"] .hero__media video,
 html[data-theme="blueprint"] .hero__media img{
@@ -446,23 +500,31 @@ html[data-theme="blueprint"] .skip-link{
   border-radius:0;
 }
 
-/* sticky-hero variant: bands stay opaque, square-edged */
+/* sticky-hero variant: bands stay opaque, square-edged, and each
+   band re-declares its own ground so the pinned video stays behind
+   every section, paper and night alike. */
 html[data-theme="blueprint"][data-hero="sticky"] .hero + .band,
-html[data-theme="blueprint"][data-hero="sticky"] main > .band,
-html[data-theme="blueprint"][data-hero="sticky"] main > .band--dark,
-html[data-theme="blueprint"][data-hero="sticky"] main > .strip-band{
+html[data-theme="blueprint"][data-hero="sticky"] main > .band{
   background-color:var(--bp-paper);
   border-radius:0;
 }
+html[data-theme="blueprint"][data-hero="sticky"] .hero,
+html[data-theme="blueprint"][data-hero="sticky"] main > .band.band--dark,
+html[data-theme="blueprint"][data-hero="sticky"] main > #intro,
 html[data-theme="blueprint"][data-hero="sticky"] main > #projects,
-html[data-theme="blueprint"][data-hero="sticky"] main > #reviews{
-  background-color:var(--bp-paper-2);
+html[data-theme="blueprint"][data-hero="sticky"] main > #project-strip,
+html[data-theme="blueprint"][data-hero="sticky"] main > #process,
+html[data-theme="blueprint"][data-hero="sticky"] main > #about{
+  background-color:var(--bp-night);
 }
 html[data-theme="blueprint"][data-hero="sticky"] .hero__media{border-radius:0}
 
 
 /* =============================================================
    8. HEADERS (both variants) + DRAWER
+   Over the night hero the headers stay transparent with white
+   annotation links; once stuck they drop onto the paper ground and
+   the links flip to ink. The drawer is paper too.
    ============================================================= */
 html[data-theme="blueprint"] .site-header,
 html[data-theme="blueprint"] .hdr2{
@@ -510,10 +572,11 @@ html[data-theme="blueprint"] .site-header.is-stuck .header-cta .phone{
   color:var(--bp-ink);
 }
 
-/* flatten the white+lime logo artwork to a single ink on paper */
+/* flatten the white+lime logo artwork to a single ink when it sits
+   on a paper ground (stuck headers + drawer). The footer logo keeps
+   its artwork: that ground is night. */
 html[data-theme="blueprint"] .site-header.is-stuck .brand img,
 html[data-theme="blueprint"] .hdr2.is-stuck .hdr2__brand img,
-html[data-theme="blueprint"] .site-footer .brand img,
 html[data-theme="blueprint"] .drawer .brand img{
   filter:brightness(0);
   opacity:.92;
@@ -538,7 +601,7 @@ html[data-theme="blueprint"] .site-header:not(.is-stuck) .nav-toggle{
 html[data-theme="blueprint"] .nav-toggle:hover,
 html[data-theme="blueprint"] .drawer__close:hover{
   background:var(--bp-ink);
-  color:var(--bp-paper);
+  color:var(--bp-ink-inv);
 }
 
 html[data-theme="blueprint"] .hdr2__util{border-bottom:1px solid rgba(255,255,255,.16)}
@@ -555,7 +618,7 @@ html[data-theme="blueprint"] .drawer nav a{
   border-bottom:1px solid var(--bp-rule);
   padding:.75rem 0;
 }
-html[data-theme="blueprint"] .drawer nav a:hover{color:var(--bp-lime-ink)}
+html[data-theme="blueprint"] .drawer nav a:hover{color:var(--accent)}
 html[data-theme="blueprint"] .drawer__foot{
   color:var(--bp-muted);
   font-family:var(--bp-tech);
@@ -566,7 +629,10 @@ html[data-theme="blueprint"] .drawer__foot{
 
 /* =============================================================
    9. BUTTONS + LINKS — square, hairline, unfilled.
-   --fill is filled lime with dark text. No ::before fill-sweep.
+   --fill is filled lime with dark #16180F text. No ::before
+   fill-sweep. Ghost buttons read their border/text off the ground
+   tokens, so they are off-white on night and ink on paper; hover
+   fills with the ground ink and prints the inverted ink.
    ============================================================= */
 html[data-theme="blueprint"] .btn-ghost,
 html[data-theme="blueprint"] .btn-ghost--fill,
@@ -590,24 +656,24 @@ html[data-theme="blueprint"] .band--dark .btn-ghost{
 html[data-theme="blueprint"] .btn-ghost::before{content:none;display:none}
 html[data-theme="blueprint"] .btn-ghost:hover,
 html[data-theme="blueprint"] .band--dark .btn-ghost:hover{
-  color:var(--bp-paper);
+  color:var(--bp-ink-inv);
   border-color:var(--bp-ink);
   background:var(--bp-ink);
 }
 
-/* primary: filled lime, dark text */
+/* primary: filled lime, dark #16180F text on BOTH grounds */
 html[data-theme="blueprint"] .btn-ghost--fill,
 html[data-theme="blueprint"] .band--dark .btn-ghost--fill{
   background:var(--bp-lime);
   border-color:var(--bp-lime);
-  color:#16180F;
+  color:var(--accent-ink);
 }
 html[data-theme="blueprint"] .btn-ghost--fill::before{content:none;display:none}
 html[data-theme="blueprint"] .btn-ghost--fill:hover,
 html[data-theme="blueprint"] .band--dark .btn-ghost--fill:hover{
   background:var(--bp-ink);
   border-color:var(--bp-ink);
-  color:var(--bp-paper);
+  color:var(--bp-ink-inv);
 }
 
 /* the header CTA sits over the video — hairline, unfilled */
@@ -627,7 +693,7 @@ html[data-theme="blueprint"] .site-header .header-cta .btn-ghost--fill:hover,
 html[data-theme="blueprint"] .site-header.is-stuck .header-cta .btn-ghost--fill:hover{
   background:var(--bp-lime);
   border-color:var(--bp-lime);
-  color:#16180F;
+  color:var(--accent-ink);
 }
 
 /* underlined text link with a small lime tick */
@@ -651,7 +717,7 @@ html[data-theme="blueprint"] .tlink i{font-size:.62rem}
 html[data-theme="blueprint"] .tlink:hover{
   gap:.85em;
   opacity:1;
-  border-bottom-color:var(--bp-lime-ink);
+  border-bottom-color:var(--accent);
 }
 
 /* chips stop being pills — caption text divided by thin rules */
@@ -672,13 +738,14 @@ html[data-theme="blueprint"] .band--dark .chips li{
 html[data-theme="blueprint"] .chips li:first-child{padding-left:0}
 html[data-theme="blueprint"] .chips li + li{border-left:1px solid var(--bp-rule)}
 
-/* focus is always visible, always the accent */
+/* focus is always visible, always the accent (olive on paper,
+   lime on night — and lime over the night hero) */
 html[data-theme="blueprint"] a:focus-visible,
 html[data-theme="blueprint"] button:focus-visible,
 html[data-theme="blueprint"] input:focus-visible,
 html[data-theme="blueprint"] textarea:focus-visible,
 html[data-theme="blueprint"] [tabindex]:focus-visible{
-  outline:2px solid var(--bp-lime-ink);
+  outline:2px solid var(--accent);
   outline-offset:3px;
   border-radius:0;
 }
@@ -740,7 +807,7 @@ html[data-theme="blueprint"] .stat-n b{
   letter-spacing:-.03em;
   color:var(--bp-ink);
 }
-html[data-theme="blueprint"] .stat-n b i{color:var(--bp-lime-ink);font-style:normal}
+html[data-theme="blueprint"] .stat-n b i{color:var(--accent);font-style:normal}
 html[data-theme="blueprint"] .stat-n > span{
   display:block;
   margin-top:.7rem;
@@ -763,7 +830,7 @@ html[data-theme="blueprint"] .credline span{
   text-transform:uppercase;
   color:var(--bp-muted);
 }
-html[data-theme="blueprint"] .credline i{color:var(--bp-lime-ink);font-size:.85rem}
+html[data-theme="blueprint"] .credline i{color:var(--accent);font-size:.85rem}
 html[data-theme="blueprint"] .credline b{color:var(--bp-ink);font-weight:500}
 
 @media (max-width:1100px){
@@ -798,7 +865,7 @@ html[data-theme="blueprint"] .about__values li{
   color:var(--bp-muted);
   font-size:.92rem;
 }
-html[data-theme="blueprint"] .about__values i{color:var(--bp-lime-ink);font-size:.8rem;margin-top:.5rem}
+html[data-theme="blueprint"] .about__values i{color:var(--accent);font-size:.8rem;margin-top:.5rem}
 html[data-theme="blueprint"] .about__values b{color:var(--bp-ink);font-weight:500}
 
 
@@ -829,14 +896,14 @@ html[data-theme="blueprint"] .svc-item__name{
   font-size:clamp(1.05rem,1.8vw,1.35rem);
   letter-spacing:.005em;
 }
-html[data-theme="blueprint"] .svc-item__go{color:var(--bp-lime-ink);font-size:.72rem}
+html[data-theme="blueprint"] .svc-item__go{color:var(--accent);font-size:.72rem}
 html[data-theme="blueprint"] .svc-item:hover,
 html[data-theme="blueprint"] .svc-item.is-active{
   color:var(--bp-ink);
   padding-left:1rem;
 }
 html[data-theme="blueprint"] .svc-item:hover .svc-item__no,
-html[data-theme="blueprint"] .svc-item.is-active .svc-item__no{color:var(--bp-lime-ink);opacity:1}
+html[data-theme="blueprint"] .svc-item.is-active .svc-item__no{color:var(--accent);opacity:1}
 html[data-theme="blueprint"] .svc-item.is-active .svc-item__go,
 html[data-theme="blueprint"] .svc-item:hover .svc-item__go{opacity:1}
 
@@ -909,7 +976,7 @@ html[data-theme="blueprint"] .band--dark .proj-card p{
   color:var(--bp-muted);
   font-size:.9rem;
 }
-html[data-theme="blueprint"] .proj-card:hover h3{color:var(--bp-lime-ink)}
+html[data-theme="blueprint"] .proj-card:hover h3{color:var(--accent)}
 
 /* carousel controls: square, hairline, no fill */
 html[data-theme="blueprint"] .swiper-controls{gap:0;margin-top:2.6rem}
@@ -926,7 +993,7 @@ html[data-theme="blueprint"] .swiper-controls button + button{border-left:0}
 html[data-theme="blueprint"] .swiper-controls button:hover,
 html[data-theme="blueprint"] .band:not(.band--dark) .swiper-controls button:hover{
   background:var(--bp-ink);
-  color:var(--bp-paper);
+  color:var(--bp-ink-inv);
   border-color:var(--bp-ink);
 }
 
@@ -940,6 +1007,9 @@ html[data-theme="blueprint"] .strip .swiper-slide{
 html[data-theme="blueprint"] .strip .swiper-slide + .swiper-slide{
   border-left:1px solid var(--bp-rule);
 }
+/* the caption chip and the nav squares sit ON the photographs, not
+   on a band ground — their paper/ink values stay fixed so a photo
+   never loses its caption */
 html[data-theme="blueprint"] .strip__cap{
   left:14px;bottom:14px;
   padding:.45em .8em;
@@ -954,16 +1024,16 @@ html[data-theme="blueprint"] .strip__cap{
 html[data-theme="blueprint"] .strip__nav{
   width:46px;height:46px;
   border-radius:0;
-  border:1px solid var(--bp-rule-ui);
+  border:1px solid rgba(255,255,255,.42);
   background:rgba(255,255,255,.92);
-  color:var(--bp-ink);
+  color:#16180F;
   box-shadow:none;
 }
 html[data-theme="blueprint"] .strip__nav:hover{
-  background:var(--bp-ink);
-  color:var(--bp-paper);
+  background:#16180F;
+  color:#fff;
   transform:translateY(-50%);
-  border-color:var(--bp-ink);
+  border-color:#16180F;
 }
 
 
@@ -1020,7 +1090,7 @@ html[data-theme="blueprint"] .cw-card__note{
   max-width:58ch;
   margin-bottom:1.1rem;
 }
-html[data-theme="blueprint"] .cw-card:hover h3{color:var(--bp-lime-ink)}
+html[data-theme="blueprint"] .cw-card:hover h3{color:var(--accent)}
 html[data-theme="blueprint"] .cw-card .tlink{
   justify-self:start;
   width:fit-content;
@@ -1195,7 +1265,7 @@ html[data-theme="blueprint"] .rev-card__who .rev-avatar{
   background:none;
   border:0;
   display:inline;
-  color:var(--bp-lime-ink);
+  color:var(--accent);
   font:400 .64rem/1 var(--bp-tech);
   letter-spacing:.12em;
   font-weight:500;
@@ -1238,16 +1308,16 @@ html[data-theme="blueprint"] .field textarea{
 html[data-theme="blueprint"] .field input::placeholder,
 html[data-theme="blueprint"] .field textarea::placeholder{color:var(--bp-faint)}
 html[data-theme="blueprint"] .field input:hover,
-html[data-theme="blueprint"] .field textarea:hover{border-bottom-color:rgba(22,24,15,.7)}
+html[data-theme="blueprint"] .field textarea:hover{border-bottom-color:var(--bp-ink)}
 html[data-theme="blueprint"] .field input:focus,
 html[data-theme="blueprint"] .field textarea:focus{
   outline:none;
-  border-bottom:2px solid var(--bp-lime-ink);
+  border-bottom:2px solid var(--accent);
   padding-bottom:10px;
 }
 html[data-theme="blueprint"] .field input:focus-visible,
 html[data-theme="blueprint"] .field textarea:focus-visible{
-  outline:2px solid var(--bp-lime-ink);
+  outline:2px solid var(--accent);
   outline-offset:4px;
 }
 html[data-theme="blueprint"] .field textarea{min-height:118px}
@@ -1265,7 +1335,7 @@ html[data-theme="blueprint"] .form-note{
   color:var(--bp-muted);
   margin-top:1.2rem;
 }
-html[data-theme="blueprint"] .form-note a{color:var(--bp-lime-ink)}
+html[data-theme="blueprint"] .form-note a{color:var(--accent)}
 html[data-theme="blueprint"] .form-ok{
   padding:1rem 0 1rem 1.2rem;
   border:0;
@@ -1285,7 +1355,7 @@ html[data-theme="blueprint"] .contact-info dl{
 html[data-theme="blueprint"] .contact-info dt{
   padding:1rem .9rem 1rem 0;
   border-bottom:1px solid var(--bp-rule);
-  color:var(--bp-lime-ink);
+  color:var(--accent);
   font-size:.85rem;
 }
 html[data-theme="blueprint"] .contact-info dd{
@@ -1304,6 +1374,8 @@ html[data-theme="blueprint"] .contact-info .tbc{color:var(--bp-faint)}
 
 /* =============================================================
    20. FOOTER — ruled structure ending in a thin dashed "scale bar".
+   The footer keeps the night ground as a deliberate dark close; its
+   tokens were flipped in 1b, so this whole section reads off-white.
    ============================================================= */
 html[data-theme="blueprint"] .site-footer{
   color:var(--bp-muted);
@@ -1420,7 +1492,7 @@ html[data-theme="blueprint"] .stepper-v li.now .dot{
   border-color:var(--bp-lime);
   box-shadow:none;
 }
-html[data-theme="blueprint"] .stepper-v li.now .st-name::after{color:var(--bp-lime-ink)}
+html[data-theme="blueprint"] .stepper-v li.now .st-name::after{color:var(--accent)}
 html[data-theme="blueprint"] .prog__bar{
   border-radius:0;
   height:6px;
@@ -1436,7 +1508,7 @@ html[data-theme="blueprint"] .timeline .tl-stage{
   font-family:var(--bp-tech);
   letter-spacing:.12em;
 }
-html[data-theme="blueprint"] .timeline .tl-stage{color:var(--bp-lime-ink)}
+html[data-theme="blueprint"] .timeline .tl-stage{color:var(--accent)}
 
 html[data-theme="blueprint"] .gallery-grid button{border-radius:0}
 html[data-theme="blueprint"] .ba,
@@ -1458,7 +1530,7 @@ html[data-theme="blueprint"] .filterbar button{
 html[data-theme="blueprint"] .filterbar button.is-active,
 html[data-theme="blueprint"] .filterbar button:hover{
   background:var(--bp-ink);
-  color:var(--bp-paper);
+  color:var(--bp-ink-inv);
   border-color:var(--bp-ink);
 }
 
@@ -1473,7 +1545,7 @@ html[data-theme="blueprint"] .wa-float{
 html[data-theme="blueprint"] .wa-float:hover{
   transform:none;
   background:var(--bp-lime);
-  color:#16180F;
+  color:var(--accent-ink);
   border-color:var(--bp-lime);
 }
 
@@ -1486,7 +1558,7 @@ html[data-theme="blueprint"] .lightbox button{
 }
 html[data-theme="blueprint"] .lightbox button:hover{
   background:var(--bp-ink);
-  color:var(--bp-paper);
+  color:var(--bp-ink-inv);
 }
 
 
