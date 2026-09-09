@@ -184,7 +184,7 @@
           svcCopy.innerHTML = '<div class="svc-copy__inner">' +
             '<h3>' + s.name + '</h3><p>' + s.desc + '</p>' +
             '<ul class="chips">' + s.tags.map(function (t) { return "<li>" + t + "</li>"; }).join("") + '</ul>' +
-            '<p style="margin-top:1.3rem"><a class="tlink" href="#">Explore ' + s.name +
+            '<p style="margin-top:1.3rem"><a class="tlink" href="service.html?slug=' + esc(s.slug) + '">Explore ' + s.name +
             ' <i class="fa-solid fa-arrow-right"></i></a></p></div>';
           requestAnimationFrame(function () { $(".svc-copy__inner", svcCopy).classList.add("is-on"); });
         }, inner ? 160 : 0);
