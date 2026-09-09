@@ -370,8 +370,8 @@ html[data-theme="carbon-soft-v2"] #intro .btn-ghost--fill{
 }
 html[data-theme="carbon-soft-v2"] #intro .btn-ghost--fill:hover{color:#C2E807}
 html[data-theme="carbon-soft-v2"] #intro .btn-ghost--fill::before{background:#17190F}
-html[data-theme="carbon-soft-v2"] #intro .btn-ghost{border-color:rgba(242,242,236,.85);color:#F2F2EC;--c:#F2F2EC}
-html[data-theme="carbon-soft-v2"] #intro .btn-ghost:hover{color:#17190F}
+html[data-theme="carbon-soft-v2"] #intro .btn-ghost:not(.btn-ghost--fill){border-color:rgba(242,242,236,.85);color:#F2F2EC;--c:#F2F2EC}
+html[data-theme="carbon-soft-v2"] #intro .btn-ghost:not(.btn-ghost--fill):hover{color:#17190F}
 
 /* the intro figures sit right of the copy in split layout */
 html[data-theme="carbon-soft-v2"] #intro .intro-figures{align-self:center}
@@ -618,9 +618,9 @@ html[data-theme="carbon-soft-v2"] .band--dark .btn-ghost--fill:hover{
   border-color:#17190F;
 }
 
-/* ghost buttons read their ground */
-html[data-theme="carbon-soft-v2"] .band--dark .btn-ghost{--c:rgba(242,242,236,.9);color:rgba(242,242,236,.9)}
-html[data-theme="carbon-soft-v2"] .band--dark .btn-ghost:hover{color:#17190F}
+/* ghost buttons read their ground — never the solid fill pill */
+html[data-theme="carbon-soft-v2"] .band--dark .btn-ghost:not(.btn-ghost--fill){--c:rgba(242,242,236,.9);color:rgba(242,242,236,.9)}
+html[data-theme="carbon-soft-v2"] .band--dark .btn-ghost:not(.btn-ghost--fill):hover{color:#17190F}
 
 /* text links flip with the ground */
 html[data-theme="carbon-soft-v2"] .tlink{color:inherit}
