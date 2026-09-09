@@ -1080,3 +1080,17 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 [data-theme="plan"] .hero-pause,[data-theme="nocturne"] .hero-pause{border-radius:0}
 /* line-based themes square off the skip link too */
 [data-theme="plan"] .skip-link,[data-theme="nocturne"] .skip-link{border-radius:0}
+
+/* =============================================================
+   40. Intro band — stats + credentials merged into the dark
+   headline section, so they need light-context colours here.
+   ============================================================= */
+#intro .statline{margin-top:3.5rem}
+#intro .stat-n::before,
+#intro .credline{border-color:var(--line-dark)}
+#intro .stat-n b{color:#fff}
+#intro .stat-n > span,
+#intro .credline span{color:var(--muted-dark)}
+#intro .credline b{color:#fff}
+/* the merged section is single-column now — kill the old 2-col grid */
+#intro .container > .reveal{max-width:60ch}
