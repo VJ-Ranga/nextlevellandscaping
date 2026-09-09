@@ -13,14 +13,14 @@
 
      hero (bottom)        . . . bottom-LEFT on the media  0 0 0 V
      #intro   (dark)      . . . flat — meets the hero     0 0 0 0
-     #services(light)     . . . top-LEFT                 V 0 0 0
-     #projects(dark)      . . . top-RIGHT                0 V 0 0
+     #services(light)     . . . top-LEFT + top-RIGHT     V V 0 0
+     #projects(dark)      . . . top-LEFT + top-RIGHT     V V 0 0
      #current (light)     . . . top-LEFT                 V 0 0 0
      #reviews (dark)      . . . top-RIGHT                0 V 0 0
      #process (light)     . . . top-LEFT                 V 0 0 0
      #store   (dark)      . . . top-RIGHT                0 V 0 0
      #contact (light)     . . . top-LEFT + top-RIGHT     V V 0 0
-     .site-footer (dark)  . . . top-LEFT                 V 0 0 0
+     .site-footer (dark)  . . . top-LEFT + top-RIGHT     V V 0 0
      (V = var(--v2-scoop))
 
    PALETTE (Carbon soft's) — two grounds:
@@ -185,8 +185,8 @@ html[data-theme="carbon-soft-v2"] main > #intro{
   border-radius:0 0 0 0;                 /* flat — hero owns the curve */
   margin-top:0;
 }
-html[data-theme="carbon-soft-v2"] main > #services{ border-radius:var(--v2-scoop) 0 0 0; }
-html[data-theme="carbon-soft-v2"] main > #projects{ border-radius:0 var(--v2-scoop) 0 0; }
+html[data-theme="carbon-soft-v2"] main > #services{ border-radius:var(--v2-scoop) var(--v2-scoop) 0 0; }
+html[data-theme="carbon-soft-v2"] main > #projects{ border-radius:var(--v2-scoop) var(--v2-scoop) 0 0; }
 html[data-theme="carbon-soft-v2"] main > #current{  border-radius:var(--v2-scoop) 0 0 0; }
 html[data-theme="carbon-soft-v2"] main > #reviews{  border-radius:0 var(--v2-scoop) 0 0; }
 html[data-theme="carbon-soft-v2"] main > #process{  border-radius:var(--v2-scoop) 0 0 0; }
@@ -244,7 +244,10 @@ html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > #store{
 }
 
 /* the swiper carousels inside scooped bands never clip a shadow
-   that breaks the curve; clip only that paint, never sticky */
+   that breaks the curve; clip only that paint, never sticky.
+   #services joined the both-corners scoop, so it clips too — its
+   figure sits near the new top-right curve. */
+html[data-theme="carbon-soft-v2"] main > #services,
 html[data-theme="carbon-soft-v2"] main > #projects,
 html[data-theme="carbon-soft-v2"] main > #reviews{
   overflow:clip;
@@ -514,7 +517,7 @@ html[data-theme="carbon-soft-v2"] .site-footer--scoop{
   --r-footer-scoop:var(--v2-scoop);
   position:relative;
   z-index:1;
-  border-radius:var(--v2-scoop) 0 0 0;    /* top-left scoop */
+  border-radius:var(--v2-scoop) var(--v2-scoop) 0 0;    /* both top corners */
   margin-top:calc(-1 * var(--v2-scoop));
   padding-top:calc(72px + var(--v2-scoop) * .55);
   background:var(--v2-night);
