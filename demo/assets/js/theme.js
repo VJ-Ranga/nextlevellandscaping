@@ -8,7 +8,9 @@
   var THEMES = [
     { id: "brand",  name: "Brand olive", swatch: ["#5A6428", "#C2E807", "#F6F5EF"] },
     { id: "carbon", name: "Carbon lime", swatch: ["#17190F", "#C2E807", "#FFFFFF"] },
-    { id: "carbon-soft", name: "Carbon soft", swatch: ["#17190F", "#C2E807", "#F2F2EC"] }
+    { id: "carbon-soft", name: "Carbon soft", swatch: ["#17190F", "#C2E807", "#F2F2EC"] },
+    { id: "plan",      name: "Plan",      swatch: ["#F7F6F1", "#16180F", "#C2E807"] },
+    { id: "nocturne",  name: "Nocturne",  swatch: ["#101109", "#F2F1E9", "#C2E807"] }
   ];
   var KEY = "nll-theme";
   var LKEY = "nll-layout";
