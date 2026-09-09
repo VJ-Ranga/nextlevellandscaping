@@ -1092,8 +1092,6 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 #intro .stat-n > span,
 #intro .credline span{color:var(--muted-dark)}
 #intro .credline b{color:#fff}
-/* the merged section is single-column now — kill the old 2-col grid */
-#intro .container > .reveal{max-width:60ch}
 
 /* =============================================================
    41. Intro layout — two switchable versions via [data-intro]
@@ -1101,7 +1099,11 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
    stacked        : copy full-width, stats 1x4 row, creds strip
    ============================================================= */
 #intro .intro-copy .measure{max-width:44ch}
-#intro .credline{margin-top:2.6rem}
+#intro .credline{
+  margin-top:2.8rem;max-width:none;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem 2.5rem;align-items:center;
+}
+#intro .credline span{font-size:.8rem}
 
 /* --- SPLIT (default) --- */
 :root{--intro:split}
@@ -1130,4 +1132,7 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 }
 @media(max-width:520px){
   #intro .statline{grid-template-columns:1fr!important}
+}
+@media(max-width:760px){
+  #intro .credline{grid-template-columns:1fr;gap:.9rem}
 }
