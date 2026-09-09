@@ -1,82 +1,96 @@
 /* =============================================================
-   NextLevel Landscaping — THEME "BLUEPRINT"
-   Plan's architectural-drawing structure, rendered in Nocturne's
-   dark palette, with deliberate section-to-section tonal variation
-   so it never reads as one flat slab.
+   NextLevel Landscaping — THEME "BLUEPRINT" v2
+   A landscape plan sheet, drawn in white ink.
 
-   Structure is borrowed from THEME "PLAN":
-   - numbered margin-index labels (CSS counters) in a narrow left
-     column, sticky on desktop, stacked on mobile
-   - ONE full-bleed 1px hairline per section for separation
-   - faint vertical drawing guides behind the content
-   - monospace technical voice for every annotation
-   - square hairline buttons / fields / ticks, no box devices
-   - a dashed "scale bar" to sign off the footer
+   Blueprint v2 = Nocturne's layout/structure  +  Plan's
+   monospace technical voice  +  a LIGHT (white) ground.
 
-   Palette is borrowed from THEME "NOCTURNE":
-   - warm near-black ground, off-white text, lime as a MARK
-   - photography is the light source (warm luminous lift)
+   STRUCTURE (from Nocturne)
+   - Flat, full-width bands; NO per-section grid, NO sticky
+     margin-label column. (That grid is what broke the projects
+     carousel — a Swiper inside a minmax(0,1fr) track computed
+     16000px-wide slides.)
+   - One full-bleed 1px hairline divides sections. Nothing else.
+   - Cards become ruled typographic rows (hairline above, no
+     decoration); the services explorer keeps its list|sticky-image
+     anatomy; current-work keeps ruled rows + square-tick stepper;
+     reviews keep the square monogram, not a filled badge.
 
-   NEW: a 3-step warm tonal scale mapped per-section-id so the
-   page reads as stacked drawing sheets, not one slab.
+   TYPOGRAPHY (from Plan)
+   - Headings + body in Poppins (weight 400).
+   - A system monospace stack carries EVERY annotation: eyebrows,
+     card meta, stat figures + captions, credline, chips, field
+     labels, svc numbers, proj meta, cw meta/stage, strip caps,
+     footer, breadcrumbs, section labels — uppercase, ~0.16em.
 
-   EVERY selector in this file is scoped to [data-theme="blueprint"]
-   (written as html[data-theme="blueprint"] so it reliably wins
-   over the base stylesheet regardless of load order). The only
-   unscoped things are @media / @supports wrappers and comments.
+   PALETTE — light / white
+   - The whole page is one #FFFFFF paper ground (the optional
+     #F6F5F0 inset is kept on #projects + #reviews — a whisper,
+     not a stripe).
+   - Lime #C2E807 is FILLS and small MARKS ONLY — never text on
+     paper. Accent *text* uses olive #3E4A16.
+
+   EVERY selector in this file is scoped to
+   html[data-theme="blueprint"] so it reliably wins over the base
+   stylesheet regardless of load order. The only unscoped things
+   are @media / @supports wrappers and comments. The demo
+   .theme-bar is left untouched.
    ============================================================= */
 
 
 /* =============================================================
-   1. PALETTE + TOKENS + TONAL SCALE
+   1. PALETTE + TOKENS
+   Tune the whole style from here. The base stylesheet's own
+   tokens are re-pointed at these so inherited rules resolve to
+   the light ground automatically.
    ============================================================= */
 html[data-theme="blueprint"]{
 
-  /* --- the 3-step warm tonal scale (tune here) -------------
-     Grounds are intentionally CLOSE — this is tonal shift,
-     not contrast. Each step nudges warmth/lift a little. */
-  --bp-ink-1:#0C0D07;   /* darkest  — the deepest sheet     */
-  --bp-ink-2:#101109;   /* base     — most sections         */
-  --bp-ink-3:#16150E;   /* lifted   — the "act now" sections */
+  /* --- ground --- */
+  --bp-paper:#FFFFFF;          /* the ground — clean white        */
+  --bp-paper-2:#F6F5F0;        /* barely-warm inset for 2 sections */
 
-  /* --- palette (from Nocturne) ---------------------------- */
-  --bp-ink:#F2F1E9;             /* off-white text           ~17:1 */
-  --bp-muted:#A9A99C;           /* secondary copy           ~7.9:1 */
-  --bp-faint:#8A8A7E;           /* captions                 ~5.4:1 */
-  --bp-rule:rgba(255,255,255,.14);   /* hairlines               */
-  --bp-rule-soft:rgba(255,255,255,.08);
-  --bp-rule-ui:rgba(255,255,255,.42);/* interactive borders >=3:1 */
-  --bp-lime:#C2E807;            /* the mark, never a surface ~13:1 */
-  --bp-error:#FF6B5B;           /* form errors            ~6.7:1 */
-  --bp-grid:rgba(242,241,233,.055);  /* vertical drawing guides   */
+  /* --- ink --- */
+  --bp-ink:#16180F;            /* near-black text        ~17.9:1  */
+  --bp-muted:#5C6152;          /* secondary copy          ~6.4:1  */
+  --bp-faint:#6E7265;          /* captions / meta   4.93 white /
+                                  4.52 on the paper-2 inset (>=4.5) */
+  --bp-rule:rgba(22,24,15,.16);      /* hairlines                 */
+  --bp-rule-soft:rgba(22,24,15,.08); /* decorative dividers       */
+  --bp-rule-ui:rgba(22,24,15,.48);   /* interactive borders ~3.2:1 */
 
-  /* --- typography ----------------------------------------- */
-  /* system monospace carries every technical annotation */
+  /* --- the single accent --- */
+  --bp-lime:#C2E807;           /* FILLS + MARKS only (1.4:1)      */
+  --bp-lime-ink:#3E4A16;       /* olive — accent TEXT on paper 9.6:1 */
+  --bp-error:#A6301B;          /* form errors             ~6.9:1  */
+
+  /* --- typography --- */
   --bp-tech:ui-monospace,"SFMono-Regular",Menlo,Consolas,
             "Liberation Mono",monospace;
-  --bp-ls:.16em;               /* annotation letterspacing  */
+  --bp-ls:.16em;               /* annotation letterspacing */
 
-  /* --- drawing geometry ----------------------------------- */
-  --bp-label-w:170px;          /* the margin-label column   */
-  --bp-cols:6;                 /* vertical guides           */
+  /* --- rhythm --- */
+  --bp-space:clamp(64px,8vw,112px);
 
-  /* --- overrides of the base design system ---------------- */
-  --bg:var(--bp-ink-2);
-  --surface-dark:var(--bp-ink-2);
-  --surface-dark-2:var(--bp-ink-2);
+  /* --- re-point the base design system --- */
   --ink:var(--bp-ink);
+  --bg:var(--bp-paper);
+  --surface-dark:var(--bp-paper);
+  --surface-dark-2:var(--bp-paper);
   --muted:var(--bp-muted);
   --muted-dark:var(--bp-muted);
   --line:var(--bp-rule);
   --line-dark:var(--bp-rule);
-  --scrim:rgba(8,9,5,.5);
+  --scrim:rgba(18,20,12,.42);
 
-  --accent:var(--bp-lime);
-  --accent-dark:var(--bp-lime);
-  --accent-light:var(--bp-lime);
-  --accent-ink:var(--bp-ink-1);
-  --accent-ink-dark:var(--bp-ink-1);
-  --accent-ink-light:var(--bp-ink-1);
+  /* on the paper ground the accent resolves to olive for any
+     accent TEXT; dark ink sits ON a lime fill. */
+  --accent:var(--bp-lime-ink);
+  --accent-light:var(--bp-lime-ink);
+  --accent-dark:var(--bp-lime-ink);
+  --accent-ink:#16180F;
+  --accent-ink-light:#16180F;
+  --accent-ink-dark:#16180F;
 
   /* no boxes: every curve in the base system is switched off */
   --r-arch:0px;
@@ -88,64 +102,90 @@ html[data-theme="blueprint"]{
   --scoop:0;
 
   --h-weight:400;
-  --container:1320px;
-  --gutter:28px;
-  --pad-band:clamp(56px,8vw,104px);
-  --pad-band-lg:clamp(64px,9vw,120px);
+  --pad-band:var(--bp-space);
+  --pad-band-lg:clamp(80px,11vw,150px);
+  --pad-band-sm:48px;
 }
 
-/* every lime mark resolves to dark ink on the ground */
+/* neutralise every dark surface: the whole page is one paper
+   ground. Lime becomes a mark, ink stays near-black. Class-doubled
+   so these outrank the base AND the [data-hero="sticky"] opacity
+   rules. */
 html[data-theme="blueprint"] .band--dark,
 html[data-theme="blueprint"] .site-footer,
 html[data-theme="blueprint"] .subhero,
 html[data-theme="blueprint"] .drawer,
-html[data-theme="blueprint"] .site-header,
 html[data-theme="blueprint"] .strip-band,
 html[data-theme="blueprint"] .lightbox,
 html[data-theme="blueprint"] .hero{
-  --accent:var(--bp-lime);
-  --accent-ink:var(--bp-ink-1);
+  --accent:var(--bp-lime-ink);
+  --accent-ink:#16180F;
+  --muted:var(--bp-muted);
+  --muted-dark:var(--bp-muted);
+  --line:var(--bp-rule);
+  --line-dark:var(--bp-rule);
 }
 
 
 /* =============================================================
-   2. GROUND — one warm near-black base.
+   2. THE CONTINUOUS GROUND
+   One white paper, unbroken, hero to footer. Dark bands and the
+   decorative contour texture are all neutralised to paper.
    ============================================================= */
+html[data-theme="blueprint"]{background:var(--bp-paper)}
+
 html[data-theme="blueprint"] body{
-  background:var(--bp-ink-2);
+  background:var(--bp-paper);
   color:var(--bp-ink);
   line-height:1.75;
   -webkit-font-smoothing:antialiased;
 }
-html[data-theme="blueprint"] main{background:var(--bp-ink-2)}
 
+html[data-theme="blueprint"] main{background:var(--bp-paper)}
 
-/* =============================================================
-   3. SECTION TONAL VARIATION — stacked drawing sheets.
-   Mapped per section id. The hairline between two same-tone
-   sections still reads because of the guides + label; between
-   different tones it gives a soft step.
-   ============================================================= */
-html[data-theme="blueprint"] main > #intro{background:var(--bp-ink-1);background-color:var(--bp-ink-1)}
-html[data-theme="blueprint"] main > #services{background:var(--bp-ink-2);background-color:var(--bp-ink-2)}
-html[data-theme="blueprint"] main > #projects{background:var(--bp-ink-1);background-color:var(--bp-ink-1)}
-html[data-theme="blueprint"] main > #project-strip{background:var(--bp-ink-1);background-color:var(--bp-ink-1)}
-html[data-theme="blueprint"] main > #current{background:var(--bp-ink-2);background-color:var(--bp-ink-2)}
-html[data-theme="blueprint"] main > #process{background:var(--bp-ink-3);background-color:var(--bp-ink-3)}
-html[data-theme="blueprint"] main > #reviews{background:var(--bp-ink-2);background-color:var(--bp-ink-2)}
-html[data-theme="blueprint"] main > #about{background:var(--bp-ink-1);background-color:var(--bp-ink-1)}
-html[data-theme="blueprint"] main > #store{background:var(--bp-ink-3);background-color:var(--bp-ink-3)}
-html[data-theme="blueprint"] main > #contact{background:var(--bp-ink-3);background-color:var(--bp-ink-3)}
-html[data-theme="blueprint"] .site-footer{background:var(--bp-ink-1);background-color:var(--bp-ink-1)}
-
-/* force full opacity on every band for sticky-hero (no bleed) */
-html[data-theme="blueprint"][data-hero="sticky"] main > .band,
-html[data-theme="blueprint"][data-hero="sticky"] main > .band--dark,
-html[data-theme="blueprint"][data-hero="sticky"] main > .strip-band{
+html[data-theme="blueprint"] .band,
+html[data-theme="blueprint"] .band--dark,
+html[data-theme="blueprint"] .band--lg,
+html[data-theme="blueprint"] .strip-band,
+html[data-theme="blueprint"] .site-footer,
+html[data-theme="blueprint"] .subhero{
+  background:var(--bp-paper);
+  background-color:var(--bp-paper);
+  color:var(--bp-ink);
   border-radius:0;
+  box-shadow:none;
+  margin-top:0;
 }
 
-/* neutralise band--dark text colours so every sheet is light-on-dark */
+/* the two warm-inset sections — a whisper, not a stripe.
+   (Kept: it stops pure white reading clinically flat.) */
+html[data-theme="blueprint"] main > #projects,
+html[data-theme="blueprint"] main > #reviews{
+  background:var(--bp-paper-2);
+  background-color:var(--bp-paper-2);
+}
+
+/* the topographic texture belongs to the old block design */
+html[data-theme="blueprint"] .contour::before{display:none}
+/* neutralise any contour image/opacity/invert rules */
+html[data-theme="blueprint"] .contour::after{display:none}
+
+/* the scoop / arch geometry is removed entirely */
+html[data-theme="blueprint"] .band--scoop,
+html[data-theme="blueprint"] .band--scoop-tr,
+html[data-theme="blueprint"] .band--scoop-top,
+html[data-theme="blueprint"] .site-footer--scoop{
+  border-radius:0;
+  margin-top:0;
+  padding-top:var(--bp-space);
+}
+html[data-theme="blueprint"] .arch,
+html[data-theme="blueprint"] .arch--tr,
+html[data-theme="blueprint"] .arch--br,
+html[data-theme="blueprint"] .arch--bl,
+html[data-theme="blueprint"] .arch--sm{border-radius:0}
+
+/* every dark band's text falls back to the paper inks */
 html[data-theme="blueprint"] main > .band.band--dark h1,
 html[data-theme="blueprint"] main > .band.band--dark h2,
 html[data-theme="blueprint"] main > .band.band--dark h3,
@@ -159,20 +199,21 @@ html[data-theme="blueprint"] main > .band.band--dark strong{color:inherit}
 
 
 /* =============================================================
-   4. SEPARATION — full-bleed 1px hairlines, edge to edge.
-   This is the ONLY device that divides sections.
+   3. SEPARATION — ONE FULL-BLEED HAIRLINE PER SECTION.
+   The only device that divides sections.
    ============================================================= */
 html[data-theme="blueprint"] main > .band{
   border-top:1px solid var(--bp-rule);
+  position:relative;
+  z-index:1;
   padding-block:var(--pad-band);
 }
 html[data-theme="blueprint"] main > .band.band--lg{
   padding-block:var(--pad-band-lg);
 }
-html[data-theme="blueprint"] main > .strip-band{
-  padding-block:var(--pad-band) var(--pad-band);
-}
-/* a slightly firmer rule where the index restarts a major chapter */
+/* the hero is the page's opening image — no rule above it */
+html[data-theme="blueprint"] main > .hero{border-top:0}
+/* a firmer rule where a major chapter restarts */
 html[data-theme="blueprint"] main > #services,
 html[data-theme="blueprint"] main > #current,
 html[data-theme="blueprint"] main > #contact{
@@ -182,55 +223,22 @@ html[data-theme="blueprint"] main > #contact{
   padding-bottom:var(--pad-band-lg);
 }
 
+/* the strip band sits tight under its own section rule */
+html[data-theme="blueprint"] .strip-band{padding-block:var(--pad-band) 0}
 
-/* =============================================================
-   5. DRAWING GUIDES — faint vertical column lines.
-   Decorative, sits under the content, far too low in contrast
-   to touch text legibility. Repurposes the .contour::before slot.
-   ============================================================= */
-html[data-theme="blueprint"] main > .band::before{
-  content:"";
-  position:absolute;
-  top:0;bottom:0;left:0;right:0;
-  width:100%;
-  max-width:var(--container);
-  margin-inline:auto;
-  background-image:repeating-linear-gradient(
-    to right,
-    var(--bp-grid) 0 1px,
-    transparent 1px calc(100% / var(--bp-cols))
-  );
-  background-size:auto;
-  background-position:0 0;
-  background-repeat:repeat;
-  filter:none;
-  opacity:1;
-  pointer-events:none;
-  z-index:0;
-}
-/* kill the old contour texture entirely */
-html[data-theme="blueprint"] main > .band.contour::before{
-  filter:none;
-  opacity:1;
-  border-radius:0;
-}
-html[data-theme="blueprint"] main > .band > .container,
-html[data-theme="blueprint"] main > .band > .swiper,
-html[data-theme="blueprint"] main > .band > .strip,
-html[data-theme="blueprint"] main > .band > .strip__nav{
-  position:relative;
-  z-index:1;
-}
-@media (max-width:640px){
-  /* fewer guides on a narrow sheet so they stay guides, not stripes */
-  html[data-theme="blueprint"]{--bp-cols:3}
+html[data-theme="blueprint"] .site-footer{
+  border-top:1px solid var(--bp-rule);
+  padding-block:var(--pad-band) 0;
 }
 
 
 /* =============================================================
-   6. MARGIN LABELS — the drawing index.
-   "01 — SERVICES" in a narrow left column, content in the wide
-   right column. Numbering is automatic via CSS counters.
+   4. SECTION LABEL — a lightweight heading per band.
+   A ::before on each .band > .container, numbered by CSS counter
+   plus a per-id label string, rendered as a NORMAL block heading
+   above the content (NOT sticky, NOT in a side column).
+   A short 2px lime tick (28px) is the one place lime touches the
+   light ground.
    ============================================================= */
 html[data-theme="blueprint"] main{counter-reset:bpsec}
 html[data-theme="blueprint"] main > .band{counter-increment:bpsec}
@@ -240,8 +248,8 @@ html[data-theme="blueprint"] main > .band > .container::before{
   display:block;
   width:fit-content;
   max-width:100%;
-  margin:0 0 2rem;
-  padding-top:.65rem;
+  margin:0 0 clamp(1.8rem,3vw,2.6rem);
+  padding-top:.6rem;
   border-top:2px solid var(--bp-lime);
   font:400 .66rem/1.45 var(--bp-tech);
   letter-spacing:var(--bp-ls);
@@ -252,7 +260,7 @@ html[data-theme="blueprint"] main > .band > .container::before{
 
 /* section names — edit these to relabel the index */
 html[data-theme="blueprint"] main > #intro        {--bp-label:"Overview"}
-html[data-theme="blueprint"] main > #services     {--bp-label:"Services"}
+html[data-theme="blueprint"] main > #services     {--bp-label:"What We Do"}
 html[data-theme="blueprint"] main > #projects     {--bp-label:"Selected Work"}
 html[data-theme="blueprint"] main > #project-strip{--bp-label:"Site Record"}
 html[data-theme="blueprint"] main > #current      {--bp-label:"Current Work"}
@@ -262,115 +270,312 @@ html[data-theme="blueprint"] main > #about        {--bp-label:"Practice"}
 html[data-theme="blueprint"] main > #store        {--bp-label:"Supply"}
 html[data-theme="blueprint"] main > #contact      {--bp-label:"Enquiry"}
 
-/* the two "proof" sections get a slightly longer lime tick on the
-   left edge of their margin label — a subtle marker. */
-html[data-theme="blueprint"] main > #projects > .container::before,
-html[data-theme="blueprint"] main > #current > .container::before{
-  border-top-color:var(--bp-lime);
-  border-top-width:4px;
-}
-
-/* two-column sheet from tablet up; the label column collapses to
-   a stacked label below that. */
-@media (min-width:901px){
-  html[data-theme="blueprint"] main > .band > .container{
-    display:grid;
-    grid-template-columns:var(--bp-label-w) minmax(0,1fr);
-    column-gap:clamp(28px,4vw,72px);
-    align-items:start;
-  }
-  html[data-theme="blueprint"] main > .band > .container > *{
-    grid-column:2;
-    min-width:0;
-  }
-  html[data-theme="blueprint"] main > .band > .container::before{
-    grid-column:1;
-    grid-row:1;
-    align-self:start;
-    position:sticky;
-    top:130px;
-    margin-bottom:0;
-  }
-}
-@media (max-width:900px){
-  html[data-theme="blueprint"] main > .band > .container::before{
-    margin-bottom:1.7rem;
-  }
-}
-
 
 /* =============================================================
-   7. TYPOGRAPHY — type does the work the colour blocks used to do.
-   Headings + body stay in Poppins (weight 400); every annotation
-   is the system monospace voice.
+   5. TYPOGRAPHY
+   Headings + body stay in Poppins (weight 400). EVERY annotation
+   — eyebrow, meta, stat figures, credline, chips, field labels,
+   svc numbers, proj meta, cw meta/stage, strip caps, footer,
+   breadcrumbs, section labels — is the system monospace voice,
+   uppercase, letterspaced. This is what makes it read as
+   "Blueprint" and not just "Nocturne in white".
    ============================================================= */
 html[data-theme="blueprint"] h1,
 html[data-theme="blueprint"] h2,
 html[data-theme="blueprint"] h3,
-html[data-theme="blueprint"] h4{
+html[data-theme="blueprint"] .hero__tag h2,
+html[data-theme="blueprint"] .hero-slide h1{
+  font-family:var(--f);
   font-weight:400;
   color:var(--bp-ink);
-  text-transform:uppercase;
   letter-spacing:-.005em;
   line-height:1.03;
 }
-html[data-theme="blueprint"] h1{font-size:clamp(2.15rem,6vw,4.1rem)}
-html[data-theme="blueprint"] h2{font-size:clamp(1.6rem,3.6vw,2.55rem)}
-html[data-theme="blueprint"] h3{
+html[data-theme="blueprint"] h1,
+html[data-theme="blueprint"] .h1{
+  font-size:clamp(2.15rem,5.6vw,4.1rem);
+  line-height:1.04;
+}
+html[data-theme="blueprint"] h2,
+html[data-theme="blueprint"] .h2{
+  font-size:clamp(1.6rem,3.6vw,2.55rem);
+}
+html[data-theme="blueprint"] h3,
+html[data-theme="blueprint"] .h3{
   font-size:clamp(1rem,1.7vw,1.2rem);
   font-weight:500;
   letter-spacing:.01em;
 }
 html[data-theme="blueprint"] h4{
-  font-size:.7rem;
+  font-family:var(--bp-tech);
+  font-size:.68rem;
   font-weight:500;
   letter-spacing:.14em;
   text-transform:uppercase;
   color:var(--bp-faint);
 }
+
 html[data-theme="blueprint"] p{color:var(--bp-ink)}
 
-html[data-theme="blueprint"] .lead{
+html[data-theme="blueprint"] .lead,
+html[data-theme="blueprint"] .band--dark .lead{
+  font-family:var(--f);
   font-size:clamp(1rem,1.4vw,1.14rem);
-  line-height:1.62;
+  line-height:1.7;
   color:var(--bp-muted);
+  max-width:58ch;
 }
 html[data-theme="blueprint"] .measure{max-width:58ch}
 
-/* eyebrow becomes a technical annotation, faint */
+/* eyebrow: a technical annotation, olive (the accent text voice) */
 html[data-theme="blueprint"] .eyebrow,
-html[data-theme="blueprint"] main > .band.band--dark .eyebrow{
+html[data-theme="blueprint"] .band--dark .eyebrow{
   display:block;
   font:400 .64rem/1.4 var(--bp-tech);
   letter-spacing:var(--bp-ls);
   text-transform:uppercase;
-  color:var(--bp-faint);
+  color:var(--bp-lime-ink);
   margin-bottom:1rem;
 }
+
 html[data-theme="blueprint"] .section-head{
-  max-width:56ch;
-  margin-bottom:clamp(1.8rem,3vw,2.8rem);
+  max-width:54ch;
+  margin-bottom:clamp(2rem,4vw,3.4rem);
 }
 html[data-theme="blueprint"] .section-head .lead{margin-top:.9rem}
 
 html[data-theme="blueprint"] ::selection{
   background:var(--bp-lime);
-  color:var(--bp-ink-1);
+  color:#16180F;
 }
 
 
 /* =============================================================
-   8. BUTTONS + LINKS — square, hairline, unfilled.
-   The "primary" is marked with a lime fill, not a sweep.
+   6. IMAGERY — clean, edge-to-edge.
+   No warm "glow" brightness lift (that was for the black ground).
+   At most a very slight contrast bump; a subtle lift on hover.
+   ============================================================= */
+html[data-theme="blueprint"] .media,
+html[data-theme="blueprint"] .svc-figure,
+html[data-theme="blueprint"] .gallery-grid button,
+html[data-theme="blueprint"] .about__media .media,
+html[data-theme="blueprint"] .store-card .media,
+html[data-theme="blueprint"] .svc-accordion-media .media{
+  border-radius:0;
+  background:var(--bp-paper-2);
+  box-shadow:none;
+}
+
+html[data-theme="blueprint"] .media img,
+html[data-theme="blueprint"] .svc-figure img,
+html[data-theme="blueprint"] .strip .swiper-slide img,
+html[data-theme="blueprint"] .gallery-grid img{
+  filter:contrast(1.03);
+  transition:transform .8s var(--ease),filter .5s var(--ease);
+}
+html[data-theme="blueprint"] a:hover .media img,
+html[data-theme="blueprint"] .store-card:hover .media img{
+  transform:scale(1.03);
+  filter:contrast(1.05) brightness(1.02);
+}
+
+html[data-theme="blueprint"] .media__scrim{background:var(--scrim)}
+
+
+/* =============================================================
+   7. HERO — the video stays, full-bleed and prominent.
+   The hero is the one dark moment on the sheet.
+   ============================================================= */
+html[data-theme="blueprint"] .hero{
+  min-height:100svh;
+  background:#16180F;
+}
+html[data-theme="blueprint"] .hero__media{
+  border-radius:0;
+  background:#16180F;
+}
+html[data-theme="blueprint"] .hero__media video,
+html[data-theme="blueprint"] .hero__media img{
+  filter:contrast(1.02);
+}
+/* keep the footage luminous — just enough veil to hold the type */
+html[data-theme="blueprint"] .hero__overlay{
+  background:linear-gradient(180deg,rgba(18,20,12,.46) 0%,rgba(18,20,12,.18) 38%,rgba(18,20,12,.72) 100%);
+}
+html[data-theme="blueprint"] .hero__media::after{display:none}
+
+html[data-theme="blueprint"] .hero__tag{padding-bottom:clamp(48px,7vw,86px)}
+html[data-theme="blueprint"] .hero__tag span{
+  display:inline-block;
+  padding-top:.6rem;
+  border-top:2px solid var(--bp-lime);
+  font:400 .64rem/1.5 var(--bp-tech);
+  letter-spacing:var(--bp-ls);
+  color:rgba(255,255,255,.86);
+}
+html[data-theme="blueprint"] .hero__tag h2{
+  font-size:clamp(2.1rem,5.4vw,3.9rem);
+  line-height:1.04;
+  max-width:14ch;
+  text-shadow:0 2px 26px rgba(8,9,5,.55);
+}
+
+html[data-theme="blueprint"] .hero__cue,
+html[data-theme="blueprint"] .hero-scroll{
+  font-family:var(--bp-tech);
+  font-size:.62rem;
+  letter-spacing:var(--bp-ls);
+  color:rgba(255,255,255,.78);
+}
+html[data-theme="blueprint"] .hero__cue::after{background:rgba(255,255,255,.45)}
+
+html[data-theme="blueprint"] .hero-car__nav{
+  border-radius:0;
+  border:1px solid rgba(255,255,255,.5);
+  background:transparent;
+  color:#fff;
+}
+html[data-theme="blueprint"] .hero-car__nav:hover{
+  background:#fff;
+  color:#16180F;
+  border-color:#fff;
+}
+
+html[data-theme="blueprint"] .hero-pause,
+html[data-theme="blueprint"] .skip-link{
+  border-radius:0;
+}
+
+/* sticky-hero variant: bands stay opaque, square-edged */
+html[data-theme="blueprint"][data-hero="sticky"] .hero + .band,
+html[data-theme="blueprint"][data-hero="sticky"] main > .band,
+html[data-theme="blueprint"][data-hero="sticky"] main > .band--dark,
+html[data-theme="blueprint"][data-hero="sticky"] main > .strip-band{
+  background-color:var(--bp-paper);
+  border-radius:0;
+}
+html[data-theme="blueprint"][data-hero="sticky"] main > #projects,
+html[data-theme="blueprint"][data-hero="sticky"] main > #reviews{
+  background-color:var(--bp-paper-2);
+}
+html[data-theme="blueprint"][data-hero="sticky"] .hero__media{border-radius:0}
+
+
+/* =============================================================
+   8. HEADERS (both variants) + DRAWER
+   ============================================================= */
+html[data-theme="blueprint"] .site-header,
+html[data-theme="blueprint"] .hdr2{
+  background-color:transparent;
+  box-shadow:none;
+  border-bottom:1px solid transparent;
+}
+html[data-theme="blueprint"] .site-header.is-stuck,
+html[data-theme="blueprint"][data-layout="centred"] .hdr2.is-stuck{
+  background-color:var(--bp-paper);
+  box-shadow:none;
+  border-bottom:1px solid var(--bp-rule);
+}
+
+html[data-theme="blueprint"] .site-header .main-nav a,
+html[data-theme="blueprint"] .site-header .header-cta .phone,
+html[data-theme="blueprint"] .hdr2__nav a,
+html[data-theme="blueprint"] .hdr2__util a,
+html[data-theme="blueprint"] .hdr2__util-right a{
+  font-family:var(--bp-tech);
+  font-size:.68rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.86);
+}
+html[data-theme="blueprint"] .site-header.is-stuck .main-nav a,
+html[data-theme="blueprint"] .site-header.is-stuck .header-cta .phone,
+html[data-theme="blueprint"] .hdr2.is-stuck .hdr2__nav a,
+html[data-theme="blueprint"] .hdr2.is-stuck .hdr2__util a,
+html[data-theme="blueprint"] .hdr2.is-stuck .hdr2__util-right a{
+  color:var(--bp-muted);
+  text-shadow:none;
+}
+html[data-theme="blueprint"] .site-header .main-nav a:hover,
+html[data-theme="blueprint"] .hdr2__nav a:hover,
+html[data-theme="blueprint"] .hdr2__util a:hover,
+html[data-theme="blueprint"] .site-header.is-stuck .main-nav a:hover,
+html[data-theme="blueprint"] .hdr2.is-stuck .hdr2__nav a:hover{color:var(--bp-ink)}
+
+html[data-theme="blueprint"] .header-cta .phone{
+  letter-spacing:.12em;
+  color:#fff;
+}
+html[data-theme="blueprint"] .site-header.is-stuck .header-cta .phone{
+  color:var(--bp-ink);
+}
+
+/* flatten the white+lime logo artwork to a single ink on paper */
+html[data-theme="blueprint"] .site-header.is-stuck .brand img,
+html[data-theme="blueprint"] .hdr2.is-stuck .hdr2__brand img,
+html[data-theme="blueprint"] .site-footer .brand img,
+html[data-theme="blueprint"] .drawer .brand img{
+  filter:brightness(0);
+  opacity:.92;
+}
+
+html[data-theme="blueprint"] .nav-toggle,
+html[data-theme="blueprint"] .site-header:not(.is-stuck) .nav-toggle,
+html[data-theme="blueprint"] .site-header.is-stuck .nav-toggle,
+html[data-theme="blueprint"] .hdr2__toggle,
+html[data-theme="blueprint"] .drawer__close{
+  border-radius:0;
+  border:1px solid var(--bp-rule-ui);
+  background:transparent;
+  color:var(--bp-ink);
+  box-shadow:none;
+  backdrop-filter:none;
+}
+html[data-theme="blueprint"] .site-header:not(.is-stuck) .nav-toggle{
+  border-color:rgba(255,255,255,.6);
+  color:#fff;
+}
+html[data-theme="blueprint"] .nav-toggle:hover,
+html[data-theme="blueprint"] .drawer__close:hover{
+  background:var(--bp-ink);
+  color:var(--bp-paper);
+}
+
+html[data-theme="blueprint"] .hdr2__util{border-bottom:1px solid rgba(255,255,255,.16)}
+
+html[data-theme="blueprint"] .drawer{
+  background:var(--bp-paper);
+  color:var(--bp-ink);
+}
+html[data-theme="blueprint"] .drawer nav a{
+  font-family:var(--f);
+  font-size:clamp(1.15rem,6vw,1.5rem);
+  text-transform:uppercase;
+  letter-spacing:0;
+  border-bottom:1px solid var(--bp-rule);
+  padding:.75rem 0;
+}
+html[data-theme="blueprint"] .drawer nav a:hover{color:var(--bp-lime-ink)}
+html[data-theme="blueprint"] .drawer__foot{
+  color:var(--bp-muted);
+  font-family:var(--bp-tech);
+  font-size:.7rem;
+  letter-spacing:.1em;
+}
+
+
+/* =============================================================
+   9. BUTTONS + LINKS — square, hairline, unfilled.
+   --fill is filled lime with dark text. No ::before fill-sweep.
    ============================================================= */
 html[data-theme="blueprint"] .btn-ghost,
 html[data-theme="blueprint"] .btn-ghost--fill,
-html[data-theme="blueprint"] main > .band.band--dark .btn-ghost{
+html[data-theme="blueprint"] .band--dark .btn-ghost{
   --c:var(--bp-ink);
   display:inline-flex;
   align-items:center;
   gap:.75em;
-  padding:13px 22px;
+  padding:15px 30px;
   border:1px solid var(--bp-rule-ui);
   border-radius:0;
   background:none;
@@ -384,47 +589,50 @@ html[data-theme="blueprint"] main > .band.band--dark .btn-ghost{
 }
 html[data-theme="blueprint"] .btn-ghost::before{content:none;display:none}
 html[data-theme="blueprint"] .btn-ghost:hover,
-html[data-theme="blueprint"] main > .band.band--dark .btn-ghost:hover{
+html[data-theme="blueprint"] .band--dark .btn-ghost:hover{
+  color:var(--bp-paper);
+  border-color:var(--bp-ink);
   background:var(--bp-ink);
-  color:var(--bp-ink-1);
 }
-/* primary: filled lime, dark ink text */
+
+/* primary: filled lime, dark text */
 html[data-theme="blueprint"] .btn-ghost--fill,
-html[data-theme="blueprint"] main > .band.band--dark .btn-ghost--fill{
+html[data-theme="blueprint"] .band--dark .btn-ghost--fill{
   background:var(--bp-lime);
   border-color:var(--bp-lime);
-  color:var(--bp-ink-1);
+  color:#16180F;
 }
 html[data-theme="blueprint"] .btn-ghost--fill::before{content:none;display:none}
 html[data-theme="blueprint"] .btn-ghost--fill:hover,
-html[data-theme="blueprint"] main > .band.band--dark .btn-ghost--fill:hover{
+html[data-theme="blueprint"] .band--dark .btn-ghost--fill:hover{
   background:var(--bp-ink);
   border-color:var(--bp-ink);
-  color:var(--bp-ink-1);
+  color:var(--bp-paper);
 }
 
 /* the header CTA sits over the video — hairline, unfilled */
 html[data-theme="blueprint"] .site-header .header-cta .btn-ghost--fill,
 html[data-theme="blueprint"] .site-header.is-stuck .header-cta .btn-ghost--fill{
   background:none;
-  border-color:var(--bp-rule-ui);
-  color:var(--bp-ink);
+  border-color:rgba(255,255,255,.85);
+  color:#fff;
   padding:10px 18px;
 }
-html[data-theme="blueprint"] .site-header .header-cta .btn-ghost--fill::before,
-html[data-theme="blueprint"] .site-header.is-stuck .header-cta .btn-ghost--fill::before{
-  content:none;
+html[data-theme="blueprint"] .site-header.is-stuck .header-cta .btn-ghost--fill{
+  border-color:var(--bp-rule-ui);
+  color:var(--bp-ink);
 }
+html[data-theme="blueprint"] .site-header .header-cta .btn-ghost--fill::before{content:none}
 html[data-theme="blueprint"] .site-header .header-cta .btn-ghost--fill:hover,
 html[data-theme="blueprint"] .site-header.is-stuck .header-cta .btn-ghost--fill:hover{
   background:var(--bp-lime);
   border-color:var(--bp-lime);
-  color:var(--bp-ink-1);
+  color:#16180F;
 }
 
-/* underlined text link with a small tick mark */
+/* underlined text link with a small lime tick */
 html[data-theme="blueprint"] .tlink,
-html[data-theme="blueprint"] main > .band.band--dark .tlink{
+html[data-theme="blueprint"] .band--dark .tlink{
   gap:.55em;
   padding-bottom:5px;
   border-bottom:1px solid var(--bp-rule-ui);
@@ -443,152 +651,63 @@ html[data-theme="blueprint"] .tlink i{font-size:.62rem}
 html[data-theme="blueprint"] .tlink:hover{
   gap:.85em;
   opacity:1;
-  border-bottom-color:var(--bp-lime);
+  border-bottom-color:var(--bp-lime-ink);
 }
 
-/* chips stop being pills — divided caption text by vertical rules */
+/* chips stop being pills — caption text divided by thin rules */
 html[data-theme="blueprint"] .chips{
-  gap:0 .5rem;
-  margin-top:1rem;
+  gap:0;
+  margin-top:1.4rem;
 }
 html[data-theme="blueprint"] .chips li,
-html[data-theme="blueprint"] main > .band.band--dark .chips li{
-  padding:0 .95em;
+html[data-theme="blueprint"] .band--dark .chips li{
   border:0;
   border-radius:0;
-  background:none;
-  font:400 .64rem/1.6 var(--bp-tech);
-  letter-spacing:.12em;
+  padding:0 .95em;
+  font:400 .64rem/1.9 var(--bp-tech);
+  letter-spacing:.16em;
   text-transform:uppercase;
   color:var(--bp-faint);
 }
 html[data-theme="blueprint"] .chips li:first-child{padding-left:0}
 html[data-theme="blueprint"] .chips li + li{border-left:1px solid var(--bp-rule)}
 
-/* focus: always visible, always the drawing's own accent */
+/* focus is always visible, always the accent */
 html[data-theme="blueprint"] a:focus-visible,
 html[data-theme="blueprint"] button:focus-visible,
 html[data-theme="blueprint"] input:focus-visible,
 html[data-theme="blueprint"] textarea:focus-visible,
 html[data-theme="blueprint"] [tabindex]:focus-visible{
-  outline:2px solid var(--bp-lime);
+  outline:2px solid var(--bp-lime-ink);
   outline-offset:3px;
   border-radius:0;
 }
-
-
-/* =============================================================
-   9. IMAGES — photography is the light source.
-   Warm luminous lift; edge-to-edge, no frames on media.
-   ============================================================= */
-html[data-theme="blueprint"] .media,
-html[data-theme="blueprint"] .svc-figure,
-html[data-theme="blueprint"] .gallery-grid button,
-html[data-theme="blueprint"] .about__media .media,
-html[data-theme="blueprint"] .store-card .media,
-html[data-theme="blueprint"] .svc-accordion-media .media{
-  border-radius:0;
-  background:var(--bp-ink-2);
-  box-shadow:none;
-  border:1px solid var(--bp-rule);
-}
-html[data-theme="blueprint"] .media img,
-html[data-theme="blueprint"] .svc-figure img,
-html[data-theme="blueprint"] .strip .swiper-slide img,
-html[data-theme="blueprint"] .gallery-grid img{
-  filter:saturate(1.06) contrast(1.04) brightness(1.05);
-  transition:transform .8s var(--ease),filter .5s var(--ease);
-}
-html[data-theme="blueprint"] a:hover .media img,
-html[data-theme="blueprint"] .store-card:hover .media img{
-  transform:scale(1.03);
-  filter:saturate(1.12) contrast(1.05) brightness(1.1);
-}
-html[data-theme="blueprint"] .media__scrim{background:var(--scrim)}
-
-
-/* =============================================================
-   10. HERO — the video stays, full-bleed and prominent.
-   ============================================================= */
-html[data-theme="blueprint"] .hero{
-  background:var(--bp-ink-1);
-  border-bottom:1px solid var(--bp-rule);
-}
-html[data-theme="blueprint"] .hero__media{
-  border-radius:0;
-  background:var(--bp-ink-1);
-}
-html[data-theme="blueprint"] .hero__media video,
-html[data-theme="blueprint"] .hero__media img{
-  filter:saturate(1.05) contrast(1.03) brightness(1.03);
-}
-html[data-theme="blueprint"] .hero__media::after{display:none}
-html[data-theme="blueprint"] .hero__overlay{
-  background:linear-gradient(180deg,rgba(16,17,9,.42) 0%,rgba(16,17,9,.18) 38%,rgba(16,17,9,.72) 100%);
-}
-/* hero annotation — a title block on a drawing */
-html[data-theme="blueprint"] .hero__tag{padding-bottom:clamp(48px,7vw,86px)}
-html[data-theme="blueprint"] .hero__tag span{
-  display:inline-block;
-  padding-top:.6rem;
-  border-top:2px solid var(--bp-lime);
-  font:400 .64rem/1.5 var(--bp-tech);
-  letter-spacing:var(--bp-ls);
-  color:rgba(242,241,233,.86);
-}
-html[data-theme="blueprint"] .hero__tag h2{
-  font-size:clamp(2.2rem,5.6vw,4rem);
-  line-height:1.04;
-  max-width:14ch;
-  text-shadow:0 2px 26px rgba(8,9,5,.55);
-}
-html[data-theme="blueprint"] .hero__cue,
-html[data-theme="blueprint"] .hero-scroll{
-  font-family:var(--bp-tech);
-  font-size:.62rem;
-  letter-spacing:var(--bp-ls);
-  color:rgba(242,241,233,.7);
-}
-html[data-theme="blueprint"] .hero-car__nav{
-  border-radius:0;
-  border:1px solid var(--bp-rule-ui);
-  background:transparent;
-  color:var(--bp-ink);
-}
-html[data-theme="blueprint"] .hero-car__nav:hover{
-  background:var(--bp-ink);
-  color:var(--bp-ink-1);
-  border-color:var(--bp-ink);
-}
-html[data-theme="blueprint"] .hero-pause,
-html[data-theme="blueprint"] .skip-link{
-  border-radius:0;
-}
-
-/* sticky-hero variant: bands stay opaque, square-edged */
-html[data-theme="blueprint"][data-hero="sticky"] .hero + .band{
-  border-radius:0;
-  background-color:var(--bp-ink-1);
-  border-top:0;
+html[data-theme="blueprint"] .hero a:focus-visible,
+html[data-theme="blueprint"] .site-header:not(.is-stuck) a:focus-visible,
+html[data-theme="blueprint"] .site-header:not(.is-stuck) button:focus-visible,
+html[data-theme="blueprint"] .hdr2:not(.is-stuck) a:focus-visible,
+html[data-theme="blueprint"] .hdr2:not(.is-stuck) button:focus-visible{
+  outline-color:var(--bp-lime);
 }
 
 
 /* =============================================================
-   11. HEADLINE / INTRO BAND — keeps the base split/stacked
-   layouts; restyles the annotations to the monospace voice.
+   10. HEADLINE / INTRO BAND — keeps the base split + stacked
+   layouts; restyles annotations to the monospace voice.
    ============================================================= */
 html[data-theme="blueprint"] .headline .row-split{
   grid-template-columns:1.25fr .75fr;
   gap:clamp(2rem,4vw,4rem);
-  align-items:start;
+  align-items:end;
 }
-html[data-theme="blueprint"] .headline h1{margin-bottom:1.3rem}
-html[data-theme="blueprint"] .headline .btns{gap:.8rem;margin-top:2.2rem}
+html[data-theme="blueprint"] .headline h1{margin-bottom:1.6rem}
+html[data-theme="blueprint"] .headline .btns{gap:.9rem;margin-top:2.4rem}
 html[data-theme="blueprint"] .headline__aside{
   border-left:1px solid var(--bp-rule);
   padding-left:clamp(1.2rem,2.5vw,2.2rem);
   color:var(--bp-muted);
   font-size:.9rem;
+  line-height:1.7;
 }
 html[data-theme="blueprint"] .headline__aside strong{
   display:block;
@@ -597,16 +716,8 @@ html[data-theme="blueprint"] .headline__aside strong{
   letter-spacing:-.02em;
   color:var(--bp-ink);
 }
-@media (max-width:900px){
-  html[data-theme="blueprint"] .headline .row-split{grid-template-columns:1fr}
-  html[data-theme="blueprint"] .headline__aside{
-    border-left:0;
-    border-top:1px solid var(--bp-rule);
-    padding:1.6rem 0 0;
-  }
-}
 
-/* stat line: hairline above each figure, lime tick */
+/* count-up row: hairline above each figure, lime tick */
 html[data-theme="blueprint"] .statline{
   gap:0;
   border-top:0;
@@ -623,12 +734,13 @@ html[data-theme="blueprint"] .stat-n::before{
   width:28px;height:2px;
   background:var(--bp-lime);
 }
+html[data-theme="blueprint"] .stat-n + .stat-n{padding-left:1.6rem}
 html[data-theme="blueprint"] .stat-n b{
   font:400 clamp(2.2rem,4.6vw,3.4rem)/1 var(--bp-tech);
   letter-spacing:-.03em;
   color:var(--bp-ink);
 }
-html[data-theme="blueprint"] .stat-n b i{color:var(--bp-lime);font-style:normal}
+html[data-theme="blueprint"] .stat-n b i{color:var(--bp-lime-ink);font-style:normal}
 html[data-theme="blueprint"] .stat-n > span{
   display:block;
   margin-top:.7rem;
@@ -651,107 +763,95 @@ html[data-theme="blueprint"] .credline span{
   text-transform:uppercase;
   color:var(--bp-muted);
 }
-html[data-theme="blueprint"] .credline i{color:var(--bp-lime);font-size:.85rem}
-html[data-theme="blueprint"] .credline b{color:var(--bp-ink);font-weight:400}
+html[data-theme="blueprint"] .credline i{color:var(--bp-lime-ink);font-size:.85rem}
+html[data-theme="blueprint"] .credline b{color:var(--bp-ink);font-weight:500}
 
-@media (max-width:900px){
-  html[data-theme="blueprint"] .statline{grid-template-columns:repeat(2,minmax(0,1fr))}
-  html[data-theme="blueprint"] .stat-n:nth-child(2n){padding-right:0}
+@media (max-width:1100px){
+  html[data-theme="blueprint"] .statline{grid-template-columns:1fr 1fr}
+  html[data-theme="blueprint"] .stat-n + .stat-n{padding-left:0}
+  html[data-theme="blueprint"] .stat-n:nth-child(even){padding-left:1.6rem}
 }
 @media (max-width:520px){
-  html[data-theme="blueprint"] .statline{grid-template-columns:minmax(0,1fr)}
+  html[data-theme="blueprint"] .statline{grid-template-columns:1fr}
+  html[data-theme="blueprint"] .stat-n,
+  html[data-theme="blueprint"] .stat-n:nth-child(even){padding:1.2rem 0 0}
 }
 
 
 /* =============================================================
-   12. ABOUT
+   11. ABOUT
    ============================================================= */
 html[data-theme="blueprint"] .about-split{
-  grid-template-columns:.85fr 1.15fr;
-  gap:clamp(1.8rem,4vw,4rem);
+  grid-template-columns:.95fr 1.05fr;
+  gap:clamp(2rem,4vw,4.5rem);
   align-items:start;
 }
 html[data-theme="blueprint"] .about__media .media{aspect-ratio:4/5}
 html[data-theme="blueprint"] .about__values{
   gap:0;
-  margin-top:2rem;
+  margin-top:2.2rem;
   border-top:1px solid var(--bp-rule);
 }
 html[data-theme="blueprint"] .about__values li{
-  padding:1.05rem 0;
+  padding:1.1rem 0;
   border-bottom:1px solid var(--bp-rule);
   color:var(--bp-muted);
   font-size:.92rem;
 }
-html[data-theme="blueprint"] .about__values i{color:var(--bp-lime)}
-html[data-theme="blueprint"] .about__values b{
-  color:var(--bp-ink);
-  font-weight:500;
-}
-@media (max-width:900px){
-  html[data-theme="blueprint"] .about-split{grid-template-columns:1fr}
-}
+html[data-theme="blueprint"] .about__values i{color:var(--bp-lime-ink);font-size:.8rem;margin-top:.5rem}
+html[data-theme="blueprint"] .about__values b{color:var(--bp-ink);font-weight:500}
 
 
 /* =============================================================
-   13. SERVICES EXPLORER — a ruled index with a plate beside it
+   12. SERVICES EXPLORER — list left, sticky image right.
+   Keeps Nocturne's anatomy; mono annotation voice. Active/hover
+   item gets the accent. Accordion under 900px.
    ============================================================= */
 html[data-theme="blueprint"] .svc-explorer{
-  grid-template-columns:1fr 1fr;
-  gap:clamp(1.8rem,3.5vw,4rem);
+  grid-template-columns:1fr 1.05fr;
+  gap:clamp(2rem,5vw,5rem);
 }
-html[data-theme="blueprint"] .svc-list{
-  border-top:1px solid var(--bp-ink);
-}
+html[data-theme="blueprint"] .svc-list{border-top:1px solid var(--bp-rule)}
 html[data-theme="blueprint"] .svc-item{
-  gap:1rem;
-  padding:1.1rem .2rem;
   border-bottom:1px solid var(--bp-rule);
-  border-radius:0;
+  padding:1.4rem .1rem;
   color:var(--bp-muted);
+  letter-spacing:.01em;
   text-transform:uppercase;
 }
 html[data-theme="blueprint"] .svc-item__no{
   font:400 .64rem/1 var(--bp-tech);
   letter-spacing:.14em;
-  color:var(--bp-muted);
-  opacity:1;
+  color:var(--bp-faint);
 }
 html[data-theme="blueprint"] .svc-item__name{
-  font-size:clamp(.98rem,1.6vw,1.25rem);
+  font-family:var(--f);
+  font-size:clamp(1.05rem,1.8vw,1.35rem);
   letter-spacing:.005em;
 }
-html[data-theme="blueprint"] .svc-item__go{color:var(--bp-lime);font-size:.72rem}
+html[data-theme="blueprint"] .svc-item__go{color:var(--bp-lime-ink);font-size:.72rem}
 html[data-theme="blueprint"] .svc-item:hover,
 html[data-theme="blueprint"] .svc-item.is-active{
   color:var(--bp-ink);
-  padding-left:.9rem;
+  padding-left:1rem;
 }
-html[data-theme="blueprint"] .svc-item.is-active .svc-item__no,
-html[data-theme="blueprint"] .svc-item:hover .svc-item__no{
-  color:var(--bp-lime);
-  opacity:1;
-}
-html[data-theme="blueprint"] .svc-item.is-active .svc-item__no::before{
-  content:"";
-  display:inline-block;
-  width:12px;height:2px;
-  margin-right:.55em;
-  vertical-align:middle;
-  background:var(--bp-lime);
-}
+html[data-theme="blueprint"] .svc-item:hover .svc-item__no,
+html[data-theme="blueprint"] .svc-item.is-active .svc-item__no{color:var(--bp-lime-ink);opacity:1}
+html[data-theme="blueprint"] .svc-item.is-active .svc-item__go,
+html[data-theme="blueprint"] .svc-item:hover .svc-item__go{opacity:1}
+
 html[data-theme="blueprint"] .svc-stage{top:130px}
 html[data-theme="blueprint"] .svc-figure{
   border-radius:0;
   aspect-ratio:4/3;
 }
-html[data-theme="blueprint"] .svc-copy{margin-top:1.4rem;min-height:150px}
-html[data-theme="blueprint"] .svc-copy h3{
-  margin-bottom:.7rem;
-  padding-top:.9rem;
+html[data-theme="blueprint"] .svc-copy{
+  margin-top:1.6rem;
+  padding-top:1.6rem;
   border-top:1px solid var(--bp-rule);
 }
 html[data-theme="blueprint"] .svc-copy p{color:var(--bp-muted);font-size:.94rem}
+html[data-theme="blueprint"] .svc-accordion-media p{color:var(--bp-muted)}
 @media (max-width:900px){
   html[data-theme="blueprint"] .svc-explorer{grid-template-columns:1fr}
   html[data-theme="blueprint"] .svc-item.is-active{padding-left:.2rem}
@@ -764,7 +864,8 @@ html[data-theme="blueprint"] .svc-copy p{color:var(--bp-muted);font-size:.94rem}
 
 
 /* =============================================================
-   14. SELECTED WORK — carousel slides become ruled sheet columns
+   13. PROJECTS CAROUSEL — slides become ruled typographic rows.
+   (Swiper-safe: NO grid track wrapping the carousel.)
    ============================================================= */
 html[data-theme="blueprint"] .proj-swiper .swiper-slide{
   border-left:1px solid var(--bp-rule);
@@ -774,20 +875,21 @@ html[data-theme="blueprint"] .proj-card{
   display:block;
   background:none;
   border:0;
+  border-top:1px solid var(--bp-rule);
   border-radius:0;
   box-shadow:none;
-  padding-top:1rem;
-  border-top:1px solid var(--bp-ink);
+  padding-top:1.3rem;
 }
 html[data-theme="blueprint"] .proj-card .media{
   aspect-ratio:16/11;
-  margin-bottom:1.1rem;
+  margin-bottom:1.3rem;
   border-radius:0;
 }
+/* GRANGE / 2025 / ... */
 html[data-theme="blueprint"] .proj-card__meta,
-html[data-theme="blueprint"] main > .band.band--dark .proj-card__meta{
+html[data-theme="blueprint"] .band--dark .proj-card__meta{
   gap:.55rem;
-  margin-bottom:.7rem;
+  margin-bottom:.8rem;
   font:400 .63rem/1.4 var(--bp-tech);
   letter-spacing:.16em;
   text-transform:uppercase;
@@ -801,39 +903,37 @@ html[data-theme="blueprint"] .proj-card__meta span:nth-child(2)::after{
   content:"/";
   font-size:.63rem;
 }
-html[data-theme="blueprint"] .proj-card h3{margin-bottom:.6rem}
+html[data-theme="blueprint"] .proj-card h3{margin-bottom:.8rem}
 html[data-theme="blueprint"] .proj-card p,
-html[data-theme="blueprint"] main > .band.band--dark .proj-card p{
+html[data-theme="blueprint"] .band--dark .proj-card p{
   color:var(--bp-muted);
   font-size:.9rem;
 }
-html[data-theme="blueprint"] .proj-card:hover .media{border-color:var(--bp-rule-ui)}
+html[data-theme="blueprint"] .proj-card:hover h3{color:var(--bp-lime-ink)}
 
 /* carousel controls: square, hairline, no fill */
-html[data-theme="blueprint"] .swiper-controls{margin-top:2.2rem}
+html[data-theme="blueprint"] .swiper-controls{gap:0;margin-top:2.6rem}
 html[data-theme="blueprint"] .swiper-controls button,
-html[data-theme="blueprint"] main > .band.band--dark .swiper-controls button,
 html[data-theme="blueprint"] .band:not(.band--dark) .swiper-controls button{
-  width:46px;height:46px;
-  border:1px solid var(--bp-rule-ui);
+  width:50px;height:50px;
   border-radius:0;
+  border:1px solid var(--bp-rule-ui);
   background:none;
   color:var(--bp-ink);
-  font-size:.85rem;
+  box-shadow:none;
 }
 html[data-theme="blueprint"] .swiper-controls button + button{border-left:0}
 html[data-theme="blueprint"] .swiper-controls button:hover,
-html[data-theme="blueprint"] main > .band.band--dark .swiper-controls button:hover,
 html[data-theme="blueprint"] .band:not(.band--dark) .swiper-controls button:hover{
   background:var(--bp-ink);
-  color:var(--bp-ink-1);
+  color:var(--bp-paper);
+  border-color:var(--bp-ink);
 }
 
 
 /* =============================================================
-   15. SITE RECORD — full-bleed photo strip
+   14. FULL-BLEED IMAGE STRIP — photography edge to edge.
    ============================================================= */
-html[data-theme="blueprint"] .strip-head{margin-bottom:1.8rem}
 html[data-theme="blueprint"] .strip .swiper-slide{
   height:clamp(240px,34vw,480px);
 }
@@ -841,48 +941,47 @@ html[data-theme="blueprint"] .strip .swiper-slide + .swiper-slide{
   border-left:1px solid var(--bp-rule);
 }
 html[data-theme="blueprint"] .strip__cap{
-  left:0;bottom:0;
-  padding:.5em .9em;
+  left:14px;bottom:14px;
+  padding:.45em .8em;
   border-radius:0;
-  background:none;
+  background:rgba(22,24,15,.72);
   backdrop-filter:none;
-  color:var(--bp-ink);
+  color:#fff;
   font:400 .62rem/1 var(--bp-tech);
   letter-spacing:.14em;
   text-transform:uppercase;
-  text-shadow:0 1px 12px rgba(8,9,5,.9);
-  transform:none;
 }
-html[data-theme="blueprint"] .strip .swiper-slide:hover .strip__cap{transform:none}
 html[data-theme="blueprint"] .strip__nav{
-  width:44px;height:44px;
+  width:46px;height:46px;
   border-radius:0;
   border:1px solid var(--bp-rule-ui);
-  background:rgba(16,17,9,.72);
+  background:rgba(255,255,255,.92);
   color:var(--bp-ink);
   box-shadow:none;
 }
 html[data-theme="blueprint"] .strip__nav:hover{
   background:var(--bp-ink);
-  color:var(--bp-ink-1);
+  color:var(--bp-paper);
   transform:translateY(-50%);
+  border-color:var(--bp-ink);
 }
 
 
 /* =============================================================
-   16. CURRENT WORK — ruled rows, image | text, hairline divided
+   15. CURRENT WORK — ruled rows, image left, captions right.
    ============================================================= */
 html[data-theme="blueprint"] .cw-grid{
   grid-template-columns:minmax(0,1fr);
   gap:0;
-  border-top:1px solid var(--bp-ink);
+  border-top:1px solid var(--bp-rule);
 }
 html[data-theme="blueprint"] .cw-card{
   display:grid;
-  grid-template-columns:minmax(120px,240px) minmax(0,1fr);
+  grid-template-columns:minmax(0,300px) minmax(0,1fr);
   grid-template-rows:repeat(6,auto);
-  column-gap:clamp(18px,3.5vw,52px);
-  padding:1.7rem 0;
+  column-gap:clamp(1.5rem,4vw,3.5rem);
+  align-items:start;
+  padding:clamp(1.8rem,3.4vw,2.8rem) 0;
   border-bottom:1px solid var(--bp-rule);
   background:none;
   border-radius:0;
@@ -891,18 +990,17 @@ html[data-theme="blueprint"] .cw-card{
 html[data-theme="blueprint"] .cw-card > *{grid-column:2;min-width:0}
 html[data-theme="blueprint"] .cw-card .media{
   grid-column:1;
-  grid-row:1 / -1;
+  grid-row:1 / span 30;
   align-self:start;
   aspect-ratio:4/3;
   margin:0;
-  border-radius:0;
 }
 html[data-theme="blueprint"] .cw-card__meta,
 html[data-theme="blueprint"] .work-card__meta{
   display:flex;
   justify-content:flex-start;
   gap:.9rem;
-  margin-bottom:.55rem;
+  margin-bottom:.6rem;
   font:400 .63rem/1.4 var(--bp-tech);
   letter-spacing:.16em;
   text-transform:uppercase;
@@ -912,38 +1010,39 @@ html[data-theme="blueprint"] .cw-card__meta span + span::before{
   content:"/ ";
   color:var(--bp-rule-ui);
 }
-html[data-theme="blueprint"] .cw-card h3{margin-bottom:.9rem}
+html[data-theme="blueprint"] .cw-card h3{
+  font-size:clamp(1.25rem,2.2vw,1.7rem);
+  margin-bottom:1rem;
+}
 html[data-theme="blueprint"] .cw-card__note{
   color:var(--bp-muted);
   font-size:.9rem;
+  max-width:58ch;
   margin-bottom:1.1rem;
 }
-html[data-theme="blueprint"] .cw-card:hover .media{border-color:var(--bp-rule-ui)}
+html[data-theme="blueprint"] .cw-card:hover h3{color:var(--bp-lime-ink)}
 html[data-theme="blueprint"] .cw-card .tlink{
   justify-self:start;
   width:fit-content;
 }
 
-/* segmented progress: 2px square ticks, lime "now" */
+/* stepper: 2px square ticks, filled tick for "now" */
 html[data-theme="blueprint"] .stepper{
-  gap:4px;
-  margin:0 0 .9rem;
-  padding-bottom:0;
+  gap:5px;
+  margin:0 0 1.1rem;
 }
 html[data-theme="blueprint"] .stepper li{
-  height:6px;
+  height:2px;
   border-radius:0;
-  background:none;
-  border-bottom:1px solid var(--bp-rule);
+  background:var(--bp-rule);
+  box-shadow:none;
 }
-html[data-theme="blueprint"] .stepper li.done{
-  background:var(--bp-ink);
-  border-bottom-color:var(--bp-ink);
-}
+html[data-theme="blueprint"] .stepper li.done{background:rgba(194,232,7,.5)}
 html[data-theme="blueprint"] .stepper li.now{
   background:var(--bp-lime);
-  border-bottom-color:var(--bp-lime);
   box-shadow:none;
+  height:4px;
+  margin-top:-1px;
 }
 html[data-theme="blueprint"] .cw-card__stage{
   font:400 .64rem/1.5 var(--bp-tech);
@@ -955,140 +1054,129 @@ html[data-theme="blueprint"] .cw-card__stage{
 html[data-theme="blueprint"] .cw-card__stage small{
   color:var(--bp-faint);
   letter-spacing:.1em;
-  margin-top:3px;
+  margin-top:4px;
 }
-@media (max-width:560px){
+@media (max-width:760px){
   html[data-theme="blueprint"] .cw-card{
     grid-template-columns:minmax(0,1fr);
     grid-template-rows:auto;
-    row-gap:1rem;
+    row-gap:1.2rem;
   }
   html[data-theme="blueprint"] .cw-card > *{grid-column:1}
   html[data-theme="blueprint"] .cw-card .media{
     grid-column:1;
     grid-row:auto;
     aspect-ratio:16/10;
+    margin-bottom:.4rem;
   }
 }
 
 
 /* =============================================================
-   17. METHOD — the numbered circles become bare monospace numerals
+   16. PROCESS — bare monospace numerals, no circle.
    ============================================================= */
 html[data-theme="blueprint"] .proc-grid{
   grid-template-columns:repeat(4,minmax(0,1fr));
   gap:0;
-  border-top:1px solid var(--bp-ink);
+  border-top:1px solid var(--bp-rule);
 }
 html[data-theme="blueprint"] .proc{
-  padding:1.5rem clamp(14px,2vw,30px) .4rem 0;
-  border-right:1px solid var(--bp-rule);
+  padding-top:1.7rem;
 }
-html[data-theme="blueprint"] .proc:last-child{border-right:0}
 html[data-theme="blueprint"] .proc__num{
-  position:static;
-  display:flex;
-  align-items:baseline;
-  justify-content:flex-start;
-  gap:.7rem;
   width:auto;height:auto;
-  margin-bottom:1rem;
-  padding-bottom:.9rem;
   border:0;
-  border-bottom:1px solid var(--bp-rule);
   border-radius:0;
+  display:block;
+  margin-bottom:1.1rem;
   color:var(--bp-faint);
-  font-size:.9rem;
 }
 html[data-theme="blueprint"] .proc__num i{display:none}
 html[data-theme="blueprint"] .proc__num span{
   position:static;
-  order:-1;
   width:auto;height:auto;
   border-radius:0;
   background:none;
   color:var(--bp-ink);
-  font:400 clamp(1.6rem,2.6vw,2.1rem)/1 var(--bp-tech);
-  letter-spacing:-.02em;
+  font:400 clamp(1.6rem,3vw,2.2rem)/1 var(--bp-tech);
+  letter-spacing:.02em;
+  display:block;
 }
-html[data-theme="blueprint"] .proc h3{margin-bottom:.5rem}
+html[data-theme="blueprint"] .proc h3{margin-bottom:.7rem}
 html[data-theme="blueprint"] .proc p{color:var(--bp-muted);font-size:.9rem}
-@media (max-width:900px){
+@media (max-width:992px){
   html[data-theme="blueprint"] .proc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  html[data-theme="blueprint"] .proc:nth-child(2n){border-right:0}
-  html[data-theme="blueprint"] .proc:nth-child(n+3){
-    border-top:1px solid var(--bp-rule);
-    padding-top:1.5rem;
-  }
 }
-@media (max-width:520px){
-  html[data-theme="blueprint"] .proc-grid{grid-template-columns:minmax(0,1fr)}
-  html[data-theme="blueprint"] .proc{border-right:0;padding-right:0}
-  html[data-theme="blueprint"] .proc + .proc{
-    border-top:1px solid var(--bp-rule);
-    padding-top:1.5rem;
+@media (max-width:760px){
+  html[data-theme="blueprint"] .proc-grid{grid-template-columns:minmax(0,1fr);gap:0}
+  html[data-theme="blueprint"] .proc{
+    padding:1.5rem 0;
+    border-bottom:1px solid var(--bp-rule);
   }
 }
 
 
 /* =============================================================
-   18. SUPPLY — store cards become ruled rows
+   17. STORE — ruled rows, portrait plate left.
    ============================================================= */
 html[data-theme="blueprint"] .store-grid{
   grid-template-columns:minmax(0,1fr);
   gap:0;
-  border-top:1px solid var(--bp-ink);
+  border-top:1px solid var(--bp-rule);
 }
 html[data-theme="blueprint"] .store-card{
   display:grid;
-  grid-template-columns:minmax(96px,190px) minmax(0,1fr);
-  grid-template-rows:auto auto;
-  column-gap:clamp(18px,3.5vw,52px);
-  align-content:start;
-  padding:1.5rem 0;
+  grid-template-columns:minmax(0,200px) minmax(0,1fr);
+  column-gap:clamp(1.5rem,4vw,3.5rem);
+  align-items:start;
+  padding:clamp(1.6rem,3vw,2.4rem) 0;
   border-bottom:1px solid var(--bp-rule);
   background:none;
   border-radius:0;
   box-shadow:none;
 }
+html[data-theme="blueprint"] .store-card > *{grid-column:2}
 html[data-theme="blueprint"] .store-card .media{
   grid-column:1;
-  grid-row:1 / span 2;
-  aspect-ratio:4/3;
+  grid-row:1 / span 30;
+  aspect-ratio:3/4;
   margin:0;
-  border-radius:0;
 }
 html[data-theme="blueprint"] .store-card h3{
-  grid-column:2;grid-row:1;
-  align-self:end;
-  margin-bottom:.45rem;
+  font-size:clamp(1.15rem,2vw,1.5rem);
+  margin-bottom:.7rem;
 }
 html[data-theme="blueprint"] .store-card p,
-html[data-theme="blueprint"] main > .band.band--dark .store-card p{
-  grid-column:2;grid-row:2;
-  align-self:start;
+html[data-theme="blueprint"] .band--dark .store-card p{
   color:var(--bp-muted);
   font-size:.9rem;
-  max-width:62ch;
+  max-width:60ch;
 }
-@media (max-width:480px){
+@media (max-width:760px){
   html[data-theme="blueprint"] .store-card{
-    grid-template-columns:minmax(72px,110px) minmax(0,1fr);
-    column-gap:16px;
+    grid-template-columns:minmax(0,1fr);
+    row-gap:1.2rem;
+  }
+  html[data-theme="blueprint"] .store-card > *{grid-column:1}
+  html[data-theme="blueprint"] .store-card .media{
+    grid-column:1;
+    grid-row:auto;
+    aspect-ratio:16/10;
+    margin-bottom:.4rem;
   }
 }
 
 
 /* =============================================================
-   19. CLIENTS — ruled quotes, square hairline monogram
+   18. REVIEWS — quotes on a hairline, square monogram.
    ============================================================= */
 html[data-theme="blueprint"] .rev-swiper .swiper-slide{
   border-left:1px solid var(--bp-rule);
   padding-left:clamp(14px,1.6vw,22px);
 }
 html[data-theme="blueprint"] .rev-card{
-  border-top:1px solid var(--bp-ink);
-  padding-top:1.3rem;
+  border-top:1px solid var(--bp-rule);
+  padding-top:1.8rem;
   background:none;
   border-radius:0;
   box-shadow:none;
@@ -1096,50 +1184,46 @@ html[data-theme="blueprint"] .rev-card{
 html[data-theme="blueprint"] .rev-card p{
   font-size:.98rem;
   line-height:1.68;
-  margin-bottom:1.3rem;
+  margin-bottom:1.6rem;
   color:var(--bp-ink);
 }
-html[data-theme="blueprint"] .rev-card__who{
-  gap:.8rem;
-  padding-top:1rem;
-  border-top:1px solid var(--bp-rule);
-}
+html[data-theme="blueprint"] .rev-card__who{gap:.9rem;align-items:baseline}
+html[data-theme="blueprint"] .rev-avatar,
 html[data-theme="blueprint"] .rev-card__who .rev-avatar{
-  width:34px;height:34px;
+  width:auto;height:auto;
   border-radius:0;
   background:none;
-  border:1px solid var(--bp-rule-ui);
-  color:var(--bp-ink);
+  border:0;
+  display:inline;
+  color:var(--bp-lime-ink);
   font:400 .64rem/1 var(--bp-tech);
-  letter-spacing:.06em;
-}
-html[data-theme="blueprint"] .rev-card__who b{
+  letter-spacing:.12em;
   font-weight:500;
-  font-size:.88rem;
-  color:var(--bp-ink);
 }
+html[data-theme="blueprint"] .rev-card__who b{color:var(--bp-ink);font-weight:500;font-size:.88rem}
 html[data-theme="blueprint"] .rev-card__who span span{
-  font:400 .6rem/1.5 var(--bp-tech);
+  color:var(--bp-faint);
+  font:400 .62rem/1.5 var(--bp-tech);
   letter-spacing:.14em;
   text-transform:uppercase;
-  color:var(--bp-muted);
+  margin-top:3px;
 }
 
 
 /* =============================================================
-   20. ENQUIRY — underlined fields, no filled inputs
+   19. CONTACT — underlined fields, not boxes. Accent focus rule.
    ============================================================= */
 html[data-theme="blueprint"] .contact-wrap{
-  grid-template-columns:1.1fr .9fr;
-  gap:clamp(2rem,4vw,4rem);
+  grid-template-columns:1.05fr .95fr;
+  gap:clamp(2.5rem,5vw,5rem);
 }
-html[data-theme="blueprint"] .field{margin-bottom:1.5rem}
+html[data-theme="blueprint"] .field{margin-bottom:1.6rem}
 html[data-theme="blueprint"] .field label{
   font:400 .62rem/1.4 var(--bp-tech);
   letter-spacing:var(--bp-ls);
   text-transform:uppercase;
   color:var(--bp-muted);
-  margin-bottom:.4rem;
+  margin-bottom:.55rem;
 }
 html[data-theme="blueprint"] .field input,
 html[data-theme="blueprint"] .field textarea{
@@ -1153,15 +1237,17 @@ html[data-theme="blueprint"] .field textarea{
 }
 html[data-theme="blueprint"] .field input::placeholder,
 html[data-theme="blueprint"] .field textarea::placeholder{color:var(--bp-faint)}
+html[data-theme="blueprint"] .field input:hover,
+html[data-theme="blueprint"] .field textarea:hover{border-bottom-color:rgba(22,24,15,.7)}
 html[data-theme="blueprint"] .field input:focus,
 html[data-theme="blueprint"] .field textarea:focus{
   outline:none;
-  border-bottom:2px solid var(--bp-lime);
+  border-bottom:2px solid var(--bp-lime-ink);
   padding-bottom:10px;
 }
 html[data-theme="blueprint"] .field input:focus-visible,
 html[data-theme="blueprint"] .field textarea:focus-visible{
-  outline:2px solid var(--bp-lime);
+  outline:2px solid var(--bp-lime-ink);
   outline-offset:4px;
 }
 html[data-theme="blueprint"] .field textarea{min-height:118px}
@@ -1179,7 +1265,7 @@ html[data-theme="blueprint"] .form-note{
   color:var(--bp-muted);
   margin-top:1.2rem;
 }
-html[data-theme="blueprint"] .form-note a{color:var(--bp-lime)}
+html[data-theme="blueprint"] .form-note a{color:var(--bp-lime-ink)}
 html[data-theme="blueprint"] .form-ok{
   padding:1rem 0 1rem 1.2rem;
   border:0;
@@ -1190,43 +1276,37 @@ html[data-theme="blueprint"] .form-ok{
   color:var(--bp-ink);
 }
 html[data-theme="blueprint"] .form-ok em{color:var(--bp-faint)}
+
 html[data-theme="blueprint"] .contact-info dl{
   gap:0;
   grid-template-columns:auto minmax(0,1fr);
   border-top:1px solid var(--bp-rule);
 }
 html[data-theme="blueprint"] .contact-info dt{
-  padding:.85rem .9rem .85rem 0;
-  border-top:1px solid var(--bp-rule);
-  color:var(--bp-lime);
+  padding:1rem .9rem 1rem 0;
+  border-bottom:1px solid var(--bp-rule);
+  color:var(--bp-lime-ink);
   font-size:.85rem;
 }
 html[data-theme="blueprint"] .contact-info dd{
-  padding:.85rem 0;
-  border-top:1px solid var(--bp-rule);
+  padding:1rem 0;
+  border-bottom:1px solid var(--bp-rule);
   color:var(--bp-muted);
   font-size:.92rem;
 }
-html[data-theme="blueprint"] .contact-info dd a:hover{
-  color:var(--bp-ink);
-  text-decoration:underline;
-}
+html[data-theme="blueprint"] .contact-info dd a:hover{color:var(--bp-ink);text-decoration:underline}
 html[data-theme="blueprint"] .contact-info .media{margin-top:1.8rem}
 html[data-theme="blueprint"] .contact-info .tbc{color:var(--bp-faint)}
-@media (max-width:900px){
+@media (max-width:992px){
   html[data-theme="blueprint"] .contact-wrap{grid-template-columns:1fr}
 }
 
 
 /* =============================================================
-   21. FOOTER — same sheet, hairline rules, scale bar
+   20. FOOTER — ruled structure ending in a thin dashed "scale bar".
    ============================================================= */
 html[data-theme="blueprint"] .site-footer{
   color:var(--bp-muted);
-  border-top:1px solid var(--bp-ink);
-  border-radius:0;
-  margin-top:0;
-  padding-block:clamp(48px,6vw,72px) 0;
 }
 html[data-theme="blueprint"] .site-footer .footer-grid{
   gap:clamp(1.6rem,3vw,2.6rem);
@@ -1237,35 +1317,35 @@ html[data-theme="blueprint"] .site-footer h4{
   border-bottom:1px solid var(--bp-rule);
   font:400 .62rem/1.4 var(--bp-tech);
   letter-spacing:var(--bp-ls);
+  text-transform:uppercase;
   color:var(--bp-ink);
 }
-html[data-theme="blueprint"] .site-footer ul{gap:.55rem;font-size:.86rem}
-html[data-theme="blueprint"] .site-footer a:hover{
-  color:var(--bp-ink);
-  text-decoration:underline;
-}
+html[data-theme="blueprint"] .site-footer ul{gap:.6rem;font-size:.86rem}
+html[data-theme="blueprint"] .site-footer a:hover{color:var(--bp-ink);text-decoration:underline}
 html[data-theme="blueprint"] .site-footer .footer-brand p{
   font-size:.86rem;
   color:var(--bp-muted);
 }
 html[data-theme="blueprint"] .footer-bar{
   position:relative;
-  margin-top:clamp(2rem,4vw,3.5rem);
+  margin-top:clamp(2.8rem,5vw,4.5rem);
   padding:1.6rem 0;
   border-top:1px solid var(--bp-rule);
   font:400 .62rem/1.6 var(--bp-tech);
   letter-spacing:.12em;
   text-transform:uppercase;
-  color:var(--bp-muted);
+  color:var(--bp-faint);
 }
-/* a scale bar, the way a plan sheet signs off */
+/* a thin dashed scale bar, the way a plan sheet signs off */
 html[data-theme="blueprint"] .footer-bar::before{
   content:"";
   position:absolute;
   top:-1px;left:0;
   width:96px;height:7px;
-  border:1px solid var(--bp-rule-ui);
   border-top:0;
+  border-left:1px solid var(--bp-rule-ui);
+  border-right:1px solid var(--bp-rule-ui);
+  border-bottom:1px solid var(--bp-rule-ui);
   background:repeating-linear-gradient(
     to right,
     var(--bp-ink) 0 16px,
@@ -1275,91 +1355,14 @@ html[data-theme="blueprint"] .footer-bar::before{
 
 
 /* =============================================================
-   22. HEADERS (both variants) + DRAWER
-   ============================================================= */
-html[data-theme="blueprint"] .site-header,
-html[data-theme="blueprint"] .hdr2{
-  background-color:transparent;
-  box-shadow:none;
-  border-bottom:1px solid transparent;
-}
-html[data-theme="blueprint"] .site-header.is-stuck,
-html[data-theme="blueprint"] .hdr2.is-stuck{
-  background-color:var(--bp-ink-1);
-  box-shadow:none;
-  border-bottom:1px solid var(--bp-rule);
-}
-
-html[data-theme="blueprint"] .site-header .main-nav a,
-html[data-theme="blueprint"] .site-header .header-cta .phone,
-html[data-theme="blueprint"] .hdr2__nav a,
-html[data-theme="blueprint"] .hdr2__util a,
-html[data-theme="blueprint"] .hdr2__util-right a{
-  font-family:var(--bp-tech);
-  font-size:.68rem;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:rgba(242,241,233,.82);
-}
-html[data-theme="blueprint"] .site-header .main-nav a:hover,
-html[data-theme="blueprint"] .hdr2__nav a:hover,
-html[data-theme="blueprint"] .hdr2__util a:hover,
-html[data-theme="blueprint"] .site-header.is-stuck .main-nav a:hover,
-html[data-theme="blueprint"] .hdr2.is-stuck .hdr2__nav a:hover{
-  color:var(--bp-ink);
-}
-html[data-theme="blueprint"] .site-header .header-cta .phone{
-  color:var(--bp-ink);
-}
-
-html[data-theme="blueprint"] .nav-toggle,
-html[data-theme="blueprint"] .hdr2__toggle,
-html[data-theme="blueprint"] .drawer__close{
-  border-radius:0;
-  border:1px solid var(--bp-rule-ui);
-  background:transparent;
-  color:var(--bp-ink);
-  box-shadow:none;
-}
-html[data-theme="blueprint"] .nav-toggle:hover,
-html[data-theme="blueprint"] .drawer__close:hover{
-  background:var(--bp-ink);
-  color:var(--bp-ink-1);
-}
-
-html[data-theme="blueprint"] .drawer{
-  background:var(--bp-ink-1);
-  color:var(--bp-ink);
-}
-html[data-theme="blueprint"] .drawer nav a{
-  border-bottom:1px solid var(--bp-rule);
-  font-size:clamp(1.15rem,6vw,1.5rem);
-}
-html[data-theme="blueprint"] .drawer__close{
-  border-color:var(--bp-rule-ui);
-  color:var(--bp-ink);
-}
-html[data-theme="blueprint"] .drawer__foot{
-  color:var(--bp-muted);
-  font-family:var(--bp-tech);
-  font-size:.7rem;
-  letter-spacing:.1em;
-}
-
-
-/* =============================================================
-   23. SUB-PAGES + MISC CONTROLS
+   21. SUB-PAGES + MISC CONTROLS
    ============================================================= */
 html[data-theme="blueprint"] .subhero{
-  background:var(--bp-ink-1);
-  background-color:var(--bp-ink-1);
+  background:var(--bp-paper);
+  background-color:var(--bp-paper);
   color:var(--bp-ink);
-  border-bottom:1px solid var(--bp-ink);
+  border-bottom:1px solid var(--bp-rule);
   padding:clamp(120px,16vw,170px) 0 clamp(40px,6vw,64px);
-  --muted:var(--bp-muted);
-  --muted-dark:var(--bp-muted);
-  --line:var(--bp-rule);
-  --accent:var(--bp-lime);
 }
 html[data-theme="blueprint"] .subhero__media{display:none}
 html[data-theme="blueprint"] .subhero h1,
@@ -1371,20 +1374,19 @@ html[data-theme="blueprint"] .subhero__meta{
   text-transform:uppercase;
   color:var(--bp-muted);
 }
-html[data-theme="blueprint"] .subhero__meta b{
-  color:var(--bp-ink);
-  font-weight:400;
-}
+html[data-theme="blueprint"] .subhero__meta b{color:var(--bp-ink);font-weight:400}
+
 html[data-theme="blueprint"] .work-grid{
   grid-template-columns:minmax(0,1fr);
   gap:0;
-  border-top:1px solid var(--bp-ink);
+  border-top:1px solid var(--bp-rule);
 }
 html[data-theme="blueprint"] .work-grid > a{
   padding:1.7rem 0;
   border-bottom:1px solid var(--bp-rule);
 }
 html[data-theme="blueprint"] .work-card .media{border-radius:0}
+
 html[data-theme="blueprint"] .spec,
 html[data-theme="blueprint"] .rev-card,
 html[data-theme="blueprint"] .cms-note,
@@ -1403,9 +1405,10 @@ html[data-theme="blueprint"] .spec dt{
   letter-spacing:.14em;
   color:var(--bp-muted);
 }
+
 html[data-theme="blueprint"] .stepper-v .dot{
   border-radius:0;
-  background:var(--bp-ink-1);
+  background:var(--bp-paper);
   border-color:var(--bp-rule-ui);
 }
 html[data-theme="blueprint"] .stepper-v li.done .dot{
@@ -1417,7 +1420,7 @@ html[data-theme="blueprint"] .stepper-v li.now .dot{
   border-color:var(--bp-lime);
   box-shadow:none;
 }
-html[data-theme="blueprint"] .stepper-v li.now .st-name::after{color:var(--bp-lime)}
+html[data-theme="blueprint"] .stepper-v li.now .st-name::after{color:var(--bp-lime-ink)}
 html[data-theme="blueprint"] .prog__bar{
   border-radius:0;
   height:6px;
@@ -1433,7 +1436,8 @@ html[data-theme="blueprint"] .timeline .tl-stage{
   font-family:var(--bp-tech);
   letter-spacing:.12em;
 }
-html[data-theme="blueprint"] .timeline .tl-stage{color:var(--bp-lime)}
+html[data-theme="blueprint"] .timeline .tl-stage{color:var(--bp-lime-ink)}
+
 html[data-theme="blueprint"] .gallery-grid button{border-radius:0}
 html[data-theme="blueprint"] .ba,
 html[data-theme="blueprint"] .ba__tag{border-radius:0}
@@ -1443,7 +1447,6 @@ html[data-theme="blueprint"] .ba__grip{
   border:1px solid var(--bp-ink);
 }
 html[data-theme="blueprint"] .ba__line{box-shadow:none}
-html[data-theme="blueprint"] .ba__line{background:var(--bp-lime)}
 
 html[data-theme="blueprint"] .filterbar button{
   border-radius:0;
@@ -1455,23 +1458,26 @@ html[data-theme="blueprint"] .filterbar button{
 html[data-theme="blueprint"] .filterbar button.is-active,
 html[data-theme="blueprint"] .filterbar button:hover{
   background:var(--bp-ink);
-  color:var(--bp-ink-1);
+  color:var(--bp-paper);
   border-color:var(--bp-ink);
 }
+
+/* WhatsApp float: a marked square, not a glossy bubble */
 html[data-theme="blueprint"] .wa-float{
   border-radius:0;
-  box-shadow:none;
+  background:var(--bp-paper);
   border:1px solid var(--bp-rule-ui);
-  background:var(--bp-ink-1);
-  color:var(--bp-lime);
+  color:var(--bp-ink);
+  box-shadow:none;
 }
 html[data-theme="blueprint"] .wa-float:hover{
   transform:none;
   background:var(--bp-lime);
-  color:var(--bp-ink-1);
+  color:#16180F;
   border-color:var(--bp-lime);
 }
-html[data-theme="blueprint"] .lightbox{background:rgba(16,17,9,.97)}
+
+html[data-theme="blueprint"] .lightbox{background:rgba(22,24,15,.96)}
 html[data-theme="blueprint"] .lightbox img,
 html[data-theme="blueprint"] .lightbox button{border-radius:0}
 html[data-theme="blueprint"] .lightbox button{
@@ -1480,42 +1486,54 @@ html[data-theme="blueprint"] .lightbox button{
 }
 html[data-theme="blueprint"] .lightbox button:hover{
   background:var(--bp-ink);
-  color:var(--bp-ink-1);
+  color:var(--bp-paper);
 }
 
 
 /* =============================================================
-   24. NARROW SHEET — down to 320px
+   22. RESPONSIVE — down to 320px.
    ============================================================= */
-@media (max-width:520px){
+@media (max-width:1100px){
+  html[data-theme="blueprint"] .headline .row-split,
+  html[data-theme="blueprint"] .about-split,
+  html[data-theme="blueprint"] .contact-wrap{grid-template-columns:1fr}
+  html[data-theme="blueprint"] .headline__aside{
+    border-left:0;
+    border-top:1px solid var(--bp-rule);
+    padding:1.6rem 0 0;
+  }
+}
+@media (max-width:900px){
+  html[data-theme="blueprint"] .svc-explorer{grid-template-columns:1fr}
+  html[data-theme="blueprint"] .svc-item.is-active{padding-left:.2rem}
+}
+@media (max-width:560px){
   html[data-theme="blueprint"]{
     --gutter:18px;
     --bp-ls:.14em;
   }
-  html[data-theme="blueprint"] main > .band > .container::before{
-    font-size:.6rem;
-  }
   html[data-theme="blueprint"] .btn-ghost,
   html[data-theme="blueprint"] .btn-ghost--fill{
-    padding:12px 16px;
+    padding:14px 22px;
     font-size:.62rem;
     letter-spacing:.12em;
   }
-  html[data-theme="blueprint"] .headline .btns{flex-direction:column;align-items:flex-start}
-  html[data-theme="blueprint"] .footer-bar{flex-direction:column;gap:.6rem}
+  html[data-theme="blueprint"] .headline .btns{flex-direction:column;align-items:stretch}
+  html[data-theme="blueprint"] .credline{gap:.9rem 1.6rem}
+  html[data-theme="blueprint"] .strip__nav{width:40px;height:40px}
+  html[data-theme="blueprint"] .footer-bar{flex-direction:column;gap:.6rem;align-items:flex-start}
   html[data-theme="blueprint"] .footer-bar::before{width:72px}
-  html[data-theme="blueprint"] .statline{grid-template-columns:minmax(0,1fr)}
-  html[data-theme="blueprint"] .credline{grid-template-columns:1fr;gap:.9rem}
 }
 @media (max-width:360px){
   html[data-theme="blueprint"]{--gutter:14px}
-  html[data-theme="blueprint"] .btn-ghost,
-  html[data-theme="blueprint"] .btn-ghost--fill{width:100%;justify-content:flex-start}
+  html[data-theme="blueprint"] .hero__tag h2{font-size:1.9rem}
+  html[data-theme="blueprint"] .chips li{padding:0 .6em;font-size:.62rem}
+  html[data-theme="blueprint"] .cw-card__meta{flex-wrap:wrap;gap:.4rem 1rem}
 }
 
 
 /* =============================================================
-   25. MOTION — honour prefers-reduced-motion
+   23. MOTION — honour prefers-reduced-motion.
    ============================================================= */
 @media (prefers-reduced-motion:reduce){
   html[data-theme="blueprint"] *,
@@ -1526,48 +1544,19 @@ html[data-theme="blueprint"] .lightbox button:hover{
     transition-duration:.01ms !important;
     scroll-behavior:auto !important;
   }
-  html[data-theme="blueprint"] .svc-stage,
-  html[data-theme="blueprint"] main > .band > .container::before{
-    position:static;
-  }
   html[data-theme="blueprint"] .media img,
   html[data-theme="blueprint"] .svc-figure img,
   html[data-theme="blueprint"] .strip .swiper-slide img,
   html[data-theme="blueprint"] .gallery-grid img{
     transition:none;
     transform:none;
+    filter:none;
   }
   html[data-theme="blueprint"] a:hover .media img,
   html[data-theme="blueprint"] .store-card:hover .media img{transform:none}
   html[data-theme="blueprint"] .hero__cue::after{animation:none}
+  html[data-theme="blueprint"] .hero-scroll::after{animation:none}
+  html[data-theme="blueprint"] .svc-item:hover,
+  html[data-theme="blueprint"] .svc-item.is-active{padding-left:.2rem}
   html[data-theme="blueprint"] .reveal{opacity:1;transform:none}
-}
-/* =============================================================
-   OVERRIDE — "Our Work" (#projects) + "#project-strip" (the two
-   carousel sections) opt OUT of the drawing-sheet label grid.
-   A Swiper inside a `minmax(0,1fr)` grid track blows each slide
-   width out to ~16000px. Render them flat / full-width the way
-   Nocturne does; the ::before margin label falls back to a plain
-   block heading above the carousel.
-   ============================================================= */
-@media (min-width:901px){
-  html[data-theme="blueprint"] main > #projects > .container,
-  html[data-theme="blueprint"] main > #project-strip > .container{
-    display:block;
-  }
-}
-html[data-theme="blueprint"] main > #projects > .container::before,
-html[data-theme="blueprint"] main > #project-strip > .container::before{
-  position:static;                 /* not sticky in the margin */
-}
-/* proj cards — Nocturne treatment */
-html[data-theme="blueprint"] .proj-swiper .swiper-slide{
-  border-left:0;
-  padding-left:0;
-}
-html[data-theme="blueprint"] .proj-card .media{
-  aspect-ratio:4/3;
-}
-html[data-theme="blueprint"] .proj-card:hover h3{
-  color:var(--bp-lime);
 }
