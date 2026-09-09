@@ -1542,3 +1542,32 @@ html[data-theme="blueprint"] .lightbox button:hover{
   html[data-theme="blueprint"] .hero__cue::after{animation:none}
   html[data-theme="blueprint"] .reveal{opacity:1;transform:none}
 }
+/* =============================================================
+   OVERRIDE — "Our Work" (#projects) + "#project-strip" (the two
+   carousel sections) opt OUT of the drawing-sheet label grid.
+   A Swiper inside a `minmax(0,1fr)` grid track blows each slide
+   width out to ~16000px. Render them flat / full-width the way
+   Nocturne does; the ::before margin label falls back to a plain
+   block heading above the carousel.
+   ============================================================= */
+@media (min-width:901px){
+  html[data-theme="blueprint"] main > #projects > .container,
+  html[data-theme="blueprint"] main > #project-strip > .container{
+    display:block;
+  }
+}
+html[data-theme="blueprint"] main > #projects > .container::before,
+html[data-theme="blueprint"] main > #project-strip > .container::before{
+  position:static;                 /* not sticky in the margin */
+}
+/* proj cards — Nocturne treatment */
+html[data-theme="blueprint"] .proj-swiper .swiper-slide{
+  border-left:0;
+  padding-left:0;
+}
+html[data-theme="blueprint"] .proj-card .media{
+  aspect-ratio:4/3;
+}
+html[data-theme="blueprint"] .proj-card:hover h3{
+  color:var(--bp-lime);
+}
