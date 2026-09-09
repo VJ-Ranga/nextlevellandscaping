@@ -1,0 +1,1533 @@
+/* =============================================================
+   NextLevel Landscaping — THEME "PLAN"
+   A landscape plan drawing, not a stack of coloured blocks.
+
+   Rules of the theme
+   ------------------
+   1. NO BOXES. No cards, no filled panels, no radius on
+      containers, no shadows, no alternating dark/light bands.
+   2. Sections are separated by 1px hairlines. That's it.
+   3. ONE continuous paper ground the whole way down. The hero
+      video is the only dark element on the page.
+   4. Faint vertical drawing guides + numbered margin labels give
+      the page the read of an architect's site plan.
+   5. Lime is a MARK, never text on paper. Dark olive is the
+      accent colour for anything that has to be read.
+
+   EVERY selector in this file is scoped under [data-theme="plan"]
+   (written as html[data-theme="plan"] so the theme reliably wins
+   over the base stylesheet regardless of load order).
+   The demo .theme-bar is deliberately left untouched.
+   ============================================================= */
+
+
+/* =============================================================
+   1. PALETTE + TOKENS
+   ============================================================= */
+html[data-theme="plan"]{
+
+  /* --- plan palette (tune here) --------------------------- */
+  --plan-paper:#F7F6F1;        /* warm off-white ground            */
+  --plan-paper-2:#EFEEE6;      /* image placeholder / faint fill   */
+  --plan-ink:#16180F;          /* near-black drawing ink  17:1     */
+  --plan-muted:#5C6152;        /* secondary text          5.9:1    */
+  --plan-rule:#D8D6CA;         /* decorative hairline              */
+  --plan-rule-ui:#8C8B7C;      /* interactive borders     3.2:1    */
+  --plan-lime:#C2E807;         /* MARKS ONLY — never text on paper */
+  --plan-olive:#3E4A16;        /* accent text on paper    8.9:1    */
+  --plan-grid:rgba(22,24,15,.055);   /* vertical drawing guides    */
+
+  /* --- typography ----------------------------------------- */
+  /* a system monospace carries every technical annotation:
+     labels, numbers, metadata, scale marks. No extra webfont. */
+  --plan-tech:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,
+              "Liberation Mono","Courier New",monospace;
+  --plan-ls:.18em;             /* annotation letterspacing */
+
+  /* --- drawing geometry ----------------------------------- */
+  --plan-label-w:170px;        /* the margin-label column  */
+  --plan-cols:6;               /* vertical guides across the sheet */
+
+  /* --- overrides of the base design system ---------------- */
+  --ink:#16180F;
+  --bg:#F7F6F1;
+  --surface-dark:#16180F;      /* hero only */
+  --surface-dark-2:#16180F;
+  --muted:#5C6152;
+  --line:#D8D6CA;
+  --line-dark:#D8D6CA;
+  --muted-dark:#5C6152;
+  --accent-dark:#C2E807;   --accent-ink-dark:#16180F;
+  --accent-light:#3E4A16;  --accent-ink-light:#F7F6F1;
+  --scrim:rgba(18,20,12,.5);
+
+  --btn-radius:0;
+  --h-weight:400;
+  --scoop:0;
+  --r-arch:0;
+  --r-arch-sm:0;
+  --r-cover:0;
+  --r-footer-scoop:0;
+
+  --container:1320px;
+  --gutter:28px;
+  --pad-band:clamp(56px,8vw,104px);
+  --pad-band-lg:clamp(64px,9vw,120px);
+}
+
+/* the hero keeps the dark context (white text, lime accent) */
+html[data-theme="plan"] .hero{
+  --muted:rgba(255,255,255,.78);
+  --line:rgba(255,255,255,.28);
+  --accent:var(--plan-lime);
+  --accent-ink:var(--plan-ink);
+}
+
+/* everything else on the page is paper */
+html[data-theme="plan"] main,
+html[data-theme="plan"] main > .band,
+html[data-theme="plan"] main > .band.band--dark,
+html[data-theme="plan"] main > .band.strip-band,
+html[data-theme="plan"] .site-footer,
+html[data-theme="plan"] .drawer{
+  --muted:var(--plan-muted);
+  --muted-dark:var(--plan-muted);
+  --line:var(--plan-rule);
+  --line-dark:var(--plan-rule);
+  --accent:var(--plan-olive);
+  --accent-ink:var(--plan-paper);
+}
+
+
+/* =============================================================
+   2. GROUND — one continuous paper colour
+   ============================================================= */
+html[data-theme="plan"] body{
+  background:var(--plan-paper);
+  color:var(--plan-ink);
+  line-height:1.72;
+}
+
+/* Neutralise .band--dark: every band is the same paper. */
+html[data-theme="plan"] main > .band,
+html[data-theme="plan"] main > .band.band--dark,
+html[data-theme="plan"] main > .band.strip-band,
+html[data-theme="plan"] main > .band.band--scoop{
+  background:var(--plan-paper);
+  background-color:var(--plan-paper);
+  color:var(--plan-ink);
+  border-radius:0;
+  margin-top:0;
+}
+
+html[data-theme="plan"] main > .band.band--dark h1,
+html[data-theme="plan"] main > .band.band--dark h2,
+html[data-theme="plan"] main > .band.band--dark h3,
+html[data-theme="plan"] main > .band.band--dark h4{
+  color:var(--plan-ink);
+}
+html[data-theme="plan"] main > .band.band--dark .lead,
+html[data-theme="plan"] main > .band.band--dark p{
+  color:var(--plan-muted);
+}
+html[data-theme="plan"] main > .band.band--dark .measure,
+html[data-theme="plan"] main > .band.band--dark li,
+html[data-theme="plan"] main > .band.band--dark b,
+html[data-theme="plan"] main > .band.band--dark strong{
+  color:inherit;
+}
+
+/* the sticky-hero variant forces opaque dark bands — undo it */
+html[data-theme="plan"] main > .band.band--dark,
+html[data-theme="plan"] main > .strip-band,
+html[data-theme="plan"] main > .hero + .band{
+  background-color:var(--plan-paper);
+  border-radius:0;
+}
+
+
+/* =============================================================
+   3. SEPARATION — full-bleed 1px hairlines, edge to edge.
+   This is the ONLY device that divides sections.
+   ============================================================= */
+html[data-theme="plan"] main > .band{
+  border-top:1px solid var(--plan-rule);
+  padding-block:var(--pad-band);
+}
+html[data-theme="plan"] main > .band.band--lg{
+  padding-block:var(--pad-band-lg);
+}
+/* the strip band's photo row runs to the bottom edge */
+html[data-theme="plan"] main > .strip-band{
+  padding-block:var(--pad-band) var(--pad-band);
+}
+/* darker rule where the drawing index restarts a major chapter */
+html[data-theme="plan"] main > #services,
+html[data-theme="plan"] main > #current,
+html[data-theme="plan"] main > #contact{
+  border-top-color:var(--plan-rule-ui);
+}
+/* the padding hack that fed the old footer scoop is not needed */
+html[data-theme="plan"] main > #contact{
+  padding-bottom:var(--pad-band-lg);
+}
+
+
+/* =============================================================
+   4. DRAWING GUIDES — faint vertical column lines.
+   Purely decorative, sits under the content layer, far too low
+   in contrast to touch text legibility.
+   ============================================================= */
+html[data-theme="plan"] main > .band::before{
+  content:"";
+  position:absolute;
+  top:0;bottom:0;left:0;right:0;
+  width:100%;
+  max-width:var(--container);
+  margin-inline:auto;
+  background-image:repeating-linear-gradient(
+    to right,
+    var(--plan-grid) 0 1px,
+    transparent 1px calc(100% / var(--plan-cols))
+  );
+  background-size:auto;
+  background-position:0 0;
+  background-repeat:repeat;
+  filter:none;
+  opacity:1;
+  pointer-events:none;
+  z-index:0;
+}
+/* kill the old contour texture entirely */
+html[data-theme="plan"] main > .band.contour::before{
+  filter:none;
+  opacity:1;
+  border-radius:0;
+}
+html[data-theme="plan"] main > .band > .container,
+html[data-theme="plan"] main > .band > .swiper,
+html[data-theme="plan"] main > .band > .strip,
+html[data-theme="plan"] main > .band > .strip__nav{
+  position:relative;
+  z-index:1;
+}
+@media (max-width:640px){
+  /* fewer guides on a narrow sheet so they stay guides, not stripes */
+  html[data-theme="plan"]{--plan-cols:3}
+}
+
+
+/* =============================================================
+   5. MARGIN LABELS — the drawing index.
+   "01 — SERVICES" in a narrow left column, content in the wide
+   right column. Numbering is automatic via CSS counters.
+   ============================================================= */
+html[data-theme="plan"] main{counter-reset:plansec}
+html[data-theme="plan"] main > .band{counter-increment:plansec}
+
+html[data-theme="plan"] main > .band > .container::before{
+  content:counter(plansec,decimal-leading-zero) "  —  " var(--plan-label,"Section");
+  display:block;
+  width:fit-content;
+  max-width:100%;
+  margin:0 0 2rem;
+  padding-top:.65rem;
+  border-top:2px solid var(--plan-lime);
+  font:400 .66rem/1.45 var(--plan-tech);
+  letter-spacing:var(--plan-ls);
+  text-transform:uppercase;
+  color:var(--plan-muted);
+  white-space:normal;
+}
+
+/* section names — edit these to relabel the index */
+html[data-theme="plan"] main > .hero + .band{--plan-label:"Overview"}
+html[data-theme="plan"] main > #numbers      {--plan-label:"Credentials"}
+html[data-theme="plan"] main > #about        {--plan-label:"Practice"}
+html[data-theme="plan"] main > #services     {--plan-label:"Services"}
+html[data-theme="plan"] main > #projects     {--plan-label:"Selected Work"}
+html[data-theme="plan"] main > #project-strip{--plan-label:"Site Record"}
+html[data-theme="plan"] main > #current      {--plan-label:"Current Work"}
+html[data-theme="plan"] main > #process      {--plan-label:"Method"}
+html[data-theme="plan"] main > #store        {--plan-label:"Supply"}
+html[data-theme="plan"] main > #reviews      {--plan-label:"Clients"}
+html[data-theme="plan"] main > #contact      {--plan-label:"Enquiry"}
+
+/* two-column sheet from tablet up; the label column collapses to
+   a stacked label below that. */
+@media (min-width:901px){
+  html[data-theme="plan"] main > .band > .container{
+    display:grid;
+    grid-template-columns:var(--plan-label-w) minmax(0,1fr);
+    column-gap:clamp(28px,4vw,72px);
+    align-items:start;
+  }
+  html[data-theme="plan"] main > .band > .container > *{
+    grid-column:2;
+    min-width:0;
+  }
+  html[data-theme="plan"] main > .band > .container::before{
+    grid-column:1;
+    grid-row:1;
+    align-self:start;
+    position:sticky;
+    top:130px;
+    margin-bottom:0;
+  }
+}
+@media (max-width:900px){
+  html[data-theme="plan"] main > .band > .container::before{
+    margin-bottom:1.7rem;
+  }
+}
+
+
+/* =============================================================
+   6. TYPOGRAPHY — type does the work the colour blocks used to do
+   ============================================================= */
+html[data-theme="plan"] h1,
+html[data-theme="plan"] h2,
+html[data-theme="plan"] h3,
+html[data-theme="plan"] h4{
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:-.005em;
+  line-height:1.03;
+}
+html[data-theme="plan"] h1{font-size:clamp(2.15rem,6vw,4.1rem)}
+html[data-theme="plan"] h2{font-size:clamp(1.6rem,3.6vw,2.55rem)}
+html[data-theme="plan"] h3{
+  font-size:clamp(1rem,1.7vw,1.2rem);
+  font-weight:500;
+  letter-spacing:.01em;
+}
+html[data-theme="plan"] .lead{
+  font-size:clamp(1rem,1.4vw,1.14rem);
+  line-height:1.62;
+  color:var(--plan-muted);
+}
+html[data-theme="plan"] .measure{max-width:58ch}
+
+/* eyebrow becomes a technical annotation, olive (8.9:1) */
+html[data-theme="plan"] .eyebrow,
+html[data-theme="plan"] main > .band.band--dark .eyebrow{
+  display:block;
+  font:400 .64rem/1.4 var(--plan-tech);
+  letter-spacing:var(--plan-ls);
+  text-transform:uppercase;
+  color:var(--plan-olive);
+  margin-bottom:1rem;
+}
+html[data-theme="plan"] .section-head{
+  max-width:56ch;
+  margin-bottom:clamp(1.8rem,3vw,2.8rem);
+}
+html[data-theme="plan"] .section-head .lead{margin-top:.9rem}
+
+
+/* =============================================================
+   7. BUTTONS + LINKS — square, hairline, unfilled.
+   The "primary" is marked with a lime tick, not a fill.
+   ============================================================= */
+html[data-theme="plan"] .btn-ghost,
+html[data-theme="plan"] .btn-ghost--fill,
+html[data-theme="plan"] main > .band.band--dark .btn-ghost{
+  --c:var(--plan-ink);
+  display:inline-flex;
+  align-items:center;
+  gap:.75em;
+  padding:13px 22px;
+  border:1px solid var(--plan-ink);
+  border-radius:0;
+  background:none;
+  color:var(--plan-ink);
+  font:400 .66rem/1 var(--plan-tech);
+  letter-spacing:var(--plan-ls);
+  text-transform:uppercase;
+  overflow:visible;
+  isolation:auto;
+  transition:background-color .22s var(--ease),color .22s var(--ease);
+}
+html[data-theme="plan"] .btn-ghost::before{content:none;display:none}
+html[data-theme="plan"] .btn-ghost:hover,
+html[data-theme="plan"] .btn-ghost--fill:hover,
+html[data-theme="plan"] main > .band.band--dark .btn-ghost:hover{
+  background:var(--plan-ink);
+  color:var(--plan-paper);
+}
+/* primary: a lime rule-tick in front of the label */
+html[data-theme="plan"] .btn-ghost--fill::after{
+  content:"";
+  width:8px;height:8px;
+  flex:none;
+  order:-1;
+  background:var(--plan-lime);
+}
+
+/* the header CTA sits over the video — it must stay unfilled too */
+html[data-theme="plan"] .site-header .header-cta .btn-ghost--fill,
+html[data-theme="plan"] .site-header.is-stuck .header-cta .btn-ghost--fill{
+  background:none;
+  border-color:rgba(255,255,255,.85);
+  color:#fff;
+  padding:10px 18px;
+}
+html[data-theme="plan"] .site-header .header-cta .btn-ghost--fill::before{
+  content:none;
+}
+html[data-theme="plan"] .site-header .header-cta .btn-ghost--fill:hover{
+  background:#fff;
+  color:var(--plan-ink);
+}
+html[data-theme="plan"] .site-header.is-stuck .header-cta .btn-ghost--fill{
+  border-color:var(--plan-ink);
+  color:var(--plan-ink);
+}
+html[data-theme="plan"] .site-header.is-stuck .header-cta .btn-ghost--fill:hover{
+  background:var(--plan-ink);
+  color:var(--plan-paper);
+}
+
+/* underlined text link with a small tick mark */
+html[data-theme="plan"] .tlink,
+html[data-theme="plan"] main > .band.band--dark .tlink{
+  gap:.55em;
+  padding-bottom:5px;
+  border-bottom:1px solid var(--plan-rule-ui);
+  font:400 .66rem/1 var(--plan-tech);
+  letter-spacing:var(--plan-ls);
+  text-transform:uppercase;
+  color:var(--plan-ink);
+}
+html[data-theme="plan"] .tlink::before{
+  content:"";
+  width:2px;height:10px;
+  flex:none;
+  background:var(--plan-lime);
+}
+html[data-theme="plan"] .tlink i{font-size:.62rem}
+html[data-theme="plan"] .tlink:hover{
+  gap:.85em;
+  opacity:1;
+  border-bottom-color:var(--plan-ink);
+}
+
+/* chips stop being pills and become a slash-annotated list */
+html[data-theme="plan"] .chips{
+  gap:0 .5rem;
+  margin-top:1rem;
+}
+html[data-theme="plan"] .chips li,
+html[data-theme="plan"] main > .band.band--dark .chips li{
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:none;
+  font:400 .64rem/1.6 var(--plan-tech);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--plan-muted);
+}
+html[data-theme="plan"] .chips li + li::before{
+  content:"·";
+  margin-right:.5rem;
+  color:var(--plan-rule-ui);
+}
+
+/* focus: always visible, always on the drawing's own accent */
+html[data-theme="plan"] a:focus-visible,
+html[data-theme="plan"] button:focus-visible,
+html[data-theme="plan"] input:focus-visible,
+html[data-theme="plan"] textarea:focus-visible,
+html[data-theme="plan"] [tabindex]:focus-visible{
+  outline:2px solid var(--plan-olive);
+  outline-offset:3px;
+  border-radius:0;
+}
+html[data-theme="plan"] .hero a:focus-visible,
+html[data-theme="plan"] .site-header a:focus-visible,
+html[data-theme="plan"] .site-header button:focus-visible,
+html[data-theme="plan"] .hdr2 a:focus-visible,
+html[data-theme="plan"] .hdr2 button:focus-visible{
+  outline-color:var(--plan-lime);
+}
+
+
+/* =============================================================
+   8. IMAGES — hairline-framed views, never rounded panels
+   ============================================================= */
+html[data-theme="plan"] .media,
+html[data-theme="plan"] .svc-figure,
+html[data-theme="plan"] .gallery-grid button,
+html[data-theme="plan"] .about__media .media,
+html[data-theme="plan"] .store-card .media,
+html[data-theme="plan"] .svc-accordion-media .media{
+  border-radius:0;
+  background:var(--plan-paper-2);
+  border:1px solid var(--plan-rule);
+}
+html[data-theme="plan"] .media__scrim{background:var(--scrim)}
+
+
+/* =============================================================
+   9. HEADER — variant A (.site-header)
+   Transparent over the video; paper + hairline once stuck.
+   The logo is white/lime artwork, so on paper it prints as
+   single-colour ink.
+   ============================================================= */
+html[data-theme="plan"] .site-header{
+  padding:20px 0;
+  box-shadow:none;
+}
+html[data-theme="plan"] .site-header .main-nav a,
+html[data-theme="plan"] .site-header .header-cta .phone,
+html[data-theme="plan"] .hdr2__nav a,
+html[data-theme="plan"] .hdr2__util a,
+html[data-theme="plan"] .hdr2__util-right a{
+  font-family:var(--plan-tech);
+  font-size:.68rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+html[data-theme="plan"] .site-header.is-stuck{
+  background-color:var(--plan-paper);
+  border-bottom:1px solid var(--plan-rule);
+  box-shadow:none;
+  padding:10px 0;
+}
+html[data-theme="plan"] .site-header.is-stuck .brand img,
+html[data-theme="plan"] .hdr2.is-stuck .hdr2__brand img,
+html[data-theme="plan"] .site-footer .brand img,
+html[data-theme="plan"] .drawer .brand img{
+  /* white + lime artwork flattened to a single ink on paper */
+  filter:brightness(0);
+  opacity:.92;
+}
+html[data-theme="plan"] .site-header.is-stuck .main-nav a,
+html[data-theme="plan"] .site-header.is-stuck .header-cta .phone,
+html[data-theme="plan"] .site-header.is-stuck .brand{
+  color:var(--plan-muted);
+  text-shadow:none;
+}
+html[data-theme="plan"] .site-header.is-stuck .main-nav a:hover{
+  color:var(--plan-ink);
+}
+html[data-theme="plan"] .site-header.is-stuck .nav-toggle{
+  color:var(--plan-ink);
+  border-color:var(--plan-rule-ui);
+  background:none;
+  backdrop-filter:none;
+}
+html[data-theme="plan"] .nav-toggle,
+html[data-theme="plan"] .drawer__close,
+html[data-theme="plan"] .hdr2__toggle{
+  border-radius:0;
+}
+
+/* =============================================================
+   9b. HEADER — variant B (.hdr2, centred logo)
+   ============================================================= */
+html[data-theme="plan"] .hdr2.is-stuck{
+  background-color:var(--plan-paper);
+  border-bottom:1px solid var(--plan-rule);
+  box-shadow:none;
+}
+html[data-theme="plan"] .hdr2.is-stuck .hdr2__util{
+  border-bottom-color:var(--plan-rule);
+}
+html[data-theme="plan"] .hdr2.is-stuck .hdr2__nav a,
+html[data-theme="plan"] .hdr2.is-stuck .hdr2__util a,
+html[data-theme="plan"] .hdr2.is-stuck .hdr2__util-right a{
+  color:var(--plan-muted);
+  text-shadow:none;
+}
+html[data-theme="plan"] .hdr2.is-stuck .hdr2__nav a:hover,
+html[data-theme="plan"] .hdr2.is-stuck .hdr2__util a:hover{
+  color:var(--plan-ink);
+}
+html[data-theme="plan"] .hdr2.is-stuck .hdr2__toggle{
+  border-color:var(--plan-rule-ui);
+  background:none;
+  color:var(--plan-ink);
+}
+html[data-theme="plan"] .hdr2__nav a:hover{color:var(--plan-lime)}
+
+/* mobile drawer: paper, ruled rows */
+html[data-theme="plan"] .drawer{
+  background:var(--plan-paper);
+  color:var(--plan-ink);
+}
+html[data-theme="plan"] .drawer nav a{
+  border-bottom:1px solid var(--plan-rule);
+  font-size:clamp(1.15rem,6vw,1.5rem);
+}
+html[data-theme="plan"] .drawer__close{
+  border-color:var(--plan-rule-ui);
+  color:var(--plan-ink);
+}
+html[data-theme="plan"] .drawer__foot{
+  color:var(--plan-muted);
+  font-family:var(--plan-tech);
+  font-size:.7rem;
+  letter-spacing:.1em;
+}
+
+
+/* =============================================================
+   10. HERO — the one dark element. Full-bleed, unchanged in
+   prominence; the video keeps running. Works for both
+   [data-hero="static"] and [data-hero="sticky"].
+   ============================================================= */
+html[data-theme="plan"] .hero{
+  background:var(--plan-ink);
+  border-bottom:1px solid var(--plan-rule);
+}
+html[data-theme="plan"] .hero__media,
+html[data-theme="plan"] .hero__media video,
+html[data-theme="plan"] .hero__media img{
+  border-radius:0;
+}
+html[data-theme="plan"] .hero__overlay{
+  background:rgba(18,20,12,.34);
+}
+html[data-theme="plan"] .hero__media::after{
+  background:linear-gradient(180deg,
+    rgba(18,20,12,.62) 0%,
+    rgba(18,20,12,.14) 34%,
+    rgba(18,20,12,.20) 58%,
+    rgba(18,20,12,.80) 100%);
+}
+/* hero annotation — a title block on a drawing */
+html[data-theme="plan"] .hero__tag{padding-bottom:54px}
+html[data-theme="plan"] .hero__tag span{
+  display:inline-block;
+  padding-top:.6rem;
+  border-top:2px solid var(--plan-lime);
+  font:400 .64rem/1.5 var(--plan-tech);
+  letter-spacing:var(--plan-ls);
+  color:rgba(255,255,255,.86);
+}
+html[data-theme="plan"] .hero__cue,
+html[data-theme="plan"] .hero-scroll{
+  font-family:var(--plan-tech);
+  font-size:.62rem;
+  letter-spacing:var(--plan-ls);
+}
+html[data-theme="plan"] .hero-car__nav{
+  border-radius:0;
+  border-color:rgba(255,255,255,.5);
+}
+html[data-theme="plan"] .hero-slide h1{
+  text-shadow:0 2px 26px rgba(18,20,12,.55);
+}
+
+/* sticky-hero variant: the covering band is paper, square-edged */
+html[data-theme="plan"][data-hero="sticky"] .hero + .band{
+  border-radius:0;
+  background-color:var(--plan-paper);
+  border-top:0;
+}
+html[data-theme="plan"][data-hero="sticky"] main > .band{
+  background-color:var(--plan-paper);
+}
+
+
+/* =============================================================
+   11. HEADLINE BAND
+   ============================================================= */
+html[data-theme="plan"] .headline .row-split{
+  grid-template-columns:1.25fr .75fr;
+  gap:clamp(2rem,4vw,4rem);
+  align-items:start;
+}
+html[data-theme="plan"] .headline h1{margin-bottom:1.3rem}
+html[data-theme="plan"] .headline .btns{gap:.8rem;margin-top:2.2rem}
+html[data-theme="plan"] .headline__aside{
+  border-left:1px solid var(--plan-rule);
+  padding-left:clamp(1.2rem,2.5vw,2.2rem);
+  color:var(--plan-muted);
+  font-size:.9rem;
+}
+html[data-theme="plan"] .headline__aside strong{
+  display:block;
+  margin-bottom:.6rem;
+  font:400 clamp(1.9rem,3.4vw,2.6rem)/1 var(--plan-tech);
+  letter-spacing:-.02em;
+  color:var(--plan-ink);
+}
+@media (max-width:900px){
+  html[data-theme="plan"] .headline .row-split{grid-template-columns:1fr}
+  html[data-theme="plan"] .headline__aside{
+    border-left:0;
+    border-top:1px solid var(--plan-rule);
+    padding:1.6rem 0 0;
+  }
+}
+
+
+/* =============================================================
+   12. STAT LINE + CREDENTIALS
+   Numbers get dimension brackets; the credential row reads as a
+   run of technical annotations divided by hairlines.
+   ============================================================= */
+html[data-theme="plan"] .statline{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:0;
+  border-top:1px solid var(--plan-ink);
+}
+html[data-theme="plan"] .stat-n{
+  padding:1.5rem clamp(12px,2vw,26px) 1.6rem 0;
+  border-right:1px solid var(--plan-rule);
+}
+html[data-theme="plan"] .stat-n:last-child{border-right:0}
+/* rule tick on the hairline above each number */
+html[data-theme="plan"] .stat-n::before{
+  content:"";
+  position:absolute;
+  left:0;top:-1px;bottom:auto;
+  width:28px;height:2px;
+  background:var(--plan-lime);
+}
+html[data-theme="plan"] .stat-n b{
+  font:400 clamp(2.2rem,4.6vw,3.4rem)/1 var(--plan-tech);
+  letter-spacing:-.03em;
+  color:var(--plan-ink);
+}
+html[data-theme="plan"] .stat-n b i{color:var(--plan-olive)}
+html[data-theme="plan"] .stat-n > span{
+  margin-top:.7rem;
+  font:400 .64rem/1.5 var(--plan-tech);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--plan-muted);
+}
+/* dimension bracket under each figure */
+html[data-theme="plan"] .stat-n::after{
+  content:"";
+  display:block;
+  max-width:70px;
+  height:6px;
+  margin-top:1.1rem;
+  border:1px solid var(--plan-rule-ui);
+  border-bottom:0;
+}
+
+html[data-theme="plan"] .credline{
+  gap:0;
+  margin-top:3rem;
+  padding-top:0;
+  border-top:1px solid var(--plan-rule);
+}
+html[data-theme="plan"] .credline span{
+  padding:1.1rem clamp(14px,2vw,26px) 1.1rem 0;
+  margin-right:clamp(14px,2vw,26px);
+  border-right:1px solid var(--plan-rule);
+  font:400 .66rem/1.5 var(--plan-tech);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--plan-muted);
+}
+html[data-theme="plan"] .credline span:last-child{
+  border-right:0;
+  margin-right:0;
+}
+html[data-theme="plan"] .credline i{color:var(--plan-olive);font-size:.85rem}
+html[data-theme="plan"] .credline b{color:var(--plan-ink);font-weight:400}
+
+@media (max-width:900px){
+  html[data-theme="plan"] .statline{grid-template-columns:repeat(2,minmax(0,1fr))}
+  html[data-theme="plan"] .stat-n:nth-child(2n){border-right:0}
+  html[data-theme="plan"] .stat-n:nth-child(n+3){border-top:1px solid var(--plan-rule)}
+}
+@media (max-width:480px){
+  html[data-theme="plan"] .statline{grid-template-columns:minmax(0,1fr)}
+  html[data-theme="plan"] .stat-n{border-right:0}
+  html[data-theme="plan"] .stat-n + .stat-n{border-top:1px solid var(--plan-rule)}
+  html[data-theme="plan"] .credline span{
+    width:100%;
+    margin-right:0;
+    padding-right:0;
+    border-right:0;
+    border-bottom:1px solid var(--plan-rule);
+  }
+  html[data-theme="plan"] .credline span:last-child{border-bottom:0}
+}
+
+
+/* =============================================================
+   13. ABOUT
+   ============================================================= */
+html[data-theme="plan"] .about-split{
+  grid-template-columns:.85fr 1.15fr;
+  gap:clamp(1.8rem,4vw,4rem);
+  align-items:start;
+}
+html[data-theme="plan"] .about__media .media{aspect-ratio:4/5}
+html[data-theme="plan"] .about__values{
+  gap:0;
+  margin-top:2rem;
+  border-top:1px solid var(--plan-rule);
+}
+html[data-theme="plan"] .about__values li{
+  padding:1.05rem 0;
+  border-bottom:1px solid var(--plan-rule);
+  color:var(--plan-muted);
+  font-size:.92rem;
+}
+html[data-theme="plan"] .about__values i{color:var(--plan-olive)}
+html[data-theme="plan"] .about__values b{
+  color:var(--plan-ink);
+  font-weight:500;
+}
+@media (max-width:900px){
+  html[data-theme="plan"] .about-split{grid-template-columns:1fr}
+}
+
+
+/* =============================================================
+   14. SERVICES EXPLORER — a ruled index with a plate beside it
+   ============================================================= */
+html[data-theme="plan"] .svc-explorer{
+  grid-template-columns:1fr 1fr;
+  gap:clamp(1.8rem,3.5vw,4rem);
+}
+html[data-theme="plan"] .svc-list{
+  border-top:1px solid var(--plan-ink);
+}
+html[data-theme="plan"] .svc-item{
+  gap:1rem;
+  padding:1.1rem .2rem;
+  border-bottom:1px solid var(--plan-rule);
+  border-radius:0;
+  color:var(--plan-muted);
+  text-transform:uppercase;
+}
+html[data-theme="plan"] .svc-item__no{
+  font:400 .64rem/1 var(--plan-tech);
+  letter-spacing:.14em;
+  color:var(--plan-muted);
+  opacity:1;
+}
+html[data-theme="plan"] .svc-item__name{
+  font-size:clamp(.98rem,1.6vw,1.25rem);
+  letter-spacing:.005em;
+}
+html[data-theme="plan"] .svc-item__go{color:var(--plan-olive);font-size:.72rem}
+html[data-theme="plan"] .svc-item:hover,
+html[data-theme="plan"] .svc-item.is-active{
+  color:var(--plan-ink);
+  padding-left:.9rem;
+}
+/* active state is the one place a lime mark is allowed to lead */
+html[data-theme="plan"] .svc-item.is-active{
+  border-bottom-color:var(--plan-ink);
+  box-shadow:none;
+}
+html[data-theme="plan"] .svc-item.is-active .svc-item__no,
+html[data-theme="plan"] .svc-item:hover .svc-item__no{
+  color:var(--plan-olive);
+  opacity:1;
+}
+html[data-theme="plan"] .svc-item.is-active .svc-item__no::before{
+  content:"";
+  display:inline-block;
+  width:12px;height:2px;
+  margin-right:.55em;
+  vertical-align:middle;
+  background:var(--plan-lime);
+}
+html[data-theme="plan"] .svc-stage{top:130px}
+html[data-theme="plan"] .svc-figure{
+  border-radius:0;
+  aspect-ratio:4/3;
+}
+html[data-theme="plan"] .svc-copy{margin-top:1.4rem;min-height:150px}
+html[data-theme="plan"] .svc-copy h3{
+  margin-bottom:.7rem;
+  padding-top:.9rem;
+  border-top:1px solid var(--plan-rule);
+}
+html[data-theme="plan"] .svc-copy p{color:var(--plan-muted);font-size:.94rem}
+@media (max-width:900px){
+  html[data-theme="plan"] .svc-explorer{grid-template-columns:1fr}
+  html[data-theme="plan"] .svc-item.is-active{padding-left:.2rem}
+  html[data-theme="plan"] .svc-accordion-media .media{
+    aspect-ratio:16/11;
+    border-radius:0;
+    margin-bottom:1rem;
+  }
+}
+
+
+/* =============================================================
+   15. SELECTED WORK — carousel slides become ruled sheet columns
+   (vertical hairlines + an annotation head), not cards.
+   ============================================================= */
+html[data-theme="plan"] .proj-swiper .swiper-slide{
+  border-left:1px solid var(--plan-rule);
+  padding-left:clamp(14px,1.6vw,22px);
+}
+html[data-theme="plan"] .proj-card{
+  display:block;
+  background:none;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  padding-top:1rem;
+  border-top:1px solid var(--plan-ink);
+}
+html[data-theme="plan"] .proj-card .media{
+  aspect-ratio:16/11;
+  margin-bottom:1.1rem;
+  border-radius:0;
+}
+/* GRANGE / 2025 / ... */
+html[data-theme="plan"] .proj-card__meta,
+html[data-theme="plan"] main > .band.band--dark .proj-card__meta{
+  gap:.55rem;
+  margin-bottom:.7rem;
+  font:400 .63rem/1.4 var(--plan-tech);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--plan-muted);
+}
+html[data-theme="plan"] .proj-card__meta span:nth-child(2){
+  font-size:0;
+  color:var(--plan-rule-ui);
+}
+html[data-theme="plan"] .proj-card__meta span:nth-child(2)::after{
+  content:"/";
+  font-size:.63rem;
+}
+html[data-theme="plan"] .proj-card h3{margin-bottom:.6rem}
+html[data-theme="plan"] .proj-card p,
+html[data-theme="plan"] main > .band.band--dark .proj-card p{
+  color:var(--plan-muted);
+  font-size:.9rem;
+}
+html[data-theme="plan"] .proj-card:hover .media{border-color:var(--plan-rule-ui)}
+
+/* carousel controls: square, hairline, no fill */
+html[data-theme="plan"] .swiper-controls{margin-top:2.2rem}
+html[data-theme="plan"] .swiper-controls button,
+html[data-theme="plan"] main > .band.band--dark .swiper-controls button,
+html[data-theme="plan"] .band:not(.band--dark) .swiper-controls button{
+  width:46px;height:46px;
+  border:1px solid var(--plan-rule-ui);
+  border-radius:0;
+  background:none;
+  color:var(--plan-ink);
+  font-size:.85rem;
+}
+html[data-theme="plan"] .swiper-controls button:hover,
+html[data-theme="plan"] main > .band.band--dark .swiper-controls button:hover,
+html[data-theme="plan"] .band:not(.band--dark) .swiper-controls button:hover{
+  background:var(--plan-ink);
+  color:var(--plan-paper);
+}
+
+
+/* =============================================================
+   16. SITE RECORD — full-bleed photo strip
+   ============================================================= */
+html[data-theme="plan"] .strip-head{margin-bottom:1.8rem}
+html[data-theme="plan"] .strip .swiper-slide{
+  border-left:1px solid var(--plan-paper);
+}
+html[data-theme="plan"] .strip__cap{
+  left:0;bottom:0;
+  padding:.5em .9em;
+  border-radius:0;
+  background:var(--plan-paper);
+  backdrop-filter:none;
+  color:var(--plan-ink);
+  font:400 .62rem/1 var(--plan-tech);
+  letter-spacing:.14em;
+  transform:none;
+}
+html[data-theme="plan"] .strip .swiper-slide:hover .strip__cap{transform:none}
+html[data-theme="plan"] .strip__nav{
+  width:44px;height:44px;
+  border-radius:0;
+  border:1px solid var(--plan-ink);
+  background:var(--plan-paper);
+  color:var(--plan-ink);
+  box-shadow:none;
+}
+html[data-theme="plan"] .strip__nav:hover{
+  background:var(--plan-ink);
+  color:var(--plan-paper);
+  transform:translateY(-50%);
+}
+
+
+/* =============================================================
+   17. CURRENT WORK — ruled rows, image | text, hairline divided
+   ============================================================= */
+html[data-theme="plan"] .cw-grid{
+  grid-template-columns:minmax(0,1fr);
+  gap:0;
+  border-top:1px solid var(--plan-ink);
+}
+html[data-theme="plan"] .cw-card{
+  display:grid;
+  grid-template-columns:minmax(120px,240px) minmax(0,1fr);
+  grid-template-rows:repeat(6,auto);
+  column-gap:clamp(18px,3.5vw,52px);
+  padding:1.7rem 0;
+  border-bottom:1px solid var(--plan-rule);
+  background:none;
+  border-radius:0;
+  box-shadow:none;
+}
+html[data-theme="plan"] .cw-card > *{grid-column:2;min-width:0}
+html[data-theme="plan"] .cw-card .media{
+  grid-column:1;
+  grid-row:1 / -1;
+  align-self:start;
+  aspect-ratio:4/3;
+  margin:0;
+  border-radius:0;
+}
+html[data-theme="plan"] .cw-card__meta,
+html[data-theme="plan"] .work-card__meta{
+  display:flex;
+  justify-content:flex-start;
+  gap:.9rem;
+  margin-bottom:.55rem;
+  font:400 .63rem/1.4 var(--plan-tech);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--plan-muted);
+}
+html[data-theme="plan"] .cw-card__meta span + span::before{
+  content:"/ ";
+  color:var(--plan-rule-ui);
+}
+html[data-theme="plan"] .cw-card h3{margin-bottom:.9rem}
+html[data-theme="plan"] .cw-card__note{
+  color:var(--plan-muted);
+  font-size:.9rem;
+  margin-bottom:1.1rem;
+}
+html[data-theme="plan"] .cw-card:hover .media{border-color:var(--plan-rule-ui)}
+/* the tlink is blockified by the grid — keep it hugging its text */
+html[data-theme="plan"] .cw-card .tlink{
+  justify-self:start;
+  width:fit-content;
+}
+
+/* segmented progress: square ticks on a hairline baseline */
+html[data-theme="plan"] .stepper{
+  gap:4px;
+  margin:0 0 .9rem;
+  padding-bottom:0;
+}
+html[data-theme="plan"] .stepper li{
+  height:6px;
+  border-radius:0;
+  background:none;
+  border-bottom:1px solid var(--plan-rule);
+}
+html[data-theme="plan"] .stepper li.done{
+  background:var(--plan-ink);
+  border-bottom-color:var(--plan-ink);
+}
+html[data-theme="plan"] .stepper li.now{
+  background:var(--plan-lime);
+  border-bottom-color:var(--plan-olive);
+  box-shadow:none;
+}
+html[data-theme="plan"] .cw-card__stage{
+  font:400 .64rem/1.5 var(--plan-tech);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--plan-ink);
+  font-weight:400;
+}
+html[data-theme="plan"] .cw-card__stage small{
+  color:var(--plan-muted);
+  letter-spacing:.1em;
+  margin-top:3px;
+}
+@media (max-width:560px){
+  html[data-theme="plan"] .cw-card{
+    grid-template-columns:minmax(0,1fr);
+    grid-template-rows:auto;
+    row-gap:1rem;
+  }
+  html[data-theme="plan"] .cw-card > *{grid-column:1}
+  html[data-theme="plan"] .cw-card .media{
+    grid-column:1;
+    grid-row:auto;
+    aspect-ratio:16/10;
+  }
+}
+
+
+/* =============================================================
+   18. METHOD — the numbered circles become plan callouts
+   ============================================================= */
+html[data-theme="plan"] .proc-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:0;
+  border-top:1px solid var(--plan-ink);
+}
+html[data-theme="plan"] .proc{
+  padding:1.5rem clamp(14px,2vw,30px) .4rem 0;
+  border-right:1px solid var(--plan-rule);
+}
+html[data-theme="plan"] .proc:last-child{border-right:0}
+html[data-theme="plan"] .proc__num{
+  position:static;
+  display:flex;
+  align-items:baseline;
+  justify-content:flex-start;
+  gap:.7rem;
+  width:auto;height:auto;
+  margin-bottom:1rem;
+  padding-bottom:.9rem;
+  border:0;
+  border-bottom:1px solid var(--plan-rule);
+  border-radius:0;
+  color:var(--plan-olive);
+  font-size:.9rem;
+}
+html[data-theme="plan"] .proc__num span{
+  position:static;
+  order:-1;
+  width:auto;height:auto;
+  border-radius:0;
+  background:none;
+  color:var(--plan-ink);
+  font:400 clamp(1.6rem,2.6vw,2.1rem)/1 var(--plan-tech);
+  letter-spacing:-.02em;
+}
+html[data-theme="plan"] .proc h3{margin-bottom:.5rem}
+html[data-theme="plan"] .proc p{color:var(--plan-muted);font-size:.9rem}
+@media (max-width:900px){
+  html[data-theme="plan"] .proc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  html[data-theme="plan"] .proc:nth-child(2n){border-right:0}
+  html[data-theme="plan"] .proc:nth-child(n+3){
+    border-top:1px solid var(--plan-rule);
+    padding-top:1.5rem;
+  }
+}
+@media (max-width:520px){
+  html[data-theme="plan"] .proc-grid{grid-template-columns:minmax(0,1fr)}
+  html[data-theme="plan"] .proc{border-right:0;padding-right:0}
+  html[data-theme="plan"] .proc + .proc{
+    border-top:1px solid var(--plan-rule);
+    padding-top:1.5rem;
+  }
+}
+
+
+/* =============================================================
+   19. SUPPLY — store cards become ruled rows
+   ============================================================= */
+html[data-theme="plan"] .store-grid{
+  grid-template-columns:minmax(0,1fr);
+  gap:0;
+  border-top:1px solid var(--plan-ink);
+}
+html[data-theme="plan"] .store-card{
+  display:grid;
+  grid-template-columns:minmax(96px,190px) minmax(0,1fr);
+  grid-template-rows:auto auto;
+  column-gap:clamp(18px,3.5vw,52px);
+  align-content:start;
+  padding:1.5rem 0;
+  border-bottom:1px solid var(--plan-rule);
+  background:none;
+  border-radius:0;
+  box-shadow:none;
+}
+html[data-theme="plan"] .store-card .media{
+  grid-column:1;
+  grid-row:1 / span 2;
+  aspect-ratio:4/3;
+  margin:0;
+  border-radius:0;
+}
+html[data-theme="plan"] .store-card h3{
+  grid-column:2;grid-row:1;
+  align-self:end;
+  margin-bottom:.45rem;
+}
+html[data-theme="plan"] .store-card p,
+html[data-theme="plan"] main > .band.band--dark .store-card p{
+  grid-column:2;grid-row:2;
+  align-self:start;
+  color:var(--plan-muted);
+  font-size:.9rem;
+  max-width:62ch;
+}
+@media (max-width:480px){
+  html[data-theme="plan"] .store-card{
+    grid-template-columns:minmax(72px,110px) minmax(0,1fr);
+    column-gap:16px;
+  }
+}
+
+
+/* =============================================================
+   20. CLIENTS — ruled quotes, square key mark instead of avatar
+   ============================================================= */
+html[data-theme="plan"] .rev-swiper .swiper-slide{
+  border-left:1px solid var(--plan-rule);
+  padding-left:clamp(14px,1.6vw,22px);
+}
+html[data-theme="plan"] .rev-card{
+  border-top:1px solid var(--plan-ink);
+  padding-top:1.3rem;
+  background:none;
+  border-radius:0;
+  box-shadow:none;
+}
+html[data-theme="plan"] .rev-card p{
+  font-size:.98rem;
+  line-height:1.68;
+  margin-bottom:1.3rem;
+  color:var(--plan-ink);
+}
+html[data-theme="plan"] .rev-card__who{
+  gap:.8rem;
+  padding-top:1rem;
+  border-top:1px solid var(--plan-rule);
+}
+html[data-theme="plan"] .rev-card__who .rev-avatar{
+  width:34px;height:34px;
+  border-radius:0;
+  background:none;
+  border:1px solid var(--plan-rule-ui);
+  color:var(--plan-ink);
+  font:400 .64rem/1 var(--plan-tech);
+  letter-spacing:.06em;
+}
+html[data-theme="plan"] .rev-card__who b{
+  font-weight:500;
+  font-size:.88rem;
+  color:var(--plan-ink);
+}
+html[data-theme="plan"] .rev-card__who span span{
+  font:400 .6rem/1.5 var(--plan-tech);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--plan-muted);
+}
+
+
+/* =============================================================
+   21. ENQUIRY — underlined fields, no filled inputs
+   ============================================================= */
+html[data-theme="plan"] .contact-wrap{
+  grid-template-columns:1.1fr .9fr;
+  gap:clamp(2rem,4vw,4rem);
+}
+html[data-theme="plan"] .field{margin-bottom:1.5rem}
+html[data-theme="plan"] .field label{
+  font:400 .62rem/1.4 var(--plan-tech);
+  letter-spacing:var(--plan-ls);
+  text-transform:uppercase;
+  color:var(--plan-muted);
+  margin-bottom:.4rem;
+}
+html[data-theme="plan"] .field input,
+html[data-theme="plan"] .field textarea{
+  padding:11px 0;
+  border:0;
+  border-bottom:1px solid var(--plan-rule-ui);
+  border-radius:0;
+  background:none;
+  color:var(--plan-ink);
+  font:400 .98rem/1.5 var(--f);
+}
+html[data-theme="plan"] .field input:focus,
+html[data-theme="plan"] .field textarea:focus{
+  outline:none;
+  border-bottom:2px solid var(--plan-olive);
+  padding-bottom:10px;
+}
+html[data-theme="plan"] .field input:focus-visible,
+html[data-theme="plan"] .field textarea:focus-visible{
+  outline:2px solid var(--plan-olive);
+  outline-offset:4px;
+}
+html[data-theme="plan"] .field textarea{min-height:118px}
+html[data-theme="plan"] .field.err input,
+html[data-theme="plan"] .field.err textarea{border-bottom-color:#A3241A}
+html[data-theme="plan"] .field .msg{
+  font:400 .64rem/1.5 var(--plan-tech);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:#A3241A;
+}
+html[data-theme="plan"] .form-note{
+  font:400 .68rem/1.6 var(--plan-tech);
+  letter-spacing:.1em;
+  color:var(--plan-muted);
+  margin-top:1.2rem;
+}
+html[data-theme="plan"] .form-ok{
+  padding:1rem 0;
+  border:0;
+  border-top:2px solid var(--plan-lime);
+  border-bottom:1px solid var(--plan-rule);
+  border-radius:0;
+  background:none;
+  font:400 .8rem/1.6 var(--f);
+  color:var(--plan-ink);
+}
+html[data-theme="plan"] .contact-info dl{
+  gap:0;
+  grid-template-columns:auto minmax(0,1fr);
+}
+html[data-theme="plan"] .contact-info dt{
+  padding:.85rem .9rem .85rem 0;
+  border-top:1px solid var(--plan-rule);
+  color:var(--plan-olive);
+  font-size:.85rem;
+}
+html[data-theme="plan"] .contact-info dd{
+  padding:.85rem 0;
+  border-top:1px solid var(--plan-rule);
+  color:var(--plan-muted);
+  font-size:.92rem;
+}
+html[data-theme="plan"] .contact-info dd a:hover{
+  color:var(--plan-ink);
+  text-decoration:underline;
+}
+html[data-theme="plan"] .contact-info .media{margin-top:1.8rem}
+@media (max-width:900px){
+  html[data-theme="plan"] .contact-wrap{grid-template-columns:1fr}
+}
+
+
+/* =============================================================
+   22. FOOTER — same paper, hairline rules, scale bar
+   ============================================================= */
+html[data-theme="plan"] .site-footer{
+  background:var(--plan-paper);
+  color:var(--plan-muted);
+  border-top:1px solid var(--plan-ink);
+  border-radius:0;
+  margin-top:0;
+  padding-block:clamp(48px,6vw,72px) 0;
+}
+html[data-theme="plan"] .site-footer .footer-grid{
+  gap:clamp(1.6rem,3vw,2.6rem);
+}
+html[data-theme="plan"] .site-footer h4{
+  padding-bottom:.75rem;
+  margin-bottom:1rem;
+  border-bottom:1px solid var(--plan-rule);
+  font:400 .62rem/1.4 var(--plan-tech);
+  letter-spacing:var(--plan-ls);
+  color:var(--plan-ink);
+}
+html[data-theme="plan"] .site-footer ul{gap:.55rem;font-size:.86rem}
+html[data-theme="plan"] .site-footer a:hover{
+  color:var(--plan-ink);
+  text-decoration:underline;
+}
+html[data-theme="plan"] .site-footer .footer-brand p{
+  font-size:.86rem;
+  color:var(--plan-muted);
+}
+html[data-theme="plan"] .footer-bar{
+  position:relative;
+  margin-top:clamp(2rem,4vw,3.5rem);
+  padding:1.6rem 0;
+  border-top:1px solid var(--plan-rule);
+  font:400 .62rem/1.6 var(--plan-tech);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--plan-muted);
+}
+/* a scale bar, the way a plan sheet signs off */
+html[data-theme="plan"] .footer-bar::before{
+  content:"";
+  position:absolute;
+  top:-1px;left:0;
+  width:96px;height:7px;
+  border:1px solid var(--plan-ink);
+  border-top:0;
+  background:repeating-linear-gradient(
+    to right,
+    var(--plan-ink) 0 16px,
+    transparent 16px 32px
+  );
+}
+
+
+/* =============================================================
+   23. MISC CONTROLS
+   ============================================================= */
+html[data-theme="plan"] .wa-float{
+  border-radius:0;
+  box-shadow:none;
+  border:1px solid rgba(18,20,12,.2);
+}
+html[data-theme="plan"] .lightbox img,
+html[data-theme="plan"] .lightbox button{border-radius:0}
+html[data-theme="plan"] .filterbar button{
+  border-radius:0;
+  border-color:var(--plan-rule-ui);
+  font-family:var(--plan-tech);
+  letter-spacing:.14em;
+  color:var(--plan-muted);
+}
+html[data-theme="plan"] .filterbar button.is-active,
+html[data-theme="plan"] .filterbar button:hover{
+  background:var(--plan-ink);
+  color:var(--plan-paper);
+  border-color:var(--plan-ink);
+}
+
+
+/* =============================================================
+   24. SUB-PAGES — keep them on the same sheet
+   (Our Work / Project / Current Work share these classes.)
+   ============================================================= */
+html[data-theme="plan"] .subhero{
+  background:var(--plan-paper);
+  color:var(--plan-ink);
+  border-bottom:1px solid var(--plan-ink);
+  padding:clamp(120px,16vw,170px) 0 clamp(40px,6vw,64px);
+  --muted:var(--plan-muted);
+  --muted-dark:var(--plan-muted);
+  --line:var(--plan-rule);
+  --accent:var(--plan-olive);
+}
+html[data-theme="plan"] .subhero__media{display:none}
+html[data-theme="plan"] .subhero h1,
+html[data-theme="plan"] .subhero h2{color:var(--plan-ink)}
+html[data-theme="plan"] .crumb,
+html[data-theme="plan"] .subhero__meta{
+  font:400 .64rem/1.5 var(--plan-tech);
+  letter-spacing:var(--plan-ls);
+  text-transform:uppercase;
+  color:var(--plan-muted);
+}
+html[data-theme="plan"] .subhero__meta b{
+  color:var(--plan-ink);
+  font-weight:400;
+}
+html[data-theme="plan"] .work-grid{
+  grid-template-columns:minmax(0,1fr);
+  gap:0;
+  border-top:1px solid var(--plan-ink);
+}
+html[data-theme="plan"] .work-grid > a{
+  padding:1.7rem 0;
+  border-bottom:1px solid var(--plan-rule);
+}
+html[data-theme="plan"] .work-card .media{border-radius:0}
+html[data-theme="plan"] .spec,
+html[data-theme="plan"] .rev-card,
+html[data-theme="plan"] .cms-note,
+html[data-theme="plan"] .ba-note{border-radius:0}
+html[data-theme="plan"] .cms-note,
+html[data-theme="plan"] .ba-note{
+  background:none;
+  border:0;
+  border-top:1px solid var(--plan-rule);
+  border-bottom:1px solid var(--plan-rule);
+  padding:1rem 0;
+  color:var(--plan-muted);
+}
+html[data-theme="plan"] .spec dt{
+  font-family:var(--plan-tech);
+  letter-spacing:.14em;
+  color:var(--plan-muted);
+}
+html[data-theme="plan"] .stepper-v .dot{
+  border-radius:0;
+  background:var(--plan-paper);
+  border-color:var(--plan-rule-ui);
+}
+html[data-theme="plan"] .stepper-v li.done .dot{
+  background:var(--plan-ink);
+  border-color:var(--plan-ink);
+}
+html[data-theme="plan"] .stepper-v li.now .dot{
+  background:var(--plan-lime);
+  border-color:var(--plan-olive);
+  box-shadow:none;
+}
+html[data-theme="plan"] .stepper-v li.now .st-name::after{color:var(--plan-olive)}
+html[data-theme="plan"] .prog__bar{
+  border-radius:0;
+  height:6px;
+  background:var(--plan-rule);
+}
+html[data-theme="plan"] .prog__bar span{
+  border-radius:0;
+  background:var(--plan-ink);
+}
+html[data-theme="plan"] .prog__pct,
+html[data-theme="plan"] .timeline time,
+html[data-theme="plan"] .timeline .tl-stage{
+  font-family:var(--plan-tech);
+  letter-spacing:.12em;
+}
+html[data-theme="plan"] .timeline .tl-stage{color:var(--plan-olive)}
+html[data-theme="plan"] .gallery-grid button{border-radius:0}
+html[data-theme="plan"] .ba,
+html[data-theme="plan"] .ba__tag{border-radius:0}
+html[data-theme="plan"] .ba__grip{
+  border-radius:0;
+  box-shadow:none;
+  border:1px solid var(--plan-ink);
+}
+html[data-theme="plan"] .ba__line{box-shadow:none}
+
+
+/* =============================================================
+   25. NARROW SHEET — down to 320px
+   ============================================================= */
+@media (max-width:520px){
+  html[data-theme="plan"]{
+    --gutter:18px;
+    --plan-ls:.14em;
+  }
+  html[data-theme="plan"] main > .band > .container::before{
+    font-size:.6rem;
+  }
+  html[data-theme="plan"] .btn-ghost,
+  html[data-theme="plan"] .btn-ghost--fill{
+    padding:12px 16px;
+    font-size:.62rem;
+    letter-spacing:.12em;
+  }
+  html[data-theme="plan"] .headline .btns{flex-direction:column;align-items:flex-start}
+  html[data-theme="plan"] .footer-bar{flex-direction:column;gap:.6rem}
+  html[data-theme="plan"] .footer-bar::before{width:72px}
+}
+@media (max-width:360px){
+  html[data-theme="plan"]{--gutter:14px}
+  html[data-theme="plan"] .btn-ghost,
+  html[data-theme="plan"] .btn-ghost--fill{width:100%;justify-content:flex-start}
+}
+
+
+/* =============================================================
+   26. MOTION — honour prefers-reduced-motion
+   ============================================================= */
+@media (prefers-reduced-motion:reduce){
+  html[data-theme="plan"] *,
+  html[data-theme="plan"] *::before,
+  html[data-theme="plan"] *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  html[data-theme="plan"] .svc-stage,
+  html[data-theme="plan"] main > .band > .container::before{
+    position:static;
+  }
+  html[data-theme="plan"] .reveal{opacity:1;transform:none}
+}

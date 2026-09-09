@@ -1,0 +1,1156 @@
+/* =============================================================
+   NOCTURNE — "a gallery catalogue at night"
+   An alternate look for the NextLevel Landscaping demo.
+
+   Concept: ONE continuous near-black ground from the hero to the
+   footer. No cards, no panels, no shadows, no radius, no
+   alternating bands. Sections are divided by full-bleed 1px
+   hairlines and nothing else. Photography is the only source of
+   light. Large serif display type against a Poppins body sets
+   the exhibition-catalogue tone. Lime appears as a mark, never
+   as a surface.
+
+   EVERY rule in this file is scoped to [data-theme="nocturne"].
+   Nothing here can leak into the other demo themes.
+   ============================================================= */
+
+
+/* -------------------------------------------------------------
+   1. PALETTE + TOKENS
+   Tune the whole style from here. The base stylesheet's own
+   tokens are re-pointed at these so inherited rules resolve to
+   the dark ground automatically.
+   ------------------------------------------------------------- */
+[data-theme="nocturne"]{
+
+  /* ground — warm near-black, very slightly green. Never #000. */
+  --n-ground:#101109;
+  --n-ground-lift:#15170D;          /* only for input wells / hovers */
+
+  /* type */
+  --n-ink:#F2F1E9;                  /* off-white body + headings  ~17:1 */
+  --n-muted:#A9A99C;                /* secondary copy             ~7.9:1 */
+  --n-faint:#8A8A7E;                /* catalogue captions         ~5.4:1 */
+
+  /* rules — the entire separation mechanism */
+  --n-rule:rgba(255,255,255,.14);
+  --n-rule-soft:rgba(255,255,255,.08);
+  --n-rule-ui:rgba(255,255,255,.42); /* interactive borders, >=3:1 */
+
+  /* the single accent. Used as a mark, an active state, a tick. */
+  --n-lime:#C2E807;                 /* on the ground: ~13:1 */
+  --n-error:#FF6B5B;                /* ~6.7:1 */
+
+  /* display face — deliberately paired against Poppins body */
+  --n-display:Georgia,"Iowan Old Style","Times New Roman",Times,serif;
+
+  /* rhythm — slow and generous */
+  --n-space:clamp(72px,10vw,140px);
+  --n-meta-track:.2em;
+
+  /* ---- re-point the base design system ---- */
+  --ink:var(--n-ink);
+  --bg:var(--n-ground);
+  --surface-dark:var(--n-ground);
+  --surface-dark-2:var(--n-ground);
+  --muted:var(--n-muted);
+  --muted-dark:var(--n-muted);
+  --line:var(--n-rule);
+  --line-dark:var(--n-rule);
+  --scrim:rgba(8,9,5,.5);
+
+  --accent:var(--n-lime);
+  --accent-dark:var(--n-lime);
+  --accent-light:var(--n-lime);
+  --accent-ink:var(--n-ground);
+  --accent-ink-dark:var(--n-ground);
+  --accent-ink-light:var(--n-ground);
+
+  /* no boxes: every curve in the base system is switched off */
+  --r-arch:0px;
+  --r-arch-sm:0px;
+  --r-scoop:0px;
+  --r-cover:0px;
+  --r-footer-scoop:0px;
+  --btn-radius:0px;
+  --scoop:0;
+
+  --h-weight:400;
+  --pad-band:var(--n-space);
+  --pad-band-lg:clamp(96px,13vw,180px);
+  --pad-band-sm:48px;
+}
+
+/* the accent stays lime in every context, light or dark */
+[data-theme="nocturne"] .band--dark,
+[data-theme="nocturne"] .site-footer,
+[data-theme="nocturne"] .subhero,
+[data-theme="nocturne"] .drawer,
+[data-theme="nocturne"] .site-header,
+[data-theme="nocturne"] .strip-band,
+[data-theme="nocturne"] .lightbox,
+[data-theme="nocturne"] .hero{
+  --accent:var(--n-lime);
+  --accent-ink:var(--n-ground);
+}
+
+
+/* -------------------------------------------------------------
+   2. THE CONTINUOUS GROUND
+   One colour, unbroken, hero to footer. Light bands, dark bands
+   and the decorative contour texture are all neutralised.
+   ------------------------------------------------------------- */
+html[data-theme="nocturne"]{background:var(--n-ground)}
+
+[data-theme="nocturne"] body{
+  background:var(--n-ground);
+  color:var(--n-ink);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+
+[data-theme="nocturne"] main{background:var(--n-ground)}
+
+[data-theme="nocturne"] .band,
+[data-theme="nocturne"] .band--dark,
+[data-theme="nocturne"] .band--lg,
+[data-theme="nocturne"] .strip-band,
+[data-theme="nocturne"] .site-footer,
+[data-theme="nocturne"] .subhero{
+  background:var(--n-ground);
+  background-color:var(--n-ground);
+  color:var(--n-ink);
+  border-radius:0;
+  box-shadow:none;
+  margin-top:0;
+}
+
+/* the topographic texture belongs to the old block design */
+[data-theme="nocturne"] .contour::before{display:none}
+
+/* the scoop / arch geometry is removed entirely */
+[data-theme="nocturne"] .band--scoop,
+[data-theme="nocturne"] .band--scoop-tr,
+[data-theme="nocturne"] .band--scoop-top,
+[data-theme="nocturne"] .site-footer--scoop{
+  border-radius:0;
+  margin-top:0;
+  padding-top:var(--n-space);
+}
+[data-theme="nocturne"] .arch,
+[data-theme="nocturne"] .arch--tr,
+[data-theme="nocturne"] .arch--br,
+[data-theme="nocturne"] .arch--bl,
+[data-theme="nocturne"] .arch--sm{border-radius:0}
+
+
+/* -------------------------------------------------------------
+   3. SEPARATION: FULL-BLEED HAIRLINES ONLY
+   Each section carries one 1px rule on its top edge, running the
+   full width of the viewport. That is the whole system.
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] main > .band{
+  border-top:1px solid var(--n-rule);
+  position:relative;
+  z-index:1;
+}
+/* the hero is the page's opening image — no rule above it */
+[data-theme="nocturne"] main > .hero{border-top:0}
+
+[data-theme="nocturne"] .site-footer{
+  border-top:1px solid var(--n-rule);
+  padding-block:var(--n-space) 0;
+}
+
+/* the strip band sits tight under its own section rule */
+[data-theme="nocturne"] .strip-band{padding-block:var(--n-space) 0}
+
+[data-theme="nocturne"] #contact{
+  padding-bottom:var(--pad-band-lg);
+}
+
+
+/* -------------------------------------------------------------
+   4. TYPOGRAPHY
+   High-contrast serif display against the Poppins body. Metadata
+   is small, letterspaced, uppercase — catalogue captions.
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] h1,
+[data-theme="nocturne"] h2,
+[data-theme="nocturne"] h3,
+[data-theme="nocturne"] .hero__tag h2,
+[data-theme="nocturne"] .hero-slide h1{
+  font-family:var(--n-display);
+  font-weight:400;
+  color:var(--n-ink);
+  letter-spacing:-.015em;
+}
+
+[data-theme="nocturne"] h1,
+[data-theme="nocturne"] .h1{
+  font-size:clamp(2.35rem,6vw,4.4rem);
+  line-height:1.03;
+}
+[data-theme="nocturne"] h2,
+[data-theme="nocturne"] .h2{
+  font-size:clamp(1.95rem,4.4vw,3.2rem);
+  line-height:1.08;
+}
+[data-theme="nocturne"] h3,
+[data-theme="nocturne"] .h3{
+  font-size:clamp(1.18rem,2vw,1.5rem);
+  line-height:1.25;
+  letter-spacing:-.005em;
+}
+[data-theme="nocturne"] h4{
+  font-family:var(--f);
+  font-size:.7rem;
+  font-weight:500;
+  letter-spacing:var(--n-meta-track);
+  text-transform:uppercase;
+  color:var(--n-faint);
+}
+
+[data-theme="nocturne"] p{color:var(--n-ink)}
+
+[data-theme="nocturne"] .lead,
+[data-theme="nocturne"] .band--dark .lead{
+  font-family:var(--f);
+  font-size:clamp(1rem,1.4vw,1.15rem);
+  line-height:1.7;
+  color:var(--n-muted);
+  max-width:58ch;
+}
+
+/* eyebrow: the one place the accent shows as a rule tick */
+[data-theme="nocturne"] .eyebrow,
+[data-theme="nocturne"] .band--dark .eyebrow{
+  display:flex;
+  align-items:center;
+  gap:.85em;
+  font-family:var(--f);
+  font-size:.68rem;
+  font-weight:500;
+  letter-spacing:var(--n-meta-track);
+  text-transform:uppercase;
+  color:var(--n-faint);
+  margin-bottom:1.6rem;
+}
+[data-theme="nocturne"] .eyebrow::before{
+  content:"";
+  flex:none;
+  width:24px;
+  height:1px;
+  background:var(--n-lime);
+}
+
+[data-theme="nocturne"] .section-head{
+  margin-bottom:clamp(2.4rem,5vw,4rem);
+  max-width:54ch;
+}
+
+[data-theme="nocturne"] ::selection{
+  background:var(--n-lime);
+  color:var(--n-ground);
+}
+
+
+/* -------------------------------------------------------------
+   5. IMAGERY — the only light in the room
+   Square edges, no frame, a subtle warm lift so photography
+   glows against the ground.
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] .media,
+[data-theme="nocturne"] .svc-figure,
+[data-theme="nocturne"] .gallery-grid button,
+[data-theme="nocturne"] .about__media .media,
+[data-theme="nocturne"] .store-card .media,
+[data-theme="nocturne"] .store-card:nth-child(2) .media,
+[data-theme="nocturne"] .store-card:nth-child(3) .media,
+[data-theme="nocturne"] .svc-accordion-media .media{
+  border-radius:0;
+  background:var(--n-ground);
+  box-shadow:none;
+}
+
+[data-theme="nocturne"] .media img,
+[data-theme="nocturne"] .svc-figure img,
+[data-theme="nocturne"] .strip .swiper-slide img,
+[data-theme="nocturne"] .gallery-grid img{
+  filter:saturate(1.06) contrast(1.04) brightness(1.05);
+  transition:transform .8s var(--ease),filter .5s var(--ease);
+}
+[data-theme="nocturne"] a:hover .media img,
+[data-theme="nocturne"] .store-card:hover .media img{
+  transform:scale(1.03);
+  filter:saturate(1.12) contrast(1.05) brightness(1.1);
+}
+
+[data-theme="nocturne"] .media__scrim{background:var(--scrim)}
+
+
+/* -------------------------------------------------------------
+   6. HERO — the video stays, full-bleed and prominent
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] .hero{
+  min-height:100svh;
+  background:var(--n-ground);
+}
+[data-theme="nocturne"] .hero__media{
+  border-radius:0;
+  background:var(--n-ground);
+}
+[data-theme="nocturne"] .hero__media video,
+[data-theme="nocturne"] .hero__media img{
+  filter:saturate(1.05) contrast(1.03) brightness(1.03);
+}
+/* keep the footage luminous — just enough veil to hold the type */
+[data-theme="nocturne"] .hero__overlay{
+  background:linear-gradient(180deg,rgba(16,17,9,.42) 0%,rgba(16,17,9,.18) 38%,rgba(16,17,9,.72) 100%);
+}
+[data-theme="nocturne"] .hero__media::after{display:none}
+
+[data-theme="nocturne"] .hero__tag{padding-bottom:clamp(48px,7vw,86px)}
+[data-theme="nocturne"] .hero__tag span{
+  font-size:.68rem;
+  letter-spacing:var(--n-meta-track);
+  color:rgba(242,241,233,.82);
+}
+[data-theme="nocturne"] .hero__tag h2{
+  font-size:clamp(2.2rem,5.6vw,4rem);
+  line-height:1.04;
+  max-width:14ch;
+}
+
+[data-theme="nocturne"] .hero__cue{
+  font-size:.62rem;
+  letter-spacing:var(--n-meta-track);
+  color:rgba(242,241,233,.7);
+}
+[data-theme="nocturne"] .hero__cue::after{background:rgba(242,241,233,.45)}
+
+/* sticky-hero variant: bands stay opaque, but square-edged */
+[data-theme="nocturne"][data-hero="sticky"] .hero + .band,
+[data-theme="nocturne"][data-hero="sticky"] main > .band,
+[data-theme="nocturne"][data-hero="sticky"] main > .band--dark,
+[data-theme="nocturne"][data-hero="sticky"] main > .strip-band{
+  background-color:var(--n-ground);
+  border-radius:0;
+}
+[data-theme="nocturne"][data-hero="sticky"] .hero__media{border-radius:0}
+
+/* hero carousel (centred layout) */
+[data-theme="nocturne"] .hero-slide h1{
+  font-size:clamp(2.2rem,5.6vw,4.2rem);
+  line-height:1.04;
+  text-shadow:0 2px 30px rgba(8,9,5,.55);
+}
+[data-theme="nocturne"] .hero-car__nav{
+  border-radius:0;
+  border:1px solid var(--n-rule-ui);
+  background:transparent;
+  color:var(--n-ink);
+}
+[data-theme="nocturne"] .hero-car__nav:hover{
+  background:var(--n-ink);
+  color:var(--n-ground);
+  border-color:var(--n-ink);
+}
+[data-theme="nocturne"] .hero-scroll span{
+  font-size:.62rem;
+  letter-spacing:var(--n-meta-track);
+  color:rgba(242,241,233,.75);
+}
+
+
+/* -------------------------------------------------------------
+   7. HEADERS (both variants) + DRAWER
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] .site-header,
+[data-theme="nocturne"] .hdr2{
+  background-color:transparent;
+  box-shadow:none;
+  border-bottom:1px solid transparent;
+}
+[data-theme="nocturne"] .site-header.is-stuck,
+[data-theme="nocturne"][data-layout="centred"] .hdr2.is-stuck{
+  background-color:var(--n-ground);
+  box-shadow:none;
+  border-bottom:1px solid var(--n-rule);
+}
+
+[data-theme="nocturne"] .main-nav a,
+[data-theme="nocturne"] .hdr2__nav a,
+[data-theme="nocturne"] .hdr2__util a,
+[data-theme="nocturne"] .hdr2__util-right a,
+[data-theme="nocturne"] .site-header.is-stuck .main-nav a{
+  font-size:.7rem;
+  letter-spacing:var(--n-meta-track);
+  text-transform:uppercase;
+  color:rgba(242,241,233,.82);
+}
+[data-theme="nocturne"] .main-nav a:hover,
+[data-theme="nocturne"] .hdr2__nav a:hover,
+[data-theme="nocturne"] .hdr2__util a:hover,
+[data-theme="nocturne"] .site-header.is-stuck .main-nav a:hover{color:var(--n-ink)}
+
+[data-theme="nocturne"] .hdr2__util{border-bottom:1px solid var(--n-rule)}
+
+[data-theme="nocturne"] .header-cta .phone,
+[data-theme="nocturne"] .site-header.is-stuck .header-cta .phone{
+  font-size:.72rem;
+  letter-spacing:.12em;
+  color:var(--n-ink);
+}
+
+[data-theme="nocturne"] .nav-toggle,
+[data-theme="nocturne"] .site-header:not(.is-stuck) .nav-toggle,
+[data-theme="nocturne"] .site-header.is-stuck .nav-toggle,
+[data-theme="nocturne"] .hdr2__toggle,
+[data-theme="nocturne"] .drawer__close{
+  border-radius:0;
+  border:1px solid var(--n-rule-ui);
+  background:transparent;
+  color:var(--n-ink);
+  box-shadow:none;
+}
+[data-theme="nocturne"] .nav-toggle:hover,
+[data-theme="nocturne"] .drawer__close:hover{
+  background:var(--n-ink);
+  color:var(--n-ground);
+}
+
+[data-theme="nocturne"] .drawer{
+  background:var(--n-ground);
+  color:var(--n-ink);
+}
+[data-theme="nocturne"] .drawer nav a{
+  font-family:var(--n-display);
+  font-size:clamp(1.5rem,7vw,2.1rem);
+  text-transform:none;
+  letter-spacing:-.01em;
+  border-bottom:1px solid var(--n-rule);
+  padding:.75rem 0;
+}
+[data-theme="nocturne"] .drawer nav a:hover{color:var(--n-lime)}
+[data-theme="nocturne"] .drawer__foot{
+  color:var(--n-faint);
+  font-size:.78rem;
+  letter-spacing:.06em;
+}
+
+
+/* -------------------------------------------------------------
+   8. BUTTONS + LINKS
+   No fill by default. Hairline border, square, generous padding,
+   small uppercase type. One filled variant in lime for the
+   primary call to action.
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] .btn-ghost,
+[data-theme="nocturne"] .band--dark .btn-ghost{
+  --c:var(--n-ink);
+  border-radius:0;
+  border:1px solid var(--n-rule-ui);
+  color:var(--n-ink);
+  background:transparent;
+  padding:17px 38px;
+  font-size:.7rem;
+  letter-spacing:var(--n-meta-track);
+}
+[data-theme="nocturne"] .btn-ghost::before{background:var(--n-ink)}
+[data-theme="nocturne"] .btn-ghost:hover,
+[data-theme="nocturne"] .band--dark .btn-ghost:hover{
+  color:var(--n-ground);
+  border-color:var(--n-ink);
+}
+
+[data-theme="nocturne"] .btn-ghost--fill,
+[data-theme="nocturne"] .site-header .header-cta .btn-ghost--fill,
+[data-theme="nocturne"] .site-header.is-stuck .header-cta .btn-ghost--fill{
+  background:var(--n-lime);
+  border-color:var(--n-lime);
+  color:var(--n-ground);
+}
+[data-theme="nocturne"] .btn-ghost--fill::before,
+[data-theme="nocturne"] .site-header .header-cta .btn-ghost--fill::before{
+  background:var(--n-ground);
+}
+[data-theme="nocturne"] .btn-ghost--fill:hover,
+[data-theme="nocturne"] .site-header .header-cta .btn-ghost--fill:hover{
+  color:var(--n-lime);
+  border-color:var(--n-lime);
+}
+
+[data-theme="nocturne"] .tlink,
+[data-theme="nocturne"] .band--dark .tlink{
+  font-size:.7rem;
+  letter-spacing:var(--n-meta-track);
+  color:var(--n-ink);
+  border-bottom:1px solid var(--n-rule-ui);
+  padding-bottom:6px;
+}
+[data-theme="nocturne"] .tlink:hover{
+  opacity:1;
+  color:var(--n-lime);
+  border-bottom-color:var(--n-lime);
+}
+
+/* chips stop being pills — they become divided caption text */
+[data-theme="nocturne"] .chips{
+  gap:0;
+  margin-top:1.4rem;
+  column-gap:0;
+}
+[data-theme="nocturne"] .chips li,
+[data-theme="nocturne"] .band--dark .chips li{
+  border:0;
+  border-radius:0;
+  padding:0 .95em;
+  font-size:.66rem;
+  letter-spacing:.16em;
+  color:var(--n-faint);
+  line-height:1.9;
+}
+[data-theme="nocturne"] .chips li:first-child{padding-left:0}
+[data-theme="nocturne"] .chips li + li{border-left:1px solid var(--n-rule)}
+
+/* focus is always visible, always the accent */
+[data-theme="nocturne"] a:focus-visible,
+[data-theme="nocturne"] button:focus-visible,
+[data-theme="nocturne"] input:focus-visible,
+[data-theme="nocturne"] textarea:focus-visible,
+[data-theme="nocturne"] [tabindex]:focus-visible{
+  outline:2px solid var(--n-lime);
+  outline-offset:3px;
+}
+
+
+/* -------------------------------------------------------------
+   9. HEADLINE BAND + NUMBERS
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] .headline .row-split{
+  grid-template-columns:1.15fr .85fr;
+  gap:clamp(2rem,5vw,5rem);
+  align-items:end;
+}
+[data-theme="nocturne"] .headline h1{margin-bottom:1.8rem}
+[data-theme="nocturne"] .headline .btns{gap:.9rem;margin-top:2.6rem}
+[data-theme="nocturne"] .headline__aside{
+  border-left:1px solid var(--n-rule);
+  padding-left:clamp(1.4rem,3vw,2.6rem);
+  color:var(--n-muted);
+  font-size:.9rem;
+  line-height:1.7;
+}
+[data-theme="nocturne"] .headline__aside strong{
+  font-family:var(--n-display);
+  color:var(--n-ink);
+  font-size:clamp(2rem,4vw,2.9rem);
+  margin-bottom:.6rem;
+}
+
+/* the count-up row: hairline above each figure, no side rules */
+[data-theme="nocturne"] .statline{
+  gap:0;
+  border-top:0;
+}
+[data-theme="nocturne"] .stat-n{
+  padding:1.6rem 1.6rem 0 0;
+  border-top:1px solid var(--n-rule);
+}
+[data-theme="nocturne"] .stat-n::before{display:none}
+[data-theme="nocturne"] .stat-n + .stat-n{padding-left:1.6rem}
+[data-theme="nocturne"] .stat-n b{
+  font-family:var(--n-display);
+  font-size:clamp(2.6rem,5.2vw,3.9rem);
+  font-weight:400;
+  color:var(--n-ink);
+  letter-spacing:-.02em;
+}
+[data-theme="nocturne"] .stat-n b i{color:var(--n-lime)}
+[data-theme="nocturne"] .stat-n > span{
+  margin-top:1rem;
+  font-size:.68rem;
+  letter-spacing:var(--n-meta-track);
+  text-transform:uppercase;
+  color:var(--n-faint);
+}
+
+[data-theme="nocturne"] .credline{
+  border-top:1px solid var(--n-rule);
+  margin-top:clamp(2.6rem,5vw,4rem);
+  padding-top:1.8rem;
+  gap:1rem 2.8rem;
+}
+[data-theme="nocturne"] .credline span{
+  font-size:.72rem;
+  letter-spacing:.1em;
+  color:var(--n-muted);
+}
+[data-theme="nocturne"] .credline i{color:var(--n-lime);font-size:.85rem}
+[data-theme="nocturne"] .credline b{color:var(--n-ink);font-weight:500}
+
+
+/* -------------------------------------------------------------
+   10. ABOUT
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] .about-split{
+  grid-template-columns:.95fr 1.05fr;
+  gap:clamp(2rem,5vw,4.5rem);
+  align-items:start;
+}
+[data-theme="nocturne"] .about__media .media{aspect-ratio:4/5}
+[data-theme="nocturne"] .about__values{
+  gap:0;
+  margin-top:2.2rem;
+  border-top:1px solid var(--n-rule);
+}
+[data-theme="nocturne"] .about__values li{
+  padding:1.1rem 0;
+  border-bottom:1px solid var(--n-rule);
+  color:var(--n-muted);
+  font-size:.92rem;
+}
+[data-theme="nocturne"] .about__values i{color:var(--n-lime);font-size:.8rem;margin-top:.5rem}
+[data-theme="nocturne"] .about__values b{color:var(--n-ink);font-weight:500}
+
+
+/* -------------------------------------------------------------
+   11. SERVICES EXPLORER — already a ruled list, now a catalogue
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] .svc-explorer{
+  grid-template-columns:1fr 1.05fr;
+  gap:clamp(2rem,5vw,5rem);
+}
+[data-theme="nocturne"] .svc-list{border-top:1px solid var(--n-rule)}
+[data-theme="nocturne"] .svc-item{
+  border-bottom:1px solid var(--n-rule);
+  padding:1.5rem .1rem;
+  color:var(--n-muted);
+  letter-spacing:.01em;
+  text-transform:none;
+  font-family:var(--n-display);
+}
+[data-theme="nocturne"] .svc-item__no{
+  font-family:var(--f);
+  font-size:.66rem;
+  letter-spacing:var(--n-meta-track);
+  color:var(--n-faint);
+}
+[data-theme="nocturne"] .svc-item__name{
+  font-family:var(--n-display);
+  font-size:clamp(1.15rem,2.2vw,1.7rem);
+  letter-spacing:-.01em;
+}
+[data-theme="nocturne"] .svc-item__go{color:var(--n-lime)}
+[data-theme="nocturne"] .svc-item:hover,
+[data-theme="nocturne"] .svc-item.is-active{
+  color:var(--n-ink);
+  padding-left:1.1rem;
+}
+[data-theme="nocturne"] .svc-item:hover .svc-item__no,
+[data-theme="nocturne"] .svc-item.is-active .svc-item__no{color:var(--n-lime);opacity:1}
+
+[data-theme="nocturne"] .svc-figure{
+  border-radius:0;
+  aspect-ratio:4/3;
+  background:var(--n-ground);
+}
+[data-theme="nocturne"] .svc-copy{
+  margin-top:1.8rem;
+  padding-top:1.6rem;
+  border-top:1px solid var(--n-rule);
+}
+[data-theme="nocturne"] .svc-copy p{color:var(--n-muted);font-size:.94rem}
+[data-theme="nocturne"] .svc-accordion-media p{color:var(--n-muted)}
+
+
+/* -------------------------------------------------------------
+   12. PROJECTS CAROUSEL — cards become ruled typographic rows
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] .proj-card{
+  background:none;
+  border:0;
+  border-top:1px solid var(--n-rule);
+  border-radius:0;
+  box-shadow:none;
+  padding:1.3rem 0 0;
+}
+[data-theme="nocturne"] .proj-card .media{
+  aspect-ratio:4/3;
+  margin-bottom:1.5rem;
+  border-radius:0;
+}
+[data-theme="nocturne"] .proj-card__meta{
+  font-size:.66rem;
+  letter-spacing:var(--n-meta-track);
+  color:var(--n-faint);
+  margin-bottom:.9rem;
+  gap:.7rem;
+}
+[data-theme="nocturne"] .proj-card h3{margin-bottom:.8rem}
+[data-theme="nocturne"] .proj-card p{color:var(--n-muted);font-size:.92rem}
+[data-theme="nocturne"] .proj-card:hover h3{color:var(--n-lime)}
+
+[data-theme="nocturne"] .swiper-controls{gap:0;margin-top:3rem}
+[data-theme="nocturne"] .swiper-controls button,
+[data-theme="nocturne"] .band:not(.band--dark) .swiper-controls button{
+  width:52px;height:52px;
+  border-radius:0;
+  border:1px solid var(--n-rule-ui);
+  background:transparent;
+  color:var(--n-ink);
+  box-shadow:none;
+}
+[data-theme="nocturne"] .swiper-controls button + button{border-left:0}
+[data-theme="nocturne"] .swiper-controls button:hover,
+[data-theme="nocturne"] .band:not(.band--dark) .swiper-controls button:hover{
+  background:var(--n-ink);
+  color:var(--n-ground);
+  border-color:var(--n-ink);
+}
+
+
+/* -------------------------------------------------------------
+   13. FULL-BLEED IMAGE STRIP — photography edge to edge
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] .strip .swiper-slide{
+  height:clamp(240px,34vw,480px);
+}
+[data-theme="nocturne"] .strip .swiper-slide + .swiper-slide{
+  border-left:1px solid var(--n-rule);
+}
+[data-theme="nocturne"] .strip__cap{
+  left:16px;bottom:16px;
+  padding:0;
+  border-radius:0;
+  background:none;
+  backdrop-filter:none;
+  color:var(--n-ink);
+  font-size:.64rem;
+  letter-spacing:var(--n-meta-track);
+  text-shadow:0 1px 12px rgba(8,9,5,.9);
+}
+[data-theme="nocturne"] .strip__nav{
+  width:50px;height:50px;
+  border-radius:0;
+  border:1px solid var(--n-rule-ui);
+  background:rgba(16,17,9,.72);
+  color:var(--n-ink);
+  box-shadow:none;
+  backdrop-filter:blur(6px);
+}
+[data-theme="nocturne"] .strip__nav:hover{
+  background:var(--n-ink);
+  color:var(--n-ground);
+  transform:translateY(-50%);
+  border-color:var(--n-ink);
+}
+
+
+/* -------------------------------------------------------------
+   14. CURRENT WORK — ruled rows, image left, catalogue right
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] .cw-grid{
+  grid-template-columns:1fr;
+  gap:0;
+  border-top:1px solid var(--n-rule);
+}
+[data-theme="nocturne"] .cw-card{
+  display:grid;
+  grid-template-columns:minmax(0,300px) minmax(0,1fr);
+  column-gap:clamp(1.5rem,4vw,3.5rem);
+  row-gap:0;
+  align-items:start;
+  padding:clamp(1.8rem,3.4vw,2.8rem) 0;
+  border-bottom:1px solid var(--n-rule);
+  background:none;
+  border-radius:0;
+  box-shadow:none;
+}
+[data-theme="nocturne"] .cw-card > *{grid-column:2}
+[data-theme="nocturne"] .cw-card .media{
+  grid-column:1;
+  grid-row:1 / span 30;
+  aspect-ratio:4/3;
+  margin-bottom:0;
+}
+[data-theme="nocturne"] .cw-card__meta{
+  justify-content:flex-start;
+  gap:1.4rem;
+  font-size:.66rem;
+  letter-spacing:var(--n-meta-track);
+  color:var(--n-faint);
+  margin-bottom:.7rem;
+}
+[data-theme="nocturne"] .cw-card h3{
+  font-size:clamp(1.25rem,2.2vw,1.7rem);
+  margin-bottom:1.4rem;
+}
+[data-theme="nocturne"] .cw-card__note{
+  color:var(--n-muted);
+  font-size:.9rem;
+  max-width:58ch;
+}
+[data-theme="nocturne"] .cw-card__stage{
+  font-size:.66rem;
+  letter-spacing:var(--n-meta-track);
+  color:var(--n-ink);
+  font-weight:500;
+}
+[data-theme="nocturne"] .cw-card__stage small{
+  color:var(--n-faint);
+  letter-spacing:.14em;
+  margin-top:5px;
+}
+[data-theme="nocturne"] .cw-card:hover h3{color:var(--n-lime)}
+
+/* stepper: segmented hairline ticks, no pills, no glow */
+[data-theme="nocturne"] .stepper{gap:5px;margin:0 0 1.1rem}
+[data-theme="nocturne"] .stepper li{
+  height:2px;
+  border-radius:0;
+  background:var(--n-rule);
+  box-shadow:none;
+}
+[data-theme="nocturne"] .stepper li.done{background:rgba(194,232,7,.5)}
+[data-theme="nocturne"] .stepper li.now{
+  background:var(--n-lime);
+  box-shadow:none;
+  height:4px;
+  margin-top:-1px;
+}
+
+
+/* -------------------------------------------------------------
+   15. PROCESS — the numbered circles become serif numerals
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] .proc-grid{
+  gap:0 clamp(1.5rem,3vw,3rem);
+  border-top:1px solid var(--n-rule);
+}
+[data-theme="nocturne"] .proc{
+  padding-top:1.7rem;
+  border-top:0;
+}
+[data-theme="nocturne"] .proc__num{
+  width:auto;height:auto;
+  border:0;
+  border-radius:0;
+  display:block;
+  margin-bottom:1.1rem;
+  color:var(--n-faint);
+}
+[data-theme="nocturne"] .proc__num i{display:none}
+[data-theme="nocturne"] .proc__num span{
+  position:static;
+  width:auto;height:auto;
+  border-radius:0;
+  background:none;
+  color:var(--n-faint);
+  font-family:var(--n-display);
+  font-size:clamp(1.6rem,3vw,2.2rem);
+  display:block;
+  letter-spacing:.02em;
+}
+[data-theme="nocturne"] .proc h3{margin-bottom:.7rem}
+[data-theme="nocturne"] .proc p{color:var(--n-muted);font-size:.9rem}
+
+
+/* -------------------------------------------------------------
+   16. STORE — ruled rows, portrait plate left
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] .store-grid{
+  grid-template-columns:1fr;
+  gap:0;
+  border-top:1px solid var(--n-rule);
+}
+[data-theme="nocturne"] .store-card{
+  display:grid;
+  grid-template-columns:minmax(0,200px) minmax(0,1fr);
+  column-gap:clamp(1.5rem,4vw,3.5rem);
+  align-items:start;
+  padding:clamp(1.6rem,3vw,2.4rem) 0;
+  border-bottom:1px solid var(--n-rule);
+  background:none;
+  border-radius:0;
+  box-shadow:none;
+}
+[data-theme="nocturne"] .store-card > *{grid-column:2}
+[data-theme="nocturne"] .store-card .media{
+  grid-column:1;
+  grid-row:1 / span 30;
+  aspect-ratio:3/4;
+  margin-bottom:0;
+}
+[data-theme="nocturne"] .store-card h3{
+  font-size:clamp(1.15rem,2vw,1.5rem);
+  margin-bottom:.7rem;
+}
+[data-theme="nocturne"] .store-card p,
+[data-theme="nocturne"] .band--dark .store-card p{
+  color:var(--n-muted);
+  font-size:.9rem;
+  max-width:60ch;
+}
+
+
+/* -------------------------------------------------------------
+   17. REVIEWS — quotes on a hairline, monogram not a badge
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] .rev-card{
+  border-top:1px solid var(--n-rule);
+  padding-top:1.8rem;
+  background:none;
+  border-radius:0;
+  box-shadow:none;
+}
+[data-theme="nocturne"] .rev-card p{
+  font-family:var(--n-display);
+  font-size:clamp(1.05rem,1.7vw,1.28rem);
+  line-height:1.6;
+  color:var(--n-ink);
+  margin-bottom:1.8rem;
+}
+[data-theme="nocturne"] .rev-card__who{gap:.9rem;align-items:baseline}
+[data-theme="nocturne"] .rev-avatar,
+[data-theme="nocturne"] .rev-card__who .rev-avatar{
+  width:auto;height:auto;
+  border-radius:0;
+  background:none;
+  display:inline;
+  color:var(--n-lime);
+  font-size:.66rem;
+  letter-spacing:var(--n-meta-track);
+  font-weight:500;
+}
+[data-theme="nocturne"] .rev-card__who b{color:var(--n-ink);font-weight:500;font-size:.88rem}
+[data-theme="nocturne"] .rev-card__who span span{
+  color:var(--n-faint);
+  font-size:.64rem;
+  letter-spacing:var(--n-meta-track);
+  margin-top:3px;
+}
+
+
+/* -------------------------------------------------------------
+   18. CONTACT — form fields must read clearly on the dark ground
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] .contact-wrap{
+  grid-template-columns:1.05fr .95fr;
+  gap:clamp(2.5rem,5vw,5rem);
+}
+[data-theme="nocturne"] .field{margin-bottom:1.6rem}
+[data-theme="nocturne"] .field label{
+  font-size:.66rem;
+  letter-spacing:var(--n-meta-track);
+  color:var(--n-muted);
+  margin-bottom:.65rem;
+}
+[data-theme="nocturne"] .field input,
+[data-theme="nocturne"] .field textarea{
+  border-radius:0;
+  border:1px solid var(--n-rule-ui);
+  background:var(--n-ground-lift);
+  color:var(--n-ink);
+  padding:15px 16px;
+  font-size:.95rem;
+}
+[data-theme="nocturne"] .field input::placeholder,
+[data-theme="nocturne"] .field textarea::placeholder{color:var(--n-faint)}
+[data-theme="nocturne"] .field input:hover,
+[data-theme="nocturne"] .field textarea:hover{border-color:rgba(255,255,255,.6)}
+[data-theme="nocturne"] .field input:focus,
+[data-theme="nocturne"] .field textarea:focus{
+  outline:2px solid var(--n-lime);
+  outline-offset:1px;
+  border-color:var(--n-lime);
+  background:var(--n-ground);
+}
+[data-theme="nocturne"] .field.err input,
+[data-theme="nocturne"] .field.err textarea{border-color:var(--n-error)}
+[data-theme="nocturne"] .field .msg{
+  color:var(--n-error);
+  font-size:.7rem;
+  letter-spacing:.08em;
+}
+[data-theme="nocturne"] .form-note{color:var(--n-muted);font-size:.8rem}
+[data-theme="nocturne"] .form-note a{color:var(--n-lime)}
+[data-theme="nocturne"] .form-ok{
+  border-radius:0;
+  background:none;
+  border:0;
+  border-left:2px solid var(--n-lime);
+  padding:1rem 0 1rem 1.2rem;
+  color:var(--n-ink);
+  font-size:.88rem;
+}
+[data-theme="nocturne"] .form-ok em{color:var(--n-faint)}
+
+[data-theme="nocturne"] .contact-info dl{
+  gap:0;
+  grid-template-columns:auto 1fr;
+  border-top:1px solid var(--n-rule);
+}
+[data-theme="nocturne"] .contact-info dt{
+  color:var(--n-lime);
+  font-size:.85rem;
+  padding:1.05rem 1.4rem 1.05rem 0;
+  border-bottom:1px solid var(--n-rule);
+}
+[data-theme="nocturne"] .contact-info dd{
+  color:var(--n-muted);
+  font-size:.92rem;
+  padding:1.05rem 0;
+  border-bottom:1px solid var(--n-rule);
+}
+[data-theme="nocturne"] .contact-info dd a:hover{color:var(--n-lime)}
+[data-theme="nocturne"] .contact-info .tbc{color:var(--n-faint)}
+
+
+/* -------------------------------------------------------------
+   19. FOOTER
+   ------------------------------------------------------------- */
+[data-theme="nocturne"] .site-footer{color:var(--n-muted)}
+[data-theme="nocturne"] .site-footer h4{
+  color:var(--n-faint);
+  font-size:.66rem;
+  letter-spacing:var(--n-meta-track);
+  margin-bottom:1.4rem;
+}
+[data-theme="nocturne"] .site-footer ul{gap:.75rem;font-size:.86rem}
+[data-theme="nocturne"] .site-footer a:hover{color:var(--n-lime)}
+[data-theme="nocturne"] .footer-brand p{color:var(--n-muted);font-size:.88rem}
+[data-theme="nocturne"] .footer-bar{
+  border-top:1px solid var(--n-rule);
+  margin-top:clamp(2.8rem,5vw,4.5rem);
+  padding:24px 0;
+  font-size:.68rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--n-faint);
+}
+
+/* WhatsApp float: a marked square, not a glossy bubble */
+[data-theme="nocturne"] .wa-float{
+  border-radius:0;
+  background:var(--n-ground);
+  border:1px solid var(--n-rule-ui);
+  color:var(--n-lime);
+  box-shadow:none;
+}
+[data-theme="nocturne"] .wa-float:hover{
+  transform:none;
+  background:var(--n-lime);
+  color:var(--n-ground);
+  border-color:var(--n-lime);
+}
+
+/* lightbox matches the ground */
+[data-theme="nocturne"] .lightbox{background:rgba(16,17,9,.97)}
+[data-theme="nocturne"] .lightbox img{border-radius:0}
+[data-theme="nocturne"] .lightbox button{
+  border-radius:0;
+  border:1px solid var(--n-rule-ui);
+  color:var(--n-ink);
+}
+[data-theme="nocturne"] .lightbox button:hover{
+  background:var(--n-ink);
+  color:var(--n-ground);
+}
+
+
+/* -------------------------------------------------------------
+   20. RESPONSIVE — down to 320px
+   ------------------------------------------------------------- */
+@media(max-width:1100px){
+  [data-theme="nocturne"] .statline{grid-template-columns:1fr 1fr}
+  [data-theme="nocturne"] .stat-n + .stat-n{padding-left:0}
+  [data-theme="nocturne"] .stat-n:nth-child(even){padding-left:1.6rem}
+}
+
+@media(max-width:992px){
+  [data-theme="nocturne"] .headline .row-split,
+  [data-theme="nocturne"] .about-split,
+  [data-theme="nocturne"] .contact-wrap{grid-template-columns:1fr}
+  [data-theme="nocturne"] .headline__aside{
+    border-left:0;
+    border-top:1px solid var(--n-rule);
+    padding:1.8rem 0 0;
+  }
+  [data-theme="nocturne"] .proc-grid{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:900px){
+  [data-theme="nocturne"] .svc-explorer{grid-template-columns:1fr}
+  [data-theme="nocturne"] .svc-item.is-active{padding-left:.1rem}
+  [data-theme="nocturne"] .svc-accordion-media .media{border-radius:0}
+}
+
+@media(max-width:760px){
+  /* ruled rows stack: the photograph leads, the caption follows */
+  [data-theme="nocturne"] .cw-card,
+  [data-theme="nocturne"] .store-card{
+    grid-template-columns:1fr;
+    row-gap:1.2rem;
+  }
+  [data-theme="nocturne"] .cw-card > *,
+  [data-theme="nocturne"] .store-card > *{grid-column:1}
+  [data-theme="nocturne"] .cw-card .media,
+  [data-theme="nocturne"] .store-card .media{
+    grid-column:1;
+    grid-row:auto;
+    aspect-ratio:16/10;
+    margin-bottom:.4rem;
+  }
+  [data-theme="nocturne"] .proc-grid{grid-template-columns:1fr;gap:0}
+  [data-theme="nocturne"] .proc{
+    padding:1.5rem 0;
+    border-bottom:1px solid var(--n-rule);
+  }
+}
+
+@media(max-width:560px){
+  [data-theme="nocturne"]{
+    --gutter:18px;
+    --n-space:clamp(56px,13vw,84px);
+  }
+  [data-theme="nocturne"] .statline{grid-template-columns:1fr}
+  [data-theme="nocturne"] .stat-n,
+  [data-theme="nocturne"] .stat-n:nth-child(even){padding:1.2rem 0 0}
+  [data-theme="nocturne"] .btn-ghost{padding:15px 26px;width:100%;justify-content:center}
+  [data-theme="nocturne"] .headline .btns{flex-direction:column;align-items:stretch}
+  [data-theme="nocturne"] .credline{gap:.9rem 1.6rem}
+  [data-theme="nocturne"] .strip__nav{width:42px;height:42px}
+  [data-theme="nocturne"] .footer-bar{flex-direction:column;gap:.6rem;align-items:flex-start}
+}
+
+@media(max-width:360px){
+  [data-theme="nocturne"] .hero__tag h2{font-size:1.9rem}
+  [data-theme="nocturne"] .chips li{padding:0 .6em;font-size:.62rem}
+  [data-theme="nocturne"] .cw-card__meta{flex-wrap:wrap;gap:.4rem 1rem}
+}
+
+
+/* -------------------------------------------------------------
+   21. REDUCED MOTION — the style is meant to be still anyway
+   ------------------------------------------------------------- */
+@media(prefers-reduced-motion:reduce){
+  [data-theme="nocturne"] .media img,
+  [data-theme="nocturne"] .svc-figure img,
+  [data-theme="nocturne"] .strip .swiper-slide img,
+  [data-theme="nocturne"] .gallery-grid img{
+    transition:none;
+    transform:none;
+  }
+  [data-theme="nocturne"] a:hover .media img,
+  [data-theme="nocturne"] .store-card:hover .media img{transform:none}
+  [data-theme="nocturne"] .btn-ghost,
+  [data-theme="nocturne"] .btn-ghost::before,
+  [data-theme="nocturne"] .svc-item,
+  [data-theme="nocturne"] .strip__nav,
+  [data-theme="nocturne"] .tlink{transition:none}
+  [data-theme="nocturne"] .hero__cue::after{animation:none}
+  [data-theme="nocturne"] .svc-item:hover,
+  [data-theme="nocturne"] .svc-item.is-active{padding-left:.1rem}
+}
