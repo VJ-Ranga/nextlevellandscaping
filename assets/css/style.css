@@ -1136,3 +1136,23 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 @media(max-width:760px){
   #intro .credline{grid-template-columns:1fr;gap:.9rem}
 }
+
+/* =============================================================
+   42. Carbon soft — rounded top on the "Our Work" band
+   The dark projects band curves up out of the light section
+   above it. Both top corners; carbon-soft only.
+   ============================================================= */
+[data-theme="carbon-soft"]{--r-ow:clamp(40px,7vw,96px)}
+[data-theme="carbon-soft"] #projects{
+  position:relative;
+  z-index:1;
+  border-radius:var(--r-ow) var(--r-ow) 0 0;
+  margin-top:calc(-1 * var(--r-ow));
+  padding-top:calc(var(--pad-band) + var(--r-ow) * .4);
+}
+[data-theme="carbon-soft"] #projects.contour::before{border-radius:inherit}
+/* the light band above needs room to be pulled into */
+[data-theme="carbon-soft"] #services{padding-bottom:calc(var(--pad-band) + var(--r-ow))}
+@media(max-width:640px){
+  [data-theme="carbon-soft"]{--r-ow:36px}
+}
