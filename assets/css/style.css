@@ -1094,3 +1094,40 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 #intro .credline b{color:#fff}
 /* the merged section is single-column now — kill the old 2-col grid */
 #intro .container > .reveal{max-width:60ch}
+
+/* =============================================================
+   41. Intro layout — two switchable versions via [data-intro]
+   split (default): copy left, stats 2x2 right, creds strip below
+   stacked        : copy full-width, stats 1x4 row, creds strip
+   ============================================================= */
+#intro .intro-copy .measure{max-width:44ch}
+#intro .credline{margin-top:2.6rem}
+
+/* --- SPLIT (default) --- */
+:root{--intro:split}
+[data-intro="split"] #intro .intro-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:clamp(2rem,6vw,5.5rem);
+  align-items:center;
+}
+[data-intro="split"] #intro .statline{
+  grid-template-columns:repeat(2,1fr);
+  gap:2.4rem 2.6rem;
+}
+[data-intro="split"] #intro .stat-n b{font-size:clamp(2.2rem,3.6vw,3rem)}
+
+/* --- STACKED --- */
+[data-intro="stacked"] #intro .intro-grid{display:block}
+[data-intro="stacked"] #intro .intro-figures{margin-top:3.2rem}
+[data-intro="stacked"] #intro .statline{grid-template-columns:repeat(4,1fr);gap:2.5rem}
+
+/* --- shared responsive --- */
+@media(max-width:900px){
+  [data-intro="split"] #intro .intro-grid{grid-template-columns:1fr;gap:2.8rem}
+  [data-intro="split"] #intro .statline{grid-template-columns:1fr 1fr}
+  [data-intro="stacked"] #intro .statline{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){
+  #intro .statline{grid-template-columns:1fr!important}
+}
