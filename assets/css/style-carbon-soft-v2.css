@@ -14,7 +14,7 @@
      hero (bottom)        . . . bottom-LEFT on the media  0 0 0 V
      #intro   (dark)      . . . flat — meets the hero     0 0 0 0
      #services(light)     . . . top-RIGHT                0 V 0 0
-     #projects(dark)      . . . top-LEFT                V 0 0 0
+     #projects(dark)      . . . top-LEFT (flush, no pull)  V 0 0 0
      #current (light)     . . . top-LEFT                 V 0 0 0
      #reviews (dark)      . . . top-RIGHT                0 V 0 0
      #process (light)     . . . top-LEFT                 V 0 0 0
@@ -160,6 +160,8 @@ html[data-theme="carbon-soft-v2"] .subhero{
    rounding to reveal the band underneath through the curve.
 
    - #intro meets the hero flat (the hero owns the curve).
+   - #projects also sits flush (its scoop corner stays, but it does
+     not ride up over #services).
    - every band after it rides up out of its predecessor with one
      corner cut, alternating top-left / top-right.
    - #contact sits flat; the footer owns the last curve.
@@ -171,7 +173,6 @@ html[data-theme="carbon-soft-v2"] main > .band{
 
 /* the riders — same geometry, corner rotates per section */
 html[data-theme="carbon-soft-v2"] main > #services,
-html[data-theme="carbon-soft-v2"] main > #projects,
 html[data-theme="carbon-soft-v2"] main > #current,
 html[data-theme="carbon-soft-v2"] main > #reviews,
 html[data-theme="carbon-soft-v2"] main > #process,
@@ -187,6 +188,7 @@ html[data-theme="carbon-soft-v2"] main > #intro{
 }
 html[data-theme="carbon-soft-v2"] main > #services{ border-radius:0 var(--v2-scoop) 0 0; }
 html[data-theme="carbon-soft-v2"] main > #projects{ border-radius:var(--v2-scoop) 0 0 0; }
+html[data-theme="carbon-soft-v2"] main > #projects{ margin-top:0; padding-top:calc(var(--pad-band) + var(--v2-scoop) * .45);  /* flush under #services — hero/intro style, no pull */ }
 html[data-theme="carbon-soft-v2"] main > #current{  border-radius:var(--v2-scoop) 0 0 0; }
 html[data-theme="carbon-soft-v2"] main > #reviews{  border-radius:0 var(--v2-scoop) 0 0; }
 html[data-theme="carbon-soft-v2"] main > #process{  border-radius:var(--v2-scoop) 0 0 0; }
@@ -197,7 +199,6 @@ html[data-theme="carbon-soft-v2"] main > #contact{ margin-top:0; padding-top:var
 /* the band ABOVE each scoop needs room to be pulled into.
    #intro also gets it (services sweeps up over its bottom). */
 html[data-theme="carbon-soft-v2"] main > #intro,
-html[data-theme="carbon-soft-v2"] main > #services,
 html[data-theme="carbon-soft-v2"] main > #current,
 html[data-theme="carbon-soft-v2"] main > #reviews,
 html[data-theme="carbon-soft-v2"] main > #process,
