@@ -19,7 +19,7 @@
      #reviews (dark)      . . . top-RIGHT                0 V 0 0
      #process (light)     . . . top-LEFT                 V 0 0 0
      #store   (dark)      . . . top-RIGHT                0 V 0 0
-     #contact (light)     . . . top-LEFT + top-RIGHT     V V 0 0
+     #contact (light)     . . . flat — under the strip     0 0 0 0
      .site-footer (dark)  . . . top-LEFT + top-RIGHT     V V 0 0
      (V = var(--v2-scoop))
 
@@ -162,7 +162,7 @@ html[data-theme="carbon-soft-v2"] .subhero{
    - #intro meets the hero flat (the hero owns the curve).
    - every band after it rides up out of its predecessor with one
      corner cut, alternating top-left / top-right.
-   - #contact is the closer: both top corners cut.
+   - #contact sits flat; the footer owns the last curve.
    ============================================================= */
 html[data-theme="carbon-soft-v2"] main > .band{
   position:relative;
@@ -175,8 +175,7 @@ html[data-theme="carbon-soft-v2"] main > #projects,
 html[data-theme="carbon-soft-v2"] main > #current,
 html[data-theme="carbon-soft-v2"] main > #reviews,
 html[data-theme="carbon-soft-v2"] main > #process,
-html[data-theme="carbon-soft-v2"] main > #store,
-html[data-theme="carbon-soft-v2"] main > #contact{
+html[data-theme="carbon-soft-v2"] main > #store{
   margin-top:calc(-1 * var(--v2-scoop));
   padding-top:calc(var(--pad-band) + var(--v2-scoop) * .45);
 }
@@ -192,7 +191,8 @@ html[data-theme="carbon-soft-v2"] main > #current{  border-radius:var(--v2-scoop
 html[data-theme="carbon-soft-v2"] main > #reviews{  border-radius:0 var(--v2-scoop) 0 0; }
 html[data-theme="carbon-soft-v2"] main > #process{  border-radius:var(--v2-scoop) 0 0 0; }
 html[data-theme="carbon-soft-v2"] main > #store{    border-radius:0 var(--v2-scoop) 0 0; }
-html[data-theme="carbon-soft-v2"] main > #contact{  border-radius:var(--v2-scoop) var(--v2-scoop) 0 0; }
+html[data-theme="carbon-soft-v2"] main > #contact{  border-radius:0 0 0 0;  /* flat — sits under the photo strip */ }
+html[data-theme="carbon-soft-v2"] main > #contact{ margin-top:0; padding-top:var(--pad-band); }
 
 /* the band ABOVE each scoop needs room to be pulled into.
    #intro also gets it (services sweeps up over its bottom). */
@@ -301,6 +301,11 @@ html[data-theme="carbon-soft-v2"] .strip-band{
   background:var(--v2-night);
   color:var(--v2-on-night);
 }
+
+html[data-theme="carbon-soft-v2"] main > #project-strip{
+  padding:clamp(22px,3.5vw,44px) clamp(16px,4vw,56px);
+}
+html[data-theme="carbon-soft-v2"] .strip .swiper-slide img{ border-radius:10px; }
 html[data-theme="carbon-soft-v2"] .strip__cap{
   background:rgba(23,25,15,.66);
   color:#F2F2EC;
