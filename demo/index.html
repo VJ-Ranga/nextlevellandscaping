@@ -13,9 +13,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1788938494">
-<link rel="stylesheet" href="assets/css/style-plan.css?v=1788938494">
-<link rel="stylesheet" href="assets/css/style-nocturne.css?v=1788938494">
+<link rel="stylesheet" href="assets/css/style.css?v=1788938967">
+<link rel="stylesheet" href="assets/css/style-plan.css?v=1788938967">
+<link rel="stylesheet" href="assets/css/style-nocturne.css?v=1788938967">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -84,7 +84,7 @@
         <a href="#process">Our Process</a>
         <a href="#reviews">Reviews</a>
         <a href="store.html">Store</a>
-        <a href="#numbers">Credentials</a>
+        <a href="#intro">Credentials</a>
       </nav>
       <div class="hdr2__util-right">
         <a href="tel:+61404440222">0404 440 222</a>
@@ -126,7 +126,6 @@
 </div>
 
 <main id="main" tabindex="-1">
-
   <!-- ===== Hero ===== -->
   <section class="hero">
     <div class="hero__media">
@@ -151,55 +150,20 @@
     <div class="hero__cue">Scroll</div>
   </section>
 
-  <!-- ===== Headline band ===== -->
-  <section class="band band--dark headline contour">
+  <!-- ===== Intro: positioning + trust ===== -->
+  <section class="band band--dark headline contour" id="intro">
     <div class="container">
-      <div class="row-split">
-        <div class="reveal">
-          <span class="eyebrow">First-choice Adelaide landscapers</span>
-          <h1>Taking Adelaide gardens to the next level</h1>
-          <p class="lead measure">Over a decade of design and construction across South Australia — paving, retaining walls, fencing, turf, irrigation and full landscape design, delivered by one experienced team.</p>
-          <div class="btns">
-            <a class="btn-ghost btn-ghost--fill" href="#contact">Get a free quote</a>
-            <a class="btn-ghost" href="our-work.html">See our work</a>
-          </div>
-        </div>
-        <div class="headline__aside reveal d1">
-          <strong>10+ yrs</strong>
-          Transforming front and back yards into spaces filled with love and laughter — from initial 2D &amp; 3D design through to the final planting.
+      <div class="reveal">
+        <span class="eyebrow">First-choice Adelaide landscapers</span>
+        <h1>Taking Adelaide gardens to the next level</h1>
+        <p class="lead measure">Over a decade of design and construction across South Australia — paving, retaining walls, fencing, turf, irrigation and full landscape design, delivered by one experienced team.</p>
+        <div class="btns">
+          <a class="btn-ghost btn-ghost--fill" href="#contact">Get a free quote</a>
+          <a class="btn-ghost" href="our-work.html">See our work</a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ===== Numbers + credentials ===== -->
-  <section class="band contour" id="numbers">
-    <div class="container">
-      <div class="statline reveal" id="stats"></div>
+      <div class="statline reveal d1" id="stats"></div>
       <div class="credline reveal d1" id="credline"></div>
-    </div>
-  </section>
-
-  <!-- ===== About ===== -->
-  <section class="band band--dark contour" id="about">
-    <div class="container">
-      <div class="row-split about-split">
-        <div class="about__media reveal">
-          <div class="media"><img loading="lazy" src="assets/img/projects/klemzig.jpg" alt="A NextLevel Landscaping backyard build in Adelaide"></div>
-        </div>
-        <div class="about__body reveal d1">
-          <span class="eyebrow">Who we are</span>
-          <h2>South Australian owned, start to finish</h2>
-          <p class="lead measure">We're NextLevel Landscaping — a proudly South Australian owned and operated business delivering reliable, affordable landscaping to families and businesses across the state.</p>
-          <p class="measure">With over a decade of hands-on experience and countless projects delivered, we've built a reputation for quality, innovative and tailored outdoor spaces. One team handles it all: paving, retaining walls, fencing, turf, irrigation and full landscape design.</p>
-          <ul class="about__values">
-            <li><i class="fa-solid fa-gem"></i><span><b>Quality</b> — we take pride in every detail, delivering exceptional workmanship.</span></li>
-            <li><i class="fa-solid fa-recycle"></i><span><b>Sustainability</b> — environmentally friendly materials and practices where we can.</span></li>
-            <li><i class="fa-solid fa-handshake-angle"></i><span><b>Customer first</b> — your vision is our priority.</span></li>
-          </ul>
-          <p style="margin-top:1.8rem"><a class="btn-ghost" href="about.html">More about us</a></p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -242,7 +206,6 @@
     </div>
   </section>
 
-
   <!-- ===== Full-bleed project image strip ===== -->
   <section class="band band--dark strip-band" id="project-strip">
     <div class="container strip-head reveal">
@@ -278,21 +241,8 @@
     </div>
   </section>
 
-  <!-- ===== Store ===== -->
-  <section class="band" id="store">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">NextLevel Outdoors</span>
-        <h2>We don't just build it — we stock it</h2>
-        <p class="lead">An extensive range of landscaping products at our Edwardstown store. Authorised distributor of Lawn Solutions Australia.</p>
-      </div>
-      <div class="store-grid" id="store-list"></div>
-      <p style="margin-top:3rem" class="reveal"><a class="btn-ghost" href="store.html">Visit the store</a></p>
-    </div>
-  </section>
-
   <!-- ===== Reviews ===== -->
-  <section class="band band--dark contour" id="reviews">
+  <section class="band contour" id="reviews">
     <div class="container">
       <div class="section-head reveal">
         <span class="eyebrow">From our clients</span>
@@ -305,6 +255,37 @@
         <button id="rev-prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
         <button id="rev-next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section class="band band--dark contour" id="about">
+    <div class="container">
+      <div class="row-split about-split">
+        <div class="about__media reveal">
+          <div class="media"><img loading="lazy" width="1440" height="1080" src="assets/img/projects/klemzig.jpg" alt="A NextLevel Landscaping backyard build in Adelaide"></div>
+        </div>
+        <div class="about__body reveal d1">
+          <span class="eyebrow">Who we are</span>
+          <h2>South Australian owned, start to finish</h2>
+          <p class="lead measure">We're NextLevel Landscaping — a proudly South Australian owned and operated business delivering reliable, affordable landscaping to families and businesses across the state.</p>
+          <p class="measure">One team handles it all: 2D &amp; 3D design, paving, retaining walls, fencing, turf, irrigation and planting — from the first site visit to the final handover.</p>
+          <p style="margin-top:1.8rem"><a class="btn-ghost" href="about.html">More about us</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Store ===== -->
+  <section class="band" id="store">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">NextLevel Outdoors</span>
+        <h2>We don't just build it — we stock it</h2>
+        <p class="lead">An extensive range of landscaping products at our Edwardstown store. Authorised distributor of Lawn Solutions Australia.</p>
+      </div>
+      <div class="store-grid" id="store-list"></div>
+      <p style="margin-top:3rem" class="reveal"><a class="btn-ghost" href="store.html">Visit the store</a></p>
     </div>
   </section>
 
@@ -420,8 +401,8 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="assets/data.js?v=1788938494"></script>
-<script src="assets/js/main.js?v=1788938494"></script>
-<script src="assets/js/theme.js?v=1788938494"></script>
+<script src="assets/data.js?v=1788938967"></script>
+<script src="assets/js/main.js?v=1788938967"></script>
+<script src="assets/js/theme.js?v=1788938967"></script>
 </body>
 </html>
