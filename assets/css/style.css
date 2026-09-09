@@ -1046,3 +1046,35 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 [data-hero="sticky"] main > .band{background-color:var(--bg)}
 [data-hero="sticky"] main > .band--dark{background-color:var(--surface-dark)}
 [data-hero="sticky"] main > .strip-band{background-color:var(--surface-dark)}
+
+/* =============================================================
+   39. WCAG 2.2 fixes
+   2.4.1 Bypass Blocks + 2.2.2 Pause, Stop, Hide
+   ============================================================= */
+.skip-link{
+  position:absolute;left:12px;top:-60px;z-index:300;
+  padding:12px 20px;border-radius:4px;
+  background:var(--accent,#1C2412);color:var(--accent-ink,#fff);
+  font:500 .82rem/1 var(--f);letter-spacing:.06em;text-transform:uppercase;
+  transition:top .2s var(--ease);
+}
+.skip-link:focus{top:12px;outline:2px solid #fff;outline-offset:2px}
+
+/* hero pause: any looping motion >5s needs a user-accessible stop */
+.hero-pause{
+  position:absolute;right:20px;bottom:20px;z-index:4;
+  display:inline-flex;align-items:center;gap:.55em;
+  min-height:44px;min-width:44px;padding:0 16px;
+  border:1px solid rgba(255,255,255,.55);border-radius:999px;
+  background:rgba(20,22,18,.45);backdrop-filter:blur(4px);
+  color:#fff;font:500 .7rem/1 var(--f);letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;transition:background .25s,border-color .25s;
+}
+.hero-pause:hover{background:rgba(20,22,18,.72);border-color:#fff}
+.hero-pause:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.hero-pause__txt{white-space:nowrap}
+@media(max-width:640px){
+  .hero-pause{right:12px;bottom:12px;padding:0;width:44px;justify-content:center}
+  .hero-pause__txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
+[data-theme="plan"] .hero-pause,[data-theme="nocturne"] .hero-pause{border-radius:0}

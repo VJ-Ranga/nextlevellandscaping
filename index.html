@@ -13,11 +13,49 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1788923587">
-<link rel="stylesheet" href="assets/css/style-plan.css?v=1788923587">
-<link rel="stylesheet" href="assets/css/style-nocturne.css?v=1788923587">
+<link rel="stylesheet" href="assets/css/style.css?v=1788937627">
+<link rel="stylesheet" href="assets/css/style-plan.css?v=1788937627">
+<link rel="stylesheet" href="assets/css/style-nocturne.css?v=1788937627">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LandscapingBusiness",
+  "name": "NextLevel Landscaping",
+  "legalName": "Adelaide Express Services Pty Ltd",
+  "url": "https://nextlevellandscaping.com.au/",
+  "telephone": "+61404440222",
+  "email": "info@nextlevellandscaping.com.au",
+  "image": "assets/img/projects/grange.jpg",
+  "logo": "assets/img/brand/logo.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Shop 1/41 Woodlands Terrace",
+    "addressLocality": "Edwardstown",
+    "addressRegion": "SA",
+    "postalCode": "5039",
+    "addressCountry": "AU"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": -34.97556, "longitude": 138.57222 },
+  "areaServed": [
+    { "@type": "City", "name": "Adelaide" },
+    { "@type": "AdministrativeArea", "name": "Adelaide Hills" }
+  ],
+  "identifier": "BLD320507",
+  "sameAs": ["https://www.instagram.com/nextlevellandscaping41/"],
+  "makesOffer": [
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Landscape design" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Paving" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Retaining walls" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Fencing" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Turf and soft landscaping" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Irrigation" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Commercial garden maintenance" } }
+  ]
+}
+</script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <!-- ===== Header ===== -->
 <header class="site-header">
@@ -27,7 +65,7 @@
       <a href="#services">Services</a>
       <a href="our-work.html">Our Work</a>
       <a href="current-work.html">Current Work</a>
-      <a href="#store">Store</a>
+      <a href="store.html">Store</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="header-cta">
@@ -45,7 +83,7 @@
       <nav class="hdr2__util-links">
         <a href="#process">Our Process</a>
         <a href="#reviews">Reviews</a>
-        <a href="#store">Store</a>
+        <a href="store.html">Store</a>
         <a href="#numbers">Credentials</a>
       </nav>
       <div class="hdr2__util-right">
@@ -78,7 +116,7 @@
     <a href="#services">Services</a>
     <a href="our-work.html">Our Work</a>
     <a href="current-work.html">Current Work</a>
-    <a href="#store">Store</a>
+    <a href="store.html">Store</a>
     <a href="#contact">Contact</a>
   </nav>
   <div class="drawer__foot">
@@ -87,7 +125,7 @@
   </div>
 </div>
 
-<main>
+<main id="main" tabindex="-1">
 
   <!-- ===== Hero ===== -->
   <section class="hero">
@@ -98,6 +136,7 @@
         <source src="assets/video/hero.mp4" type="video/mp4">
       </video>
       <div class="hero__overlay"></div>
+      <button class="hero-pause" id="hero-pause" type="button" aria-pressed="false"><i class="fa-solid fa-pause" aria-hidden="true"></i><span class="hero-pause__txt">Pause background video</span></button>
     </div>
     <div class="container hero__tag">
       <span>Adelaide &bull; South Australian owned &bull; Licensed builder BLD320507</span>
@@ -158,7 +197,7 @@
             <li><i class="fa-solid fa-recycle"></i><span><b>Sustainability</b> — environmentally friendly materials and practices where we can.</span></li>
             <li><i class="fa-solid fa-handshake-angle"></i><span><b>Customer first</b> — your vision is our priority.</span></li>
           </ul>
-          <p style="margin-top:1.8rem"><a class="btn-ghost" href="#">More about us</a></p>
+          <p style="margin-top:1.8rem"><a class="btn-ghost" href="about.html">More about us</a></p>
         </div>
       </div>
     </div>
@@ -248,7 +287,7 @@
         <p class="lead">An extensive range of landscaping products at our Edwardstown store. Authorised distributor of Lawn Solutions Australia.</p>
       </div>
       <div class="store-grid" id="store-list"></div>
-      <p style="margin-top:3rem" class="reveal"><a class="btn-ghost" href="#">Visit the store</a></p>
+      <p style="margin-top:3rem" class="reveal"><a class="btn-ghost" href="store.html">Visit the store</a></p>
     </div>
   </section>
 
@@ -340,7 +379,7 @@
           <li><a href="#services">Services</a></li>
           <li><a href="our-work.html">Our Work</a></li>
           <li><a href="current-work.html">Current Work</a></li>
-          <li><a href="#store">Store</a></li>
+          <li><a href="store.html">Store</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
@@ -366,7 +405,7 @@
     </div>
     <div class="footer-bar">
       <span>&copy; <span id="year">2026</span> NextLevel Landscaping. Demo design by Cloudycode.</span>
-      <span><a href="#">Privacy &amp; Security</a></span>
+      <span><a href="privacy.html">Privacy &amp; Security</a></span>
     </div>
   </div>
 </footer>
@@ -381,8 +420,8 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="assets/data.js?v=1788923587"></script>
-<script src="assets/js/main.js?v=1788923587"></script>
-<script src="assets/js/theme.js?v=1788923587"></script>
+<script src="assets/data.js?v=1788937627"></script>
+<script src="assets/js/main.js?v=1788937627"></script>
+<script src="assets/js/theme.js?v=1788937627"></script>
 </body>
 </html>

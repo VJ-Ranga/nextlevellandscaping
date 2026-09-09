@@ -71,7 +71,7 @@
     function auto() {
       clearInterval(timer);
       if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      timer = setInterval(function () { go(ci + 1); }, 6000);
+      timer = setInterval(function () { if (!window.NLLmotionStopped) go(ci + 1); }, 6000);
     }
     var carEl = $("#hero-car");
     $(".hero-car__next", carEl).addEventListener("click", function () { go(ci + 1); auto(); });
@@ -80,6 +80,33 @@
     carEl.addEventListener("mouseleave", auto);
     auto();
   }
+
+
+  /* ---- WCAG 2.2.2: user control for all looping hero motion ---- */
+  (function () {
+    var btn = $("#hero-pause");
+    if (!btn) return;
+    var vid = $(".hero__media video");
+    var icon = $("i", btn), label = $(".hero-pause__txt", btn);
+    var stopped = false;
+    function paint() {
+      btn.setAttribute("aria-pressed", stopped ? "true" : "false");
+      icon.className = stopped ? "fa-solid fa-play" : "fa-solid fa-pause";
+      label.textContent = stopped ? "Play background video" : "Pause background video";
+    }
+    btn.addEventListener("click", function () {
+      stopped = !stopped;
+      window.NLLmotionStopped = stopped;          // carousel reads this
+      if (vid) { if (stopped) vid.pause(); else vid.play().catch(function () {}); }
+      paint();
+    });
+    // honour reduced-motion: start stopped, poster only
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      stopped = true; window.NLLmotionStopped = true;
+      if (vid) vid.pause();
+    }
+    paint();
+  })();
 
   /* ---- 3. Render: stats ---------------------------------- */
   var statsEl = $("#stats");
