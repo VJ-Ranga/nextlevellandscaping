@@ -93,6 +93,7 @@ html[data-theme="carbon-soft-v2"]{
 
   /* --- THE SIGNATURE MOVE — one radius token ----------------- */
   --v2-scoop: clamp(56px, 11vw, 150px);
+  --v2-scoop-card: clamp(28px, 5vw, 72px);   /* card-level scoop for the store row */
 }
 @media(max-width:640px){
   html[data-theme="carbon-soft-v2"]{ --v2-scoop: 44px; }
@@ -456,6 +457,9 @@ html[data-theme="carbon-soft-v2"] .store-card h3{color:var(--v2-on-night)}
 html[data-theme="carbon-soft-v2"] .store-card p,
 html[data-theme="carbon-soft-v2"] .band--dark .store-card p{color:var(--v2-muted-nt)}
 html[data-theme="carbon-soft-v2"] .store-card .media{background:var(--v2-night)}
+/* store row bookends — outer cards sweep one corner each */
+html[data-theme="carbon-soft-v2"] .store-card:first-child .media{ border-radius:var(--v2-scoop-card) 0 0 0; }
+html[data-theme="carbon-soft-v2"] .store-card:last-child  .media{ border-radius:0 var(--v2-scoop-card) 0 0; }
 
 
 /* =============================================================
