@@ -18,7 +18,7 @@
      #current (light)     . . . top-LEFT                 V 0 0 0
      #reviews (dark)      . . . top-RIGHT                0 V 0 0
      #process (light)     . . . top-LEFT                 V 0 0 0
-     #store   (dark)      . . . top-RIGHT                0 V 0 0
+     #store   (dark)      . . . flat                       0 0 0 0
      #contact (light)     . . . flat — under the strip     0 0 0 0
      .site-footer (dark)  . . . top-LEFT + top-RIGHT     V V 0 0
      (V = var(--v2-scoop))
@@ -192,7 +192,7 @@ html[data-theme="carbon-soft-v2"] main > #projects{ margin-top:0; padding-top:ca
 html[data-theme="carbon-soft-v2"] main > #current{  border-radius:var(--v2-scoop) 0 0 0; }
 html[data-theme="carbon-soft-v2"] main > #reviews{  border-radius:0 var(--v2-scoop) 0 0; }
 html[data-theme="carbon-soft-v2"] main > #process{  border-radius:var(--v2-scoop) 0 0 0; }
-html[data-theme="carbon-soft-v2"] main > #store{    border-radius:0 var(--v2-scoop) 0 0; }
+html[data-theme="carbon-soft-v2"] main > #store{    border-radius:0 0 0 0;  /* flat — no scoop on the store band */ }
 html[data-theme="carbon-soft-v2"] main > #contact{  border-radius:0 0 0 0;  /* flat — sits under the photo strip */ }
 html[data-theme="carbon-soft-v2"] main > #contact{ margin-top:0; padding-top:var(--pad-band); }
 
