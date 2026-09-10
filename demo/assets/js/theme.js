@@ -49,6 +49,8 @@
     try { localStorage.setItem(KEY, id); } catch (e) {}
     var btns = document.querySelectorAll(".theme-opt");
     for (var i = 0; i < btns.length; i++) {
+      // .theme-opt is also on the layout/hero/intro buttons — leave those alone
+      if (!btns[i].dataset.theme) continue;
       btns[i].setAttribute("aria-pressed", btns[i].dataset.theme === id ? "true" : "false");
     }
   }
