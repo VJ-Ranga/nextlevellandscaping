@@ -225,6 +225,13 @@ html[data-theme="carbon-soft-v2"] main > #projects{
 html[data-theme="carbon-soft-v2"] main > #contact{
   padding-bottom:calc(var(--pad-band-lg) + var(--v2-scoop));
 }
+/* sub-pages: the last content band also reserves room for the
+   footer's scoop pull (homepage #contact above already does, and
+   its id rule outranks this one). Without it the footer rides up
+   over the last section's content. */
+html[data-theme="carbon-soft-v2"] main > .band:last-of-type{
+  padding-bottom:calc(var(--pad-band) + var(--v2-scoop));
+}
 
 /* clip the contour texture to the curve so the sweep stays clean */
 html[data-theme="carbon-soft-v2"] #intro.contour::before,
