@@ -26,6 +26,34 @@
         '</div>' +
       '</div>' +
     '</header>' +
+    '<header class="hdr2">' +
+      '<div class="hdr2__util">' +
+        '<div class="container hdr2__util-row">' +
+          '<nav class="hdr2__util-links">' +
+            '<a href="index.html#process">Our Process</a>' +
+            '<a href="index.html#reviews">Reviews</a>' +
+            '<a href="store.html">Store</a>' +
+            '<a href="index.html#intro">Credentials</a>' +
+          '</nav>' +
+          '<div class="hdr2__util-right">' +
+            '<a href="tel:+61404440222">0404 440 222</a>' +
+            '<a href="https://www.instagram.com/nextlevellandscaping41/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="container hdr2__main">' +
+        '<nav class="hdr2__nav hdr2__nav--l">' +
+          '<a href="index.html#services">Services</a>' +
+          '<a href="our-work.html">Our Work</a>' +
+        '</nav>' +
+        '<a class="hdr2__brand" href="index.html"><img src="assets/img/brand/logo.png" alt="NextLevel Landscaping"></a>' +
+        '<nav class="hdr2__nav hdr2__nav--r">' +
+          '<a href="current-work.html">Current Work</a>' +
+          '<a href="index.html#contact">Contact</a>' +
+        '</nav>' +
+        '<button class="nav-toggle hdr2__toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>' +
+      '</div>' +
+    '</header>' +
     '<div class="drawer" id="drawer">' +
       '<div class="drawer__top">' +
         '<span class="brand"><img src="assets/img/brand/logo.png" alt="NextLevel Landscaping"></span>' +
