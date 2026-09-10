@@ -13,8 +13,8 @@
 
      hero (bottom)        . . . bottom-LEFT on the media  0 0 0 V
      #intro   (dark)      . . . flat — meets the hero     0 0 0 0
-     #services(light)     . . . top-RIGHT                0 V 0 0
-     #projects(dark)      . . . top-LEFT (flush, no pull)  V 0 0 0
+     #services(light)     . . . top-RIGHT + bottom-LEFT   0 V 0 V
+     #projects(dark)      . . . flat — #services curves over it  0 0 0 0
      #current (light)     . . . top-LEFT                 V 0 0 0
      #reviews (dark)      . . . top-RIGHT                0 V 0 0
      #process (light)     . . . top-LEFT                 V 0 0 0
@@ -160,11 +160,12 @@ html[data-theme="carbon-soft-v2"] .subhero{
    rounding to reveal the band underneath through the curve.
 
    - #intro meets the hero flat (the hero owns the curve).
-   - #projects also sits flush (its scoop corner stays, but it does
-     not ride up over #services).
-   - every band after it rides up out of its predecessor with one
+   - #services owns the seam curve at its BOTTOM-LEFT; #projects is
+     flat and tucks up behind it (same idea as hero/#intro, one step
+     down the page).
+   - every other band rides up out of its predecessor with one
      corner cut, alternating top-left / top-right.
-   - #contact sits flat; the footer owns the last curve.
+   - #store and #contact sit flat; the footer owns the last curve.
    ============================================================= */
 html[data-theme="carbon-soft-v2"] main > .band{
   position:relative;
@@ -186,9 +187,17 @@ html[data-theme="carbon-soft-v2"] main > #intro{
   border-radius:0 0 0 0;                 /* flat — hero owns the curve */
   margin-top:0;
 }
-html[data-theme="carbon-soft-v2"] main > #services{ border-radius:0 var(--v2-scoop) 0 0; }
-html[data-theme="carbon-soft-v2"] main > #projects{ border-radius:var(--v2-scoop) 0 0 0; }
-html[data-theme="carbon-soft-v2"] main > #projects{ margin-top:0; padding-top:calc(var(--pad-band) + var(--v2-scoop) * .45);  /* flush under #services — hero/intro style, no pull */ }
+html[data-theme="carbon-soft-v2"] main > #services{ border-radius:0 var(--v2-scoop) 0 var(--v2-scoop); }  /* TR + BL — owns the seam curve */
+html[data-theme="carbon-soft-v2"] main > #projects{ border-radius:0 0 0 0; }  /* flat — #services curves over it */
+html[data-theme="carbon-soft-v2"] main > #projects{ margin-top:calc(-1 * var(--v2-scoop)); padding-top:calc(var(--pad-band) + var(--v2-scoop));  /* tucks up behind #services's bottom-left scoop */ }
+
+/* #services owns the seam curve at its BOTTOM-LEFT and sits ON TOP;
+   #projects (flat) tucks up behind so the night ground shows through
+   the notch — like the hero owns its curve and #intro stays flat. */
+html[data-theme="carbon-soft-v2"] main > #services{
+  z-index:2;
+  padding-bottom:calc(var(--pad-band) + var(--v2-scoop));
+}
 html[data-theme="carbon-soft-v2"] main > #current{  border-radius:var(--v2-scoop) 0 0 0; }
 html[data-theme="carbon-soft-v2"] main > #reviews{  border-radius:0 var(--v2-scoop) 0 0; }
 html[data-theme="carbon-soft-v2"] main > #process{  border-radius:var(--v2-scoop) 0 0 0; }
