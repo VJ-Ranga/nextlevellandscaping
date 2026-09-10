@@ -15,8 +15,8 @@
      #intro   (dark)      . . . flat — meets the hero     0 0 0 0
      #services(light)     . . . top-RIGHT + bottom-LEFT   0 V 0 V
      #projects(dark)      . . . flat — #services curves over it  0 0 0 0
-     #current (light)     . . . top-RIGHT                0 V 0 0
-     #reviews (dark)      . . . top-RIGHT                0 V 0 0
+     #current (light)     . . . top-RIGHT + bottom-LEFT   0 V 0 V
+     #reviews (dark)      . . . flat — #current curves over it  0 0 0 0
      #process (light)     . . . top-LEFT                 V 0 0 0
      #store   (dark)      . . . flat                       0 0 0 0
      #contact (light)     . . . flat — under the strip     0 0 0 0
@@ -160,11 +160,11 @@ html[data-theme="carbon-soft-v2"] .subhero{
    rounding to reveal the band underneath through the curve.
 
    - #intro meets the hero flat (the hero owns the curve).
-   - #services owns the seam curve at its BOTTOM-LEFT; #projects is
-     flat and tucks up behind it (same idea as hero/#intro, one step
-     down the page).
-   - every other band rides up out of its predecessor with one
-     corner cut, alternating top-left / top-right.
+   - the light bands #services and #current each own a BOTTOM-LEFT
+     seam curve; the dark band under each (#projects, #reviews) is
+     flat and tucks up behind it (same idea as hero/#intro).
+   - #current and #process still ride up out of their predecessor
+     with a top corner cut.
    - #store and #contact sit flat; the footer owns the last curve.
    ============================================================= */
 html[data-theme="carbon-soft-v2"] main > .band{
@@ -175,7 +175,6 @@ html[data-theme="carbon-soft-v2"] main > .band{
 /* the riders — same geometry, corner rotates per section */
 html[data-theme="carbon-soft-v2"] main > #services,
 html[data-theme="carbon-soft-v2"] main > #current,
-html[data-theme="carbon-soft-v2"] main > #reviews,
 html[data-theme="carbon-soft-v2"] main > #process,
 html[data-theme="carbon-soft-v2"] main > #store{
   margin-top:calc(-1 * var(--v2-scoop));
@@ -198,9 +197,11 @@ html[data-theme="carbon-soft-v2"] main > #services{
   z-index:2;
   padding-bottom:calc(var(--pad-band) + var(--v2-scoop));
 }
-html[data-theme="carbon-soft-v2"] main > #current{  border-radius:0 var(--v2-scoop) 0 0; }  /* top-RIGHT */
-html[data-theme="carbon-soft-v2"] main > #reviews{  border-radius:0 var(--v2-scoop) 0 0; }
-html[data-theme="carbon-soft-v2"] main > #process{  border-radius:var(--v2-scoop) 0 0 0; }
+html[data-theme="carbon-soft-v2"] main > #current{  border-radius:0 var(--v2-scoop) 0 var(--v2-scoop); }  /* TR + BL — owns the #current/#reviews seam */
+html[data-theme="carbon-soft-v2"] main > #reviews{  border-radius:0 0 0 0; }  /* flat — #current curves over it */
+html[data-theme="carbon-soft-v2"] main > #reviews{ margin-top:calc(-1 * var(--v2-scoop)); padding-top:calc(var(--pad-band) + var(--v2-scoop));  /* tucks up behind #current's bottom-left scoop */ }
+html[data-theme="carbon-soft-v2"] main > #current{ z-index:2; }  /* sits on top so it clips over #reviews */
+html[data-theme="carbon-soft-v2"] main > #process{ border-radius:var(--v2-scoop) 0 0 0; }
 html[data-theme="carbon-soft-v2"] main > #store{    border-radius:0 0 0 0;  /* flat — no scoop on the store band */ }
 html[data-theme="carbon-soft-v2"] main > #contact{  border-radius:0 0 0 0;  /* flat — sits under the photo strip */ }
 html[data-theme="carbon-soft-v2"] main > #contact{ margin-top:0; padding-top:var(--pad-band); }
@@ -260,6 +261,7 @@ html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > #store{
    figure sits near the new top-right curve. */
 html[data-theme="carbon-soft-v2"] main > #services,
 html[data-theme="carbon-soft-v2"] main > #projects,
+html[data-theme="carbon-soft-v2"] main > #current,
 html[data-theme="carbon-soft-v2"] main > #reviews{
   overflow:clip;
 }
