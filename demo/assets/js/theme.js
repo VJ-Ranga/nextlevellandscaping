@@ -1,15 +1,17 @@
 /* =============================================================
-   Demo theme switcher — lets the client compare three looks.
-   Remove this file (and the <script> tags) for production.
+   Demo theme switcher — lets the client compare looks/layouts.
+   Default: Carbon (carbon-soft-v2) + centred header + static hero
+   + stacked intro. Remove this file (and the <script> tags) for
+   production.
    ============================================================= */
 (function () {
   "use strict";
 
   var THEMES = [
+    { id: "carbon-soft-v2", name: "Carbon", swatch: ["#17190F", "#C2E807", "#F2F2EC"] },
     { id: "carbon-soft", name: "Carbon soft", swatch: ["#17190F", "#C2E807", "#F2F2EC"] },
-    { id: "brand",  name: "Brand olive", swatch: ["#5A6428", "#C2E807", "#F6F5EF"] },
+    { id: "brand",  name: "Olive", swatch: ["#5A6428", "#C2E807", "#F6F5EF"] },
     { id: "carbon", name: "Carbon lime", swatch: ["#17190F", "#C2E807", "#FFFFFF"] },
-    { id: "carbon-soft-v2", name: "Carbon soft v2", swatch: ["#17190F", "#C2E807", "#F2F2EC"] },
     { id: "nocturne",  name: "Nocturne",  swatch: ["#101109", "#F2F1E9", "#C2E807"] },
     { id: "blueprint", name: "Blueprint", swatch: ["#101109", "#C2E807", "#F2F1E9"] }
   ];
@@ -51,10 +53,10 @@
     }
   }
 
-  var saved = "carbon-soft";
-  try { saved = localStorage.getItem(KEY) || "carbon-soft"; } catch (e) {}
+  var saved = "carbon-soft-v2";
+  try { saved = localStorage.getItem(KEY) || "carbon-soft-v2"; } catch (e) {}
   // a removed theme may still be stored from an earlier visit
-  if (!THEMES.some(function (t) { return t.id === saved; })) saved = "carbon-soft";
+  if (!THEMES.some(function (t) { return t.id === saved; })) saved = "carbon-soft-v2";
 
   var bar = document.createElement("div");
   bar.className = "theme-bar";
@@ -101,13 +103,13 @@
     if (b && b.dataset.theme) apply(b.dataset.theme);
   });
 
-  var savedLayout = "classic";
-  try { savedLayout = localStorage.getItem(LKEY) || "classic"; } catch (e) {}
+  var savedLayout = "centred";
+  try { savedLayout = localStorage.getItem(LKEY) || "centred"; } catch (e) {}
   var savedHero = "static";
   try { savedHero = localStorage.getItem(HKEY) || "static"; } catch (e) {}
-  var savedIntro = "split";
-  try { savedIntro = localStorage.getItem(IKEY) || "split"; } catch (e) {}
-  if (["split","stacked"].indexOf(savedIntro) < 0) savedIntro = "split";
+  var savedIntro = "stacked";
+  try { savedIntro = localStorage.getItem(IKEY) || "stacked"; } catch (e) {}
+  if (["split","stacked"].indexOf(savedIntro) < 0) savedIntro = "stacked";
   apply(saved);
   applyLayout(savedLayout);
   applyHero(savedHero);
