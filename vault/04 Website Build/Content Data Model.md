@@ -6,6 +6,9 @@ tags: [build, data]
 
 All homepage/sub-page content lives in `window.NLL` so it's easy to update and maps 1:1 to future WP fields.
 
+> [!warning] `site/assets/data.js` has diverged (2026-09-23)
+> `site/`'s copy dropped `store[]` and `storeProducts[]` entirely — the client asked to remove the Store page and everything it fed (see [[Client Requirements Inbox]] #36, [[Site Build Log]] Round 20). `demo/` is frozen and still has both, which is why this table (describing the shared original shape) still lists them. Everything else below still matches `site/`.
+
 | Key | Shape | WP target |
 |---|---|---|
 | `heroSlides[]` | `{line, cta, href}` | theme option / Elementor |

@@ -192,6 +192,11 @@ html[data-theme="carbon-soft-v2"] main > #store{
 html[data-theme="carbon-soft-v2"] main > #intro{
   border-radius:0 0 0 0;                 /* flat — hero owns the curve */
   margin-top:0;
+  /* the only two "flat" bands (#intro, #contact) don't get the scoop
+     reservation's extra padding the way #services/#current/#projects/#reviews
+     do, so they read as cramped next to those unless bumped to the
+     larger statement-band figure on their own (2026-09-23, client feedback). */
+  padding-top:var(--pad-band-lg);
 }
 html[data-theme="carbon-soft-v2"] main > #services{ border-radius:0 var(--v2-scoop) 0 var(--v2-scoop); }  /* TR + BL — owns the seam curve */
 html[data-theme="carbon-soft-v2"] main > #projects{ border-radius:0 0 0 0; }  /* flat — #services curves over it */
@@ -211,7 +216,7 @@ html[data-theme="carbon-soft-v2"] main > #current{ z-index:2; }  /* sits on top 
 html[data-theme="carbon-soft-v2"] main > #process{ border-radius:0 var(--v2-scoop) 0 0; }  /* top-RIGHT */
 html[data-theme="carbon-soft-v2"] main > #store{    border-radius:0 0 0 0;  /* flat — no scoop on the store band */ }
 html[data-theme="carbon-soft-v2"] main > #contact{  border-radius:0 0 0 0;  /* flat — sits under the photo strip */ }
-html[data-theme="carbon-soft-v2"] main > #contact{ margin-top:0; padding-top:var(--pad-band); }
+html[data-theme="carbon-soft-v2"] main > #contact{ margin-top:0; padding-top:var(--pad-band-lg); }
 
 /* the band ABOVE each scoop needs room to be pulled into.
    #intro also gets it (services sweeps up over its bottom).
@@ -634,6 +639,7 @@ html[data-theme="carbon-soft-v2"] .hdr2__util{border-bottom-color:rgba(242,242,2
 html[data-theme="carbon-soft-v2"] .site-header .main-nav a,
 html[data-theme="carbon-soft-v2"] .site-header .header-cta .phone,
 html[data-theme="carbon-soft-v2"] .hdr2__nav a,
+html[data-theme="carbon-soft-v2"] .hdr2__drop,
 html[data-theme="carbon-soft-v2"] .hdr2__util a,
 html[data-theme="carbon-soft-v2"] .hdr2__util-right a{
   color:rgba(242,242,236,.88);
@@ -779,7 +785,7 @@ html[data-theme="carbon-soft-v2"] .subhero h2{color:var(--v2-on-night)}
    Each tile is a view into one of four real projects. The grid
    creates rhythm through controlled spans, not a square card wall.
    ============================================================= */
-html[data-theme="carbon-soft-v2"] .work-grid{
+html[data-theme="carbon-soft-v2"] #work-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
   grid-auto-rows:clamp(7rem,11vw,10.5rem);
@@ -853,11 +859,11 @@ html[data-theme="carbon-soft-v2"] .work-tile__place{
 html[data-theme="carbon-soft-v2"] .work-tile__place b{color:var(--v2-lime-ink);font-weight:400}
 html[data-theme="carbon-soft-v2"] .work-tile[hidden]{display:none}
 @media(max-width:900px){
-  html[data-theme="carbon-soft-v2"] .work-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:clamp(8rem,26vw,11rem)}
+  html[data-theme="carbon-soft-v2"] #work-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:clamp(8rem,26vw,11rem)}
   html[data-theme="carbon-soft-v2"] .work-tile:nth-child(n){grid-column:span 1;grid-row:span 1}
 }
 @media(max-width:640px){
-  html[data-theme="carbon-soft-v2"] .work-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:34vw;gap:.5rem}
+  html[data-theme="carbon-soft-v2"] #work-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:34vw;gap:.5rem}
 }
 @media(prefers-reduced-motion:reduce){
   html[data-theme="carbon-soft-v2"] .work-tile__media img{transition:none}

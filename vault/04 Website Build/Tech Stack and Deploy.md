@@ -10,7 +10,7 @@ updated: 2026-09-23
 - CSS: `style.css` (base system, shared components) + `style-carbon-soft-v2.css` (the Carbon theme — the only one that ships). No switcher, no other theme files.
 - JS: `main.js` (rendering, interactions), `partials.js` (shared header/drawer/footer on every sub-page except `index.html`, which carries its own inline copy — **keep both in sync when nav changes**).
 - Content: `assets/data.js` — one source, 11 arrays (`services`, `projects`, `process`, `storeProducts`, `faqs`, `reviews`, …). See [[Content Data Model]].
-- 15 pages. See [[Sitemap and Pages]] for the full list.
+- 13 pages (down from 15 — `store.html`/`product.html` removed 2026-09-23, see [[Site Build Log]] Round 20). See [[Sitemap and Pages]] for the full list.
 - **Cache-buster `?v=<unix-timestamp>` on every CSS/JS link, every page.** Bump it after any CSS/JS edit — stale caching has cost real debugging time repeatedly. One command:
   ```bash
   cd site && T=$(date +%s) && sed -i "s/v=[0-9]\{10\}/v=$T/g" *.html

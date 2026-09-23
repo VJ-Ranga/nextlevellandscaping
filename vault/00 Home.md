@@ -8,13 +8,13 @@ updated: 2026-09-23
 Cloudycode client project. Full redesign + restructure of <https://nextlevellandscaping.com.au/> (Adelaide landscape design & construction + garden store).
 
 - **Live preview:** <https://vj-ranga.github.io/nextlevellandscaping/> — landing page linking both builds:
-  - **[/site/](https://vj-ranga.github.io/nextlevellandscaping/site/)** — the real build (15 pages)
+  - **[/site/](https://vj-ranga.github.io/nextlevellandscaping/site/)** — the real build (13 pages — Store/product pages removed 2026-09-23). ⚠ the deployed `gh-pages` copy currently only reflects work through [[Site Build Log]] Round 19 — Rounds 20–26 are built and verified locally but not yet committed/redeployed.
   - **[/demo/](https://vj-ranga.github.io/nextlevellandscaping/demo/)** — the 6-theme reference
 - **Repo:** github.com/VJ-Ranga/nextlevellandscaping
 - **Two folders:**
   - `demo/` — the multi-theme options showcase (6 themes, switcher). Frozen — a parts-bin to pull sections from, never build production here again.
-  - **`site/`** — the real build. Single locked look (Carbon, Centred header, Sticky hero, Split intro, no switcher). **15 pages, every nav item its own page**, ~29 client requirements applied. This is what ships. See [[Sitemap and Pages]].
-- **Stage (2026-09-23):** `site/` complete and both builds deployed — see [[Site Build Log]] (Rounds 1–12) and [[Tech Stack and Deploy]] for how the deploy actually works now (it changed — not a subtree split anymore).
+  - **`site/`** — the real build. Single locked look (Carbon, Centred header, Sticky hero, Split intro, no switcher). **13 pages, every nav item its own page**, 42 client requirements logged (38 done). This is what ships. See [[Sitemap and Pages]].
+- **Stage (2026-09-23):** `site/` complete and both builds deployed as of Round 19; a further large round of changes (Rounds 20–26 — Store removal, Services nav dropdown, single-service page redesign, sitewide spacing pass) is built and verified locally but awaiting an explicit commit/push/redeploy instruction. See [[Site Build Log]] and [[Tech Stack and Deploy]] for how the deploy actually works now (it changed — not a subtree split anymore).
 
 > [!tip] Where to start
 > New client requirements go in [[Client Requirements Inbox]]. Every change we agree goes in [[Decisions Log]].

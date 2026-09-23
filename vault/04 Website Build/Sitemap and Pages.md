@@ -5,7 +5,10 @@ updated: 2026-09-23
 
 # Sitemap & Pages
 
-**All 15 pages now built** in `site/` (the production folder). `demo/` is frozen and not part of this.
+**13 pages now built** in `site/` (the production folder). `demo/` is frozen and not part of this.
+
+> [!warning] Store removed (2026-09-23)
+> Client doesn't want a retail "Store" presence on the site. `store.html` and `product.html` were deleted, along with every nav/footer link to them, the `store`/`storeProducts` data arrays, and the store-rendering JS. The Edwardstown address itself stays (client confirmed the office is fine to show) but is no longer framed as a walk-in shop — "Shop 1/41 Woodlands Terrace" is now just "1/41 Woodlands Terrace", and contact.html's closing band reads "Our office" instead of "Visit us". See [[Site Build Log]] Round 20.
 
 > [!important] Every nav item is its own page
 > Client rule (2026-09-23): **no menu item may point at a homepage anchor.** "Our Process" and "Reviews" were the last two (`index.html#process` / `index.html#reviews`) — both are now real pages. If a nav item is ever added, it needs a page, not an anchor.
@@ -20,8 +23,6 @@ updated: 2026-09-23
 | — | Project detail | `project.html?slug=` | ✅ gallery + lightbox |
 | — | **Current Work** (new) | `current-work.html` | ✅ → [[Current Work Feature]] |
 | — | Current job detail | `current-work-detail.html?slug=` | ✅ vertical stepper + timeline |
-| Store | Store (NextLevel Outdoors) | `store.html` | ✅ tiles now link through to product pages |
-| Store products (thin) | **Product detail** | `product.html?slug=` | ✅ **new 2026-09-23** — enquiry-only, P.O.A, no cart |
 | — | **FAQ** | `faq.html` | ✅ **new 2026-09-23** — competitive gap, see [[Market Gaps]] |
 | Contact (anchor only) | **Contact page** | `contact.html` | ✅ **new 2026-09-23** — real page, full quote form |
 | — | **Our Process** | `process.html` | ✅ **new 2026-09-23** — 4 steps in depth + the 10-stage pipeline, links to Current Work |
@@ -30,12 +31,11 @@ updated: 2026-09-23
 
 ## Nav (current, as built) — every item is a real page
 Single centred header (`.hdr2`) — the classic header was deleted from `site/` entirely.
-- **Utility row:** About · Our Process · Reviews · FAQ · Store · phone · Instagram
+- **Utility row:** About · Our Process · Reviews · FAQ · phone · Instagram
 - **Main row:** Services · Our Work | logo | Current Work · Contact
-- **Drawer (mobile):** Services · Our Work · Current Work · Our Process · Store · About · Reviews · FAQ · Contact
-- **Footer EXPLORE:** Services · Our Work · Current Work · Our Process · Store · About · Reviews · FAQ · Contact
+- **Drawer (mobile):** Services · Our Work · Current Work · Our Process · About · Reviews · FAQ · Contact
+- **Footer EXPLORE:** Services · Our Work · Current Work · Our Process · About · Reviews · FAQ · Contact
 - All "Get a free quote" CTAs across the site now point at `contact.html` (they previously went to the `index.html#contact` anchor).
-- **Footer STORE:** the 4 categories, each linking to `product.html?slug=`
 - Shared chrome on sub-pages injected by `assets/js/partials.js`; `index.html` carries its own copy inline (keep the two in sync when changing nav).
 
 ## Global

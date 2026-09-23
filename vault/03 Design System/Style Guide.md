@@ -70,7 +70,9 @@ Text measure: cap prose at `~62ch` (`.measure`). Never let a paragraph run the f
 ## 3. Spacing & layout
 
 - **Base unit:** 8px (8 / 16 / 24 / 40 / 64 / 96 / 128 — pick from this scale, don't invent a one-off pixel value).
-- **Band vertical padding:** `--pad-band: 96px` (default) · `--pad-band-lg: 128px` (statement bands, e.g. Contact) · `--pad-band-sm: 32px` (tight bands).
+- **Band vertical padding:** `--pad-band: 96px` (default, `64px` on mobile ≤640px) · `--pad-band-lg: 128px` (statement bands — `80px` on mobile) · `--pad-band-sm: 32px` (tight bands).
+  > [!warning] Don't bump `--pad-band` globally to fix one thin-looking band
+  > Tried this 2026-09-23 (client felt `#intro` was cramped) and it backfired: `#services`/`#current`/`#projects`/`#reviews` don't use `--pad-band` directly, they use `calc(var(--pad-band) + var(--v2-scoop))` for the scoop-seam reservation — so a global bump amplifies their *already-large* padding far more than it helps the plain bands, and 30 minutes later the client reported "huge empty space" on `#services`. Reverted. If a **specific flat band** (`#intro`, `#contact` — the only two with no scoop reservation) needs more room, override *that band's* `padding-top` directly to `var(--pad-band-lg)`, the way both now do — don't touch the shared token.
 - **Content container:** `--container: 1200px`, `--gutter: 24px`, centred.
 - **The header is the one exception** — it does not use `--container`. It gets `.hdr2 .container{max-width:none; padding-inline:clamp(20px,4vw,56px)}`, running near-full viewport width, matched to `lagunapools.com.au`'s header. **The footer does NOT** — it was briefly full-width as a placeholder, then pulled back to the normal 1200px container at the client's request (2026-09-23). Nothing except the header gets this override.
 - **Footer on mobile keeps two link columns**, not one. Collapsing all four blocks to a single column made it 1257px tall at 375px (1.5× the viewport). See `style.css` `@media(max-width:640px)`.

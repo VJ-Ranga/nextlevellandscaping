@@ -298,5 +298,85 @@ Verified via JS rect check: section has zero padding and its height exactly equa
 ## Round 19 — 2026-09-23: closing CTA hidden (kept, not deleted)
 Client wants the "Have a space in mind?" / photo-backdrop CTA off `our-work.html` for now but may want it back later. Wrapped the whole section in an HTML comment (`<!-- Hidden per client request (2026-09-23) — keep for later, may bring back. ... -->`) rather than deleting it, so the markup/CSS/asset reference are all preserved. Page now ends flush with the photo strip straight into the footer. Verified via JS: `.cta-photo` no longer in the DOM, no "Have a space in mind" heading, and `#project-strip`'s bottom edge sits exactly at the footer's top (no gap). Cache-buster bumped to `v=1790200007` across all 15 pages.
 
+## Round 20 — 2026-09-23: Store removed site-wide, address de-shopified
+Client doesn't want a retail "Store" presence on the site at all, but confirmed the Edwardstown office/address is fine to show — just not framed as a walk-in shop.
+
+**Removed entirely:**
+- Deleted `store.html` and `product.html` (the latter only existed to serve store category pages, unreachable without the former).
+- Removed the `Store` nav link from every header (util nav + main drawer) and the footer `EXPLORE` list, in both `assets/js/partials.js` (shared chrome for all sub-pages) and `index.html`'s own inline copy of the same header/drawer/footer markup.
+- Removed the whole footer `STORE` column (product-category links) from both places.
+- Removed the now-unreachable store-rendering code in `main.js` (`#store-list` render block) and the now-dead `store` / `storeProducts` arrays from `assets/data.js`.
+
+**Address wording (kept, de-shopified):** every occurrence of "Shop 1/41 Woodlands Terrace..." changed to "1/41 Woodlands Terrace..." — partials.js drawer, index.html drawer/contact-info/footer/JSON-LD `streetAddress`, contact.html contact-info + closing address heading, privacy.html's legal ABN disclosure paragraph.
+
+**Reframed as office, not storefront:** contact.html's closing band — eyebrow "Visit us" → "Our office", heading dropped "Shop", lead rewritten from "Call in to NextLevel Outdoors to talk through your project" (implies walk-in) to "Reach our Edwardstown office by phone, or send your project details through", and the trading-hours note reworded from "please call before visiting" to "call ahead to arrange a time". Also fixed three other copy spots that still promoted "our Edwardstown store" as a place to browse: an FAQ answer in `data.js`, `process.html`'s Aftercare copy, and meta descriptions on `contact.html` and `reviews.html`.
+
+Verified via JS across index.html, about.html (partials.js-driven), contact.html and faq.html: zero `store`/`product` links or nav items anywhere, footer down to 2 columns (Explore + business info), address renders without "Shop", no console errors. Cache-buster bumped to `v=1790200008` across all remaining 13 pages (down from 15 — store.html/product.html deleted).
+
+## Round 21 — 2026-09-23: floating quote button hidden on Contact + near footer
+Client doesn't want the floating "Get a Free Quote" button on the Contact page (redundant — the page already has the quote form and a "Call" CTA) or overlapping the footer on any page.
+
+- `assets/js/partials.js`: the floating button markup is now conditionally omitted from the shared footer string when `location.pathname` ends in `contact.html`, so it's simply never injected there. Confirmed `#quote-float` is entirely absent from the DOM on that page.
+- `assets/js/main.js`: the existing scroll-based `toggle()` for `#quote-float` now also checks `.site-footer`'s bounding rect — hides once the footer scrolls into view (`top <= innerHeight`), on every page, reusing the same `scroll` listener rather than adding a new one.
+- index.html's own inline copy of the button is untouched (it's the homepage, not the Contact page) but picks up the new footer-hide behavior automatically since the toggle logic is shared.
+
+Verified with real scroll (JS `scrollTo` doesn't fire a live scroll in this session's headless pane — used the browser tool's wheel-scroll instead): button hidden on contact.html entirely; on about.html it shows mid-page, hides once the footer is in view, and reappears correctly on scrolling back up. Cache-buster bumped to `v=1790200009` across all 13 pages.
+
+## Round 22 — 2026-09-23: footer rebalanced after Store removal (4th column back)
+Removing Store in Round 20 left `.footer-grid` with only 3 divs (brand, an 8-item EXPLORE list, business info) sitting inside a CSS grid still defined for 4 columns (`1.4fr 1fr 1fr 1.3fr`) — the empty 3rd track is why the client saw it as "ugly"/uneven, plus EXPLORE had grown too long (8 links) in one column.
+
+Split EXPLORE into two 4-5 item columns: **EXPLORE** (Services, Our Work, Current Work, Our Process, About) and a new **SUPPORT** column (Reviews, FAQ, Contact) — restoring the 4-column grid to its designed proportions. Applied in both `assets/js/partials.js` (shared footer for sub-pages) and `index.html`'s own inline copy.
+
+Verified via JS rect check on about.html: the 4 columns now span the full grid width edge-to-edge with no leftover gap track (242px + 173px + 173px + 253px = 961px, the full `.footer-grid` width). Cache-buster bumped to `v=1790200010` across all 13 pages.
+
+## Round 23 — 2026-09-23: Services header dropdown + single-service page rebuilt
+Client asked (voice-to-text, a bit garbled) for a dropdown under the header's "Services" nav item, and separately flagged the single-service page (`service.html`) as "really ugly." Confirmed scope with the client first: dropdown on Services only (not Our Work), and a full visual redesign of `service.html` rather than a spot-fix.
+
+**Bug found and fixed first, before either feature:** Round 16/17's `.work-grid` mosaic CSS (fixed 4-col grid + explicit `nth-child` positions, written for `our-work.html`'s 12-tile layout) was a plain class selector, so it was also silently hijacking `service.html`'s and `project.html`'s "Related work" sections — which reuse the same `.work-grid` container class for an unrelated simple 3-card row. Their cards were being squashed to ~113px tall. Rescoped the mosaic-specific rules from `.work-grid` to `#work-grid` (an id only `our-work.html` has) in `style-carbon-soft-v2.css`, restoring the original plain 2-up `.work-grid` rule from `style.css` for the related-work sections. Verified via rect check: related-work cards went from 230×113 to 461×390.
+
+**Services dropdown** (`assets/js/partials.js` + `index.html`'s inline header copy, kept in sync per the existing convention): "Services" is now a `<div class="hdr2__drop">` wrapping the original link plus a `.hdr2__drop-panel` listing "All Services" + all 7 individual services (icon + name, from the same list as `data.js`, hardcoded here since this script injects the header before `data.js` loads — note left in the code to keep both in sync if a service changes). Opens on hover/`:focus-within`, solid `#17190F` panel with a hairline border (no box-shadow — Style Guide §4 forbids drop-shadow elevation), small 4px radius per the forms-radius convention, lime icon accents, chevron that flips on open. Had to change `.hdr2__nav a`'s box-model rule from a descendant to a child (`.hdr2__nav>a,.hdr2__nav>.hdr2__drop`) selector and broaden the `:first-child`-on-`a` divider rules to plain `:first-child`, so the wrapper div — not just bare `<a>` tags — gets the correct border/padding "slot" styling and stays consistent between transparent and `.is-stuck` header states.
+
+**`service.html` full redesign**, reusing existing site patterns rather than inventing new ones:
+- Subhero simplified to match every other subpage (flat dark `.subhero.contour`, no photo) — the old version was the only subpage subhero with a photo background dimmed to `opacity:.28`, which read as broken/washed-out and was likely the main source of "ugly."
+- The service photo now shows at full brightness in a proper `.svc` row (same media pattern `services.html` uses for its alternating rows) instead of being buried in the dim subhero.
+- Dropped the sparse `.detail-body`/`.spec` two-column sidebar (a bare 3-row fact table felt like empty filler) in favour of one solid content column: options/materials copy, tags, CTA button, and a one-line credentials note.
+- "All services" quick-nav upgraded from bare text chips to icon+label pills, with the current service visually marked (`.is-current`).
+- Added a closing "Get started" CTA band (services.html has one; the old service.html just stopped after the chips list with no closing CTA at all).
+- Breadcrumb's "Services" crumb now correctly points to `services.html` (was `index.html#services`, a stale anchor from before Services became its own page).
+
+Verified: `node --check` on the extracted script block, live render at `paving` and `natural-artificial-grass` (confirms `&`-in-name handling), desktop screenshot, and 375px mobile (image loads, single column, floating quote button doesn't overlap content). Cache-buster bumped to `v=1790200011` across all 13 pages.
+
+## Round 24 — 2026-09-23: service.html — All Services removed, Related Work is now a carousel
+Client (voice-to-text) called the "All Services" quick-nav pill list on `service.html` useless — removed the section, its `#s-all` render logic and the page-scoped `.svc-all` CSS entirely.
+
+Related Work replaced the static 3-card `.work-grid` with the same carousel pattern the homepage uses for its "Signature transformations" section (`.proj-swiper`/`.proj-card`, Swiper `slidesPerView:1.1` → `2` at 768px → `2.4` at 1200px) — client asked for exactly this ("same slider version if we have more than three work"). Renders every project that matches the service's tags (not sliced to 3 like before), so it scales automatically if the project count grows past what fits on screen.
+
+**Bug caught while wiring it up:** `service.html` had never actually loaded the Swiper JS bundle (only its CSS) — `new Swiper(...)` was silently a no-op since it was still on the old static grid. Added `<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js">` before `partials.js`, matching every other page that runs a carousel.
+
+Verified: `swiper-initialized` class present, `el.swiper.slides.length` matches the related-project count, card width confirms 2.4-per-view at desktop, and full page text extraction confirms all content (options/materials, related work cards with blurb+tags, closing CTA) renders correctly end to end. No CSS/JS files changed this round, so no cache-buster bump was needed — only `service.html` itself.
+
+## Round 25 — 2026-09-23: service.html closing CTA band removed
+Client didn't want the Round 24 "Get Started" CTA band (redundant with the "Get a free quote" button already in the Options & Materials content). Removed the section and the now-dead `s-cta-name` JS line. Page now ends with Related Work. Verified via page-text extraction, no console errors.
+
+## Round 26 — 2026-09-23: global band padding bumped — more consistent, more premium spacing
+Client flagged the homepage's dark `#intro` band (right under the hero) as feeling cramped compared to the site's other sections, and asked for consistent, generous padding across every section for a cleaner, more premium feel.
+
+Measured actual computed padding across every homepage band first rather than guessing from the screenshot: `#intro`/`#contact` (flat bands, no scoop reservation) were sitting at the bare `--pad-band` value (96px top), while scoop-reserving bands (`#services`, `#current`, `#process`, `#projects`, `#reviews`) were already 192–311px because they add the scoop token on top for the tuck-under mechanic — so the "cramped" one was specifically the plain bands, not a site-wide bug.
+
+Fixed by bumping the shared tokens themselves in `style.css`: `--pad-band` 96px→128px, `--pad-band-lg` 128px→160px (mobile ≤640px override 64/80→88/112). Every band on every page derives its padding from these two tokens — including the scoop `calc()` expressions — so this raises spacing consistently everywhere at once (dark and light bands alike) without disturbing the differential math that makes the scoop seams work. Updated [[Style Guide]] §3 to match, per its own "update here in the same sitting" rule.
+
+Verified via JS rect/computed-style checks (screenshots were unreliable again this session — the browser tool's scroll-capture glitch, not a real issue): every homepage band's padding-top/bottom scaled up proportionally (e.g. `#intro` 96px→128px, `#services` 192.8px→224.8px, `#projects` 311px→343px), mobile override confirmed at 375px width (88px/112px, no horizontal overflow). Cache-buster bumped to `v=1790200012` across all 13 pages.
+
+## Round 27 — 2026-09-23: Round 26's padding bump reverted — it was too blunt, fixed the wrong thing
+Client's very next message after Round 26: "What we do" (homepage `#services`) now has "huge empty space." Measured it: section height 1230px, but its tallest child (`.svc-left`, the service list) is only 663px tall — 568px of that was padding alone (`padding-top:224.8px` + `padding-bottom:343px`).
+
+Root cause: Round 26 bumped the shared `--pad-band` token globally to fix `#intro`'s padding feeling thin. But `#services` (and `#current`/`#projects`/`#reviews`) don't just use `--pad-band` directly — their padding is `calc(var(--pad-band) + var(--v2-scoop))`, the extra reserved for the scoop-seam tuck-under mechanic. Bumping the shared base token amplified that already-large compounded padding even further on exactly the sections that didn't need it, while `#intro`/`#contact` (the genuinely thin, "flat" bands with no scoop reservation) only got the plain +32px. Net effect: fixed a minor problem on 2 bands, created a much bigger one on 4.
+
+**Reverted** `--pad-band`/`--pad-band-lg` in `style.css` back to 96px/128px (96 desktop, 64px mobile ≤640px — exactly Round 25's pre-existing values), which restored `#services` to 192.8px/311px padding around its 663px of content — the same proportions every other scoop-owning band already had and nobody complained about.
+
+**Re-fixed the original complaint surgically instead:** added a direct `padding-top:var(--pad-band-lg)` override to `main > #intro` and changed `main > #contact`'s existing `padding-top:var(--pad-band)` to `var(--pad-band-lg)` in `style-carbon-soft-v2.css` — bumping only the two flat bands that actually lacked the scoop reservation's built-in extra room, without touching the shared token every other band's `calc()` depends on.
+
+Verified via JS rect/computed-style checks: `#services` back to 192.768px/311.04px padding (was 224.8/343 under Round 26's fix), section height 1230px→1166px; `#intro` padding-top 128px (up from the original 96px, the actual fix); `#contact` now symmetric 128px/128px (was 96/128). Updated [[Style Guide]] §3 to reflect the token revert + the two-band-specific override, and corrected Round 26's own entry isn't rewritten (kept for history) but is now superseded by this one. Cache-buster bumped to `v=1790200013` across all 13 pages.
+
 ## Next
 Say which of the "not yet applied" items to tackle next, or give more reference sections from `demo/`'s other themes to pull in per the cherry-pick workflow.

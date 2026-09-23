@@ -333,28 +333,6 @@
     }).join("");
   }
 
-  /* ---- 8. Render: store -------------------------------
-     Prefer storeProducts (has slugs, so the tiles link through
-     to product.html); fall back to the older flat store list. */
-  var storeEl = $("#store-list");
-  if (storeEl && D.storeProducts) {
-    storeEl.innerHTML = D.storeProducts.map(function (s) {
-      return '' +
-        '<a class="store-card reveal" href="product.html?slug=' + esc(s.slug) + '">' +
-          '<div class="media"><img loading="lazy" src="' + esc(s.img) + '" alt=""></div>' +
-          '<h3>' + s.name + '</h3><p>' + s.blurb + '</p>' +
-        '</a>';
-    }).join("");
-  } else if (storeEl && D.store) {
-    storeEl.innerHTML = D.store.map(function (s) {
-      return '' +
-        '<article class="store-card reveal">' +
-          '<div class="media"><img loading="lazy" src="' + esc(s.img) + '" alt=""></div>' +
-          '<h3>' + s.name + '</h3><p>' + s.desc + '</p>' +
-        '</article>';
-    }).join("");
-  }
-
   /* ---- 9. Render: reviews (swiper) -------------------- */
   var revWrap = $("#reviews-track");
   if (revWrap && D.reviews) {
@@ -431,12 +409,14 @@
     if (!btn) return;
     var heroEl = $(".hero");
     var subheroEl = $(".subhero");
+    var footerEl = $(".site-footer");
     function toggle() {
       var past;
       if (heroEl && coverBand) past = coverBand.getBoundingClientRect().top <= window.innerHeight * 0.5;
       else if (subheroEl) past = subheroEl.getBoundingClientRect().bottom <= window.innerHeight * 0.5;
       else past = window.scrollY > 80;
-      btn.classList.toggle("is-visible", past);
+      var overFooter = footerEl && footerEl.getBoundingClientRect().top <= window.innerHeight;
+      btn.classList.toggle("is-visible", past && !overFooter);
     }
     toggle();
     window.addEventListener("scroll", toggle, { passive: true });
