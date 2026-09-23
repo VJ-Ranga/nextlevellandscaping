@@ -2,7 +2,10 @@
 tags: [build, log]
 ---
 
-# Build Log
+# Build Log (demo/ era — 2026-09-08 to 09-10)
+
+> [!note] Superseded
+> This covers only `demo/`, before the client picked a theme. For everything since — the `site/` build, all 15 pages, deploy — see [[Site Build Log]] (Rounds 1–12).
 
 | Date | What |
 |---|---|

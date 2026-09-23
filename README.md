@@ -64,13 +64,23 @@ cd site && python3 -m http.server 8000
 
 ## Deploy
 
-GitHub Pages serves the **`gh-pages`** branch, which is a subtree split of `demo/` — i.e. the Pages site is still the old multi-theme demo, **not `site/`**. There is no Actions workflow (the token lacks `workflow` scope).
+**Live:** https://vj-ranga.github.io/nextlevellandscaping/ — a small landing page linking `/site/` (the real build) and `/demo/` (the theme reference), both served in full.
+
+`gh-pages` is a **standalone history**, not a subtree split — it shares no commits with `main`. To redeploy after changing `site/` or `demo/`, copy the current folders into a scratch directory, commit fresh, and force-push:
 
 ```bash
-git subtree split --prefix demo -b gh-pages && git push -f origin gh-pages && git branch -D gh-pages
+rm -rf /tmp/ghp && mkdir /tmp/ghp && cd /tmp/ghp
+cp -r /path/to/repo/site ./site
+cp -r /path/to/repo/demo ./demo
+touch .nojekyll
+# add an index.html landing page — see gh-pages branch history for the current one
+git init -q && git checkout -q -b gh-pages
+git add -A && git commit -q -m "Deploy: site/ + demo/"
+git remote add origin https://github.com/VJ-Ranga/nextlevellandscaping.git
+git push -f origin gh-pages
 ```
 
-To publish `site/` instead, swap `--prefix demo` for `--prefix site`. Large pushes occasionally 408 — retry.
+GitHub Pages takes ~10–60s to rebuild — verify with `curl` before calling it live. No Actions workflow (the token lacks `workflow` scope). Large pushes occasionally 408 — retry. `main` is never touched by this.
 
 ## Next phase
 

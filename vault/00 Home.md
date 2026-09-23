@@ -1,18 +1,20 @@
 ---
 tags: [moc]
-updated: 2026-09-21
+updated: 2026-09-23
 ---
 
 # NextLevel Landscaping — Project Vault
 
 Cloudycode client project. Full redesign + restructure of <https://nextlevellandscaping.com.au/> (Adelaide landscape design & construction + garden store).
 
-- **Live demo:** <https://vj-ranga.github.io/nextlevellandscaping/> (still points at `demo/`)
+- **Live preview:** <https://vj-ranga.github.io/nextlevellandscaping/> — landing page linking both builds:
+  - **[/site/](https://vj-ranga.github.io/nextlevellandscaping/site/)** — the real build (15 pages)
+  - **[/demo/](https://vj-ranga.github.io/nextlevellandscaping/demo/)** — the 6-theme reference
 - **Repo:** github.com/VJ-Ranga/nextlevellandscaping
-- **Two folders now:**
+- **Two folders:**
   - `demo/` — the multi-theme options showcase (6 themes, switcher). Frozen — a parts-bin to pull sections from, never build production here again.
-  - **`site/`** — the real build. Single locked look (Carbon, Centred header, Sticky hero, Split intro, no switcher), client's 15 agreed requirements baked in. This is what ships.
-- **Stage (2026-09-22):** `site/` created and the basic pass built — see [[Site Build Log]]. Not deployed yet.
+  - **`site/`** — the real build. Single locked look (Carbon, Centred header, Sticky hero, Split intro, no switcher). **15 pages, every nav item its own page**, ~29 client requirements applied. This is what ships. See [[Sitemap and Pages]].
+- **Stage (2026-09-23):** `site/` complete and both builds deployed — see [[Site Build Log]] (Rounds 1–12) and [[Tech Stack and Deploy]] for how the deploy actually works now (it changed — not a subtree split anymore).
 
 > [!tip] Where to start
 > New client requirements go in [[Client Requirements Inbox]]. Every change we agree goes in [[Decisions Log]].

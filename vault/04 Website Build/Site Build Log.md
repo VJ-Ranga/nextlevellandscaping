@@ -236,5 +236,19 @@ Verified identical on both the homepage and `process.html`. The two sections now
 > [!warning] `height:auto` is required here
 > The images carry `width`/`height` attributes (kept for CLS). Those map to a **presentational height**, which beats CSS `aspect-ratio` — the first attempt rendered at the intrinsic 3:2 instead of 3/4. `height:auto` lets `aspect-ratio` govern. Same trap applies anywhere else an `aspect-ratio` is put on an `<img>` that has the attributes.
 
+## Round 12 — 2026-09-23: `site/` deployed — both builds now live
+Client wanted `site/` visible on the GitHub Pages URL alongside the existing `demo/`, so both could be shown. `gh-pages` previously held only a subtree split of `demo/`.
+
+**What's live at https://vj-ranga.github.io/nextlevellandscaping/:**
+- **`/`** — a small landing page (two cards), `<meta name="robots" content="noindex, nofollow">` since it's a preview link, not the real domain
+- **`/site/`** — the real build, all 15 pages
+- **`/demo/`** — the original 6-theme showcase, unchanged, kept as reference
+
+**How:** `gh-pages` is no longer a subtree split — it's a **standalone orphan history** (a fresh `git init` in a scratch folder, one commit, force-pushed). `site/` and `demo/` were plain-copied in as of `main`@`2f43124`, not filtered from `main`'s history, so `gh-pages` and `main` are unrelated histories now. This means:
+- **`git subtree split --prefix demo` no longer works to update `gh-pages`** — that assumed subtree ancestry. Future deploys need a repeat of this process (copy the current `site/` and/or `demo/` into a scratch folder, fresh commit, `git push -f origin gh-pages`), not the subtree command in the old README/Tech Stack doc.
+- Verified after deploy (GitHub Pages took ~10s to rebuild after the force-push): root serves the landing page, `/site/index.html` serves the real build's title, `/demo/index.html` still has its theme switcher intact.
+
+`main` branch untouched — only `gh-pages` changed.
+
 ## Next
 Say which of the "not yet applied" items to tackle next, or give more reference sections from `demo/`'s other themes to pull in per the cherry-pick workflow.

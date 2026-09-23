@@ -42,9 +42,10 @@ Paste every end-client requirement here as it arrives. One row each. Then triage
 | 27 | 2026-09-23 | Invisible white box on the store page — "why white area white font?" | bug | S | done | `.ba-note` built its background from `--bg`, which isn't flipped in dark bands → white text on white panel. Was on 4 pages. See [[Site Build Log]] Round 9 |
 | 28 | 2026-09-23 | Every menu option needs its own separate page | page | M | done | "Our Process" and "Reviews" were homepage anchors — both now real pages. 15 pages total. See [[Site Build Log]] Round 10 |
 | 29 | 2026-09-23 | "How we work" — use images instead of icons | design | M | done | Photo-led steps on both the homepage and `process.html`. Images are real NextLevel work used illustratively; `icon` kept as fallback. See [[Site Build Log]] Round 11 |
+| 30 | 2026-09-23 | Show both `site` and `demo` on the GitHub Pages link | build | S | done | `gh-pages` rebuilt as a landing page + `/site/` + `/demo/`. See [[Site Build Log]] Round 12, [[Tech Stack and Deploy]] |
 
 > [!note] Status as of 2026-09-23
-> Built into **`site/`** (the new production-direction folder, not `demo/`) — see [[Site Build Log]] for exactly what changed and how it was verified. **24 of 29 done**, 2 still agreed (need a real design pass: the asymmetric Our Work / portfolio layout), 1 parked (per-service PDFs), 1 confirmed no-change-needed. One carries an accepted accessibility risk (#23, hero pause button). Requirement #14 is built but still wants real step photography.
+> Built into **`site/`** (the new production-direction folder, not `demo/`) — see [[Site Build Log]] for exactly what changed and how it was verified. **25 of 30 done**, 2 still agreed (need a real design pass: the asymmetric Our Work / portfolio layout), 1 parked (per-service PDFs), 1 confirmed no-change-needed. One carries an accepted accessibility risk (#23, hero pause button). Requirement #14 is built but still wants real step photography. Both `site/` and `demo/` are now live at the GitHub Pages URL (#30).
 >
 > **Open, awaiting a client decision:** `#current` is 2239px tall on mobile (2.75 viewports) — shortening it means removing content from their most-differentiated section, so it wasn't touched. See [[Site Build Log]] Round 8.
 
