@@ -82,30 +82,17 @@
   }
 
 
-  /* ---- WCAG 2.2.2: user control for all looping hero motion ---- */
+  /* ---- Hero motion control ------------------------------------
+     The visible pause button was removed at the client's request
+     (2026-09-23). That drops our WCAG 2.2.2 (Level A) pause
+     mechanism — logged as an accepted risk in the vault, revisit
+     before launch. We still honour prefers-reduced-motion here,
+     which is the part we can keep without a visible control. */
   (function () {
-    var btn = $("#hero-pause");
-    if (!btn) return;
     var vid = $(".hero__media video");
-    var icon = $("i", btn), label = $(".hero-pause__txt", btn);
-    var stopped = false;
-    function paint() {
-      btn.setAttribute("aria-pressed", stopped ? "true" : "false");
-      icon.className = stopped ? "fa-solid fa-play" : "fa-solid fa-pause";
-      label.textContent = stopped ? "Play background video" : "Pause background video";
-    }
-    btn.addEventListener("click", function () {
-      stopped = !stopped;
-      window.NLLmotionStopped = stopped;          // carousel reads this
-      if (vid) { if (stopped) vid.pause(); else vid.play().catch(function () {}); }
-      paint();
-    });
-    // honour reduced-motion: start stopped, poster only
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      stopped = true; window.NLLmotionStopped = true;
-      if (vid) vid.pause();
-    }
-    paint();
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    window.NLLmotionStopped = true;               // carousel reads this
+    if (vid) vid.pause();
   })();
 
   /* ---- 3. Render: stats ---------------------------------- */
@@ -335,15 +322,30 @@
   var procEl = $("#process-list");
   if (procEl && D.process) {
     procEl.innerHTML = D.process.map(function (p) {
-      return '<div class="proc reveal">' +
-        '<div class="proc__num"><i class="' + esc(p.icon || "fa-solid fa-circle") + '"></i><span>' + esc(p.no) + '</span></div>' +
+      // photo-led step (client preference, 2026-09-23); falls back to
+      // the original icon medallion if a step has no img yet
+      var visual = p.img
+        ? '<div class="proc__media"><img loading="lazy" src="' + esc(p.img) + '" width="' + esc(p.w) + '" height="' + esc(p.h) + '" alt="' + esc(p.alt || "") + '"><span class="proc__step">' + esc(p.no) + '</span></div>'
+        : '<div class="proc__num"><i class="' + esc(p.icon || "fa-solid fa-circle") + '"></i><span>' + esc(p.no) + '</span></div>';
+      return '<div class="proc' + (p.img ? ' proc--photo' : '') + ' reveal">' +
+        visual +
         '<h3>' + esc(p.name) + '</h3><p>' + p.desc + '</p></div>';
     }).join("");
   }
 
-  /* ---- 8. Render: store ------------------------------- */
+  /* ---- 8. Render: store -------------------------------
+     Prefer storeProducts (has slugs, so the tiles link through
+     to product.html); fall back to the older flat store list. */
   var storeEl = $("#store-list");
-  if (storeEl && D.store) {
+  if (storeEl && D.storeProducts) {
+    storeEl.innerHTML = D.storeProducts.map(function (s) {
+      return '' +
+        '<a class="store-card reveal" href="product.html?slug=' + esc(s.slug) + '">' +
+          '<div class="media"><img loading="lazy" src="' + esc(s.img) + '" alt=""></div>' +
+          '<h3>' + s.name + '</h3><p>' + s.blurb + '</p>' +
+        '</a>';
+    }).join("");
+  } else if (storeEl && D.store) {
     storeEl.innerHTML = D.store.map(function (s) {
       return '' +
         '<article class="store-card reveal">' +

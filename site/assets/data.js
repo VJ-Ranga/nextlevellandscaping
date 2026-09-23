@@ -212,12 +212,23 @@ window.NLL = {
     { name: "Garden Beds &amp; Edging",    desc: "LinkEdge edging, mulch, soil, potting mix and pebbles.", img: "assets/img/store/edging.jpg" }
   ],
 
-  /* --- process ------------------------------------------------ */
+  /* --- process ------------------------------------------------
+     Client asked 2026-09-23 for photos instead of icons on "How we
+     work". These are all REAL NextLevel images, but they are
+     finished-work shots standing in illustratively — none of them
+     is a photo of the step itself (no consultation, crew or
+     build-in-progress photography exists yet). `icon` is kept as a
+     fallback. Swap `img`/`w`/`h` when the client supplies proper
+     step photography — nothing else needs to change. */
   process: [
-    { no: "1", icon: "fa-solid fa-comments",         name: "Consultation", desc: "We visit the site and talk through your vision, budget and needs." },
-    { no: "2", icon: "fa-solid fa-compass-drafting",  name: "Design",       desc: "A 2D &amp; 3D plan tailored to your space and how you want to use it." },
-    { no: "3", icon: "fa-solid fa-trowel-bricks",     name: "Execution",    desc: "On-time, on-budget delivery with clear communication throughout." },
-    { no: "4", icon: "fa-solid fa-heart",             name: "Aftercare",    desc: "We stay in touch to make sure you're happy with the result." }
+    { no: "1", icon: "fa-solid fa-comments",          name: "Consultation", desc: "We visit the site and talk through your vision, budget and needs.",
+      img: "assets/img/projects/north-haven.jpg",      w: 1280, h: 853, alt: "A North Haven property NextLevel Landscaping was engaged to transform" },
+    { no: "2", icon: "fa-solid fa-compass-drafting",  name: "Design",       desc: "A 2D &amp; 3D plan tailored to your space and how you want to use it.",
+      img: "assets/img/services/landscape-design.jpg", w: 1440, h: 810, alt: "A 3D landscape design render of a deck, fire pit and planting" },
+    { no: "3", icon: "fa-solid fa-trowel-bricks",     name: "Execution",    desc: "On-time, on-budget delivery with clear communication throughout.",
+      img: "assets/img/services/paving.jpg",           w: 1280, h: 853, alt: "Completed driveway paving, edging and planting at an Adelaide home" },
+    { no: "4", icon: "fa-solid fa-heart",             name: "Aftercare",    desc: "We stay in touch to make sure you're happy with the result.",
+      img: "assets/img/projects/grange.jpg",           w: 1280, h: 853, alt: "An established, maintained garden at the Grange project" }
   ],
 
   /* --- Google reviews (verbatim) --------------------------- */
@@ -229,5 +240,49 @@ window.NLL = {
     { name: "Isabella White", text: "Sincerely could not recommend more highly. Wonderful experience with this excellent team. Prompt, friendly, professional communication. Great advice and recommendations. Fair pricing and management of progress. Honest and reliable." },
     { name: "Jim Jam", text: "The whole project — travertine tiling for two gardens, new driveway paving and new plants — was well managed. We had complete trust in the various teams, and the value delivered on budget and on time. Highly recommended." },
     { name: "Bronte Nixon", text: "They worked with the challenging natural terrain and levels of our backyard to construct retaining walls, garden beds, paving, and install turf. We now have a fantastic entertaining space and couldn't be happier." }
+  ],
+
+  /* --- store products (NextLevel Outdoors) -------------------
+     Enquiry-only catalogue — every item is P.O.A, no cart.
+     Categories + range taken from the live site's product CPT. */
+  storeProducts: [
+    { slug: "indoor-outdoor-pots", cat: "Indoor &amp; Outdoor Pots", name: "Indoor &amp; Outdoor Pots", img: "assets/img/store/pots.jpg",
+      blurb: "A wide range of pots in varied sizes, finishes and profiles — drainage, self-watering and plant-friendly designs for indoors and out.",
+      detail: ["Drainage and self-watering options", "Sizes from tabletop to statement planters", "Finishes to suit modern and classic gardens", "Advice on the right pot for the plant"] },
+    { slug: "plants-plant-care", cat: "Plants &amp; Plant Care", name: "Plants &amp; Plant Care", img: "assets/img/store/plants.jpg",
+      blurb: "Indoor and outdoor plants, plus everything needed to keep them thriving — potting mix, fertiliser and care essentials.",
+      detail: ["Indoor and outdoor plants", "Premium potting mix", "Fertilisers and plant food", "Planting and care advice from our team"] },
+    { slug: "lawns-lawn-care", cat: "Lawns &amp; Lawn Care", name: "Lawns &amp; Lawn Care", img: "assets/img/store/lawns.jpg",
+      blurb: "Authorised Lawn Solutions Australia distributor — premium natural turf varieties, artificial lawn, and the products to keep them at their best.",
+      detail: ["Eureka Kikuyu", "Nullarbor Couch", "Sir Grange Zoysia", "Sir Walter Buffalo", "TifTuf Hybrid Bermuda", "RTF Fescue", "Artificial lawn", "Fertiliser and topdressing"] },
+    { slug: "garden-beds-edging", cat: "Garden Beds &amp; Edging", name: "Garden Beds &amp; Edging", img: "assets/img/store/edging.jpg",
+      blurb: "Everything to build and finish a garden bed — LinkEdge aluminium edging, mulch, soil, potting mix and decorative pebbles.",
+      detail: ["LinkEdge aluminium garden edging", "Mulch and decorative pebbles", "Premium garden soil", "Potting mix", "Edging installation advice"] }
+  ],
+
+  /* --- FAQ ---------------------------------------------------
+     Drafted from verified facts in BUSINESS.md. Anything the
+     client still has to confirm is marked `confirm: true` and
+     renders with a visible draft flag — do NOT ship those as
+     fact without sign-off. See vault: Open Questions. */
+  faqs: [
+    { q: "Do you handle council approvals?",
+      a: "Yes. Where a project needs development approval we manage the process on your behalf — as we did for our Somerton Park clients, start to finish, so it stays hassle-free for you." },
+    { q: "Will I see a design before any work starts?",
+      a: "Yes. We start with an on-site consultation to talk through your requirements, then provide a 2D &amp; 3D design so you can see exactly what your outdoor space will look like before you commit to anything." },
+    { q: "Are you licensed?",
+      a: "Yes — NextLevel Landscaping holds builders licence <b>BLD320507</b> and is a member of Master Landscapers South Australia. We are also an authorised distributor of Lawn Solutions Australia." },
+    { q: "Which areas do you service?",
+      a: "We work across metropolitan Adelaide and the Adelaide Hills. Recent projects include Grange, North Haven, Somerton Park and Klemzig.", confirm: "Confirm the full service-area suburb list with the client." },
+    { q: "Do you supply the plants and materials too?",
+      a: "We do — that is what makes us a little different. Our Edwardstown store, NextLevel Outdoors, stocks pots, plants, turf, mulch, soil, edging and pebbles, so your design, build and supplies all come from one team." },
+    { q: "Do you take on commercial work?",
+      a: "Yes. Alongside residential projects, our qualified horticulturists provide commercial garden maintenance — pruning, planting, weeding and seasonal care to keep a property looking its best year-round." },
+    { q: "What does a project cost?",
+      a: "Every site is different, so we price after seeing it. Following the on-site consultation and design you receive a detailed quote covering the full scope — no guesswork and no surprises later." },
+    { q: "How long does a project take?",
+      a: "It depends on scope, site access and approvals. We give you an indicative timeline with your quote and keep you updated as the build progresses — you can even follow live jobs on our Current Work page.", confirm: "Confirm typical project durations with the client." },
+    { q: "Do you offer a workmanship guarantee?",
+      a: "", confirm: "Client has not confirmed a warranty or workmanship guarantee period. Only 1 of 19 competitors states one — stating it would be a real differentiator. Answer intentionally left blank until confirmed." }
   ]
 };

@@ -91,12 +91,19 @@ html[data-theme="carbon-soft-v2"]{
   --btn-radius:999px;
   --h-weight:400;
 
-  /* --- THE SIGNATURE MOVE — one radius token ----------------- */
-  --v2-scoop: clamp(56px, 11vw, 150px);
+  /* --- THE SIGNATURE MOVE — one radius token -----------------
+     Bumped 2026-09-23: client compared us directly against
+     lagunapools.com.au and asked for their boldness — Laguna runs
+     a fixed 150-300px curve at EVERY width, including mobile, it
+     never shrinks. Matched their 300px ceiling and raised the
+     floor so the curve stays bold through tablet/laptop widths
+     instead of tapering off (was clamp(56px,11vw,150px), mobile
+     44px — both read as barely-there next to Laguna's). */
+  --v2-scoop: clamp(110px, 21vw, 300px);
   --v2-scoop-card: clamp(28px, 5vw, 72px);   /* card-level scoop for the store row */
 }
 @media(max-width:640px){
-  html[data-theme="carbon-soft-v2"]{ --v2-scoop: 44px; }
+  html[data-theme="carbon-soft-v2"]{ --v2-scoop: 130px; }
 }
 
 
@@ -227,16 +234,15 @@ html[data-theme="carbon-soft-v2"] main > #process{
 html[data-theme="carbon-soft-v2"] main > #projects{
   padding-bottom:calc(var(--pad-band) + var(--v2-scoop));
 }
-/* the last light band is pulled into by the footer */
+/* footer is flat for now (no scoop pull), so #contact only needs
+   its own normal statement-band padding, not the extra reserve */
 html[data-theme="carbon-soft-v2"] main > #contact{
-  padding-bottom:calc(var(--pad-band-lg) + var(--v2-scoop));
+  padding-bottom:var(--pad-band-lg);
 }
-/* sub-pages: the last content band also reserves room for the
-   footer's scoop pull (homepage #contact above already does, and
-   its id rule outranks this one). Without it the footer rides up
-   over the last section's content. */
+/* sub-pages: footer is flat for now (no scoop pull), so the last
+   content band only needs its normal padding, not a reserve */
 html[data-theme="carbon-soft-v2"] main > .band:last-of-type{
-  padding-bottom:calc(var(--pad-band) + var(--v2-scoop));
+  padding-bottom:var(--pad-band);
 }
 
 /* clip the contour texture to the curve so the sweep stays clean */
@@ -481,6 +487,12 @@ html[data-theme="carbon-soft-v2"] .proc__num span{
 }
 html[data-theme="carbon-soft-v2"] .proc h3{color:var(--v2-ink)}
 html[data-theme="carbon-soft-v2"] .proc p{color:var(--v2-muted)}
+/* photo-led steps: same bookend sweep as the store row, so the two
+   sections read as one family (client asked for the store look) */
+html[data-theme="carbon-soft-v2"] .proc__media{background:var(--v2-night)}
+html[data-theme="carbon-soft-v2"] .proc--photo:first-child .proc__media{ border-radius:var(--v2-scoop-card) 0 0 0; }
+html[data-theme="carbon-soft-v2"] .proc--photo:last-child  .proc__media{ border-radius:0 var(--v2-scoop-card) 0 0; }
+html[data-theme="carbon-soft-v2"] .proc__step{background:var(--v2-lime);color:#17190F}
 
 
 /* =============================================================
@@ -546,24 +558,33 @@ html[data-theme="carbon-soft-v2"] .contact-info .tbc{color:var(--v2-muted);opaci
 
 
 /* =============================================================
-   15. FOOTER — dark close, top-LEFT scoop over the light contact
-   The footer keeps the night ground as the page's dark sign-off
-   and sweeps up out of the light contact band with one corner.
+   15. FOOTER — dark close, FLAT for now (no scoop), full-width
+   like lagunapools.com.au's own footer (client checked their
+   footer live 2026-09-23: border-radius:0, runs near-full
+   viewport width). Placeholder treatment — client wants to
+   finalise the footer look later; this is the interim baseline.
    ============================================================= */
 html[data-theme="carbon-soft-v2"] .site-footer--scoop{
-  --r-footer-scoop:var(--v2-scoop);
   position:relative;
   z-index:1;
-  border-radius:var(--v2-scoop) var(--v2-scoop) 0 0;    /* both top corners */
-  margin-top:calc(-1 * var(--v2-scoop));
-  padding-top:calc(72px + var(--v2-scoop) * .55);
+  border-radius:0;
+  margin-top:0;
+  padding-top:72px;
   background:var(--v2-night);
   background-color:var(--v2-night);
+}
+@media(max-width:640px){
+  html[data-theme="carbon-soft-v2"] .site-footer--scoop{padding-top:56px}
 }
 html[data-theme="carbon-soft-v2"] .site-footer{
   color:var(--v2-muted-nt);
   border-top:0;
 }
+/* footer content uses the site's NORMAL 1200px container (client
+   asked 2026-09-23 to pull it back in — the earlier full-width
+   Laguna-style treatment was a placeholder). The header stays
+   full-width; the footer does not. Nothing to override here —
+   `.container` already does the right thing. */
 html[data-theme="carbon-soft-v2"] .site-footer a:hover{color:#fff}
 html[data-theme="carbon-soft-v2"] .site-footer .footer-brand p{color:var(--v2-muted-nt)}
 html[data-theme="carbon-soft-v2"] .footer-bar{border-top-color:var(--v2-line-nt);color:var(--v2-muted-nt)}
@@ -580,8 +601,9 @@ html[data-theme="carbon-soft-v2"] .site-header.is-stuck{
   background-color:var(--v2-night);
   box-shadow:0 1px 0 rgba(242,242,236,.08);
 }
-html[data-theme="carbon-soft-v2"] .hdr2{background-color:transparent}
+html[data-theme="carbon-soft-v2"] .hdr2:not(.is-stuck){background-color:transparent}
 html[data-theme="carbon-soft-v2"][data-layout="centred"] .hdr2.is-stuck{
+  background-color:#17190F;
   background-color:var(--v2-night);
   box-shadow:0 1px 0 rgba(242,242,236,.08);
 }

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-AU" data-theme="carbon-soft-v2" data-layout="centred" data-hero="sticky" data-intro="split">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Store Product — NextLevel Outdoors — NextLevel Landscaping</title>
+<meta name="description" content="Product ranges stocked at NextLevel Outdoors, Edwardstown — pots, plants, lawns and garden bed supplies. All items priced on application.">
+<link rel="icon" href="assets/img/brand/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="assets/css/style.css?v=1790128770">
+<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1790128770">
+<style>
+/* Page-scoped only — the P.O.A block is unique to this template and has no
+   equivalent in style.css / style-carbon-soft-v2.css. Everything else on this
+   page reuses existing site classes. Tokens only, no hardcoded hex. */
+.poa{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:1.6rem 0;
+  margin:2rem 0 0;
+}
+.poa__amount{
+  display:block;
+  font-size:clamp(1.9rem,4.6vw,2.6rem);
+  line-height:1.04;
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:0;
+  color:var(--ink);
+  margin:0 0 .5rem;
+}
+.poa__amount i{
+  color:var(--accent);
+  font-size:.55em;
+  margin-right:.35em;
+  vertical-align:.12em;
+}
+.poa__note{
+  margin:0;
+  font-size:.86rem;
+  line-height:1.7;
+  color:var(--muted);
+  max-width:46ch;
+}
+/* the enquiry band puts two pills side by side and wraps them cleanly at 320px */
+.enq-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.9rem;
+  margin:2rem 0 0;
+  padding:0;
+  list-style:none;
+}
+.enq-actions .btn-ghost{white-space:nowrap}
+@media (max-width:420px){
+  .enq-actions{flex-direction:column;align-items:flex-start}
+  .enq-actions li,.enq-actions .btn-ghost{width:100%;text-align:center}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="site-header-slot"></div>
+
+<main id="main" tabindex="-1">
+  <section class="subhero">
+    <div class="subhero__media" id="subhero-media"></div>
+    <div class="container">
+      <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <a href="store.html">Store</a> &nbsp;/&nbsp; <span id="crumb-name">Product</span></p>
+      <span class="eyebrow" id="p-cat">NextLevel Outdoors</span>
+      <h1 id="p-name">—</h1>
+      <div class="subhero__meta">
+        <span>Edwardstown store</span>
+        <span><b>P.O.A</b> — price on application</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" style="--plan-label:'The Range'">
+    <div class="container">
+      <div class="detail-body">
+        <div class="reveal">
+          <div class="media" id="p-media"></div>
+          <p class="lead measure" id="p-blurb" style="margin-top:1.8rem"></p>
+          <div class="section-head" style="margin:2.4rem 0 0"><span class="eyebrow">In this range</span><h2>What we stock</h2></div>
+          <ul class="chips" id="p-detail"></ul>
+        </div>
+        <aside class="reveal">
+          <div class="spec"><dl id="p-spec"></dl></div>
+          <div class="poa">
+            <span class="poa__amount"><i class="fa-solid fa-dollar-sign" aria-hidden="true"></i>P.O.A — enquire</span>
+            <p class="poa__note">Every range is priced on application. Tell us the sizes and quantities you are after and we will quote it — there is no online checkout.</p>
+          </div>
+          <p style="margin-top:2rem"><a class="btn-ghost btn-ghost--fill" href="contact.html">Enquire about this range</a></p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--dark contour" style="--plan-label:'Enquire'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">Enquire</span><h2 id="p-enq-head">Ask us about this range</h2>
+        <p class="lead">Call the Edwardstown store, or send the details through the quote form and we will come back to you with pricing and availability.</p></div>
+      <ul class="enq-actions reveal">
+        <li><a class="btn-ghost btn-ghost--fill" href="tel:+61404440222">Call 0404 440 222</a></li>
+        <li><a class="btn-ghost" href="contact.html">Send an enquiry</a></li>
+      </ul>
+      <p class="ba-note reveal" style="margin-top:2rem">Trading hours still to be confirmed by the client.</p>
+    </div>
+  </section>
+
+  <section class="band" style="--plan-label:'More In Store'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">More from the store</span><h2>Also in store</h2></div>
+      <div class="store-grid" id="p-more"></div>
+      <p style="margin-top:2.4rem"><a class="btn-ghost" href="store.html">Back to the store</a></p>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer-slot"></div>
+<script src="assets/js/partials.js?v=1790128770"></script>
+<script src="assets/data.js?v=1790128770"></script>
+<script src="assets/js/main.js?v=1790128770"></script>
+<script>
+(function(){
+  var D = window.NLL || {}, list = D.storeProducts || [];
+  if (!list.length) return;
+
+  /* intrinsic dimensions of the shipped store images — kept here (not in
+     data.js) so nothing outside this page has to change. */
+  var DIMS = {
+    "assets/img/store/pots.jpg":   [1440, 1080],
+    "assets/img/store/plants.jpg": [1440, 1080],
+    "assets/img/store/lawns.jpg":  [1440, 1080],
+    "assets/img/store/edging.jpg": [571, 690]
+  };
+  function dim(src){ return DIMS[src] || [1440, 1080]; }
+  function attr(s){ return String(s).replace(/"/g, "&quot;"); }
+  function plain(s){
+    var d = document.createElement("div");
+    d.innerHTML = s;
+    return d.textContent || "";
+  }
+
+  var slug = new URLSearchParams(location.search).get("slug");
+  /* unknown or missing slug -> fall back to the first product, same as service.html */
+  var p = list.find(function(x){ return x.slug === slug; }) || list[0];
+
+  var name = plain(p.name), cat = plain(p.cat), blurb = plain(p.blurb);
+
+  document.title = name + " — NextLevel Outdoors — NextLevel Landscaping";
+  var meta = document.querySelector('meta[name="description"]');
+  if (meta) meta.setAttribute("content", blurb + " Priced on application at NextLevel Outdoors, Edwardstown.");
+
+  document.getElementById("crumb-name").textContent = name;
+  document.getElementById("p-cat").innerHTML = p.cat;
+  document.getElementById("p-name").innerHTML = p.name;
+  document.getElementById("p-blurb").innerHTML = p.blurb;
+  document.getElementById("p-enq-head").innerHTML = "Ask us about " + p.name;
+
+  var d = dim(p.img);
+  document.getElementById("subhero-media").innerHTML =
+    '<img src="' + attr(p.img) + '" alt="" width="' + d[0] + '" height="' + d[1] + '">';
+  document.getElementById("p-media").innerHTML =
+    '<img src="' + attr(p.img) + '" width="' + d[0] + '" height="' + d[1] +
+    '" alt="' + attr(name) + ' at the NextLevel Outdoors store in Edwardstown">';
+
+  document.getElementById("p-detail").innerHTML = p.detail.map(function(t){
+    return "<li>" + t + "</li>";
+  }).join("");
+
+  document.getElementById("p-spec").innerHTML =
+    "<dt>Range</dt><dd>" + p.cat + "</dd>" +
+    "<dt>Price</dt><dd>P.O.A &mdash; price on application</dd>" +
+    "<dt>Store</dt><dd>Shop 1/41 Woodlands Terrace, Edwardstown SA 5039</dd>" +
+    "<dt>Licence</dt><dd>BLD320507</dd>";
+
+  var others = list.filter(function(x){ return x.slug !== p.slug; });
+  document.getElementById("p-more").innerHTML = others.map(function(o){
+    var od = dim(o.img);
+    return '<a href="product.html?slug=' + attr(o.slug) + '">' +
+      '<article class="store-card">' +
+        '<div class="media"><img loading="lazy" src="' + attr(o.img) + '" width="' + od[0] + '" height="' + od[1] +
+          '" alt="' + attr(plain(o.name)) + '"></div>' +
+        "<h3>" + o.name + "</h3><p>" + o.blurb + "</p>" +
+      "</article></a>";
+  }).join("");
+
+  document.querySelectorAll(".reveal").forEach(function(el){ el.classList.add("in"); });
+})();
+</script>
+</body>
+</html>

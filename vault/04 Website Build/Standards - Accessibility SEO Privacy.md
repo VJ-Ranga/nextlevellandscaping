@@ -11,12 +11,15 @@ LCP ≤ 2.5s · INP ≤ 200ms · CLS ≤ 0.1 at p75 real mobile users.
 AHRC upgraded recommendation to 2.2 AA (Apr 2025); binds via **Disability Discrimination Act 1992 s24**.
 | Item | Status |
 |---|---|
-| 2.2.2 pause for video/carousel | ✅ hero pause button; headline carousel needs keyboard/touch pause check |
+| 2.2.2 pause for video/carousel | ❌ **FAILING — accepted risk.** The hero pause button was removed at the client's request 2026-09-23. The hero video still autoplays and loops with no user-accessible pause, which is a **Level A** failure (binds via Disability Discrimination Act s24). `prefers-reduced-motion` is still honoured. **Revisit before launch** — options: bring the control back in a quieter style, or make the hero a non-looping/poster-first treatment. |
 | 2.4.1 skip link | ✅ |
 | Contrast | ✅ 0 failures all themes |
+| 2.5.8 Target Size Minimum (24×24, **AA**) | ✅ audited across all 13 pages at 375px 2026-09-23 — was failing (footer links 20px, breadcrumbs 16px, Instagram icon 23×12px), fixed via `style.css` §40. 0 failures now. |
+| Text size ≥11px | ✅ strip captions + mobile quote-float raised to the `.72rem` eyebrow token 2026-09-23 |
+| Horizontal overflow | ✅ 0 across 13 pages × 375/768/1024px |
 | Focus visible | ✅ lime on dark / olive on light |
 | img width/height | ⚠ partial (strip has dims) |
-| reduced-motion → poster only | ❌ video still plays |
+| reduced-motion → static hero | ✅ fixed 2026-09-23 — the video is paused on load under `prefers-reduced-motion`, and the headline carousel stops too. (This nearly regressed when the pause button was removed: the handling lived inside the button's `if (!btn) return;` block. Rewritten to stand alone.) |
 
 ## SEO
 - `LandscapingBusiness` schema ✅ (add `openingHoursSpecification` once hours known).

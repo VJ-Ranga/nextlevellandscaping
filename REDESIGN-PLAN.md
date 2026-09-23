@@ -1,5 +1,9 @@
 # NextLevel Landscaping — Website Redesign Plan
 
+> ⚠️ **SUPERSEDED IN PLACES — read the vault for current state.** This is the original plan (2026-09-08) and is kept as the record of the initial thinking. The build has moved well past it: the design is locked (Carbon), `site/` holds 15 built pages, and the client has since made ~29 change requests.
+> **Current sources of truth:** `vault/00 Home.md` → `vault/04 Website Build/Sitemap and Pages.md` (what exists), `vault/03 Design System/Style Guide.md` (the design rules), `vault/05 Client/Client Requirements Inbox.md` (what the client asked for).
+> Known divergences from below: 7 services not 8 (Walkways dropped), no homepage Store band, no WhatsApp float, no hero pause control, footer is flat and contained, process steps are photo-led.
+
 > **Status:** draft for client/internal discussion. **Nothing is being built yet.**
 > Companion doc: [BUSINESS.md](BUSINESS.md) (verified facts). Reference site studied: <https://www.lagunapools.com.au/>.
 > Prepared by Cloudycode, 2026-09-08.

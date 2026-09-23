@@ -36,6 +36,7 @@ Cloudycode client project. Full redesign + restructure of <https://nextlevelland
 - [[Outside Ideas]]
 
 ## 03 Design system — the style we are building
+- [[Style Guide]] ⭐ — **the rulebook.** One consolidated source of truth, pulled from the live `site/` CSS. Start here.
 - [[Design Direction]] — "premium visuals on trade IA", anti-boxy
 - [[Colour Palette]] · [[Typography]] · [[Buttons]] · [[Spacing and Layout]]
 - [[Scoop Curve]] — Carbon theme signature move + corner map

@@ -21,5 +21,5 @@ tags: [client, blocked]
 - [x] Brand palette + logo — resolved 2026-09-08 from logo files
 - [ ] Real black-and-white logo export (currently a CSS grayscale filter on the colour logo, not a real asset) — requirement #2
 - [ ] Downloadable PDF/document per service (spec sheets, brochures) — requirement #13
-- [ ] Photos for each Process step (replacing icons) — requirement #14
+- [ ] **Photos for each Process step** — requirement #14. The photo-led design is now **built and live**; it currently uses real NextLevel finished-work photos standing in illustratively (none of them depicts the actual step). Ideal shots: a site consultation in progress, the crew mid-build, a handover/walk-through. Dropping them in = swapping 4 `img` values in `data.js`.
 - [ ] Portfolio reference confirmation — client sent an asymmetric-grid architecture-portfolio screenshot as style reference for Our Work / Current Work — requirement #4/#9

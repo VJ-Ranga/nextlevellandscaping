@@ -9,7 +9,7 @@ tags: [client, questions]
 2. Real team — names, roles, photos ([[Team]])
 3. Is the 8-service list final? ([[Services]])
 4. Trading hours — office + store
-5. WhatsApp number (float button)
+5. ~~WhatsApp number (float button)~~ — moot, WhatsApp float removed 2026-09-23 per client request (inbox #17)
 6. Google Business Profile URL, Facebook?
 7. Warranty / workmanship guarantee period? (only 1/19 competitors state one)
 8. Insurance wording
@@ -30,6 +30,7 @@ tags: [client, questions]
 19. Keep Poppins, or editorial humanist sans for headings?
 20. Store row bookend corners — keep or remove?
 21. Confirm Carbon as final theme
+22. **Footer design — currently a flat, full-width placeholder** (matched to lagunapools.com.au's own footer as a stand-in, no scoop). Client said explicitly this needs finalising — what should it actually look like?
 
 ## Build
 22. WP approach — child theme + Elementor for marketing sections (recommended) vs full block theme

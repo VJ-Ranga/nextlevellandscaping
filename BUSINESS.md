@@ -39,6 +39,8 @@
 
 All real service copy currently lives only on `/our-services/`. The 8 `/service/*` pages are empty stubs (H1 + form).
 
+> **Note (2026-09-23):** this table records the **live site as crawled** and stays accurate to it. In the rebuild the client dropped **Walkways** (#7), so `site/` ships **7 services**. That was a client decision, not a correction — see `vault/05 Client/Client Requirements Inbox.md` #7.
+
 | # | Service | Description (verbatim) | Options / materials |
 |---|---|---|---|
 | 1 | **Landscape Design** | "We provide an on-site consultation to discuss your landscaping requirements before providing you with a 2D & 3D design. See exactly what your outdoor space will look like before moving ahead with the project." | 2D & 3D design |

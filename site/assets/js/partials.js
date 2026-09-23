@@ -6,11 +6,15 @@
   "use strict";
 
   var nav = [
-    ["index.html#services", "Services"],
+    ["services.html", "Services"],
     ["our-work.html", "Our Work"],
     ["current-work.html", "Current Work"],
+    ["process.html", "Our Process"],
     ["store.html", "Store"],
-    ["index.html#contact", "Contact"]
+    ["about.html", "About"],
+    ["reviews.html", "Reviews"],
+    ["faq.html", "FAQ"],
+    ["contact.html", "Contact"]
   ];
   var navLinks = nav.map(function (n) { return '<a href="' + n[0] + '">' + n[1] + '</a>'; }).join("");
 
@@ -19,10 +23,11 @@
       '<div class="hdr2__util">' +
         '<div class="container hdr2__util-row">' +
           '<nav class="hdr2__util-links">' +
-            '<a href="index.html#process">Our Process</a>' +
-            '<a href="index.html#reviews">Reviews</a>' +
+            '<a href="about.html">About</a>' +
+            '<a href="process.html">Our Process</a>' +
+            '<a href="reviews.html">Reviews</a>' +
+            '<a href="faq.html">FAQ</a>' +
             '<a href="store.html">Store</a>' +
-            '<a href="index.html#intro">Credentials</a>' +
           '</nav>' +
           '<div class="hdr2__util-right">' +
             '<a href="tel:+61404440222">0404 440 222</a>' +
@@ -32,13 +37,13 @@
       '</div>' +
       '<div class="container hdr2__main">' +
         '<nav class="hdr2__nav hdr2__nav--l">' +
-          '<a href="index.html#services">Services</a>' +
+          '<a href="services.html">Services</a>' +
           '<a href="our-work.html">Our Work</a>' +
         '</nav>' +
         '<a class="hdr2__brand" href="index.html"><img src="assets/img/brand/logo.png" alt="NextLevel Landscaping"></a>' +
         '<nav class="hdr2__nav hdr2__nav--r">' +
           '<a href="current-work.html">Current Work</a>' +
-          '<a href="index.html#contact">Contact</a>' +
+          '<a href="contact.html">Contact</a>' +
         '</nav>' +
         '<button class="nav-toggle hdr2__toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>' +
       '</div>' +
@@ -61,18 +66,21 @@
             '<p>A proudly South Australian owned and operated landscaping business. Design, construction and garden supplies.</p>' +
           '</div>' +
           '<div><h4>EXPLORE</h4><ul>' +
-            '<li><a href="index.html#services">Services</a></li>' +
+            '<li><a href="services.html">Services</a></li>' +
             '<li><a href="our-work.html">Our Work</a></li>' +
             '<li><a href="current-work.html">Current Work</a></li>' +
+            '<li><a href="process.html">Our Process</a></li>' +
             '<li><a href="store.html">Store</a></li>' +
             '<li><a href="about.html">About</a></li>' +
-            '<li><a href="index.html#contact">Contact</a></li>' +
+            '<li><a href="reviews.html">Reviews</a></li>' +
+            '<li><a href="faq.html">FAQ</a></li>' +
+            '<li><a href="contact.html">Contact</a></li>' +
           '</ul></div>' +
           '<div><h4>STORE</h4><ul>' +
-            '<li><a href="store.html">Indoor &amp; Outdoor Pots</a></li>' +
-            '<li><a href="store.html">Plants &amp; Plant Care</a></li>' +
-            '<li><a href="store.html">Lawns &amp; Lawn Care</a></li>' +
-            '<li><a href="store.html">Garden Beds &amp; Edging</a></li>' +
+            '<li><a href="product.html?slug=indoor-outdoor-pots">Indoor &amp; Outdoor Pots</a></li>' +
+            '<li><a href="product.html?slug=plants-plant-care">Plants &amp; Plant Care</a></li>' +
+            '<li><a href="product.html?slug=lawns-lawn-care">Lawns &amp; Lawn Care</a></li>' +
+            '<li><a href="product.html?slug=garden-beds-edging">Garden Beds &amp; Edging</a></li>' +
           '</ul></div>' +
           '<div><h4>NEXTLEVEL LANDSCAPING</h4><ul>' +
             '<li>Shop 1/41 Woodlands Terrace, Edwardstown SA 5039</li>' +
@@ -88,7 +96,7 @@
         '</div>' +
       '</div>' +
     '</footer>' +
-    '<a class="quote-float btn-ghost btn-ghost--fill" id="quote-float" href="index.html#contact"><i class="fa-solid fa-comment-dollar" aria-hidden="true"></i> Get a Free Quote</a>';
+    '<a class="quote-float btn-ghost btn-ghost--fill" id="quote-float" href="contact.html"><i class="fa-solid fa-comment-dollar" aria-hidden="true"></i> Get a Free Quote</a>';
 
   var h = document.getElementById("site-header-slot");
   if (h) h.outerHTML = header; else document.body.insertAdjacentHTML("afterbegin", header);

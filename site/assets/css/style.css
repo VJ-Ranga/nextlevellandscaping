@@ -290,8 +290,39 @@ p:last-child{margin-bottom:0}
 .proc h3{font-size:1.2rem;margin-bottom:.7rem}
 .proc p{font-size:1rem;line-height:1.65;color:var(--muted)}
 
+/* photo-led process step (client asked for images over icons,
+   2026-09-23). Deliberately mirrors the store's "What we stock"
+   row — client pointed at it and asked for the same treatment:
+   portrait 3/4 images, tight gap, smaller type, and scooped
+   bookend corners on the first and last card only. */
+.proc-grid:has(.proc--photo){gap:1.6rem}
+.proc__media{position:relative;margin-bottom:1rem;overflow:hidden;
+  background:var(--surface-dark)}
+/* height:auto is required — the width/height HTML attributes (kept for
+   CLS) map to a presentational height, which would otherwise beat
+   aspect-ratio and give the image its intrinsic 3:2 shape */
+.proc__media img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;
+  transition:transform .6s var(--ease)}
+.proc--photo:hover .proc__media img{transform:scale(1.04)}
+/* bookends, same as .store-card */
+.proc--photo:first-child .proc__media{border-radius:var(--r-arch-sm) 0 0 0}
+.proc--photo:last-child .proc__media{border-radius:0 var(--r-arch-sm) 0 0}
+.proc--photo h3{font-size:1rem;margin-bottom:.4rem}
+.proc--photo p{font-size:.86rem;line-height:1.6}
+.proc__step{position:absolute;left:0;bottom:0;z-index:2;
+  min-width:40px;height:40px;padding:0 .7rem;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--accent);color:var(--accent-ink,#17190F);
+  font-size:.82rem;font-weight:500;letter-spacing:.04em;
+  border-radius:0 var(--r-arch-sm) 0 0}
+@media(prefers-reduced-motion:reduce){
+  .proc__media img{transition:none}
+  .proc--photo:hover .proc__media img{transform:none}
+}
+
 /* ---------- 14. Store ----------------------------------- */
 .store-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem}
+.store-card{display:block}
 .store-card .media{aspect-ratio:3/4;margin-bottom:1rem}
 .store-card:nth-child(2) .media{border-radius:0 var(--r-arch-sm) 0 0}
 .store-card:nth-child(3) .media{border-radius:0 0 var(--r-arch-sm) 0}
@@ -327,7 +358,11 @@ p:last-child{margin-bottom:0}
 .field .msg{font-size:.72rem;color:#c0392b;margin-top:.35rem;display:none}
 .field.err .msg{display:block}
 .form-note{font-size:.82rem;color:var(--muted);margin-top:.8rem}
+/* the panel is deliberately a solid light box, so its ink is pinned
+   dark rather than inherited — otherwise dropping the form on a dark
+   band would give white text on a white panel */
 .form-ok{display:none;padding:1.2rem 1.4rem;border-radius:4px;background:color-mix(in srgb,var(--accent) 12%,#fff);
+  color:#1C2412;
   border:1px solid color-mix(in srgb,var(--accent) 40%,#fff);font-size:.9rem;margin-bottom:1.2rem}
 .form-ok.show{display:block}
 .contact-info dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.5rem 1.2rem}
@@ -359,7 +394,7 @@ p:last-child{margin-bottom:0}
 .quote-float:hover{transform:translateY(-2px)}
 .quote-float.is-visible:hover{transform:translateY(-2px)}
 @media(max-width:640px){
-  .quote-float{right:14px;bottom:14px;padding:11px 16px;font-size:.68rem}
+  .quote-float{right:14px;bottom:14px;padding:11px 16px;font-size:.72rem}
 }
 @media(prefers-reduced-motion:reduce){
   .quote-float{transition:opacity .2s}
@@ -387,9 +422,17 @@ p:last-child{margin-bottom:0}
 }
 @media(max-width:640px){
   :root{--pad-band:64px;--pad-band-lg:80px}
-  .cw-grid,.proc-grid,.store-grid,.footer-grid,.stats{grid-template-columns:1fr}
+  .cw-grid,.proc-grid,.store-grid,.stats{grid-template-columns:1fr}
   .hero__tag h2{font-size:1.5rem}
-  .footer-bar{flex-direction:column}
+  .footer-bar{flex-direction:column;margin-top:32px;gap:.5rem}
+  /* Footer keeps TWO link columns on mobile. Collapsing all four
+     blocks to one column made the footer 1257px tall at 375px —
+     1.5x the viewport. Brand and the company block still span
+     full width; Explore and Store sit side by side. */
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem 1.4rem}
+  .footer-grid > :first-child,
+  .footer-grid > :last-child{grid-column:1 / -1}
+  .site-footer{padding-block:56px 0}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -478,8 +521,10 @@ p:last-child{margin-bottom:0}
 .timeline p{font-size:.94rem;color:var(--ink);margin:0}
 
 /* "office would edit this" callout on detail page */
+/* same rule as .ba-note: mix into transparent, never into var(--bg),
+   so it survives being dropped on a dark band */
 .cms-note{margin-top:2rem;padding:1.1rem 1.3rem;border:1px dashed var(--line);border-radius:6px;
-  font-size:.84rem;color:var(--muted);background:color-mix(in srgb,var(--accent) 5%,var(--bg))}
+  font-size:.84rem;color:var(--muted);background:color-mix(in srgb,var(--accent) 8%,transparent)}
 .cms-note b{color:var(--ink);font-weight:500}
 
 @media(max-width:900px){
@@ -578,8 +623,14 @@ p:last-child{margin-bottom:0}
 .ba__tag--a{right:20px}
 .ba-hint{margin-top:1rem;font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:.6em}
 .ba-hint i{color:var(--accent)}
+/* NOTE: the tint must mix into `transparent`, NOT into var(--bg).
+   `--bg` is the LIGHT ground and is not flipped inside .band--dark
+   (only --ink/--muted/--line/--accent are), so mixing into it painted
+   a light box inside dark bands while --muted flipped to near-white —
+   invisible text. Mixing into transparent tints whatever is behind it,
+   so this reads correctly on both grounds. */
 .ba-note{margin-top:1.4rem;padding:.9rem 1.1rem;border:1px dashed var(--line);border-radius:6px;
-  font-size:.78rem;color:var(--muted);background:color-mix(in srgb,var(--accent) 4%,var(--bg))}
+  font-size:.78rem;color:var(--muted);background:color-mix(in srgb,var(--accent) 8%,transparent)}
 
 @media(max-width:900px){
   .statline{grid-template-columns:1fr 1fr;gap:2.4rem 1.6rem}
@@ -686,7 +737,7 @@ p:last-child{margin-bottom:0}
   position:absolute;left:14px;bottom:14px;z-index:2;
   padding:.42em 1em;border-radius:999px;
   background:rgba(20,22,18,.6);backdrop-filter:blur(4px);
-  color:#fff;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+  color:#fff;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
   opacity:0;transform:translateY(6px);transition:.3s var(--ease);pointer-events:none;
 }
 .strip .swiper-slide:hover .strip__cap{opacity:1;transform:none}
@@ -1056,24 +1107,11 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 }
 .skip-link:focus{top:12px;outline:2px solid #fff;outline-offset:2px}
 
-/* hero pause: any looping motion >5s needs a user-accessible stop */
-.hero-pause{
-  position:absolute;right:20px;bottom:20px;z-index:4;
-  display:inline-flex;align-items:center;gap:.55em;
-  min-height:44px;min-width:44px;padding:0 16px;
-  border:1px solid rgba(255,255,255,.55);border-radius:999px;
-  background:rgba(20,22,18,.45);backdrop-filter:blur(4px);
-  color:#fff;font:500 .7rem/1 var(--f);letter-spacing:.1em;text-transform:uppercase;
-  cursor:pointer;transition:background .25s,border-color .25s;
-}
-.hero-pause:hover{background:rgba(20,22,18,.72);border-color:#fff}
-.hero-pause:focus-visible{outline:2px solid #fff;outline-offset:3px}
-.hero-pause__txt{white-space:nowrap}
-@media(max-width:640px){
-  .hero-pause{right:12px;bottom:12px;padding:0;width:44px;justify-content:center}
-  .hero-pause__txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-}
-[data-theme="nocturne"] .hero-pause,[data-theme="blueprint"] .hero-pause{border-radius:0}
+/* NOTE: the .hero-pause control was removed at the client's request
+   (2026-09-23). That was our WCAG 2.2.2 (Level A) mechanism for the
+   looping hero video — logged as an accepted risk in the vault,
+   revisit before launch. prefers-reduced-motion is still honoured
+   in main.js. Styles deleted with the markup. */
 /* line-based themes square off the skip link too */
 [data-theme="nocturne"] .skip-link,[data-theme="blueprint"] .skip-link{border-radius:0}
 
@@ -1151,4 +1189,33 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 [data-theme="carbon-soft"] #services{padding-bottom:calc(var(--pad-band) + var(--r-ow))}
 @media(max-width:640px){
   [data-theme="carbon-soft"]{--r-ow:44px}
+}
+
+/* =============================================================
+   40. Tap targets — WCAG 2.2 AA (2.5.8 Target Size Minimum, 24px)
+   Audited 2026-09-23 at 375px: footer links were 20px tall,
+   breadcrumbs 16px, and the header Instagram icon 23x12.
+   padding-block on an inline link grows the hit area WITHOUT
+   changing the line box, so none of this shifts layout.
+   ============================================================= */
+@media(max-width:768px){
+  .site-footer ul a,
+  .contact-info dd a,
+  .crumb a,
+  .footer-bar a,
+  .drawer__foot a,
+  .form-note a,
+  .hdr2__util-links a,
+  .hdr2__util-right a{
+    display:inline-block;
+    min-height:24px;
+    padding-block:3px;
+  }
+  /* icon-only links need width as well as height */
+  .hdr2__util-right a[aria-label]{
+    min-width:24px;
+    text-align:center;
+  }
+  /* footer lists: keep the visual rhythm now the links are taller */
+  .site-footer ul{gap:.35rem}
 }
