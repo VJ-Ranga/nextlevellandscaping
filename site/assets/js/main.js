@@ -296,7 +296,7 @@
     if (window.Swiper) {
       var stripSwiper = new Swiper("#strip", {
         slidesPerView: "auto",
-        spaceBetween: 14,
+        spaceBetween: 0,
         freeMode: { enabled: true, momentum: true },
         observer: true,
         observeParents: true,

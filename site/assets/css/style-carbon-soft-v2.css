@@ -337,9 +337,9 @@ html[data-theme="carbon-soft-v2"] .strip-band{
 }
 
 html[data-theme="carbon-soft-v2"] main > #project-strip{
-  padding:clamp(22px,3.5vw,44px) clamp(16px,4vw,56px);
+  padding:0;
 }
-html[data-theme="carbon-soft-v2"] .strip .swiper-slide img{ border-radius:10px; }
+html[data-theme="carbon-soft-v2"] .strip .swiper-slide img{ border-radius:0; }
 html[data-theme="carbon-soft-v2"] .strip__cap{
   background:rgba(23,25,15,.66);
   color:#F2F2EC;
@@ -354,6 +354,27 @@ html[data-theme="carbon-soft-v2"] .strip__nav:hover{
   border-color:#C2E807;
 }
 html[data-theme="carbon-soft-v2"] .strip__nav.swiper-button-disabled{opacity:.35;pointer-events:none}
+
+/* Closing CTA band with a photo backdrop — reads as its own moment,
+   clearly separate from the flat-dark footer that follows it.
+   (Selector matches main > .band.band--dark's specificity + the
+   cta-photo class so its background shorthand can't reset our
+   background-size/position back to their initial values.) */
+html[data-theme="carbon-soft-v2"] main > .band.band--dark.cta-photo{
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  padding-block:clamp(72px,12vw,140px);
+  isolation:isolate;
+}
+html[data-theme="carbon-soft-v2"] .cta-photo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:linear-gradient(180deg,rgba(10,12,10,.55) 0%,rgba(10,12,10,.72) 55%,rgba(10,12,10,.94) 100%);
+}
+html[data-theme="carbon-soft-v2"] .cta-photo > .container{position:relative;z-index:1}
 
 
 /* =============================================================
@@ -751,4 +772,93 @@ html[data-theme="carbon-soft-v2"] .subhero h2{color:var(--v2-on-night)}
   html[data-theme="carbon-soft-v2"] .hero__cue::after,
   html[data-theme="carbon-soft-v2"] .hero-scroll::after{animation:none}
   html[data-theme="carbon-soft-v2"] .reveal{transform:none}
+}
+
+/* =============================================================
+   20. OUR WORK — editorial project mosaic
+   Each tile is a view into one of four real projects. The grid
+   creates rhythm through controlled spans, not a square card wall.
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] .work-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  grid-auto-rows:clamp(7rem,11vw,10.5rem);
+  gap:clamp(.6rem,1.4vw,1.1rem);
+}
+html[data-theme="carbon-soft-v2"] .work-tile{
+  display:block;
+  min-width:0;
+  min-height:0;
+  height:100%;
+  color:var(--v2-ink);
+}
+html[data-theme="carbon-soft-v2"] .work-tile article{
+  display:block;
+  height:100%;
+}
+/* Fixed 4-col / 5-row tiling — every cell is explicitly assigned so the
+   mosaic always fills edge-to-edge with no leftover gaps (dense
+   auto-placement left an unfillable hole after the last tile). */
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(1){grid-column:1/3;grid-row:1/3}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(2){grid-column:3/4;grid-row:1/3}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(3){grid-column:4/5;grid-row:1/2}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(4){grid-column:4/5;grid-row:2/3}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(5){grid-column:1/2;grid-row:3/4}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(6){grid-column:2/3;grid-row:3/4}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(7){grid-column:3/4;grid-row:3/4}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(8){grid-column:4/5;grid-row:3/4}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(9){grid-column:1/3;grid-row:4/5}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(10){grid-column:3/5;grid-row:4/5}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(11){grid-column:1/3;grid-row:5/6}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(12){grid-column:3/5;grid-row:5/6}
+html[data-theme="carbon-soft-v2"] .work-tile__media{
+  position:relative;
+  overflow:hidden;
+  background:var(--v2-night);
+  width:100%;
+  height:100%;
+  border-radius:14px;
+}
+html[data-theme="carbon-soft-v2"] .work-tile__media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .7s var(--ease);
+}
+html[data-theme="carbon-soft-v2"] .work-tile:hover .work-tile__media img,
+html[data-theme="carbon-soft-v2"] .work-tile:focus-visible .work-tile__media img{transform:scale(1.035)}
+html[data-theme="carbon-soft-v2"] .work-tile__caption{
+  position:absolute;
+  inset:auto 0 0 0;
+  display:flex;
+  flex-direction:column;
+  gap:.15rem;
+  padding:1.6rem .95rem .8rem;
+  background:linear-gradient(to top,rgba(10,12,10,.82) 0%,rgba(10,12,10,.42) 55%,transparent 100%);
+  color:#fff;
+}
+html[data-theme="carbon-soft-v2"] .work-tile__project{
+  font-size:clamp(.82rem,1vw,.95rem);
+  font-weight:600;
+  line-height:1.2;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+}
+html[data-theme="carbon-soft-v2"] .work-tile__place{
+  color:rgba(255,255,255,.78);
+  font-size:.66rem;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+html[data-theme="carbon-soft-v2"] .work-tile__place b{color:var(--v2-lime-ink);font-weight:400}
+html[data-theme="carbon-soft-v2"] .work-tile[hidden]{display:none}
+@media(max-width:900px){
+  html[data-theme="carbon-soft-v2"] .work-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:clamp(8rem,26vw,11rem)}
+  html[data-theme="carbon-soft-v2"] .work-tile:nth-child(n){grid-column:span 1;grid-row:span 1}
+}
+@media(max-width:640px){
+  html[data-theme="carbon-soft-v2"] .work-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:34vw;gap:.5rem}
+}
+@media(prefers-reduced-motion:reduce){
+  html[data-theme="carbon-soft-v2"] .work-tile__media img{transition:none}
 }

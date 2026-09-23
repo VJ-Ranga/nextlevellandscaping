@@ -250,5 +250,53 @@ Client wanted `site/` visible on the GitHub Pages URL alongside the existing `de
 
 `main` branch untouched — only `gh-pages` changed.
 
+## Round 13 — 2026-09-23: Our Work asymmetric portfolio redesign
+
+Completed client-approved Our Work / portfolio pass in production `site/` only. Replaced old two-column project cards with a 12-item CSS Grid editorial mosaic using controlled feature, tall, wide and detail spans, responsive tablet fallback, mobile stacking, and selective single-corner scoop curves. Tiles use only four real `NLL.projects` records and existing gallery images; repeated views are visibly labeled as project views and link to correct `project.html?slug=` detail page rather than claiming additional projects.
+
+Filters now use real project tags and hide complete tile items without changing underlying metadata. Existing `projectStrip` data, horizontal Swiper-like carousel, navigation and lightbox remain intact. Added meaningful image alt text, visible project/suburb captions, semantic links, focus states and reduced-motion-safe image transitions.
+
+CSS/HTML/data/JS cache-buster updated consistently across all 15 site pages to `v=1790132400`. Static verification completed: all site JavaScript passed `node --check`, cache-buster references match, `our-work.html` has one H1, no placeholder `href="#"` was introduced, new local image paths resolve, mosaic renders 12 planned items, and bottom strip remains present. `demo/` was not edited.
+
+## Round 14 — 2026-09-23: Our Work grid restyled to moodboard/overlay-caption look
+Client sent a reference moodboard (tight photo grid, mixed tile sizes, dark gradient overlay captions on only some tiles, uncaptioned detail shots) and asked for `our-work.html` to match it.
+
+Reworked `.work-grid` in `style-carbon-soft-v2.css` from the Round 13 12-col row-dense grid (large gaps, top-border captions under every image, per-tile margin-top stagger, scoop-curve corners) to a 4-col grid with `grid-auto-rows` + `grid-row`/`grid-column` spans (feature 2×2, tall 1×2, wide 2×1, detail 1×1), tight `clamp(.6rem,1.4vw,1.1rem)` gaps, uniform 14px rounded corners, no stagger.
+
+Captions moved from a caption block below the image to an absolute-positioned overlay inside `.work-tile__media` with a bottom gradient scrim (`linear-gradient(to top, rgba(10,12,10,.82)…)`), white text, project name bold uppercase + suburb/view-number subtitle — matching the moodboard's two-line label style. `our-work.html`'s `tilePlan` now carries a `caption:true/false` flag per tile (7 of 12 captioned) so corner/detail shots render bare, same as the reference.
+
+Fixed a layout bug hit during verification: `.work-tile`/`article` had no explicit height, so `.work-tile__media{height:100%}` collapsed to content height and tiles overlapped across grid rows. Added `height:100%` to `.work-tile` and its `article` child.
+
+Verified locally via `python3 -m http.server` (added `.claude/launch.json` for this) at desktop and 375px mobile widths — grid renders correctly, no overlap, filter bar and lightbox untouched. Cache-buster bumped to `v=1790200001` across all 15 site pages (shared CSS/JS files touched). `demo/` not touched.
+
+## Round 15 — 2026-09-23: Our Work filter bar removed
+Client didn't want the All/Residential/Paving/Retaining walls/Fencing/Turf filter row above the mosaic. Removed `.filterbar` markup and the `work-note` line from `our-work.html`, deleted the now-dead click-handler JS (filter logic, `data-project-tags` attribute), and dropped the now-unused `.work-note` rules from `style-carbon-soft-v2.css` (base `.filterbar` CSS in `style.css` left alone — confirmed no other site page still references it). Cache-buster bumped to `v=1790200002` across all 15 pages. Verified locally: grid renders full-width immediately under the H1 intro, no console errors, dark fence thumbnail in row 2 confirmed as real photo content, not a broken image.
+
+## Round 16 — 2026-09-23: Our Work mosaic gap bug fixed
+Client flagged the last tile floating alone with a big empty gap to its left. Root cause: `.work-grid` used `grid-auto-flow:row dense` with mixed feature/tall/wide/detail spans — the browser's dense auto-placement can't always perfectly tile irregular spans, and left an unfillable hole before the final tile.
+
+Fixed by removing `dense` auto-placement and giving every tile (`.work-tile:nth-child(1)`…`(12)`) an explicit `grid-column`/`grid-row`, hand-tiled to a fixed 4-col × 5-row layout with zero leftover cells (feature+tall+2 detail block, then a 4×detail row, then two 2×wide rows — 4+4+4=12 tiles, 8+4+8=20 cell-units, exact fit). Tablet/mobile breakpoints simplified to uniform 1×1 tiles (12 tiles ÷ 2 cols = 6 even rows) rather than trying to carry the same irregular spans down responsively, which was the other latent source of the same class of bug.
+
+Verified via JS `getBoundingClientRect()` dump of all 12 `.work-tile` rects — confirms edge-to-edge fill, no gaps, at desktop width. Cache-buster bumped to `v=1790200003` across all 15 pages.
+
+## Round 17 — 2026-09-23: photo strip made edge-to-edge, closing CTA gets a photo backdrop
+Client sent an Instagram-grid reference and asked for the "In the field / Straight from our sites" strip to sit with zero gaps between photos, and for the closing "Have a space in mind?" band to get a background photo with a dark gradient so it doesn't visually blend into the footer.
+
+**Strip:** `main.js` Swiper init for `#strip` had `spaceBetween:14` — set to `0`. `style-carbon-soft-v2.css` `main > #project-strip` padding (which inset the whole section, including the image row, from the viewport edges) split into: the section itself now `padding:0 0 clamp(22px,3.5vw,44px)` (no side padding, so the swiper is truly full-bleed), and a new `.strip-head` rule carrying the side/top padding just for the "In the field" heading. Slide image `border-radius` dropped to `0` (square edge-to-edge tiles, not rounded cards) to match the reference. This affects `index.html` too, which shares the same strip component — same visual intent, so left as shared.
+
+**Closing CTA:** added a `cta-photo` class + inline `background-image:url('assets/img/projects/north-haven.jpg')` to `our-work.html`'s final "Have a space in mind?" section only (NOT the shared `.band.band--dark.contour` pattern used as a generic dark-band wrapper on 14 other pages, which would have been way too broad a change — checked each one first and they're mostly content grids/forms, not this plain quote-CTA). Added `background-size:cover` + a `::after` dark gradient (`rgba(10,12,10,.55)→.94)`) plus extra `padding-block` for presence.
+
+**Bug hit and fixed during this round:** the new `.cta-photo` rule's `background-size:cover` was silently losing to the existing `html[...] main > .band.band--dark{background:var(--v2-night); ...}` rule (line ~137) — that selector's specificity (0,3,2) beats a plain `.cta-photo` class selector (0,2,1), and its `background` shorthand implicitly resets `background-size` to `auto` as a longhand. Fixed by matching that selector's structure: `main > .band.band--dark.cta-photo`. Confirms a broader lesson for this file — any one-off override targeting a `.band.band--dark` element needs to out-specify that base rule, not just add a lower-speicifity class selector.
+
+Verified via computed-style JS checks (screenshots were unreliable mid-scroll in this session — the sticky header repaints oddly when the headless tool captures during a scroll, a known quirk, not a real bug): strip slides sit exactly edge-to-edge (`right` of slide N == `left` of slide N+1), `.cta-photo` computed `background-size:cover`/`background-image` resolved correctly, and its bottom edge sits flush against the footer's top with a clearly different background (photo+gradient vs footer's flat `rgb(23,25,15)`). Cache-buster bumped to `v=1790200005` across all 15 pages.
+
+## Round 18 — 2026-09-23: photo strip heading/space removed entirely
+Client meant literally no heading and no space at all — just the image row. Removed the `.strip-head` container (`In the field` / `Straight from our sites`) from `our-work.html`'s `#project-strip` section, and zeroed `main > #project-strip` padding to `0` in `style-carbon-soft-v2.css` (was `0 0 clamp(22px,3.5vw,44px)`, reserved for space under the now-deleted heading). Dropped the now-dead `.strip-head` padding rule. `index.html`'s copy of this strip never had the heading markup, so unaffected.
+
+Verified via JS rect check: section has zero padding and its height exactly equals the swiper's height (no heading, no gap top or bottom). Cache-buster bumped to `v=1790200006` across all 15 pages.
+
+## Round 19 — 2026-09-23: closing CTA hidden (kept, not deleted)
+Client wants the "Have a space in mind?" / photo-backdrop CTA off `our-work.html` for now but may want it back later. Wrapped the whole section in an HTML comment (`<!-- Hidden per client request (2026-09-23) — keep for later, may bring back. ... -->`) rather than deleting it, so the markup/CSS/asset reference are all preserved. Page now ends flush with the photo strip straight into the footer. Verified via JS: `.cta-photo` no longer in the DOM, no "Have a space in mind" heading, and `#project-strip`'s bottom edge sits exactly at the footer's top (no gap). Cache-buster bumped to `v=1790200007` across all 15 pages.
+
 ## Next
 Say which of the "not yet applied" items to tackle next, or give more reference sections from `demo/`'s other themes to pull in per the cherry-pick workflow.
