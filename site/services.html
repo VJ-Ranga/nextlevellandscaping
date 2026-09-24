@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-AU" data-theme="carbon-soft-v2" data-layout="centred" data-hero="sticky" data-intro="split">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Services — Landscaping Across Adelaide — NextLevel Landscaping</title>
+<meta name="description" content="Every landscaping service NextLevel Landscaping offers across Adelaide — landscape design, paving, retaining walls, fencing, grass and soft landscapes, irrigation and commercial maintenance. Licensed builder BLD320507.">
+<link rel="icon" href="assets/img/brand/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="assets/css/style.css?v=1790200023">
+<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1790200023">
+<style>
+/* Page-scoped only — the .svc row pattern already exists in style.css but has
+   never carried a divider (it was only ever used as a stand-alone block).
+   Style Guide §4.4: cards have no border and no fill — image + text + a hairline
+   or a gap. These rules add the hairline between consecutive rows and nothing
+   else; every colour comes from an existing token so the dark/light flip holds. */
+.svc-index .svc + .svc{border-top:1px solid var(--line);padding-top:5.5rem}
+.svc-index .svc h3{max-width:20ch}
+.svc-index .svc p{color:var(--muted)}
+/* The .svc__no run is uppercase-tracked like an eyebrow; keep the arrow link
+   sitting on the 8px scale rather than inventing a one-off margin. */
+.svc-index .svc__link{margin-top:1.5rem}
+@media(max-width:992px){
+  .svc-index .svc + .svc{padding-top:3.5rem}
+}
+@media(max-width:360px){
+  /* 320px floor: the number + icon run would otherwise force a horizontal scroll */
+  .svc-index .svc__no{flex-wrap:wrap;letter-spacing:.14em}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="site-header-slot"></div>
+
+<main id="main" tabindex="-1">
+  <section class="subhero contour">
+    <div class="container">
+      <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Services</p>
+      <h1>Our Services</h1>
+      <p class="lead">Seven services under one roof, delivered by one team across Adelaide — from the first on-site consultation to the finished garden.</p>
+    </div>
+  </section>
+
+  <section class="band" style="--plan-label:'All Services'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">What we do</span><h2>Everything your outdoor space needs</h2>
+        <p class="lead">We design and build the whole property, so nothing gets handed between trades and lost along the way. Pick a service to see how it works.</p></div>
+      <div class="svc-index" id="svc-index"></div>
+    </div>
+  </section>
+
+  <section class="band band--dark contour" style="--plan-label:'How We Work'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">How we work</span><h2>The same four steps, every job</h2>
+        <p class="lead">Whichever service you need, the process is the same — so you always know what happens next.</p></div>
+      <div class="proc-grid" id="process-list"></div>
+    </div>
+  </section>
+
+  <section class="band" style="--plan-label:'Get Started'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">Get started</span><h2>Tell us about your space</h2>
+        <p class="lead">Send through a few details and we will come out, talk it through and put a free quote together — no obligation.</p></div>
+      <p class="reveal"><a class="btn-ghost" href="contact.html">Get a free quote</a></p>
+    </div>
+  </section>
+  <!-- ===== Full-bleed photo strip ===== -->
+  <section class="band band--dark strip-band" id="project-strip" aria-label="Photos of our work">
+    <div class="swiper strip" id="strip" data-service="all"><div class="swiper-wrapper" id="strip-track"></div></div>
+    <button class="strip__nav strip__prev" id="strip-prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
+    <button class="strip__nav strip__next" id="strip-next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
+  </section>
+
+</main>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" aria-label="Close">&times;</button>
+  <button class="lb-prev" aria-label="Previous">&larr;</button>
+  <img src="" alt="">
+  <button class="lb-next" aria-label="Next">&rarr;</button>
+</div>
+
+<div id="site-footer-slot"></div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="assets/js/partials.js?v=1790200023"></script>
+<script src="assets/data.js?v=1790200023"></script>
+<script src="assets/js/main.js?v=1790200023"></script>
+<script>
+(function(){
+  var D = window.NLL || {}, list = D.services || [];
+
+  /* intrinsic dimensions of the files in assets/img/services/ — kept here so
+     every <img> ships explicit width/height (Style Guide §10 / CLS). */
+  var DIM = {
+    "assets/img/services/landscape-design.jpg": [1440, 810],
+    "assets/img/services/paving.jpg":           [1280, 853],
+    "assets/img/services/retaining-walls.jpg":  [1440, 960],
+    "assets/img/services/fencing.jpg":          [852, 1024],
+    "assets/img/services/grass.jpg":            [1440, 1080],
+    "assets/img/services/irrigation.jpg":       [1440, 960],
+    "assets/img/services/maintenance.jpg":      [1440, 810]
+  };
+
+  function plain(s){ return String(s).replace(/&amp;/g, "&"); }
+
+  var host = document.getElementById("svc-index");
+  if (host) {
+    host.innerHTML = list.map(function (s) {
+      var d = DIM[s.img] || [1440, 960];
+      var name = plain(s.name);
+      var href = "service.html?slug=" + encodeURIComponent(s.slug);
+      return '<article class="svc reveal">' +
+          '<div class="svc__media"><a href="' + href + '" tabindex="-1" aria-hidden="true">' +
+            '<div class="media"><img loading="lazy" decoding="async" width="' + d[0] + '" height="' + d[1] + '" ' +
+              'src="' + s.img + '" alt="' + name + ' by NextLevel Landscaping in Adelaide"></div>' +
+          '</a></div>' +
+          '<div class="svc__body">' +
+            '<span class="svc__no"><i class="' + s.icon + '" aria-hidden="true"></i>' + s.no + '</span>' +
+            '<h3>' + s.name + '</h3>' +
+            '<p class="measure">' + s.desc + '</p>' +
+            '<ul class="chips">' + s.tags.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>' +
+            '<p class="svc__link"><a class="tlink" href="' + href + '">' +
+              'More on ' + s.name + ' <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>' +
+          '</div>' +
+        '</article>';
+    }).join('');
+  }
+
+  /* #process-list is already filled from window.NLL.process by main.js — this
+     page only has to provide the container (same as index.html does). */
+
+  document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+})();
+</script>
+</body>
+</html>

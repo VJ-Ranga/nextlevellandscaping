@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NextLevel Landscaping — Website Preview</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#17190F;--bg:#F2F2EC;--muted:#6B6F62;--line:rgba(23,25,15,.14);--lime:#C2E807;--lime-ink:#3E4A16}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Poppins",system-ui,sans-serif;background:var(--bg);color:var(--ink);
+    min-height:100svh;display:flex;align-items:center;justify-content:center;padding:24px}
+  .wrap{max-width:920px;width:100%}
+  .eyebrow{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lime-ink);font-weight:500;margin-bottom:1rem}
+  h1{font-size:clamp(2rem,5vw,2.8rem);font-weight:400;text-transform:uppercase;letter-spacing:0;line-height:1.05;margin:0 0 1rem}
+  p.lead{font-size:1.05rem;line-height:1.6;color:var(--muted);max-width:60ch;margin:0 0 2.5rem}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+  @media(max-width:640px){.cards{grid-template-columns:1fr}}
+  a.card{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);
+    border-radius:0 40px 0 0;padding:2rem;transition:border-color .25s,transform .25s}
+  a.card:hover{border-color:var(--ink);transform:translateY(-2px)}
+  a.card:nth-child(2){border-radius:40px 0 0 0}
+  .tag{display:inline-block;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+    padding:.35em .9em;border-radius:999px;margin-bottom:1rem}
+  .tag.live{background:var(--lime);color:var(--lime-ink)}
+  .tag.demo{background:var(--line);color:var(--muted)}
+  a.card h2{font-size:1.3rem;font-weight:400;text-transform:uppercase;margin:0 0 .6rem}
+  a.card p{font-size:.9rem;line-height:1.55;color:var(--muted);margin:0}
+  .go{margin-top:1.4rem;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+  footer{margin-top:2.5rem;font-size:.78rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="eyebrow">NextLevel Landscaping — Adelaide</span>
+  <h1>Website preview</h1>
+  <p class="lead">Two things to look at: the finished build in its final look, and the original multi-theme demo it was chosen from.</p>
+  <div class="cards">
+    <a class="card" href="site/index.html">
+      <span class="tag live">Current build</span>
+      <h2>The Site</h2>
+      <p>The production-direction build — Carbon theme, locked layout, all pages, client feedback applied.</p>
+      <div class="go">Open the site &rarr;</div>
+    </a>
+    <a class="card" href="demo/index.html">
+      <span class="tag demo">Reference</span>
+      <h2>The Demo</h2>
+      <p>The original options showcase — 6 selectable themes and layouts. Kept for reference only.</p>
+      <div class="go">Open the demo &rarr;</div>
+    </a>
+  </div>
+  <footer>Private preview — not indexed. Cloudycode for NextLevel Landscaping.</footer>
+</div>
+</body>
+</html>

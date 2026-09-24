@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-AU" data-theme="carbon-soft-v2" data-layout="centred" data-hero="sticky" data-intro="split">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reviews — What Our Adelaide Clients Say — NextLevel Landscaping</title>
+<meta name="description" content="Google reviews for NextLevel Landscaping, Adelaide — read them in full, in our clients' own words, covering paving, turf, retaining walls and garden design.">
+<link rel="icon" href="assets/img/brand/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="assets/css/style.css?v=1790200023">
+<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1790200023">
+<style>
+/* ---- page-scoped: full-length review flow ------------------------------
+   The shared `.rev-card` is built for the homepage carousel and hard-clamps
+   its quote to 6 lines — unusable here, where every review must read in
+   full and verbatim. These reviews also vary from one sentence to five, so
+   the flow is CSS multi-column (masonry-ish: items keep their natural
+   height and the column balances) rather than an equal-height grid.
+   No border, no fill — hairline + space only, per the Style Guide. ---- */
+.revs{columns:1;column-gap:64px;margin:0;padding:0}
+@media (min-width:900px){.revs{columns:2}}
+.revq{
+  break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;
+  border-top:1px solid var(--line);
+  padding:24px 0 8px;margin:0 0 40px;
+}
+.revq p{font-size:1.02rem;line-height:1.8;margin:0 0 1.4rem;color:var(--ink)}
+.revq cite{font-style:normal;display:flex;align-items:center;gap:.9rem}
+.revq__who{display:block}
+.revq__name{display:block;font-size:.9rem;font-weight:500;color:var(--ink)}
+.revq__src{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:.15em}
+/* credibility strip — plain facts on hairlines, no boxes */
+.cred{display:grid;gap:0;margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}
+@media (min-width:760px){.cred{grid-template-columns:1fr 1fr}}
+.cred li{border-bottom:1px solid var(--line);padding:20px 0;font-size:.95rem;line-height:1.6}
+@media (min-width:760px){.cred li:nth-child(odd){padding-right:40px}}
+.cred b{font-weight:500}
+.rev-cta{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;margin-top:8px}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="site-header-slot"></div>
+
+<main id="main" tabindex="-1">
+  <section class="subhero contour">
+    <div class="container">
+      <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Reviews</p>
+      <h1>What our clients say</h1>
+      <p class="lead">Reviews left by Adelaide homeowners on Google, reproduced here in full and word for word.</p>
+    </div>
+  </section>
+
+  <section class="band" style="--plan-label:'Reviews'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">From our clients</span><h2>Honest, reliable, on budget</h2>
+        <p class="lead measure">Every review below is published exactly as it was written — nothing edited, shortened or added.</p></div>
+      <div class="revs reveal" id="reviews-all"></div>
+    </div>
+  </section>
+
+  <section class="band band--tight" style="--plan-label:'Credentials'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">Who you are dealing with</span><h2>Credentials</h2></div>
+      <ul class="cred reveal">
+        <li>Licensed builder — <b>BLD320507</b></li>
+        <li>Member of <b>Master Landscapers South Australia</b></li>
+        <li>Authorised <b>Lawn Solutions Australia</b> distributor</li>
+        <li><b>South Australian owned</b> and operated</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band band--dark contour" style="--plan-label:'Your Project'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">Your project next</span><h2>Let's talk about your outdoor space</h2>
+        <p class="lead">Tell us what you have in mind and we will come back to you with the next step — on-site consultation, design, then a clear plan.</p></div>
+      <p class="rev-cta reveal">
+        <a class="btn-ghost" href="contact.html">Get in touch</a>
+        <a class="btn-ghost btn-ghost--fill" href="tel:+61404440222">Call 0404 440 222</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer-slot"></div>
+<script src="assets/js/partials.js?v=1790200023"></script>
+<script src="assets/data.js?v=1790200023"></script>
+<script src="assets/js/main.js?v=1790200023"></script>
+<script>
+/* Reviews — rendered from window.NLL.reviews, verbatim.
+   `text` and `name` are printed exactly as stored (innerHTML, so the HTML
+   entities in the source — &sup2;, &amp; — resolve). Nothing is trimmed,
+   clamped or reworded: these are real people's Google reviews and altering
+   them is both dishonest and an ACL/ACCC problem.
+   Deliberately NO Review/AggregateRating JSON-LD and no star graphics —
+   self-serving review markup is a known penalty risk (see vault:
+   Standards - Accessibility SEO Privacy), and we have no verified
+   aggregate rating or review count to publish. */
+(function () {
+  var host = document.getElementById('reviews-all');
+  var reviews = (window.NLL && window.NLL.reviews) || [];
+  if (!host || !reviews.length) return;
+  host.innerHTML = reviews.map(function (r) {
+    var initials = r.name.split(' ').map(function (w) { return w.charAt(0); }).slice(0, 2).join('');
+    return '<blockquote class="revq">' +
+             '<p>&ldquo;' + r.text + '&rdquo;</p>' +
+             '<cite>' +
+               '<span class="rev-avatar" aria-hidden="true">' + initials + '</span>' +
+               '<span class="revq__who">' +
+                 '<span class="revq__name">' + r.name + '</span>' +
+                 '<span class="revq__src">Google review</span>' +
+               '</span>' +
+             '</cite>' +
+           '</blockquote>';
+  }).join('');
+})();
+</script>
+<script>document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});</script>
+</body>
+</html>

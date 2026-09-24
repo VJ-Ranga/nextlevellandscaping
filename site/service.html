@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-AU" data-theme="carbon-soft-v2" data-layout="centred" data-hero="sticky" data-intro="split">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Service — NextLevel Landscaping</title>
+<meta name="description" content="Landscaping services across Adelaide by NextLevel Landscaping — licensed builder BLD320507.">
+<link rel="icon" href="assets/img/brand/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="assets/css/style.css?v=1790200023">
+<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1790200023">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="site-header-slot"></div>
+
+<main id="main" tabindex="-1">
+  <section class="subhero contour">
+    <div class="container">
+      <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <a href="services.html">Services</a> &nbsp;/&nbsp; <span id="crumb-name">Service</span></p>
+      <h1 id="s-name">—</h1>
+      <p class="lead" id="s-desc"></p>
+    </div>
+  </section>
+
+  <section class="band" style="--plan-label:'Detail'">
+    <div class="container">
+      <article class="svc reveal" style="margin-bottom:0">
+        <div class="svc__media"><div class="media" id="s-media"></div></div>
+        <div class="svc__body">
+          <span class="svc__no"><i id="s-icon" aria-hidden="true"></i><span id="s-no"></span></span>
+          <h2>Options &amp; materials</h2>
+          <p class="measure" id="s-more"></p>
+          <ul class="chips" id="s-tags"></ul>
+          <p style="margin-top:2rem"><a class="btn-ghost btn-ghost--fill" href="contact.html">Get a free quote</a></p>
+          <p class="ba-note" style="margin-top:1.4rem">Licensed builder BLD320507 &middot; servicing metropolitan Adelaide and the Adelaide Hills.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="band band--dark contour" style="--plan-label:'Related Work';overflow-x:clip">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">Related work</span><h2>Where we've done this</h2></div>
+      <div class="swiper proj-swiper" id="s-related-swiper"><div class="swiper-wrapper" id="s-related-track"></div></div>
+      <div class="swiper-controls">
+        <button id="s-related-prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
+        <button id="s-related-next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Full-bleed photo strip ===== -->
+  <section class="band band--dark strip-band" id="project-strip" aria-label="Photos of our work">
+    <div class="swiper strip" id="strip" data-service="slug"><div class="swiper-wrapper" id="strip-track"></div></div>
+    <button class="strip__nav strip__prev" id="strip-prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
+    <button class="strip__nav strip__next" id="strip-next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
+  </section>
+</main>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" aria-label="Close">&times;</button>
+  <button class="lb-prev" aria-label="Previous">&larr;</button>
+  <img src="" alt="">
+  <button class="lb-next" aria-label="Next">&rarr;</button>
+</div>
+
+<div id="site-footer-slot"></div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="assets/js/partials.js?v=1790200023"></script>
+<script src="assets/data.js?v=1790200023"></script>
+<script src="assets/js/main.js?v=1790200023"></script>
+<script>
+(function(){
+  var D=window.NLL, list=D.services||[];
+  var slug=new URLSearchParams(location.search).get('slug');
+  var s=list.find(function(x){return x.slug===slug;})||list[0];
+  var plain=s.name.replace(/&amp;/g,'&');
+
+  /* intrinsic dimensions of assets/img/services/* — kept explicit for CLS,
+     same map as services.html (Style Guide §10). */
+  var DIM = {
+    "assets/img/services/landscape-design.jpg": [1440, 810],
+    "assets/img/services/paving.jpg":           [1280, 853],
+    "assets/img/services/retaining-walls.jpg":  [1440, 960],
+    "assets/img/services/fencing.jpg":          [852, 1024],
+    "assets/img/services/grass.jpg":            [1440, 1080],
+    "assets/img/services/irrigation.jpg":       [1440, 960],
+    "assets/img/services/maintenance.jpg":      [1440, 810]
+  };
+
+  document.title=plain+' — NextLevel Landscaping';
+  document.getElementById('crumb-name').textContent=plain;
+  document.getElementById('s-name').innerHTML=s.name;
+  document.getElementById('s-desc').innerHTML=s.desc;
+  document.getElementById('s-icon').className=s.icon;
+  document.getElementById('s-no').textContent=s.no+' / 07';
+
+  var d=DIM[s.img]||[1440,960];
+  document.getElementById('s-media').innerHTML=
+    '<img loading="lazy" decoding="async" width="'+d[0]+'" height="'+d[1]+'" src="'+s.img+'" alt="'+plain+' by NextLevel Landscaping in Adelaide">';
+
+  document.getElementById('s-tags').innerHTML=s.tags.map(function(t){return '<li>'+t+'</li>';}).join('');
+  document.getElementById('s-more').innerHTML='Every job starts with an on-site consultation and a 2D &amp; 3D design, so you can see the finished space before we begin. One team handles the whole build.';
+
+  // related projects: match a service tag against project tags
+  var key=plain.split(' ')[0].toLowerCase();
+  var rel=(D.projects||[]).filter(function(p){
+    return p.tags.some(function(t){return t.toLowerCase().indexOf(key)>-1;});
+  });
+  if(!rel.length) rel=(D.projects||[]).slice(0,3);
+  document.getElementById('s-related-track').innerHTML=rel.map(function(r){
+    return '<div class="swiper-slide">' +
+      '<a class="proj-card" href="project.html?slug='+r.slug+'">' +
+        '<div class="media"><img loading="lazy" src="'+r.img+'" alt="'+r.name+'"></div>' +
+        '<div class="proj-card__meta"><span>'+r.suburb+'</span><span>&bull;</span><span>'+r.date+'</span></div>' +
+        '<h3>'+r.name+'</h3>' +
+        '<p>'+r.blurb+'</p>' +
+        '<ul class="chips">'+r.tags.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul>' +
+      '</a>' +
+    '</div>';
+  }).join('');
+  if(window.Swiper){
+    new Swiper('#s-related-swiper', {
+      slidesPerView: 1.1, spaceBetween: 24,
+      breakpoints: { 768: { slidesPerView: 2, spaceBetween: 32 }, 1200: { slidesPerView: rel.length>2?2.4:rel.length, spaceBetween: 40 } },
+      navigation: { nextEl: '#s-related-next', prevEl: '#s-related-prev' }
+    });
+  }
+
+  document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+})();
+</script>
+</body>
+</html>
