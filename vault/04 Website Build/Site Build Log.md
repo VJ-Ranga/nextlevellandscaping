@@ -378,5 +378,54 @@ Root cause: Round 26 bumped the shared `--pad-band` token globally to fix `#intr
 
 Verified via JS rect/computed-style checks: `#services` back to 192.768px/311.04px padding (was 224.8/343 under Round 26's fix), section height 1230px→1166px; `#intro` padding-top 128px (up from the original 96px, the actual fix); `#contact` now symmetric 128px/128px (was 96/128). Updated [[Style Guide]] §3 to reflect the token revert + the two-band-specific override, and corrected Round 26's own entry isn't rewritten (kept for history) but is now superseded by this one. Cache-buster bumped to `v=1790200013` across all 13 pages.
 
+## Round 28 — 2026-09-24: client's real contour drawing replaces the invented wave motif
+Client's "changed clint" folder holds their own topographic contour drawing (`Drawing1.dwg` from AutoCAD, plus a PDF export). They asked to use *that* design as the background on the dark ("black") areas, in place of the wavy-line pattern we'd invented, at 50% opacity, dark areas only.
+
+Converted the PDF to SVG with `pdftocairo`, then optimised it: dropped the page-clip wrappers, baked the transform into the coordinates, simplified the polylines (Ramer–Douglas–Peucker, 0.25 tolerance) and cropped to the drawing's bounds. 655KB → 38KB, 57 paths, white strokes (no data loss visible — checked against the original). Saved as `site/assets/img/contour-lines.svg`.
+
+`style.css`: `.contour::before` now uses that SVG (`right center / cover`, `opacity:.5`). Light bands no longer get any contour (was an inverted copy) — `.band:not(.band--dark).contour::before{display:none}`. Removed the `.subhero.contour::before{opacity:.06}` override so sub-page heroes also show it at 50%. The site's 50%-opacity request is the client's number; if it fights with body copy on any dark band it's one value to lower (`opacity` on `.contour::before`).
+
+Verified visually on `reviews.html` (dark subhero shows the lines, light bands clean). Cache-buster `v=1790200014`. Not committed/deployed yet.
+
+## Round 29 — 2026-09-24: tablet/mobile header — hamburger was in the middle
+Client (screenshot with arrows, "most important thing") pointed out that on tablet and mobile the menu button sat in the middle of the header, the logo hard left, and phone/Instagram stranded top-left. Root cause: `.hdr2__main` stays a 3-column grid (`1fr auto 1fr`) at ≤992px, but the two nav columns are `display:none` — so the hamburger drops into the middle column. Fixed in `style.css` (≤992px block): `grid-template-columns:auto 1fr` (logo left, hamburger pushed to the right edge) and `.hdr2__util-row{justify-content:flex-end}` so phone + Instagram sit right-aligned above the hamburger. Verified at 375px (logo 20–99px, hamburger 311–355px) and 820px (logo 33–112px, hamburger 728–772px). Cache-buster `v=1790200015`. Not committed/deployed yet.
+
+## Round 30 — 2026-09-24: responsive audit — header, footer, top areas (110 checks)
+Client asked: check what else can go in the top bar, and check mobile/tablet responsiveness of header, footer and top areas. Ran an automated audit: 11 pages × 10 widths (320, 375, 414, 600, 768, 900, 992, 1024, 1200, 1440) in hidden iframes, checking horizontal scroll, hamburger position/overlap (≤992px), desktop nav vs logo clearance, footer overflow, and tap-target size (<24px, WCAG 2.5.8) on header + footer links.
+
+**Found and fixed:**
+1. **`service.html` scrolled sideways at every width** (766–1530px scroll width) — my Round 24 Related Work carousel's slides (`overflow:visible` by design) spilled past the viewport with nothing clipping them. Fixed with `overflow-x:clip` on that band (same as the homepage's projects band gets from its parent).
+2. **Contact info overflowed at 320px** (homepage + contact page) — the long email address in the `dl` grid wouldn't wrap. `.contact-info dd{min-width:0;overflow-wrap:anywhere}`; also `.contact-wrap>*{min-width:0}` so the form grid column can shrink.
+3. **Footer links + header utility links were 17–23px tall at widths above 768px** — the tap-target fix (Style Guide §11) was only applied ≤768px, so tablet-landscape and desktop still failed WCAG 2.5.8 (24px). Removed the media-query wrapper so it applies at every width.
+
+**Re-ran after fixes: 110 checks, 0 issues.** Cache-buster `v=1790200017`.
+
+**Top bar capacity (answer to the client's question):** the utility row has 4 links (About, Our Process, Reviews, FAQ) + phone + Instagram. From 993px up it has 435–849px of free space between the links and the phone/Instagram group (links ≈317px, right group ≈147px), so ~3–4 more short links or icons fit on desktop. At ≤992px the links are hidden by design (they live in the hamburger drawer) and only phone + Instagram show — that row is deliberately minimal on mobile, so anything added there should be icon-sized (e.g. email/WhatsApp-style icon), not text.
+
+## Round 31 — 2026-09-24: contour background → 10% opacity, added to the homepage's second section
+Client feedback on Round 28: the contour drawing wasn't showing in the homepage's second section (`#intro`, right under the hero), and 50% was too heavy — "show a little bit, not fully destroying all of the elements." Two changes: (1) `.contour::before` opacity `.5` → `.1` in `style.css` (all dark bands and dark sub-page heroes). (2) added the `contour` class to `#intro` in `index.html` — it had been removed from there on purpose in Round 1 (requirement #8: "not in the opening/start section"), but the client now explicitly wants it in that second section; the hero video itself stays clean. The existing rule that clips the texture to `#intro`'s scoop corner already covered it. Verified: computed opacity 0.1 on `#intro`, `#projects`, `#reviews`, contour present on `#intro`, lines faint and unobtrusive in the browser. Cache-buster `v=1790200018`. Not committed/deployed yet. Requirement #8's note updated in the Inbox (#46).
+
+## Round 32 — 2026-09-24: mobile + tablet review pass (375 / 768) — fixes
+Client asked for a real top-to-bottom mobile/tablet review (desktop signed off, untouched). Ran automated sweeps of all 13 pages at 375 and 768 (horizontal scroll, off-screen elements, clipped text, distorted images, tap targets, sub-11px text, text contrast) plus visual/JS-rect checks. Layout numbers were already clean; the sweep found these real problems:
+
+1. **Invisible headings on dark bands (all widths).** `.proc h3/p` was hard-set to `--v2-ink`/`--v2-muted` — ink-on-night, contrast 1.0:1 — on `about.html` (Quality / Sustainability / Customer first) and `services.html` (Consultation / Design / Execution / Aftercare steps). Added `.band--dark .proc h3/p` overrides.
+2. **Sub-page hero lead paragraph too dim (3.3:1).** `html[..] .lead{color:var(--v2-muted)}` was not flipped inside `.subhero` (only `.band--dark` and `#intro` were). Added `.subhero .lead`.
+3. **Our Work mosaic captions swallowed the photos at 375px** — caption block was 110px of a 128px tile. Tiles are now `46vw` tall (was 34vw), caption text/padding tightened, the place line is one line with ellipsis. Caption now ~65–79px of 173px.
+4. **Text under 11px** (Style Guide §11 floor): `.cw-card__stage small` (10.4px) and `.work-tile__place` (10.56px) raised to `.72rem`.
+5. **Homepage intro stats** stacked 1-col below 520px (intro band 1596px tall at 375). Now 2×2 down to 340px (1357px).
+6. **`.ba-note` / `.cms-note` contrast** 3.84:1 (muted text on a tinted panel) — text now ink at 82%.
+7. **Drawer a11y**: hamburger now carries `aria-expanded`, Escape closes the drawer, focus moves to the close button on open and back to the hamburger on Escape.
+
+Cache-buster `v=1790200021`. Not committed/deployed. (Contour opacity is `.1` per Round 31, made by a parallel session — not touched here.)
+
+**Flagged, not changed:** `#current` is still 2239px on mobile (open client decision, content untouched).
+
+## Round 33 — 2026-09-24: photo strip on Services + every single-service page
+Client showed the full-bleed photo slider (the Our Work strip) and asked for it on the Services page and on each service page, with photos that are meaningful for that service.
+
+Hand-picked real client photos per service (viewed each on a contact sheet; no stock, and skipped the one stock-looking portrait) and stored them as `serviceStrip` in `assets/data.js`, keyed by service slug, each with width/height and a caption saying what the photo actually shows (e.g. "Exposed aggregate · Grange"). `main.js` strip block now reads `data-service` on `#strip`: `all` (services.html) interleaves photos from every service; otherwise (service.html) it uses `?slug=`. Same Swiper/arrows/lightbox as the homepage. `service.html` strip sits last, after Related Work, right before the footer (client corrected the first placement); `services.html` strip sits above the footer. Added the missing Swiper bundle + lightbox markup to `services.html`, lightbox to `service.html`.
+
+Verified: retaining-walls strip 7 slides, services strip 21, 0 broken images, no console errors, no horizontal scroll. Cache-buster `v=1790200023`. Not committed/deployed. Waiting on client: proper per-service photography (irrigation and maintenance sets lean on lawn/planting shots).
+
 ## Next
 Say which of the "not yet applied" items to tackle next, or give more reference sections from `demo/`'s other themes to pull in per the cherry-pick workflow.

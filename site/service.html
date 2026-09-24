@@ -11,8 +11,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1790200013">
-<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1790200013">
+<link rel="stylesheet" href="assets/css/style.css?v=1790200023">
+<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1790200023">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
     </div>
   </section>
 
-  <section class="band band--dark contour" style="--plan-label:'Related Work'">
+  <section class="band band--dark contour" style="--plan-label:'Related Work';overflow-x:clip">
     <div class="container">
       <div class="section-head reveal"><span class="eyebrow">Related work</span><h2>Where we've done this</h2></div>
       <div class="swiper proj-swiper" id="s-related-swiper"><div class="swiper-wrapper" id="s-related-track"></div></div>
@@ -53,13 +53,27 @@
       </div>
     </div>
   </section>
+
+  <!-- ===== Full-bleed photo strip ===== -->
+  <section class="band band--dark strip-band" id="project-strip" aria-label="Photos of our work">
+    <div class="swiper strip" id="strip" data-service="slug"><div class="swiper-wrapper" id="strip-track"></div></div>
+    <button class="strip__nav strip__prev" id="strip-prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
+    <button class="strip__nav strip__next" id="strip-next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
+  </section>
 </main>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" aria-label="Close">&times;</button>
+  <button class="lb-prev" aria-label="Previous">&larr;</button>
+  <img src="" alt="">
+  <button class="lb-next" aria-label="Next">&rarr;</button>
+</div>
 
 <div id="site-footer-slot"></div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="assets/js/partials.js?v=1790200013"></script>
-<script src="assets/data.js?v=1790200013"></script>
-<script src="assets/js/main.js?v=1790200013"></script>
+<script src="assets/js/partials.js?v=1790200023"></script>
+<script src="assets/data.js?v=1790200023"></script>
+<script src="assets/js/main.js?v=1790200023"></script>
 <script>
 (function(){
   var D=window.NLL, list=D.services||[];

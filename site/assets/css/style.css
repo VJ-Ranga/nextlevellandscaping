@@ -93,11 +93,10 @@ p:last-child{margin-bottom:0}
 .contour::before{
   content:"";
   position:absolute;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600' viewBox='0 0 1200 600'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1.2' opacity='0.5'%3E%3Cpath d='M-40 120C220 40 380 200 620 150 900 92 1000 220 1260 150'/%3E%3Cpath d='M-40 200C220 120 380 280 620 230 900 172 1000 300 1260 230'/%3E%3Cpath d='M-40 280C220 200 380 360 620 310 900 252 1000 380 1260 310'/%3E%3Cpath d='M-40 360C220 280 380 440 620 390 900 332 1000 460 1260 390'/%3E%3Cpath d='M-40 440C220 360 380 520 620 470 900 412 1000 540 1260 470'/%3E%3Cpath d='M-40 520C220 440 380 600 620 550 900 492 1000 620 1260 550'/%3E%3C/g%3E%3C/svg%3E");
-  background-size:cover;background-position:center;
-  opacity:.06;pointer-events:none;
+  background:url("../img/contour-lines.svg") right center/cover no-repeat;
+  opacity:.1;pointer-events:none;
 }
-.band:not(.band--dark).contour::before{filter:invert(1)}
+.band:not(.band--dark).contour::before{display:none}
 
 /* ---------- 4. The arch / scoop shape --------------------------- */
 .arch{border-radius:var(--r-arch) 0 0 0;overflow:hidden}
@@ -279,7 +278,7 @@ p:last-child{margin-bottom:0}
 .stepper li.done{background:var(--accent)}
 .stepper li.now{background:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
 .cw-card__stage{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);font-weight:500}
-.cw-card__stage small{display:block;color:var(--muted);font-weight:400;letter-spacing:.04em;margin-top:2px}
+.cw-card__stage small{font-size:.72rem;display:block;color:var(--muted);font-weight:400;letter-spacing:.04em;margin-top:2px}
 
 /* ---------- 13. Process ---------------------------------- */
 .proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3.25rem}
@@ -343,6 +342,7 @@ p:last-child{margin-bottom:0}
 
 /* ---------- 16. Contact ------------------------------- */
 .contact-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;align-items:start}
+.contact-wrap>*{min-width:0}
 .field{margin-bottom:1.1rem}
 .field label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.5rem}
 .field input,.field textarea,.field select{
@@ -367,7 +367,7 @@ p:last-child{margin-bottom:0}
 .form-ok.show{display:block}
 .contact-info dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.5rem 1.2rem}
 .contact-info dt{color:var(--accent);font-size:1rem}
-.contact-info dd{margin:0;font-size:.95rem;color:var(--muted)}
+.contact-info dd{margin:0;font-size:.95rem;color:var(--muted);min-width:0;overflow-wrap:anywhere}
 .contact-info dd a:hover{color:var(--ink)}
 .contact-info .tbc{font-style:italic;opacity:.7}
 
@@ -444,7 +444,6 @@ p:last-child{margin-bottom:0}
    21. Sub-pages (Our Work, Project, Current Work, detail)
    ============================================================= */
 .subhero{position:relative;background:var(--surface-dark);color:#fff;padding:150px 0 64px;overflow:hidden}
-.subhero.contour::before{opacity:.06}
 .subhero__media{position:absolute;inset:0;z-index:0}
 .subhero__media img{width:100%;height:100%;object-fit:cover;opacity:.28}
 .subhero__media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,22,18,.7),rgba(20,22,18,.92))}
@@ -524,7 +523,7 @@ p:last-child{margin-bottom:0}
 /* same rule as .ba-note: mix into transparent, never into var(--bg),
    so it survives being dropped on a dark band */
 .cms-note{margin-top:2rem;padding:1.1rem 1.3rem;border:1px dashed var(--line);border-radius:6px;
-  font-size:.84rem;color:var(--muted);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+  font-size:.84rem;color:color-mix(in srgb,var(--ink) 82%,transparent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
 .cms-note b{color:var(--ink);font-weight:500}
 
 @media(max-width:900px){
@@ -630,7 +629,7 @@ p:last-child{margin-bottom:0}
    invisible text. Mixing into transparent tints whatever is behind it,
    so this reads correctly on both grounds. */
 .ba-note{margin-top:1.4rem;padding:.9rem 1.1rem;border:1px dashed var(--line);border-radius:6px;
-  font-size:.78rem;color:var(--muted);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+  font-size:.78rem;color:color-mix(in srgb,var(--ink) 82%,transparent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
 
 @media(max-width:900px){
   .statline{grid-template-columns:1fr 1fr;gap:2.4rem 1.6rem}
@@ -1079,7 +1078,8 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 
 @media(max-width:992px){
   .hdr2__nav,.hdr2__util-links{display:none}
-  .hdr2__main{grid-template-columns:1fr auto 1fr}
+  .hdr2__main{grid-template-columns:auto 1fr}
+  .hdr2__util-row{justify-content:flex-end}
   .hdr2__toggle{display:inline-flex;align-items:center;justify-content:center;
     width:44px;height:44px;border-radius:999px;border:1px solid rgba(255,255,255,.5);
     background:rgba(20,22,18,.25);color:#fff;cursor:pointer;justify-self:end}
@@ -1189,7 +1189,7 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
   [data-intro="split"] #intro .statline{grid-template-columns:1fr 1fr}
   [data-intro="stacked"] #intro .statline{grid-template-columns:1fr 1fr}
 }
-@media(max-width:520px){
+@media(max-width:340px){
   #intro .statline{grid-template-columns:1fr!important}
 }
 @media(max-width:760px){
@@ -1218,29 +1218,29 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 
 /* =============================================================
    40. Tap targets — WCAG 2.2 AA (2.5.8 Target Size Minimum, 24px)
+   Applies at ALL widths (was ≤768px only — footer links were still 20px
+   on tablet-landscape/desktop, audited 2026-09-24).
    Audited 2026-09-23 at 375px: footer links were 20px tall,
    breadcrumbs 16px, and the header Instagram icon 23x12.
    padding-block on an inline link grows the hit area WITHOUT
    changing the line box, so none of this shifts layout.
    ============================================================= */
-@media(max-width:768px){
-  .site-footer ul a,
-  .contact-info dd a,
-  .crumb a,
-  .footer-bar a,
-  .drawer__foot a,
-  .form-note a,
-  .hdr2__util-links a,
-  .hdr2__util-right a{
-    display:inline-block;
-    min-height:24px;
-    padding-block:3px;
-  }
-  /* icon-only links need width as well as height */
-  .hdr2__util-right a[aria-label]{
-    min-width:24px;
-    text-align:center;
-  }
-  /* footer lists: keep the visual rhythm now the links are taller */
-  .site-footer ul{gap:.35rem}
+.site-footer ul a,
+.contact-info dd a,
+.crumb a,
+.footer-bar a,
+.drawer__foot a,
+.form-note a,
+.hdr2__util-links a,
+.hdr2__util-right a{
+  display:inline-block;
+  min-height:24px;
+  padding-block:3px;
 }
+/* icon-only links need width as well as height */
+.hdr2__util-right a[aria-label]{
+  min-width:24px;
+  text-align:center;
+}
+/* footer lists: keep the visual rhythm now the links are taller */
+.site-footer ul{gap:.35rem}

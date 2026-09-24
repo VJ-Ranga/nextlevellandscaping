@@ -204,6 +204,80 @@ window.NLL = {
     { img: "assets/img/gallery/grange-3.jpg", w: 1280, h: 853,      cap: "Grange" }
   ],
 
+  /* --- per-service photo strips (service.html / services.html) ---
+     Hand-picked from real client photos; captions say what the photo
+     actually shows. [path under assets/img/, caption] — sizes are read
+     from the files so there is no layout shift. --- */
+  serviceStrip: {
+    "landscape-design": [
+      { img: "assets/img/services/landscape-design.jpg", w: 1440, h: 810, cap: "3D concept" },
+      { img: "assets/img/gallery/grange-3.jpg", w: 1280, h: 853, cap: "Pool & pergola \u00b7 Grange" },
+      { img: "assets/img/gallery/klemzig-4.jpg", w: 1440, h: 811, cap: "Outdoor living \u00b7 Klemzig" },
+      { img: "assets/img/gallery/somerton-2.jpg", w: 1280, h: 853, cap: "Courtyard layout \u00b7 Somerton Park" },
+      { img: "assets/img/services/maintenance.jpg", w: 1440, h: 810, cap: "Entertaining area" },
+      { img: "assets/img/gallery/grange-4.jpg", w: 1280, h: 853, cap: "Feature paving \u00b7 Grange" },
+      { img: "assets/img/gallery/somerton-3.jpg", w: 1280, h: 853, cap: "Raised planters \u00b7 Somerton Park" },
+      { img: "assets/img/projects/klemzig.jpg", w: 1440, h: 1080, cap: "Travertine terrace \u00b7 Klemzig" }
+    ],
+    "paving": [
+      { img: "assets/img/services/paving.jpg", w: 1280, h: 853, cap: "Entry paving" },
+      { img: "assets/img/gallery/somerton-1.jpg", w: 1280, h: 853, cap: "Large-format pavers \u00b7 Somerton Park" },
+      { img: "assets/img/services/grass.jpg", w: 1440, h: 1080, cap: "Paved patio" },
+      { img: "assets/img/gallery/grange-1.jpg", w: 1280, h: 853, cap: "Exposed aggregate \u00b7 Grange" },
+      { img: "assets/img/projects/klemzig.jpg", w: 1440, h: 1080, cap: "Travertine \u00b7 Klemzig" },
+      { img: "assets/img/gallery/grange-4.jpg", w: 1280, h: 853, cap: "Crazy paving \u00b7 Grange" },
+      { img: "assets/img/projects/grange.jpg", w: 1280, h: 853, cap: "Driveway \u00b7 Grange" },
+      { img: "assets/img/gallery/somerton-4.jpg", w: 1280, h: 853, cap: "Patio paving \u00b7 Somerton Park" }
+    ],
+    "retaining-walls": [
+      { img: "assets/img/services/retaining-walls.jpg", w: 1440, h: 960, cap: "Block retaining wall" },
+      { img: "assets/img/gallery/grange-2.jpg", w: 1280, h: 853, cap: "Block wall & steps \u00b7 Grange" },
+      { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080, cap: "Rendered wall \u00b7 Klemzig" },
+      { img: "assets/img/gallery/somerton-3.jpg", w: 1280, h: 853, cap: "Raised planter walls \u00b7 Somerton Park" },
+      { img: "assets/img/gallery/somerton-4.jpg", w: 1280, h: 853, cap: "Wall & bench seat \u00b7 Somerton Park" },
+      { img: "assets/img/gallery/klemzig-4.jpg", w: 1440, h: 811, cap: "Rendered garden wall \u00b7 Klemzig" },
+      { img: "assets/img/projects/klemzig.jpg", w: 1440, h: 1080, cap: "Feature wall \u00b7 Klemzig" }
+    ],
+    "fencing": [
+      { img: "assets/img/services/fencing.jpg", w: 852, h: 1024, cap: "Laser-cut screen" },
+      { img: "assets/img/projects/grange.jpg", w: 1280, h: 853, cap: "Automated gate \u00b7 Grange" },
+      { img: "assets/img/gallery/cw-a1.jpg", w: 1440, h: 960, cap: "Tubular fencing" },
+      { img: "assets/img/gallery/grange-2.jpg", w: 1280, h: 853, cap: "Colorbond fencing \u00b7 Grange" },
+      { img: "assets/img/gallery/grange-4.jpg", w: 1280, h: 853, cap: "Boundary fencing \u00b7 Grange" },
+      { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080, cap: "Boundary fencing \u00b7 Klemzig" },
+      { img: "assets/img/gallery/grange-1.jpg", w: 1280, h: 853, cap: "Front fence \u00b7 Grange" }
+    ],
+    "natural-artificial-grass": [
+      { img: "assets/img/services/grass.jpg", w: 1440, h: 1080, cap: "Natural turf" },
+      { img: "assets/img/gallery/northhaven-2.jpg", w: 675, h: 844, cap: "Turf laying" },
+      { img: "assets/img/gallery/somerton-2.jpg", w: 1280, h: 853, cap: "Artificial turf \u00b7 Somerton Park" },
+      { img: "assets/img/gallery/grange-2.jpg", w: 1280, h: 853, cap: "Lawn & garden \u00b7 Grange" },
+      { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080, cap: "Lawn \u00b7 Klemzig" },
+      { img: "assets/img/services/paving.jpg", w: 1280, h: 853, cap: "Garden beds" },
+      { img: "assets/img/gallery/somerton-3.jpg", w: 1280, h: 853, cap: "Planting \u00b7 Somerton Park" },
+      { img: "assets/img/projects/north-haven.jpg", w: 1280, h: 853, cap: "Front lawn \u00b7 North Haven" }
+    ],
+    "irrigation": [
+      { img: "assets/img/services/irrigation.jpg", w: 1440, h: 960, cap: "Pop-up sprinkler" },
+      { img: "assets/img/services/grass.jpg", w: 1440, h: 1080, cap: "Lawn irrigation" },
+      { img: "assets/img/gallery/grange-3.jpg", w: 1280, h: 853, cap: "Lawn & garden \u00b7 Grange" },
+      { img: "assets/img/gallery/grange-2.jpg", w: 1280, h: 853, cap: "Watered lawn \u00b7 Grange" },
+      { img: "assets/img/projects/north-haven.jpg", w: 1280, h: 853, cap: "Front lawn \u00b7 North Haven" },
+      { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080, cap: "Lawn \u00b7 Klemzig" }
+    ],
+    "commercial-garden-maintenance": [
+      { img: "assets/img/services/maintenance.jpg", w: 1440, h: 810, cap: "Commercial outdoor area" },
+      { img: "assets/img/gallery/cw-a1.jpg", w: 1440, h: 960, cap: "Planter displays" },
+      { img: "assets/img/gallery/cw-b1.jpg", w: 667, h: 1000, cap: "Feature planting" },
+      { img: "assets/img/gallery/cw-b2.jpg", w: 667, h: 1000, cap: "Indoor plant styling" },
+      { img: "assets/img/gallery/cw-c1.jpg", w: 667, h: 1000, cap: "Indoor plant styling" },
+      { img: "assets/img/gallery/cw-c2.jpg", w: 667, h: 1000, cap: "Indoor plant styling" },
+      { img: "assets/img/gallery/cw-a2.jpg", w: 667, h: 1000, cap: "Indoor plant styling" },
+      { img: "assets/img/gallery/northhaven-4.jpg", w: 667, h: 1000, cap: "Feature planting" },
+      { img: "assets/img/gallery/somerton-3.jpg", w: 1280, h: 853, cap: "Garden beds \u00b7 Somerton Park" }
+    ]
+  },
+
   /* --- process ------------------------------------------------
      Client asked 2026-09-23 for photos instead of icons on "How we
      work". These are all REAL NextLevel images, but they are

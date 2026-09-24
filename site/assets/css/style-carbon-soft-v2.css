@@ -411,6 +411,7 @@ html[data-theme="carbon-soft-v2"] .section-head{max-width:54ch}
 
 html[data-theme="carbon-soft-v2"] .lead{color:var(--v2-muted)}
 html[data-theme="carbon-soft-v2"] .band--dark .lead,
+html[data-theme="carbon-soft-v2"] .subhero .lead,
 html[data-theme="carbon-soft-v2"] main > #intro .lead{color:var(--v2-muted-nt)}
 
 html[data-theme="carbon-soft-v2"] .band--dark p{color:var(--v2-on-night)}
@@ -513,6 +514,9 @@ html[data-theme="carbon-soft-v2"] .proc__num span{
 }
 html[data-theme="carbon-soft-v2"] .proc h3{color:var(--v2-ink)}
 html[data-theme="carbon-soft-v2"] .proc p{color:var(--v2-muted)}
+/* .proc on a dark band (about.html values, services.html steps) — ink-on-night was invisible */
+html[data-theme="carbon-soft-v2"] .band--dark .proc h3{color:var(--v2-on-night)}
+html[data-theme="carbon-soft-v2"] .band--dark .proc p{color:var(--v2-muted-nt)}
 /* photo-led steps: same bookend sweep as the store row, so the two
    sections read as one family (client asked for the store look) */
 html[data-theme="carbon-soft-v2"] .proc__media{background:var(--v2-night)}
@@ -852,7 +856,7 @@ html[data-theme="carbon-soft-v2"] .work-tile__project{
 }
 html[data-theme="carbon-soft-v2"] .work-tile__place{
   color:rgba(255,255,255,.78);
-  font-size:.66rem;
+  font-size:.72rem;
   letter-spacing:.09em;
   text-transform:uppercase;
 }
@@ -863,7 +867,11 @@ html[data-theme="carbon-soft-v2"] .work-tile[hidden]{display:none}
   html[data-theme="carbon-soft-v2"] .work-tile:nth-child(n){grid-column:span 1;grid-row:span 1}
 }
 @media(max-width:640px){
-  html[data-theme="carbon-soft-v2"] #work-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:34vw;gap:.5rem}
+  html[data-theme="carbon-soft-v2"] #work-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:46vw;gap:.5rem}
+  /* caption was 110px of a 128px tile at 375px — it swallowed the photo */
+  html[data-theme="carbon-soft-v2"] .work-tile__caption{padding:1.2rem .6rem .55rem;gap:.1rem}
+  html[data-theme="carbon-soft-v2"] .work-tile__project{font-size:.75rem;letter-spacing:0}
+  html[data-theme="carbon-soft-v2"] .work-tile__place{letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 }
 @media(prefers-reduced-motion:reduce){
   html[data-theme="carbon-soft-v2"] .work-tile__media img{transition:none}

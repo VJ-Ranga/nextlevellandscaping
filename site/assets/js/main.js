@@ -48,10 +48,13 @@
 
   /* ---- 2. Mobile drawer ----------------------------------- */
   var drawer = $(".drawer");
-  $$(".nav-toggle").forEach(function (t) { t.addEventListener("click", function () { drawer.classList.add("is-open"); document.body.style.overflow = "hidden"; }); });
+  function setToggles(open) { $$(".nav-toggle").forEach(function (t) { t.setAttribute("aria-expanded", open ? "true" : "false"); }); }
+  setToggles(false);
+  $$(".nav-toggle").forEach(function (t) { t.addEventListener("click", function () { drawer.classList.add("is-open"); document.body.style.overflow = "hidden"; setToggles(true); var c = $(".drawer__close"); if (c) c.focus(); }); });
   $(".drawer__close").addEventListener("click", closeDrawer);
   $$(".drawer nav a").forEach(function (a) { a.addEventListener("click", closeDrawer); });
-  function closeDrawer() { drawer.classList.remove("is-open"); document.body.style.overflow = ""; }
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && drawer.classList.contains("is-open")) { closeDrawer(); var t = $(".nav-toggle"); if (t) t.focus(); } });
+  function closeDrawer() { drawer.classList.remove("is-open"); document.body.style.overflow = ""; setToggles(false); }
 
 
   /* ---- Hero headline carousel (layout B) --------------- */
@@ -281,8 +284,24 @@
 
   /* ---- 6b. Full-bleed project image strip -------------- */
   var stripTrack = $("#strip-track");
-  if (stripTrack && D.projectStrip) {
-    stripTrack.innerHTML = D.projectStrip.map(function (s, i) {
+  /* strip photos: homepage/Our Work use projectStrip; service pages set
+     data-service on #strip ("all" = every service, else read ?slug=) */
+  var stripEl = $("#strip");
+  var stripData = D.projectStrip;
+  if (stripEl && stripEl.dataset.service && D.serviceStrip) {
+    var sk = stripEl.dataset.service;
+    if (sk === "all") {
+      // interleave one photo per service per pass so the row stays varied
+      stripData = [];
+      var lists = Object.keys(D.serviceStrip).map(function (k) { return D.serviceStrip[k]; });
+      for (var pass = 0; pass < 3; pass++) lists.forEach(function (l) { if (l[pass]) stripData.push(l[pass]); });
+    } else {
+      var slug = new URLSearchParams(location.search).get("slug");
+      stripData = D.serviceStrip[slug] || null;
+    }
+  }
+  if (stripTrack && stripData) {
+    stripTrack.innerHTML = stripData.map(function (s, i) {
       return '<div class="swiper-slide">' +
         '<button data-i="' + i + '" aria-label="View photo ' + (i + 1) + '">' +
           '<img loading="lazy" decoding="async"' +
@@ -311,7 +330,7 @@
       });
       window.addEventListener("load", function () { stripSwiper.update(); });
     }
-    var openStrip = window.NLLlightbox(D.projectStrip.map(function (s) { return s.img; }));
+    var openStrip = window.NLLlightbox(stripData.map(function (s) { return s.img; }));
     stripTrack.addEventListener("click", function (e) {
       var b = e.target.closest("button[data-i]");
       if (b && openStrip) openStrip(+b.dataset.i);
