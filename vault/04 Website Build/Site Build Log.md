@@ -427,5 +427,20 @@ Hand-picked real client photos per service (viewed each on a contact sheet; no s
 
 Verified: retaining-walls strip 7 slides, services strip 21, 0 broken images, no console errors, no horizontal scroll. Cache-buster `v=1790200023`. Not committed/deployed. Waiting on client: proper per-service photography (irrigation and maintenance sets lean on lawn/planting shots).
 
+## Round 34 — 2026-09-24: sitemap document (`sitemap/`)
+Built a standalone client-facing sitemap in a new `sitemap/` folder (`index.html`, `assets/sitemap.css`, `assets/sitemap.js`, `assets/sitemap-data.js`). `site/` and `demo/` untouched. Design system reused from the Style Guide (Carbon palette, Poppins, ALL-CAPS weight-400 headings, pill buttons, one scoop corner, no shadows, olive for light-ground text, lime fill only).
+
+Three maps in ARIA tabs (`#tree`, `#flow`, `#inventory`): (1) collapsible hierarchy, org-chart at >=1200px and indented outline below, Home > 8 nav items + Privacy (footer-only) > 7 services / 4 projects / 3 jobs; (2) inline-SVG visitor flow, wide layout >=1024px and a tall phone layout below, main conversion path (entry > Home > Services > service > Contact) highlighted, floating quote button noted, plus a text list of journeys; (3) inventory of all 13 files with purpose, sections, shared components, status, instance links, filterable by type and status. Every node links to `../site/`. All three render from `sitemap-data.js`. Print CSS shows all three maps (Chrome PDF: 9 A4 pages).
+
+Verified by JS rect checks at 320/375/1024/1200/1440: no horizontal scroll, 0 tap targets under 24px, flow text >=11.8px effective, no node overlap. Bugs found and fixed: Bootstrap `.card`/`.badge` clashes (renamed), invisible entry-node text, SVG link underlines, bullets on tree lists, arrowhead clutter on the phone flow.
+
+Status calls to confirm with client: About = placeholder (team), Irrigation + Commercial Maintenance service pages = waiting on client (stand-in photos). Not committed/deployed; `sitemap/` is not in gh-pages yet.
+
+## Round 35 — 2026-09-26: `#services` ("What we do") padding −100px top and bottom
+Client: too much empty space above and below the section. Measured first: desktop 231px top / 396px bottom padding (scoop token is most of it), mobile 122 / 194. Added a `@media(min-width:641px)` override on `main > #services` in `style-carbon-soft-v2.css`: `padding-top` `calc(var(--pad-band) + scoop*.45 - 100px)`, `padding-bottom` `calc(var(--pad-band) + scoop - 100px)`. Desktop now 131 / 296, section 1329 → 1129px. Mobile left as is: −100px would leave a 47px gap under a 130px scoop overlap, and mobile was signed off (Round 32). Shared `--pad-band` untouched (Round 27). Verified by computed-style check at 1440 and 375. Cache-buster `v=1790200025`. Not committed/deployed.
+
+## Round 36 — 2026-09-26: homepage bands — exactly 120px top and bottom
+Client: every homepage section 120px top and 120px bottom, no more or less. New token `--pad-home:120px` and a homepage-only block (`body.pg-home main > #id`) at the end of `style-carbon-soft-v2.css`; `--pad-band`/`--pad-band-lg` untouched (Round 27). Because scoop bands overlap, the *visible* gap is what's 120: bands sitting on top (`#services`, `#current`, `#process`, `#contact`) get plain 120/120; `#intro` bottom, and `#projects` + `#reviews` top and bottom, add `+ --v2-scoop` because the neighbouring band covers/tucks over that much. Removes Round 35's `#services` −100px media block (superseded). Verified by `offsetTop`/bottom of `.container` at 1440 (scoop 300) and 375 (scoop 130): 120 after subtracting overlap on every band, no horizontal overflow at 375. `#project-strip` is a full-bleed photo strip with 0 padding, left alone. Applies at all widths (mobile too). Cache-buster `v=1790200027`. Not committed/deployed.
+
 ## Next
 Say which of the "not yet applied" items to tackle next, or give more reference sections from `demo/`'s other themes to pull in per the cherry-pick workflow.

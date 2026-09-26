@@ -86,3 +86,6 @@ Paste every end-client requirement here as it arrives. One row each. Then triage
 - Header/footer on sub-pages → `site/assets/js/partials.js`
 - Per-page layout → that page's HTML
 - `demo/` is frozen — only pull individual sections from it, never build there again
+| 49 | 2026-09-24 | Standalone sitemap document with 3 map types (hierarchy tree, visitor-flow map, page inventory) to show the client the site structure; printable to PDF | page | M | done | New `sitemap/` folder (index.html + assets/sitemap-data.js single data source); `site/` and `demo/` untouched. See [[Site Build Log]] Round 34 |
+| 50 | 2026-09-26 | "What we do" (`#services`) has too much space top and bottom — reduce both by 100px | design | S | done | `#services` padding-top/bottom −100px above 640px only (mobile unchanged, would go too tight). `--pad-band` untouched. See [[Site Build Log]] Round 35 |
+| 51 | 2026-09-26 | Homepage: every section exactly 120px top and 120px bottom — no more, no less | design | M | done | New `--pad-home:120px`, homepage-only (`body.pg-home`) per-band overrides; covered/tucked bands reserve 120px + scoop so the *visible* gap is 120. Supersedes #50's `#services` −100px rule (removed). Photo strip left at 0 (full-bleed). See [[Site Build Log]] Round 36 |

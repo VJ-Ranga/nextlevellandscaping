@@ -876,3 +876,29 @@ html[data-theme="carbon-soft-v2"] .work-tile[hidden]{display:none}
 @media(prefers-reduced-motion:reduce){
   html[data-theme="carbon-soft-v2"] .work-tile__media img{transition:none}
 }
+
+/* =============================================================
+   HOMEPAGE BAND SPACING — exactly 120px visible above and below the
+   content of every text band (client, 2026-09-26). Homepage only.
+   The scoop bands overlap their neighbour by --v2-scoop, so a band
+   that is COVERED by its neighbour (#intro bottom, #projects and
+   #reviews top+bottom) reserves 120px + the scoop; a band sitting
+   on top of its neighbours gets a plain 120px. The full-bleed photo strip has no padding by design.
+   ============================================================= */
+html[data-theme="carbon-soft-v2"]{ --pad-home:120px; }
+html[data-theme="carbon-soft-v2"] body.pg-home main > #services,
+html[data-theme="carbon-soft-v2"] body.pg-home main > #current,
+html[data-theme="carbon-soft-v2"] body.pg-home main > #process,
+html[data-theme="carbon-soft-v2"] body.pg-home main > #contact{
+  padding-top:var(--pad-home);     /* sits on top of its neighbours */
+  padding-bottom:var(--pad-home);
+}
+html[data-theme="carbon-soft-v2"] body.pg-home main > #intro{
+  padding-top:var(--pad-home);
+  padding-bottom:calc(var(--pad-home) + var(--v2-scoop));   /* #services covers its bottom */
+}
+html[data-theme="carbon-soft-v2"] body.pg-home main > #projects,
+html[data-theme="carbon-soft-v2"] body.pg-home main > #reviews{
+  padding-top:calc(var(--pad-home) + var(--v2-scoop));      /* tucks behind the band above */
+  padding-bottom:calc(var(--pad-home) + var(--v2-scoop));   /* covered by the band below */
+}
