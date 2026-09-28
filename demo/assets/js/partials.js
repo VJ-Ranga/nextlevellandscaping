@@ -6,34 +6,45 @@
   "use strict";
 
   var nav = [
-    ["index.html#services", "Services"],
+    ["services.html", "Services"],
     ["our-work.html", "Our Work"],
     ["current-work.html", "Current Work"],
-    ["store.html", "Store"],
-    ["index.html#contact", "Contact"]
+    ["process.html", "Our Process"],
+    ["about.html", "About"],
+    ["reviews.html", "Reviews"],
+    ["faq.html", "FAQ"],
+    ["contact.html", "Contact"]
   ];
   var navLinks = nav.map(function (n) { return '<a href="' + n[0] + '">' + n[1] + '</a>'; }).join("");
 
-  var header =
-    '<header class="site-header">' +
-      '<div class="container site-header__row">' +
-        '<a class="brand" href="index.html"><img src="assets/img/brand/logo.png" alt="NextLevel Landscaping"></a>' +
-        '<nav class="main-nav">' + navLinks + '</nav>' +
-        '<div class="header-cta">' +
-          '<a class="phone" href="tel:+61404440222"><i class="fa-solid fa-phone"></i> 0404 440 222</a>' +
-          '<a class="btn-ghost btn-ghost--fill" href="index.html#contact">Get a free quote</a>' +
-          '<button class="nav-toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>' +
-        '</div>' +
+  /* Services header nav item opens a dropdown of the 7 individual service
+     pages. Hardcoded here (not read from data.js) because this script runs
+     and injects the header before data.js loads — keep in sync with the
+     `services` array in assets/data.js if a service is added/renamed/removed. */
+  var servicesDrop =
+    '<div class="hdr2__drop">' +
+      '<a href="services.html">Services <i class="fa-solid fa-chevron-down hdr2__drop-arrow" aria-hidden="true"></i></a>' +
+      '<div class="hdr2__drop-panel">' +
+        '<a class="hdr2__drop-all" href="services.html">All Services</a>' +
+        '<a href="service.html?slug=landscape-design"><i class="fa-solid fa-pen-ruler" aria-hidden="true"></i>Landscape Design</a>' +
+        '<a href="service.html?slug=paving"><i class="fa-solid fa-border-all" aria-hidden="true"></i>Paving</a>' +
+        '<a href="service.html?slug=retaining-walls"><i class="fa-solid fa-layer-group" aria-hidden="true"></i>Retaining Walls</a>' +
+        '<a href="service.html?slug=fencing"><i class="fa-solid fa-grip-lines-vertical" aria-hidden="true"></i>Fencing</a>' +
+        '<a href="service.html?slug=natural-artificial-grass"><i class="fa-solid fa-leaf" aria-hidden="true"></i>Grass &amp; Soft Landscapes</a>' +
+        '<a href="service.html?slug=irrigation"><i class="fa-solid fa-droplet" aria-hidden="true"></i>Irrigation</a>' +
+        '<a href="service.html?slug=commercial-garden-maintenance"><i class="fa-solid fa-scissors" aria-hidden="true"></i>Commercial Maintenance</a>' +
       '</div>' +
-    '</header>' +
+    '</div>';
+
+  var header =
     '<header class="hdr2">' +
       '<div class="hdr2__util">' +
         '<div class="container hdr2__util-row">' +
           '<nav class="hdr2__util-links">' +
-            '<a href="index.html#process">Our Process</a>' +
-            '<a href="index.html#reviews">Reviews</a>' +
-            '<a href="store.html">Store</a>' +
-            '<a href="index.html#intro">Credentials</a>' +
+            '<a href="about.html">About</a>' +
+            '<a href="process.html">Our Process</a>' +
+            '<a href="reviews.html">Reviews</a>' +
+            '<a href="faq.html">FAQ</a>' +
           '</nav>' +
           '<div class="hdr2__util-right">' +
             '<a href="tel:+61404440222">0404 440 222</a>' +
@@ -43,13 +54,13 @@
       '</div>' +
       '<div class="container hdr2__main">' +
         '<nav class="hdr2__nav hdr2__nav--l">' +
-          '<a href="index.html#services">Services</a>' +
+          servicesDrop +
           '<a href="our-work.html">Our Work</a>' +
         '</nav>' +
         '<a class="hdr2__brand" href="index.html"><img src="assets/img/brand/logo.png" alt="NextLevel Landscaping"></a>' +
         '<nav class="hdr2__nav hdr2__nav--r">' +
           '<a href="current-work.html">Current Work</a>' +
-          '<a href="index.html#contact">Contact</a>' +
+          '<a href="contact.html">Contact</a>' +
         '</nav>' +
         '<button class="nav-toggle hdr2__toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>' +
       '</div>' +
@@ -60,7 +71,7 @@
         '<button class="drawer__close" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>' +
       '</div>' +
       '<nav>' + navLinks + '</nav>' +
-      '<div class="drawer__foot"><a href="tel:+61404440222">0404 440 222</a><br>Shop 1/41 Woodlands Terrace, Edwardstown SA 5039</div>' +
+      '<div class="drawer__foot"><a href="tel:+61404440222">0404 440 222</a><br>1/41 Woodlands Terrace, Edwardstown SA 5039</div>' +
     '</div>';
 
   var footer =
@@ -72,21 +83,19 @@
             '<p>A proudly South Australian owned and operated landscaping business. Design, construction and garden supplies.</p>' +
           '</div>' +
           '<div><h4>EXPLORE</h4><ul>' +
-            '<li><a href="index.html#services">Services</a></li>' +
+            '<li><a href="services.html">Services</a></li>' +
             '<li><a href="our-work.html">Our Work</a></li>' +
             '<li><a href="current-work.html">Current Work</a></li>' +
-            '<li><a href="store.html">Store</a></li>' +
+            '<li><a href="process.html">Our Process</a></li>' +
             '<li><a href="about.html">About</a></li>' +
-            '<li><a href="index.html#contact">Contact</a></li>' +
           '</ul></div>' +
-          '<div><h4>STORE</h4><ul>' +
-            '<li><a href="store.html">Indoor &amp; Outdoor Pots</a></li>' +
-            '<li><a href="store.html">Plants &amp; Plant Care</a></li>' +
-            '<li><a href="store.html">Lawns &amp; Lawn Care</a></li>' +
-            '<li><a href="store.html">Garden Beds &amp; Edging</a></li>' +
+          '<div><h4>SUPPORT</h4><ul>' +
+            '<li><a href="reviews.html">Reviews</a></li>' +
+            '<li><a href="faq.html">FAQ</a></li>' +
+            '<li><a href="contact.html">Contact</a></li>' +
           '</ul></div>' +
           '<div><h4>NEXTLEVEL LANDSCAPING</h4><ul>' +
-            '<li>Shop 1/41 Woodlands Terrace, Edwardstown SA 5039</li>' +
+            '<li>1/41 Woodlands Terrace, Edwardstown SA 5039</li>' +
             '<li><a href="tel:+61404440222">0404 440 222</a></li>' +
             '<li><a href="mailto:info@nextlevellandscaping.com.au">info@nextlevellandscaping.com.au</a></li>' +
             '<li>Adelaide Express Services Pty Ltd &bull; ABN 15 642 563 513</li>' +
@@ -99,7 +108,8 @@
         '</div>' +
       '</div>' +
     '</footer>' +
-    '<a class="wa-float" href="https://wa.me/61404440222" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>';
+    (/(^|\/)contact\.html$/.test(location.pathname) ? "" :
+    '<a class="quote-float btn-ghost btn-ghost--fill" id="quote-float" href="contact.html"><i class="fa-solid fa-comment-dollar" aria-hidden="true"></i> Get a Free Quote</a>');
 
   var h = document.getElementById("site-header-slot");
   if (h) h.outerHTML = header; else document.body.insertAdjacentHTML("afterbegin", header);

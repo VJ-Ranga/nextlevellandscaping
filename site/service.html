@@ -11,15 +11,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1790200027">
-<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1790200027">
+<link rel="stylesheet" href="assets/css/style.css?v=1790200030">
+<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1790200030">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div id="site-header-slot"></div>
 
 <main id="main" tabindex="-1">
-  <section class="subhero contour">
+  <section class="subhero subhero--photo" id="s-subhero">
+    <div class="subhero__media" id="s-subhero-media"><img id="s-subhero-img" src="assets/img/services/landscape-design.jpg" alt="" width="1440" height="810" fetchpriority="high" decoding="async"></div>
     <div class="container">
       <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <a href="services.html">Services</a> &nbsp;/&nbsp; <span id="crumb-name">Service</span></p>
       <h1 id="s-name">—</h1>
@@ -71,9 +72,9 @@
 
 <div id="site-footer-slot"></div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="assets/js/partials.js?v=1790200027"></script>
-<script src="assets/data.js?v=1790200027"></script>
-<script src="assets/js/main.js?v=1790200027"></script>
+<script src="assets/js/partials.js?v=1790200030"></script>
+<script src="assets/data.js?v=1790200030"></script>
+<script src="assets/js/main.js?v=1790200030"></script>
 <script>
 (function(){
   var D=window.NLL, list=D.services||[];
@@ -101,6 +102,11 @@
   document.getElementById('s-no').textContent=s.no+' / 07';
 
   var d=DIM[s.img]||[1440,960];
+  var heroImg=document.getElementById('s-subhero-img');
+  heroImg.src=s.img;
+  heroImg.width=d[0];
+  heroImg.height=d[1];
+
   document.getElementById('s-media').innerHTML=
     '<img loading="lazy" decoding="async" width="'+d[0]+'" height="'+d[1]+'" src="'+s.img+'" alt="'+plain+' by NextLevel Landscaping in Adelaide">';
 

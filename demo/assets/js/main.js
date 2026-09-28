@@ -48,10 +48,13 @@
 
   /* ---- 2. Mobile drawer ----------------------------------- */
   var drawer = $(".drawer");
-  $$(".nav-toggle").forEach(function (t) { t.addEventListener("click", function () { drawer.classList.add("is-open"); document.body.style.overflow = "hidden"; }); });
+  function setToggles(open) { $$(".nav-toggle").forEach(function (t) { t.setAttribute("aria-expanded", open ? "true" : "false"); }); }
+  setToggles(false);
+  $$(".nav-toggle").forEach(function (t) { t.addEventListener("click", function () { drawer.classList.add("is-open"); document.body.style.overflow = "hidden"; setToggles(true); var c = $(".drawer__close"); if (c) c.focus(); }); });
   $(".drawer__close").addEventListener("click", closeDrawer);
   $$(".drawer nav a").forEach(function (a) { a.addEventListener("click", closeDrawer); });
-  function closeDrawer() { drawer.classList.remove("is-open"); document.body.style.overflow = ""; }
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && drawer.classList.contains("is-open")) { closeDrawer(); var t = $(".nav-toggle"); if (t) t.focus(); } });
+  function closeDrawer() { drawer.classList.remove("is-open"); document.body.style.overflow = ""; setToggles(false); }
 
 
   /* ---- Hero headline carousel (layout B) --------------- */
@@ -82,30 +85,17 @@
   }
 
 
-  /* ---- WCAG 2.2.2: user control for all looping hero motion ---- */
+  /* ---- Hero motion control ------------------------------------
+     The visible pause button was removed at the client's request
+     (2026-09-23). That drops our WCAG 2.2.2 (Level A) pause
+     mechanism — logged as an accepted risk in the vault, revisit
+     before launch. We still honour prefers-reduced-motion here,
+     which is the part we can keep without a visible control. */
   (function () {
-    var btn = $("#hero-pause");
-    if (!btn) return;
     var vid = $(".hero__media video");
-    var icon = $("i", btn), label = $(".hero-pause__txt", btn);
-    var stopped = false;
-    function paint() {
-      btn.setAttribute("aria-pressed", stopped ? "true" : "false");
-      icon.className = stopped ? "fa-solid fa-play" : "fa-solid fa-pause";
-      label.textContent = stopped ? "Play background video" : "Pause background video";
-    }
-    btn.addEventListener("click", function () {
-      stopped = !stopped;
-      window.NLLmotionStopped = stopped;          // carousel reads this
-      if (vid) { if (stopped) vid.pause(); else vid.play().catch(function () {}); }
-      paint();
-    });
-    // honour reduced-motion: start stopped, poster only
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      stopped = true; window.NLLmotionStopped = true;
-      if (vid) vid.pause();
-    }
-    paint();
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    window.NLLmotionStopped = true;               // carousel reads this
+    if (vid) vid.pause();
   })();
 
   /* ---- 3. Render: stats ---------------------------------- */
@@ -294,8 +284,24 @@
 
   /* ---- 6b. Full-bleed project image strip -------------- */
   var stripTrack = $("#strip-track");
-  if (stripTrack && D.projectStrip) {
-    stripTrack.innerHTML = D.projectStrip.map(function (s, i) {
+  /* strip photos: homepage/Our Work use projectStrip; service pages set
+     data-service on #strip ("all" = every service, else read ?slug=) */
+  var stripEl = $("#strip");
+  var stripData = D.projectStrip;
+  if (stripEl && stripEl.dataset.service && D.serviceStrip) {
+    var sk = stripEl.dataset.service;
+    if (sk === "all") {
+      // interleave one photo per service per pass so the row stays varied
+      stripData = [];
+      var lists = Object.keys(D.serviceStrip).map(function (k) { return D.serviceStrip[k]; });
+      for (var pass = 0; pass < 3; pass++) lists.forEach(function (l) { if (l[pass]) stripData.push(l[pass]); });
+    } else {
+      var slug = new URLSearchParams(location.search).get("slug");
+      stripData = D.serviceStrip[slug] || null;
+    }
+  }
+  if (stripTrack && stripData) {
+    stripTrack.innerHTML = stripData.map(function (s, i) {
       return '<div class="swiper-slide">' +
         '<button data-i="' + i + '" aria-label="View photo ' + (i + 1) + '">' +
           '<img loading="lazy" decoding="async"' +
@@ -309,7 +315,7 @@
     if (window.Swiper) {
       var stripSwiper = new Swiper("#strip", {
         slidesPerView: "auto",
-        spaceBetween: 14,
+        spaceBetween: 0,
         freeMode: { enabled: true, momentum: true },
         observer: true,
         observeParents: true,
@@ -324,7 +330,7 @@
       });
       window.addEventListener("load", function () { stripSwiper.update(); });
     }
-    var openStrip = window.NLLlightbox(D.projectStrip.map(function (s) { return s.img; }));
+    var openStrip = window.NLLlightbox(stripData.map(function (s) { return s.img; }));
     stripTrack.addEventListener("click", function (e) {
       var b = e.target.closest("button[data-i]");
       if (b && openStrip) openStrip(+b.dataset.i);
@@ -335,21 +341,14 @@
   var procEl = $("#process-list");
   if (procEl && D.process) {
     procEl.innerHTML = D.process.map(function (p) {
-      return '<div class="proc reveal">' +
-        '<div class="proc__num"><i class="' + esc(p.icon || "fa-solid fa-circle") + '"></i><span>' + esc(p.no) + '</span></div>' +
+      // photo-led step (client preference, 2026-09-23); falls back to
+      // the original icon medallion if a step has no img yet
+      var visual = p.img
+        ? '<div class="proc__media"><img loading="lazy" src="' + esc(p.img) + '" width="' + esc(p.w) + '" height="' + esc(p.h) + '" alt="' + esc(p.alt || "") + '"><span class="proc__step">' + esc(p.no) + '</span></div>'
+        : '<div class="proc__num"><i class="' + esc(p.icon || "fa-solid fa-circle") + '"></i><span>' + esc(p.no) + '</span></div>';
+      return '<div class="proc' + (p.img ? ' proc--photo' : '') + ' reveal">' +
+        visual +
         '<h3>' + esc(p.name) + '</h3><p>' + p.desc + '</p></div>';
-    }).join("");
-  }
-
-  /* ---- 8. Render: store ------------------------------- */
-  var storeEl = $("#store-list");
-  if (storeEl && D.store) {
-    storeEl.innerHTML = D.store.map(function (s) {
-      return '' +
-        '<article class="store-card reveal">' +
-          '<div class="media"><img loading="lazy" src="' + esc(s.img) + '" alt=""></div>' +
-          '<h3>' + s.name + '</h3><p>' + s.desc + '</p>' +
-        '</article>';
     }).join("");
   }
 
@@ -397,7 +396,7 @@
       e.preventDefault();
       var ok = true;
       $$(".field", form).forEach(function (f) {
-        var input = $("input,textarea", f);
+        var input = $("input,textarea,select", f);
         if (!input) return;
         var val = input.value.trim();
         var bad = input.required && !val;
@@ -417,5 +416,29 @@
 
   /* ---- 13. Footer year ---------------------------- */
   var y = $("#year"); if (y) y.textContent = new Date().getFullYear();
+
+  /* ---- 14. Floating quote button — appears once the visitor is about
+     halfway scrolled through the hero (not only once it's fully covered).
+     Reuses the same coverBand element as the sticky-hero video pause above
+     (.hero + .band sliding over the pinned hero) but checks its position
+     against half the viewport height instead of 0; on sub-pages without a
+     sticky hero (no .hero on the page) it just shows once scrolled a bit. */
+  (function () {
+    var btn = $("#quote-float");
+    if (!btn) return;
+    var heroEl = $(".hero");
+    var subheroEl = $(".subhero");
+    var footerEl = $(".site-footer");
+    function toggle() {
+      var past;
+      if (heroEl && coverBand) past = coverBand.getBoundingClientRect().top <= window.innerHeight * 0.5;
+      else if (subheroEl) past = subheroEl.getBoundingClientRect().bottom <= window.innerHeight * 0.5;
+      else past = window.scrollY > 80;
+      var overFooter = footerEl && footerEl.getBoundingClientRect().top <= window.innerHeight;
+      btn.classList.toggle("is-visible", past && !overFooter);
+    }
+    toggle();
+    window.addEventListener("scroll", toggle, { passive: true });
+  })();
 
 })();

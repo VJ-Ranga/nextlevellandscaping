@@ -902,3 +902,33 @@ html[data-theme="carbon-soft-v2"] body.pg-home main > #reviews{
   padding-top:calc(var(--pad-home) + var(--v2-scoop));      /* tucks behind the band above */
   padding-bottom:calc(var(--pad-home) + var(--v2-scoop));   /* covered by the band below */
 }
+
+/* =============================================================
+   22. Sub-page photo hero (subhero--photo) — dark gradient over
+   a real photo, replacing the flat dark subhero for these pages.
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] .subhero--photo{
+  min-height:clamp(380px,56vh,600px);
+  display:flex;
+  align-items:flex-end;
+  padding-bottom:64px;
+}
+html[data-theme="carbon-soft-v2"] .subhero--photo .subhero__media img{
+  opacity:1;
+  height:100%;
+  object-fit:cover;
+}
+html[data-theme="carbon-soft-v2"] .subhero--photo .subhero__media::after{
+  background:linear-gradient(to top, rgba(23,25,15,.85) 0%, rgba(23,25,15,.55) 45%, rgba(23,25,15,.35) 100%);
+}
+html[data-theme="carbon-soft-v2"] .subhero--photo .container{
+  position:relative;
+  z-index:1;
+  width:100%;
+}
+@media(max-width:640px){
+  html[data-theme="carbon-soft-v2"] .subhero--photo{
+    min-height:clamp(320px,46vh,420px);
+    padding-bottom:48px;
+  }
+}

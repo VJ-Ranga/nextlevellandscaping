@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en-AU" class="no-js">
+<html lang="en-AU" data-theme="carbon-soft-v2" data-layout="centred" data-hero="sticky" data-intro="split">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<script src="assets/js/demo-bar.js?v=15"></script>
+<script src="assets/js/demo-footer.js?v=15"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script>document.documentElement.classList.remove('no-js');try{document.documentElement.setAttribute("data-theme",(function(t){return ["brand","carbon","carbon-soft","carbon-soft-v2","nocturne","blueprint"].indexOf(t)>-1?t:"carbon-soft-v2"})(localStorage.getItem("nll-theme")));document.documentElement.setAttribute("data-layout",localStorage.getItem("nll-layout")||"centred");document.documentElement.setAttribute("data-hero",localStorage.getItem("nll-hero")||"static");document.documentElement.setAttribute("data-intro",(function(v){return ["split","stacked"].indexOf(v)>-1?v:"stacked"})(localStorage.getItem("nll-intro")))}catch(e){}</script>
 <title>Current Work — NextLevel Landscaping</title>
 <meta name="description" content="Landscaping projects NextLevel Landscaping is building right now across Adelaide — with a live look at what stage each one is at.">
 <link rel="icon" href="assets/img/brand/favicon.png" type="image/png">
@@ -11,17 +13,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1789010816">
-<link rel="stylesheet" href="assets/css/style-nocturne.css?v=1789010816">
-<link rel="stylesheet" href="assets/css/style-blueprint.css?v=1789010816">
-<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1789010816">
+<link rel="stylesheet" href="assets/css/style.css?v=1790200030">
+<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1790200030">
+<link rel="stylesheet" href="assets/css/demo-bar.css?v=15">
+<link rel="stylesheet" href="assets/css/demo-variants.css?v=15">
+<link rel="stylesheet" href="assets/css/demo-footer.css?v=15">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div id="site-header-slot"></div>
 
 <main id="main" tabindex="-1">
-  <section class="subhero contour">
+  <section class="subhero subhero--photo">
+    <div class="subhero__media"><img src="assets/img/current/henley.jpg" alt="" width="1280" height="853" fetchpriority="high" decoding="async"></div>
     <div class="container">
       <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Current Work</p>
       <h1>Current Work, Live</h1>
@@ -39,16 +43,16 @@
     <div class="container" style="text-align:center">
       <h2>Want your project on this page next?</h2>
       <p class="lead" style="margin:1rem auto 2rem;max-width:46ch">Start with a free on-site consultation and design.</p>
-      <a class="btn-ghost" href="index.html#contact">Get a free quote</a>
+      <a class="btn-ghost" href="contact.html">Get a free quote</a>
     </div>
   </section>
 </main>
 
 <div id="site-footer-slot"></div>
 
-<script src="assets/js/partials.js?v=1789010816"></script>
-<script src="assets/data.js?v=1789010816"></script>
-<script src="assets/js/main.js?v=1789010816"></script>
+<script src="assets/js/partials.js?v=1790200030"></script>
+<script src="assets/data.js?v=1790200030"></script>
+<script src="assets/js/main.js?v=1790200030"></script>
 <script>
 (function(){
   var D=window.NLL, total=(D.stages||[]).length||10;
@@ -70,6 +74,5 @@
   document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
 })();
 </script>
-<script src="assets/js/theme.js?v=1789010816"></script>
 </body>
 </html>

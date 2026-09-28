@@ -17,7 +17,7 @@ window.NLL = {
   /* --- count-up numbers (no boxes) --------------------------- */
   stats: [
     { value: 10,  suffix: "+", label: "Years transforming<br>Adelaide gardens" },
-    { value: 8,   suffix: "",  label: "Services under<br>one roof" },
+    { value: 7,   suffix: "",  label: "Services under<br>one roof" },
     { value: 4,   suffix: "",  label: "Signature full-property<br>transformations" },
     { value: 100, suffix: "%", label: "South Australian<br>owned &amp; operated" }
   ],
@@ -29,7 +29,7 @@ window.NLL = {
     { icon: "fa-solid fa-seedling",      text: "<b>Lawn Solutions Australia</b> authorised" }
   ],
 
-  /* --- 8 services (verbatim copy from the live site) --------- */
+  /* --- 7 services (verbatim copy from the live site; Walkways removed per client feedback 2026-09-22) --------- */
   services: [
     { no: "01", slug: "landscape-design", name: "Landscape Design", icon: "fa-solid fa-pen-ruler",
       desc: "An on-site consultation to talk through your requirements, then a 2D &amp; 3D design so you see exactly what your outdoor space will look like before we move ahead.",
@@ -49,10 +49,7 @@ window.NLL = {
     { no: "06", slug: "irrigation", name: "Irrigation", icon: "fa-solid fa-droplet",
       desc: "Professionally installed systems, from drip lines to sprinklers, designed for your garden's size and needs — saving you time and water.",
       tags: ["Drip systems", "Sprinklers", "Wi-Fi control"], img: "assets/img/services/irrigation.jpg" },
-    { no: "07", slug: "walkways", name: "Walkways", icon: "fa-solid fa-shoe-prints",
-      desc: "Stepping stones, timber and pebbles, carefully set out to bring a modern look to the garden with minimal maintenance.",
-      tags: ["Stepping stones", "Timber", "Pebbles"], img: "assets/img/services/walkways.jpg" },
-    { no: "08", slug: "commercial-garden-maintenance", name: "Commercial Maintenance", icon: "fa-solid fa-scissors",
+    { no: "07", slug: "commercial-garden-maintenance", name: "Commercial Maintenance", icon: "fa-solid fa-scissors",
       desc: "Qualified horticulturists keeping commercial properties sharp — pruning, planting, weeding and seasonal care, year-round.",
       tags: ["Pruning", "Planting", "Weeding", "Seasonal care"], img: "assets/img/services/maintenance.jpg" }
   ],
@@ -207,20 +204,97 @@ window.NLL = {
     { img: "assets/img/gallery/grange-3.jpg", w: 1280, h: 853,      cap: "Grange" }
   ],
 
-  /* --- NextLevel Outdoors store categories ------------------ */
-  store: [
-    { name: "Indoor &amp; Outdoor Pots", desc: "Drainage, self-watering and plant-friendly designs.", img: "assets/img/store/pots.jpg" },
-    { name: "Plants &amp; Plant Care",     desc: "Indoor and outdoor plants, plus everything to keep them thriving.", img: "assets/img/store/plants.jpg" },
-    { name: "Lawns &amp; Lawn Care",       desc: "Lawn Solutions Australia turf, fertiliser and topdressing.", img: "assets/img/store/lawns.jpg" },
-    { name: "Garden Beds &amp; Edging",    desc: "LinkEdge edging, mulch, soil, potting mix and pebbles.", img: "assets/img/store/edging.jpg" }
-  ],
+  /* --- per-service photo strips (service.html / services.html) ---
+     Hand-picked from real client photos; captions say what the photo
+     actually shows. [path under assets/img/, caption] — sizes are read
+     from the files so there is no layout shift. --- */
+  serviceStrip: {
+    "landscape-design": [
+      { img: "assets/img/services/landscape-design.jpg", w: 1440, h: 810, cap: "3D concept" },
+      { img: "assets/img/gallery/grange-3.jpg", w: 1280, h: 853, cap: "Pool & pergola \u00b7 Grange" },
+      { img: "assets/img/gallery/klemzig-4.jpg", w: 1440, h: 811, cap: "Outdoor living \u00b7 Klemzig" },
+      { img: "assets/img/gallery/somerton-2.jpg", w: 1280, h: 853, cap: "Courtyard layout \u00b7 Somerton Park" },
+      { img: "assets/img/services/maintenance.jpg", w: 1440, h: 810, cap: "Entertaining area" },
+      { img: "assets/img/gallery/grange-4.jpg", w: 1280, h: 853, cap: "Feature paving \u00b7 Grange" },
+      { img: "assets/img/gallery/somerton-3.jpg", w: 1280, h: 853, cap: "Raised planters \u00b7 Somerton Park" },
+      { img: "assets/img/projects/klemzig.jpg", w: 1440, h: 1080, cap: "Travertine terrace \u00b7 Klemzig" }
+    ],
+    "paving": [
+      { img: "assets/img/services/paving.jpg", w: 1280, h: 853, cap: "Entry paving" },
+      { img: "assets/img/gallery/somerton-1.jpg", w: 1280, h: 853, cap: "Large-format pavers \u00b7 Somerton Park" },
+      { img: "assets/img/services/grass.jpg", w: 1440, h: 1080, cap: "Paved patio" },
+      { img: "assets/img/gallery/grange-1.jpg", w: 1280, h: 853, cap: "Exposed aggregate \u00b7 Grange" },
+      { img: "assets/img/projects/klemzig.jpg", w: 1440, h: 1080, cap: "Travertine \u00b7 Klemzig" },
+      { img: "assets/img/gallery/grange-4.jpg", w: 1280, h: 853, cap: "Crazy paving \u00b7 Grange" },
+      { img: "assets/img/projects/grange.jpg", w: 1280, h: 853, cap: "Driveway \u00b7 Grange" },
+      { img: "assets/img/gallery/somerton-4.jpg", w: 1280, h: 853, cap: "Patio paving \u00b7 Somerton Park" }
+    ],
+    "retaining-walls": [
+      { img: "assets/img/services/retaining-walls.jpg", w: 1440, h: 960, cap: "Block retaining wall" },
+      { img: "assets/img/gallery/grange-2.jpg", w: 1280, h: 853, cap: "Block wall & steps \u00b7 Grange" },
+      { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080, cap: "Rendered wall \u00b7 Klemzig" },
+      { img: "assets/img/gallery/somerton-3.jpg", w: 1280, h: 853, cap: "Raised planter walls \u00b7 Somerton Park" },
+      { img: "assets/img/gallery/somerton-4.jpg", w: 1280, h: 853, cap: "Wall & bench seat \u00b7 Somerton Park" },
+      { img: "assets/img/gallery/klemzig-4.jpg", w: 1440, h: 811, cap: "Rendered garden wall \u00b7 Klemzig" },
+      { img: "assets/img/projects/klemzig.jpg", w: 1440, h: 1080, cap: "Feature wall \u00b7 Klemzig" }
+    ],
+    "fencing": [
+      { img: "assets/img/services/fencing.jpg", w: 852, h: 1024, cap: "Laser-cut screen" },
+      { img: "assets/img/projects/grange.jpg", w: 1280, h: 853, cap: "Automated gate \u00b7 Grange" },
+      { img: "assets/img/gallery/cw-a1.jpg", w: 1440, h: 960, cap: "Tubular fencing" },
+      { img: "assets/img/gallery/grange-2.jpg", w: 1280, h: 853, cap: "Colorbond fencing \u00b7 Grange" },
+      { img: "assets/img/gallery/grange-4.jpg", w: 1280, h: 853, cap: "Boundary fencing \u00b7 Grange" },
+      { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080, cap: "Boundary fencing \u00b7 Klemzig" },
+      { img: "assets/img/gallery/grange-1.jpg", w: 1280, h: 853, cap: "Front fence \u00b7 Grange" }
+    ],
+    "natural-artificial-grass": [
+      { img: "assets/img/services/grass.jpg", w: 1440, h: 1080, cap: "Natural turf" },
+      { img: "assets/img/gallery/northhaven-2.jpg", w: 675, h: 844, cap: "Turf laying" },
+      { img: "assets/img/gallery/somerton-2.jpg", w: 1280, h: 853, cap: "Artificial turf \u00b7 Somerton Park" },
+      { img: "assets/img/gallery/grange-2.jpg", w: 1280, h: 853, cap: "Lawn & garden \u00b7 Grange" },
+      { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080, cap: "Lawn \u00b7 Klemzig" },
+      { img: "assets/img/services/paving.jpg", w: 1280, h: 853, cap: "Garden beds" },
+      { img: "assets/img/gallery/somerton-3.jpg", w: 1280, h: 853, cap: "Planting \u00b7 Somerton Park" },
+      { img: "assets/img/projects/north-haven.jpg", w: 1280, h: 853, cap: "Front lawn \u00b7 North Haven" }
+    ],
+    "irrigation": [
+      { img: "assets/img/services/irrigation.jpg", w: 1440, h: 960, cap: "Pop-up sprinkler" },
+      { img: "assets/img/services/grass.jpg", w: 1440, h: 1080, cap: "Lawn irrigation" },
+      { img: "assets/img/gallery/grange-3.jpg", w: 1280, h: 853, cap: "Lawn & garden \u00b7 Grange" },
+      { img: "assets/img/gallery/grange-2.jpg", w: 1280, h: 853, cap: "Watered lawn \u00b7 Grange" },
+      { img: "assets/img/projects/north-haven.jpg", w: 1280, h: 853, cap: "Front lawn \u00b7 North Haven" },
+      { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080, cap: "Lawn \u00b7 Klemzig" }
+    ],
+    "commercial-garden-maintenance": [
+      { img: "assets/img/services/maintenance.jpg", w: 1440, h: 810, cap: "Commercial outdoor area" },
+      { img: "assets/img/gallery/cw-a1.jpg", w: 1440, h: 960, cap: "Planter displays" },
+      { img: "assets/img/gallery/cw-b1.jpg", w: 667, h: 1000, cap: "Feature planting" },
+      { img: "assets/img/gallery/cw-b2.jpg", w: 667, h: 1000, cap: "Indoor plant styling" },
+      { img: "assets/img/gallery/cw-c1.jpg", w: 667, h: 1000, cap: "Indoor plant styling" },
+      { img: "assets/img/gallery/cw-c2.jpg", w: 667, h: 1000, cap: "Indoor plant styling" },
+      { img: "assets/img/gallery/cw-a2.jpg", w: 667, h: 1000, cap: "Indoor plant styling" },
+      { img: "assets/img/gallery/northhaven-4.jpg", w: 667, h: 1000, cap: "Feature planting" },
+      { img: "assets/img/gallery/somerton-3.jpg", w: 1280, h: 853, cap: "Garden beds \u00b7 Somerton Park" }
+    ]
+  },
 
-  /* --- process ------------------------------------------------ */
+  /* --- process ------------------------------------------------
+     Client asked 2026-09-23 for photos instead of icons on "How we
+     work". These are all REAL NextLevel images, but they are
+     finished-work shots standing in illustratively — none of them
+     is a photo of the step itself (no consultation, crew or
+     build-in-progress photography exists yet). `icon` is kept as a
+     fallback. Swap `img`/`w`/`h` when the client supplies proper
+     step photography — nothing else needs to change. */
   process: [
-    { no: "1", icon: "fa-solid fa-comments",         name: "Consultation", desc: "We visit the site and talk through your vision, budget and needs." },
-    { no: "2", icon: "fa-solid fa-compass-drafting",  name: "Design",       desc: "A 2D &amp; 3D plan tailored to your space and how you want to use it." },
-    { no: "3", icon: "fa-solid fa-trowel-bricks",     name: "Execution",    desc: "On-time, on-budget delivery with clear communication throughout." },
-    { no: "4", icon: "fa-solid fa-heart",             name: "Aftercare",    desc: "We stay in touch to make sure you're happy with the result." }
+    { no: "1", icon: "fa-solid fa-comments",          name: "Consultation", desc: "We visit the site and talk through your vision, budget and needs.",
+      img: "assets/img/projects/north-haven.jpg",      w: 1280, h: 853, alt: "A North Haven property NextLevel Landscaping was engaged to transform" },
+    { no: "2", icon: "fa-solid fa-compass-drafting",  name: "Design",       desc: "A 2D &amp; 3D plan tailored to your space and how you want to use it.",
+      img: "assets/img/services/landscape-design.jpg", w: 1440, h: 810, alt: "A 3D landscape design render of a deck, fire pit and planting" },
+    { no: "3", icon: "fa-solid fa-trowel-bricks",     name: "Execution",    desc: "On-time, on-budget delivery with clear communication throughout.",
+      img: "assets/img/services/paving.jpg",           w: 1280, h: 853, alt: "Completed driveway paving, edging and planting at an Adelaide home" },
+    { no: "4", icon: "fa-solid fa-heart",             name: "Aftercare",    desc: "We stay in touch to make sure you're happy with the result.",
+      img: "assets/img/projects/grange.jpg",           w: 1280, h: 853, alt: "An established, maintained garden at the Grange project" }
   ],
 
   /* --- Google reviews (verbatim) --------------------------- */
@@ -232,5 +306,31 @@ window.NLL = {
     { name: "Isabella White", text: "Sincerely could not recommend more highly. Wonderful experience with this excellent team. Prompt, friendly, professional communication. Great advice and recommendations. Fair pricing and management of progress. Honest and reliable." },
     { name: "Jim Jam", text: "The whole project — travertine tiling for two gardens, new driveway paving and new plants — was well managed. We had complete trust in the various teams, and the value delivered on budget and on time. Highly recommended." },
     { name: "Bronte Nixon", text: "They worked with the challenging natural terrain and levels of our backyard to construct retaining walls, garden beds, paving, and install turf. We now have a fantastic entertaining space and couldn't be happier." }
+  ],
+
+  /* --- FAQ ---------------------------------------------------
+     Drafted from verified facts in BUSINESS.md. Anything the
+     client still has to confirm is marked `confirm: true` and
+     renders with a visible draft flag — do NOT ship those as
+     fact without sign-off. See vault: Open Questions. */
+  faqs: [
+    { q: "Do you handle council approvals?",
+      a: "Yes. Where a project needs development approval we manage the process on your behalf — as we did for our Somerton Park clients, start to finish, so it stays hassle-free for you." },
+    { q: "Will I see a design before any work starts?",
+      a: "Yes. We start with an on-site consultation to talk through your requirements, then provide a 2D &amp; 3D design so you can see exactly what your outdoor space will look like before you commit to anything." },
+    { q: "Are you licensed?",
+      a: "Yes — NextLevel Landscaping holds builders licence <b>BLD320507</b> and is a member of Master Landscapers South Australia. We are also an authorised distributor of Lawn Solutions Australia." },
+    { q: "Which areas do you service?",
+      a: "We work across metropolitan Adelaide and the Adelaide Hills. Recent projects include Grange, North Haven, Somerton Park and Klemzig.", confirm: "Confirm the full service-area suburb list with the client." },
+    { q: "Do you supply the plants and materials too?",
+      a: "We do — that is what makes us a little different. Through NextLevel Outdoors we can source pots, plants, turf, mulch, soil, edging and pebbles, so your design, build and supplies all come from one team." },
+    { q: "Do you take on commercial work?",
+      a: "Yes. Alongside residential projects, our qualified horticulturists provide commercial garden maintenance — pruning, planting, weeding and seasonal care to keep a property looking its best year-round." },
+    { q: "What does a project cost?",
+      a: "Every site is different, so we price after seeing it. Following the on-site consultation and design you receive a detailed quote covering the full scope — no guesswork and no surprises later." },
+    { q: "How long does a project take?",
+      a: "It depends on scope, site access and approvals. We give you an indicative timeline with your quote and keep you updated as the build progresses — you can even follow live jobs on our Current Work page.", confirm: "Confirm typical project durations with the client." },
+    { q: "Do you offer a workmanship guarantee?",
+      a: "", confirm: "Client has not confirmed a warranty or workmanship guarantee period. Only 1 of 19 competitors states one — stating it would be a real differentiator. Answer intentionally left blank until confirmed." }
   ]
 };

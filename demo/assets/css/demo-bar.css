@@ -1,0 +1,61 @@
+/* =============================================================
+   Demo options bar chrome. NOINDEX build only — strip this file
+   and demo-variants.css (plus their tags) for production.
+   ============================================================= */
+:root{--demo-bar-h:0px}
+
+.demo-bar{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:#0E100B;color:rgba(255,255,255,.86);
+  font:500 .74rem/1.2 var(--f);
+}
+.demo-bar__toggle{
+  display:none;width:100%;align-items:center;justify-content:space-between;gap:.8rem;
+  padding:12px var(--gutter);border:0;background:none;color:inherit;cursor:pointer;
+  font:inherit;letter-spacing:.04em;
+}
+.demo-bar__toggle i{font-size:.8rem;transition:transform .2s}
+.demo-bar.is-collapsed .demo-bar__toggle i{transform:rotate(180deg)}
+.demo-bar__panel{
+  display:flex;flex-wrap:wrap;align-items:center;gap:1.4rem 1.8rem;
+  padding:12px var(--gutter);
+}
+.demo-bar__group{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.demo-bar__group-label{
+  text-transform:uppercase;letter-spacing:.1em;font-size:.7rem;color:rgba(255,255,255,.55);white-space:nowrap;
+}
+.demo-bar__opts{display:flex;gap:.4rem;flex-wrap:wrap}
+.demo-bar__opt{
+  display:flex;align-items:center;gap:.4em;
+  padding:.4em .8em;border:1px solid rgba(255,255,255,.28);border-radius:999px;
+  background:none;color:rgba(255,255,255,.8);cursor:pointer;
+  font:500 .72rem/1 var(--f);letter-spacing:.04em;
+  transition:background .18s,border-color .18s,color .18s;
+  min-height:24px;
+}
+.demo-bar__opt:hover{border-color:rgba(255,255,255,.6);color:#fff}
+.demo-bar__opt[aria-pressed="true"]{background:#C2E807;color:#17190F;border-color:#C2E807}
+.demo-bar__opt-code{font-weight:600}
+.demo-bar__hint{
+  margin:0;margin-left:auto;color:rgba(255,255,255,.5);font-size:.72rem;font-style:italic;white-space:nowrap;
+}
+
+/* push the fixed site header down by the bar's actual (measured) height */
+[data-layout="centred"] .hdr2{top:var(--demo-bar-h,0)}
+
+@media(max-width:759px){
+  .demo-bar__toggle{display:flex}
+  .demo-bar__panel{
+    display:none;flex-direction:column;align-items:flex-start;gap:1rem;
+    padding:4px var(--gutter) 14px;
+  }
+  .demo-bar:not(.is-collapsed) .demo-bar__panel{display:flex}
+  .demo-bar.is-collapsed .demo-bar__panel{display:none}
+  .demo-bar__group{flex-direction:column;align-items:flex-start;gap:.5rem}
+  .demo-bar__hint{margin-left:0;white-space:normal}
+  .demo-bar__opt{font-size:.7rem;min-height:28px}
+}
+
+@media(min-width:760px){
+  .demo-bar__panel{display:flex !important}
+}

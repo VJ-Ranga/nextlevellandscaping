@@ -6,6 +6,12 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "8098", "--directory", "site"],
       "port": 8098
+    },
+    {
+      "name": "repo-static",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8099"],
+      "port": 8099
     }
   ]
 }

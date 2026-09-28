@@ -799,8 +799,13 @@ p:last-child{margin-bottom:0}
 /* real logo lockup */
 .brand{display:block}
 .brand img{height:44px;width:auto;display:block;filter:grayscale(1);transition:filter .3s}
-.drawer .brand img,.site-footer .brand img{height:40px}
-@media(max-width:640px){ .brand img{height:34px} }
+.drawer .brand img{height:40px}
+/* footer logo +30% (client, round 4): 40->52 */
+.site-footer .brand img{height:52px}
+@media(max-width:640px){
+  .brand img{height:34px}
+  .site-footer .brand img{height:44px}
+}
 
 /* welcome page: full-colour logo everywhere; every other page: b&w */
 .pg-home .brand img{filter:none}

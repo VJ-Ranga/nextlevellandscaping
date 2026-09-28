@@ -23,3 +23,4 @@ tags: [client, blocked]
 - [ ] Downloadable PDF/document per service (spec sheets, brochures) — requirement #13
 - [ ] **Photos for each Process step** — requirement #14. The photo-led design is now **built and live**; it currently uses real NextLevel finished-work photos standing in illustratively (none of them depicts the actual step). Ideal shots: a site consultation in progress, the crew mid-build, a handover/walk-through. Dropping them in = swapping 4 `img` values in `data.js`.
 - [ ] Portfolio reference confirmation — client sent an asymmetric-grid architecture-portfolio screenshot as style reference for Our Work / Current Work — requirement #4/#9
+- [ ] **Acknowledgement of Country wording** — draft added to demo footer options E2–E4 (2026-09-27): "NextLevel Landscaping acknowledges the Kaurna people as the Traditional Owners of the land on which we live and work, and pays respect to Elders past and present." Client to confirm wording or supply their own.

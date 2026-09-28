@@ -1,0 +1,263 @@
+/* =============================================================
+   Demo hero-variant rules, driven by attributes demo-bar.js sets
+   on <html>. NOINDEX build only — remove for production.
+   ============================================================= */
+
+/* -------------------------------------------------------------
+   Shared restructure (all A x B x D combos)
+   The shipped carousel absolutely-positions each .hero-slide
+   inset:0 inside a fixed min-height:220px track, and (in this
+   demo's B2/B3 text-only motion) the fixed CTA was absolutely
+   pinned to the track's bottom edge. Both are fixed-box
+   techniques — a long headline can run past 220px and collide
+   with whatever sits at that fixed bottom edge.
+
+   Fix: the track becomes a CSS grid stack (every .hero-slide
+   shares grid-area 1/1, in normal flow, not position:absolute)
+   so the track's height is always the tallest slide's real
+   height — stable across slides, no measuring needed. The CTA
+   button(s) become a normal sibling BELOW the track inside a new
+   .hero-car__col wrapper (flex column, gap 28px — within the
+   24-32px spec range), so headline and button always stack in
+   flow with a real gap, at every breakpoint.
+   ------------------------------------------------------------- */
+.hero-car__col{
+  flex:1;min-width:0;display:flex;flex-direction:column;
+  gap:28px;align-items:center;
+}
+.hero-car__track{
+  flex:none;width:100%;display:grid;
+  min-height:220px; /* same floor the shipped design used, so the
+    hero-car row keeps its usual vertical position (and doesn't
+    creep into the fixed-position scroll cue) for ordinary 1-2
+    line headlines; it can still grow taller than this when a
+    slide genuinely needs more room (long headline + 2 buttons) */
+  grid-template-columns:minmax(0,1fr); /* a plain "auto" column won't
+    reliably grow to fill the container - force it to, so slide/h1
+    percentage widths resolve against the real available space */
+  /* end, not center: the stack is as tall as the LONGEST headline, so
+     centring left a big gap above the buttons on 2-line slides
+     (client, 2026-09-27). Bottom-align so every headline sits the
+     same 28px above the buttons; shorter ones just start lower. */
+  align-items:end;justify-items:center;
+}
+.hero-slide{
+  grid-area:1/1;position:relative;inset:auto;width:100%;min-width:0;
+}
+/* flex cross-axis items (align-items:center, not stretch) size to
+   their own max-content width regardless of the container — with
+   a narrow track (small viewports, or D4's extra counter pill
+   eating width) that let the headline's box run past the track
+   and into the nav arrows. Cap it to the space actually
+   available so long headlines wrap onto another line instead. */
+.hero-slide h1{max-width:min(20ch,100%)}
+.hero-car__nav{
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.hero-car__nav:focus-visible{outline:2px solid #C2E807;outline-offset:3px}
+
+/* ---- A: hero text position (homepage headline carousel) ---- */
+/* centre is the shipped default: no override needed. */
+[data-hero-pos="left"] .hero-slide{align-items:flex-start;text-align:left}
+[data-hero-pos="right"] .hero-slide{align-items:flex-end;text-align:right}
+[data-hero-pos="left"] .hero-car__col{align-items:flex-start}
+[data-hero-pos="right"] .hero-car__col{align-items:flex-end}
+
+/* Bottom-anchored composition (Laguna reference) — A1/A3 only.
+   A2 centre keeps the shipped 90px reservation untouched. The
+   text+button block's horizontal edges already line up with the
+   site container/gutter (.hero-car is max-width:var(--container)
+   with padding:0 var(--gutter) — shipped, unchanged); this just
+   pulls the whole block down closer to the hero's bottom edge so
+   it reads as one composed band with the cue (whose own fixed
+   bottom:120px sits inside this same range). */
+@media(min-width:641px){
+  [data-hero-pos="left"] .hero-car,
+  [data-hero-pos="right"] .hero-car{
+    padding-bottom:clamp(56px,10vh,120px);
+  }
+}
+
+/* ---- Laguna-style arrow placement for A1/A3 (desktop only) --
+   JS (demo-bar.js: layoutHeroArrows) measures the active slide's
+   headline and switches prev/next (and the D4 counter) to
+   position:absolute, pinned to the vertical centre of the
+   headline's LAST line. The arrow on the text's own side sits
+   just beside that line; the other sits at the far edge, at the
+   same inset the scroll cue uses (so it reads as sitting "above
+   the cue"). Below 641px this is skipped entirely (JS clears the
+   inline styles) and the shipped flex-row arrows are used instead
+   — simpler and already verified clean at those sizes. */
+@media(min-width:641px){
+  [data-hero-pos="left"] .hero-car__nav,
+  [data-hero-pos="right"] .hero-car__nav{
+    transition:top .3s var(--ease,ease),left .3s var(--ease,ease),right .3s var(--ease,ease),
+      background .18s,border-color .18s,color .18s,opacity .18s;
+  }
+  [data-hero-arrows="counter"][data-hero-pos="left"] .hero-car__count,
+  [data-hero-arrows="counter"][data-hero-pos="right"] .hero-car__count{
+    transition:top .3s var(--ease,ease),left .3s var(--ease,ease),right .3s var(--ease,ease);
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  [data-hero-pos="left"] .hero-car__nav,
+  [data-hero-pos="right"] .hero-car__nav,
+  [data-hero-arrows="counter"][data-hero-pos="left"] .hero-car__count,
+  [data-hero-arrows="counter"][data-hero-pos="right"] .hero-car__count{
+    transition:none;
+  }
+}
+
+/* scroll cue keeps its shipped design (vertical "SCROLL DOWN" +
+   animated line + arrowhead) completely unchanged — only its
+   LEFT/RIGHT position moves, always to the side OPPOSITE the
+   text block (Laguna Pools reference: text right -> cue left).
+   A2 centre keeps the shipped left:38px, untouched. */
+[data-hero-pos="left"] .hero-scroll{left:auto;right:38px}
+[data-hero-pos="right"] .hero-scroll{left:38px;right:auto}
+
+/* pre-existing shipped-layout gap, surfaced by the verification
+   sweep: .hero-car only gets its centring margin once the
+   viewport clears its 1200px max-width by enough to also clear
+   the cue's fixed 38px offset (roughly >=1270px). Below that,
+   down to the 992px breakpoint where nav/cue already shrink or
+   hide, the nav sits close enough to the left (or, mirrored,
+   right) edge to collide with the cue. Nudge the cue clear of it
+   in just that band; unaffected outside it. */
+@media (min-width:993px) and (max-width:1270px){
+  [data-layout="centred"] .hero-scroll{left:112px}
+  [data-hero-pos="right"] .hero-scroll{left:112px;right:auto}
+  [data-hero-pos="left"] .hero-scroll{right:112px;left:auto}
+}
+
+/* nav-arrow order: prev is ALWAYS on the left (pointing left) and
+   next ALWAYS on the right (pointing right), in every A position.
+   An earlier A1 "mirror" swap put next on the left, which read as
+   arrows pointing the wrong way (client, 2026-09-27). */
+
+/* ---- B: hero motion ----------------------------------------
+   B1 slide (default): unchanged — the whole slide (headline +
+   its own CTA) fades/slides together, exactly as shipped.
+   B2 text-1 / B3 text-2: only the headline moves; the CTA(s)
+   are lifted out of the sliding element (see demo-bar.js
+   restructureHero) into a standalone .hero-cta-static that
+   never fades, and sits in normal flow below the track. */
+.hero-cta-static{display:none;flex-wrap:wrap;gap:14px;justify-content:center}
+/* on narrow widths the two B3 buttons wrap onto separate lines;
+   flex-wrap's default per-line packing is flex-start (left),
+   which left-aligned every row regardless of A's position -
+   breaking the "same edge as the headline" alignment for A1/A3.
+   Match justify-content to the same edge the headline uses. */
+[data-hero-pos="left"] .hero-cta-static{justify-content:flex-start}
+[data-hero-pos="right"] .hero-cta-static{justify-content:flex-end}
+[data-hero-motion="text-1"] .hero-slide .btn-ghost,
+[data-hero-motion="text-2"] .hero-slide .btn-ghost{display:none}
+[data-hero-motion="text-1"] .hero-cta-static,
+[data-hero-motion="text-2"] .hero-cta-static{display:flex}
+/* B2 (text-1) shows the primary "Get a free quote" button only */
+[data-hero-motion="text-1"] .hero-cta-static__secondary{display:none}
+/* B3 (text-2) shows both — Style Guide allows only one FILLED
+   button, so the second ("View our work") is ghost/outline,
+   never a second fill. The hero sits on dark video, not a
+   .band--dark section, so give the outline button white
+   border/text explicitly (same --c override .band--dark uses)
+   and flip its hover text dark so it stays readable against
+   the white hover-fill. */
+.hero-cta-static__secondary{--c:#fff}
+.hero-cta-static__secondary:hover{color:#17190F}
+
+/* ---- C: overlay ----------------------------------------------
+   normal (default): unchanged.
+   dark: +~20-25% scrim on sub-page photo heroes only (round 3:
+   the options bar now hides group C on the homepage entirely —
+   A/B/D only affect that hero — so C2 no longer touches
+   .hero__overlay/.hero__media at all). Text contrast stays
+   >=4.5:1 against the near-black ink already used for headings
+   on these bands. */
+html[data-theme="carbon-soft-v2"][data-overlay="dark"] .subhero--photo .subhero__media::after{
+  background:linear-gradient(to top, rgba(23,25,15,.95) 0%, rgba(23,25,15,.75) 45%, rgba(23,25,15,.55) 100%);
+}
+
+/* ---- D: slide arrows (prev/next of the hero carousel) ------ */
+/* D1 circle: shipped default (46px circle, border, icon) — no
+   override needed. */
+
+/* D2 bare chevron — Laguna style: no circle, just the glyph,
+   generous invisible padding keeps the tap target >=24px. */
+[data-hero-arrows="bare"] .hero-car__nav{
+  width:auto;height:auto;min-width:24px;min-height:24px;
+  border:0;background:none;border-radius:0;
+  padding:13px 15px;font-size:1.05rem;
+}
+[data-hero-arrows="bare"] .hero-car__nav:hover{background:none;opacity:.65}
+
+/* D3 long thin line arrow — hairline shaft + small chevron head,
+   drawn with plain CSS (border-trick), not an icon-font glyph
+   (the fa- chevron reads clumsy stretched this thin). */
+[data-hero-arrows="line"] .hero-car__nav{
+  width:64px;height:44px;min-width:24px;min-height:24px;
+  border:0;background:none;border-radius:0;position:relative;padding:0;
+}
+[data-hero-arrows="line"] .hero-car__nav i{display:none}
+[data-hero-arrows="line"] .hero-car__nav::before{
+  content:"";position:absolute;top:50%;height:1px;background:currentColor;
+  opacity:.75;transform:translateY(-50%);transition:opacity .2s;
+}
+[data-hero-arrows="line"] .hero-car__nav::after{
+  content:"";position:absolute;top:50%;width:8px;height:8px;
+  border-top:1px solid currentColor;border-right:1px solid currentColor;
+  transform:translateY(-50%) rotate(45deg);transition:opacity .2s;
+}
+[data-hero-arrows="line"] .hero-car__prev::before{left:18px;right:12px}
+[data-hero-arrows="line"] .hero-car__prev::after{left:12px;transform:translateY(-50%) rotate(-135deg)}
+[data-hero-arrows="line"] .hero-car__next::before{left:12px;right:18px}
+[data-hero-arrows="line"] .hero-car__next::after{right:12px;transform:translateY(-50%) rotate(45deg)}
+[data-hero-arrows="line"] .hero-car__nav:hover::before,
+[data-hero-arrows="line"] .hero-car__nav:hover::after{opacity:1}
+
+/* D4 creative pick — a slide counter ("01 / 03") next to small
+   bare chevrons. Chosen because it fits the Carbon style's quiet
+   numeric details (see .proc__num / .cw-card__meta elsewhere on
+   the site) and gives the client an explicit progress read
+   instead of just directional arrows. */
+[data-hero-arrows="counter"] .hero-car__nav{
+  width:auto;height:auto;min-width:24px;min-height:24px;
+  border:0;background:none;border-radius:0;padding:11px;font-size:.8rem;
+}
+[data-hero-arrows="counter"] .hero-car__nav:hover{background:none;opacity:.65}
+.hero-car__count{display:none}
+[data-hero-arrows="counter"] .hero-car__count{
+  display:inline-flex;align-items:center;flex:none;order:3;margin-left:4px;
+  font:500 .74rem/1 var(--f);letter-spacing:.08em;color:currentColor;opacity:.85;
+  padding:.35em .9em;border:1px solid currentColor;border-radius:999px;
+  white-space:nowrap;
+}
+/* the counter always sits beside "Next" - for A1 the nav order is
+   swapped (Next moves to the left edge, beside the cue-opposite
+   headline start), so the counter has to swap with it too, or it
+   ends up stacked on the right edge on top of the scroll cue
+   (which A1 also moved to the right). */
+[data-hero-pos="left"][data-hero-arrows="counter"] .hero-car__count{
+  order:-1;margin-left:0;margin-right:4px;
+}
+
+/* D3/D4 footprint at <=992px: the shipped nav already shrinks to
+   38x38 here (see main style.css); D3's fixed 64px shaft and D4's
+   padding+pill were wider than that, squeezing the track and
+   overlapping the headline. Shrink them to match. */
+@media(max-width:992px){
+  [data-hero-arrows="line"] .hero-car__nav{width:40px;height:38px}
+  [data-hero-arrows="line"] .hero-car__prev::before{left:11px;right:9px}
+  [data-hero-arrows="line"] .hero-car__prev::after{left:9px}
+  [data-hero-arrows="line"] .hero-car__next::before{left:9px;right:11px}
+  [data-hero-arrows="line"] .hero-car__next::after{right:9px}
+  [data-hero-arrows="counter"] .hero-car__nav{padding:8px;font-size:.74rem}
+  [data-hero-arrows="counter"] .hero-car__count{
+    font-size:.66rem;padding:.3em .6em;margin-left:0;
+  }
+}
+@media(max-width:480px){
+  [data-hero-arrows="line"] .hero-car__nav{width:30px}
+  [data-hero-arrows="counter"] .hero-car__nav{padding:6px;font-size:.68rem}
+  [data-hero-arrows="counter"] .hero-car__count{padding:.28em .5em;font-size:.6rem}
+}

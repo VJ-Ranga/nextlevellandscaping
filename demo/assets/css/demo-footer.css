@@ -1,0 +1,77 @@
+/* =============================================================
+   Demo footer options (round 5, group E). NOINDEX build only —
+   remove for production. Carbon palette only: night ground
+   (--surface-dark-2, already the shipped footer background),
+   off-white text, lime (--accent) as fill/marks only, no shadows,
+   Poppins (inherited), ALL-CAPS weight-400 headings (h4 already
+   400 site-wide), pill badges (hairline border, no fill).
+   ============================================================= */
+
+/* ---- bigger brand-column logo (E2-E4 only; E1 is untouched) --
+   higher specificity than the shipped ".site-footer .brand img"
+   (2 classes), which otherwise wins over a single-class override
+   regardless of stylesheet order. */
+.site-footer .brand.ftr5__logo img{height:108px}
+@media(max-width:640px){
+  .ftr5__logo{margin-bottom:4px}
+  .site-footer .brand.ftr5__logo img{height:72px}
+}
+
+/* long email/company strings shouldn't be able to push the page
+   wide in the new, narrower credential rows */
+.ftr5,
+.ftr5__credline,
+.ftr5__badges,
+.ftr5__split{overflow-wrap:anywhere}
+
+/* ---- shared ack line (E2-E4) ---------------------------------- */
+.ftr-ack{
+  font-size:.8rem;line-height:1.6;color:var(--muted-dark);max-width:70ch;
+  margin:24px 0 0;padding-top:20px;border-top:1px solid var(--line-dark);
+}
+@media(max-width:640px){
+  .ftr-ack{margin-top:16px;padding-top:14px}
+}
+
+/* ---- E2: one centred credential line -------------------------- */
+.ftr5__credline{
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;
+  gap:.4rem .7rem;margin-top:32px;padding:20px 0;
+  border-top:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark);
+  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-dark);
+}
+.ftr5__credline span:not(.ftr5__sep){white-space:nowrap}
+.ftr5__sep{opacity:.55}
+@media(max-width:640px){
+  .ftr5__credline{margin-top:20px;padding:14px 0}
+}
+
+/* ---- E3: trust badges ------------------------------------------ */
+.ftr5__badges{
+  display:flex;flex-wrap:wrap;gap:.6rem .8rem;margin-top:32px;padding:20px 0;
+  border-top:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark);
+}
+.ftr-badge{
+  display:inline-flex;align-items:center;gap:.55em;
+  padding:.5em 1em;border:1px solid rgba(255,255,255,.28);border-radius:999px;
+  background:none;box-shadow:none;
+  font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;
+  color:rgba(255,255,255,.86);min-height:24px;
+}
+.ftr-badge img{height:18px;width:auto;display:block}
+@media(max-width:640px){
+  .ftr5__badges{margin-top:20px;padding:14px 0}
+}
+
+/* ---- E4: split row ---------------------------------------------- */
+.ftr5__split{
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;
+  gap:.6rem 1.4rem;margin-top:32px;padding:20px 0;
+  border-top:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark);
+  font-size:.78rem;letter-spacing:.04em;color:var(--muted-dark);
+}
+.ftr5__split-r{display:inline-flex;align-items:center;gap:.55em}
+.ftr5__split-r img{height:18px;width:auto;display:block}
+@media(max-width:640px){
+  .ftr5__split{flex-direction:column;align-items:flex-start;margin-top:20px;padding:14px 0;gap:.4rem}
+}
