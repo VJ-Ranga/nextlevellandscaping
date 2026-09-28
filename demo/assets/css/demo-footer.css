@@ -1,0 +1,102 @@
+/* =============================================================
+   Demo footer options (round 5, group E). NOINDEX build only —
+   remove for production. Carbon palette only: night ground
+   (--surface-dark-2, already the shipped footer background),
+   off-white text, lime (--accent) as fill/marks only, no shadows,
+   Poppins (inherited), ALL-CAPS weight-400 headings (h4 already
+   400 site-wide), pill badges (hairline border, no fill).
+   ============================================================= */
+
+/* ---- bigger brand-column logo (E2-E4) --------------------------
+   higher specificity than the shipped ".site-footer .brand img"
+   (2 classes), which otherwise wins over a single-class override
+   regardless of stylesheet order. */
+.site-footer .brand.ftr5__logo img{height:108px}
+@media(max-width:640px){
+  .ftr5__logo{margin-bottom:4px}
+  .site-footer .brand.ftr5__logo img{height:72px}
+}
+
+/* E1 uses same footer logo size as E2-E4. */
+.site-footer.is-e1 .brand img{height:108px}
+@media(max-width:640px){
+  .site-footer.is-e1 .brand img{height:72px}
+}
+.site-footer.is-e2 .footer-bar{margin-top:24px}
+.site-footer.is-e3 .footer-bar,
+.site-footer.is-e4 .footer-bar,
+.site-footer.is-e5 .footer-bar{margin-top:24px}
+.site-footer.is-e5{position:relative;overflow:hidden}
+.site-footer.is-e5 > .container{position:relative;z-index:1}
+
+.demo-footer-dock{
+  width:100%;display:flex;justify-content:center;
+  padding:10px var(--gutter);background:#0E100B;color:rgba(255,255,255,.86);
+  font:500 .74rem/1.2 var(--f);
+}
+.demo-footer-choices{
+  display:flex;align-items:center;flex-wrap:wrap;gap:.4rem .6rem;
+  width:100%;max-width:1200px;
+}
+.demo-footer-choices__label{
+  margin-right:.3rem;color:rgba(255,255,255,.55);
+  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+}
+.demo-footer-choice{
+  min-height:24px;padding:.4em .8em;border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;background:none;color:rgba(255,255,255,.8);cursor:pointer;
+  font:500 .72rem/1 var(--f);letter-spacing:.04em;
+}
+.demo-footer-choice:hover{border-color:rgba(255,255,255,.6);color:#fff}
+.demo-footer-choice[aria-pressed="true"]{background:#C2E807;color:#17190F;border-color:#C2E807}
+
+/* long email/company strings shouldn't be able to push the page
+   wide in the new, narrower credential rows */
+.ftr5,
+.ftr5__credline,
+.ftr5__badges,
+.ftr5__split{overflow-wrap:anywhere}
+
+/* ---- E2: one centred credential line -------------------------- */
+.ftr5__credline{
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;
+  gap:.4rem .7rem;margin-top:32px;padding:20px 0;
+  border-top:0;border-bottom:0;
+  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-dark);
+}
+.ftr5__credline span:not(.ftr5__sep){white-space:nowrap}
+.ftr5__sep{opacity:.55}
+.ftr5__credline--plain{border-top:0;border-bottom:0}
+@media(max-width:640px){
+  .ftr5__credline{margin-top:20px;padding:14px 0}
+}
+
+/* ---- E3: trust badges ------------------------------------------ */
+.ftr5__badges{
+  display:flex;justify-content:space-between;gap:1rem;margin-top:32px;padding:20px 0;
+  border-top:0;border-bottom:0;
+}
+.ftr5__badge-group{display:flex;flex-wrap:wrap;gap:.6rem .8rem}
+.ftr-badge{
+  display:inline-flex;align-items:center;gap:.55em;
+  padding:.5em 1em;border:1px solid rgba(255,255,255,.28);border-radius:999px;
+  background:none;box-shadow:none;
+  font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;
+  color:rgba(255,255,255,.86);min-height:24px;
+}
+.ftr-badge img{height:18px;width:auto;display:block}
+@media(max-width:640px){
+  .ftr5__badges{margin-top:20px;padding:14px 0}
+  .ftr5__badges{flex-direction:column;align-items:flex-start}
+}
+
+/* ---- E4: split row ---------------------------------------------- */
+.ftr5__split{
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.6rem 1.4rem;
+  margin-top:32px;padding:20px 0 0;
+  font-size:.78rem;letter-spacing:.04em;color:var(--muted-dark);
+}
+.ftr5__split > span{padding:0}
+@media(max-width:640px){
+  .ftr5__split{flex-direction:column;align-items:flex-start;margin-top:20px;padding:14px 0 0;gap:1rem}
+}
