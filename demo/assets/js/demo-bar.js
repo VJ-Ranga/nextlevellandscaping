@@ -365,16 +365,10 @@
     allSlides.forEach(function (s) { s.style.transition = ""; s.style.transform = ""; });
     void heroCar.offsetHeight; // flush back to the live (possibly still-animating) state
 
-    // far arrow (and the D4 counter, grouped with it — plenty of
-    // open room on that side, none beside the text) sit at the
-    // same inset the scroll cue uses, so all three read as one
-    // band. Near arrow sits at the container's own gutter inset —
-    // its shipped position — with the headline given matching
-    // padding on that side (above) so it can never grow into it,
-    // whatever the slide's word count.
+    // Both arrows share headline's last-line baseline. Near arrow
+    // stays beside text; far arrow moves down to same baseline.
     var EDGE = 24; // matches --gutter
     var cue = document.querySelector(".hero-scroll");
-    var cueVisible = cue && getComputedStyle(cue).display !== "none";
     var farInset = 96;
     if (cue) {
       var cueCS = getComputedStyle(cue);
@@ -382,20 +376,7 @@
       var parsed = parseFloat(raw);
       if (!isNaN(parsed)) farInset = parsed;
     }
-    // Below ~1270px the cue's own vertical footprint (its "SCROLL
-    // DOWN" label + line + arrowhead run ~190px tall) can overlap
-    // the headline's last-line height entirely, so the far arrow
-    // can't safely share the near arrow's exact Y there without
-    // risking sitting on top of the cue. Where the cue is visible,
-    // pin the far arrow just above the cue's own (live-measured)
-    // top edge instead — literally "above the scroll cue". Where
-    // the cue is hidden (<=992px), there's nothing to clash with,
-    // so it keeps the near arrow's Y (the "same line" reading).
     var farTop = topPx;
-    if (cueVisible) {
-      var cueRect = cue.getBoundingClientRect();
-      farTop = cueRect.top - carRect.top - navH - 12;
-    }
 
     function place(el, side, value, top) {
       el.style.position = "absolute";
@@ -411,19 +392,14 @@
     }
 
     if (pos === "right") {
-      // text hugs the right edge: next (near, already points
-      // right) sits at the shipped gutter inset, level with the
-      // headline's last line; prev (far, points left) sits at the
-      // cue's own inset, just above it
+      // Text hugs right edge: next stays near text; prev stays far
+      // left, both aligned to headline's last line.
       place(next, "right", EDGE, topPx);
       place(prev, "left", farInset, farTop);
       if (count) place(count, "left", farInset + navW + 10, farCountTop);
     } else {
-      // pos === "left": prev (near, already points left) sits at
-      // the shipped gutter inset, level with the headline's last
-      // line; next (far, points right) sits at the cue's own
-      // inset, just above it — mirrors Laguna without flipping
-      // either arrow's direction
+      // pos === "left": prev stays near text; next stays far right,
+      // both aligned to headline's last line.
       place(prev, "left", EDGE, topPx);
       place(next, "right", farInset, farTop);
       if (count) place(count, "right", farInset + navW + 10, farCountTop);
