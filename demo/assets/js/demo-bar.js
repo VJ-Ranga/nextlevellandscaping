@@ -87,19 +87,8 @@
     ]
   };
 
-  var GROUP_E = {
-    code: "E", label: "Footer", key: "footer", storeKey: null,
-    opts: [
-      { code: "E1", val: "e1", label: "Current" },
-      { code: "E2", val: "e2", label: "One line" },
-      { code: "E3", val: "e3", label: "Badges" },
-      { code: "E4", val: "e4", label: "Split row" }
-    ]
-  };
-
   /* A/B/D only ever touch the homepage hero (#hero-car-track);
-     C (overlay) only touches sub-page photo heroes (round 3). E
-     (footer) is on every page, so it's appended to both lists.
+      C (overlay) only touches sub-page photo heroes (round 3).
      Detected structurally (no #hero-car-track means "not the
      homepage"), not by page filename. */
   // NOTE: computed lazily inside buildBar(), not here — this file
@@ -123,8 +112,8 @@
 
   function buildBar() {
     var isHome = !!document.getElementById("hero-car-track");
-    GROUPS = isHome ? [GROUP_A, GROUP_B, GROUP_D, GROUP_E] : [GROUP_C, GROUP_E];
-    HINT_TEXT = isHome ? "Tell us your pick, e.g. A1 + B2 + D2 + E1" : "Tell us your pick, e.g. C2 + E1";
+    GROUPS = isHome ? [GROUP_A, GROUP_B, GROUP_D] : [GROUP_C];
+    HINT_TEXT = isHome ? "Tell us your pick, e.g. A1 + B2 + D2" : "Tell us your pick, e.g. C2";
 
     var bar = document.createElement("div");
     bar.className = "demo-bar";
