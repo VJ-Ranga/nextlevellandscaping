@@ -1457,3 +1457,25 @@ html[data-theme="carbon-soft-v2"] .msel__btn:hover{border-color:var(--v2-ink)}
   width:18px;height:18px;flex:none;margin:0;padding:0;border-radius:3px;accent-color:#3E4A16;cursor:pointer;
 }
 .field .msel__opt:focus-within{outline:2px solid var(--accent);outline-offset:-2px}
+
+/* =============================================================
+   Footer — option E5 "Contour footer" (client pick, 2026-10-13).
+   Larger brand logo, contour lines behind the content, and a
+   credentials row (company / ABN · licence / MLSA) between the
+   link columns and the bottom bar.
+   ============================================================= */
+.site-footer .brand.ftr5__logo img{height:108px}
+.site-footer.is-e5{position:relative;overflow:hidden}
+.site-footer.is-e5 > .container{position:relative;z-index:1}
+.site-footer.is-e5 .footer-bar{margin-top:24px}
+.ftr5,.ftr5__split{overflow-wrap:anywhere}
+.ftr5__split{
+  display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.6rem 1.4rem;
+  margin-top:32px;padding:20px 0 0;
+  font-size:.78rem;letter-spacing:.04em;color:var(--muted-dark);
+}
+@media(max-width:640px){
+  .ftr5__logo{margin-bottom:4px}
+  .site-footer .brand.ftr5__logo img{height:72px}
+  .ftr5__split{flex-direction:column;align-items:flex-start;margin-top:20px;padding:14px 0 0;gap:1rem}
+}

@@ -79,11 +79,14 @@
     '</div>';
 
   var footer =
-    '<footer class="site-footer site-footer--scoop">' +
+    /* Footer = option E5 "Contour footer" (client pick, 2026-10-13): larger
+       logo, contour lines behind, and the company / licence lines moved out
+       of the contact column into their own row above the bottom bar. */
+    '<footer class="site-footer site-footer--scoop is-e5 contour">' +
       '<div class="container">' +
-        '<div class="footer-grid">' +
+        '<div class="footer-grid ftr5">' +
           '<div class="footer-brand">' +
-            '<span class="brand"><img src="assets/img/brand/logo.png" alt="NextLevel Landscaping"></span>' +
+            '<span class="brand ftr5__logo"><img src="assets/img/brand/logo.png" alt="NextLevel Landscaping"></span>' +
             '<p>A proudly South Australian owned and operated landscaping business. Design, construction and garden supplies.</p>' +
           '</div>' +
           '<div><h4>EXPLORE</h4><ul>' +
@@ -102,9 +105,11 @@
             '<li>1/41 Woodlands Terrace, Edwardstown SA 5039</li>' +
             '<li><a href="tel:+61404440222">0404 440 222</a></li>' +
             '<li><a href="mailto:info@nextlevellandscaping.com.au">info@nextlevellandscaping.com.au</a></li>' +
-            '<li>Adelaide Express Services Pty Ltd &bull; ABN 15 642 563 513</li>' +
-            '<li>Builders Licence BLD320507 &bull; MLSA member</li>' +
           '</ul></div>' +
+        '</div>' +
+        '<div class="ftr5__split">' +
+          '<span>Adelaide Express Services Pty Ltd &bull; ABN 15 642 563 513</span>' +
+          '<span>Builders Licence BLD320507 &bull; MLSA member</span>' +
         '</div>' +
         '<div class="footer-bar">' +
           '<span>&copy; <span id="year">2026</span> NextLevel Landscaping. Demo design by Cloudycode.</span>' +
