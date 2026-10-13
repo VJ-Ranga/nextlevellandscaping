@@ -1349,22 +1349,25 @@ html[data-theme="carbon-soft-v2"] .svc:nth-child(even) .svc__media .media{
 
 /* 13. One arrowhead everywhere: carousel + photo-strip controls
    use the same bare thin chevron as the hero arrows (no circle). */
-html[data-theme="carbon-soft-v2"] .swiper-controls{gap:.4rem;margin-left:-.75rem}
+html[data-theme="carbon-soft-v2"] .swiper-controls{gap:.5rem;margin-left:-.6rem}
 html[data-theme="carbon-soft-v2"] .swiper-controls button{
-  width:auto;height:auto;min-width:44px;min-height:44px;padding:.5rem .75rem;
-  border:0;border-radius:0;background:none;font-size:1.15rem;
-  transition:opacity .2s,color .2s;
+  width:46px;height:46px;padding:0;
+  border:0;border-radius:999px;background:none;font-size:1.15rem;
+  transition:background-color .25s,color .25s;
 }
-html[data-theme="carbon-soft-v2"] .swiper-controls button:hover{background:none;color:#C2E807}
-html[data-theme="carbon-soft-v2"] .band:not(.band--dark) .swiper-controls button:hover{color:var(--v2-lime-ink);opacity:.7}
+/* hover = the ghost button's hover: a full light box behind a dark
+   chevron (dark box / light chevron on light bands) */
+html[data-theme="carbon-soft-v2"] .swiper-controls button:hover{background:#F2F2EC;color:#17190F}
+html[data-theme="carbon-soft-v2"] .band:not(.band--dark) .swiper-controls button:hover{background:var(--v2-ink);color:#F2F2EC}
 html[data-theme="carbon-soft-v2"] .swiper-controls button:focus-visible,
 html[data-theme="carbon-soft-v2"] .strip__nav:focus-visible{outline:2px solid #C2E807;outline-offset:2px}
 /* over photos: bare white chevron, shadow keeps it readable on any image */
 html[data-theme="carbon-soft-v2"] .strip__nav{
-  width:56px;height:56px;border:0;border-radius:0;background:none;box-shadow:none;
+  width:56px;height:56px;border:0;border-radius:999px;background:none;box-shadow:none;
   color:#fff;font-size:1.7rem;filter:drop-shadow(0 2px 10px rgba(0,0,0,.65));
+  transition:background-color .25s,color .25s,filter .25s;
 }
-html[data-theme="carbon-soft-v2"] .strip__nav:hover{background:none;color:#C2E807;border-color:transparent}
+html[data-theme="carbon-soft-v2"] .strip__nav:hover{background:#F2F2EC;color:#17190F;border-color:transparent;filter:none;transform:translateY(-50%)}
 @media(max-width:640px){
   html[data-theme="carbon-soft-v2"] .strip__nav{width:44px;height:44px;font-size:1.35rem}
 }
