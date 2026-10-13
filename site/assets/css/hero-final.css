@@ -22,6 +22,9 @@
   align-items:flex-end;text-align:right;
 }
 .hero-slide h1{max-width:min(20ch,100%)}
+/* slides hold only the headline now (buttons are static), so they
+   never need to catch the pointer */
+[data-layout="centred"] .hero-slide,[data-layout="centred"] .hero-slide.is-on{pointer-events:none}
 
 /* B2: only the headline moves — per-slide buttons are hidden and
    one static "Get a free quote" button sits under the track. */
@@ -40,7 +43,11 @@
 }
 
 /* D2: bare chevrons — no circle, generous invisible tap padding. */
+/* z-index: the arrows must sit ABOVE the headline track — each
+   slide is a full-width block, and it was covering the previous
+   arrow, swallowing its clicks and hover. */
 html[data-theme] .hero-car__nav{
+  position:relative;z-index:3;
   display:inline-flex;align-items:center;justify-content:center;
   width:auto;height:auto;min-width:24px;min-height:24px;
   border:0;background:none;border-radius:0;
