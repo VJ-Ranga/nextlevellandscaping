@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1791872900">
+<link rel="stylesheet" href="assets/css/style.css?v=1791874800">
 <link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1791871600">
 <link rel="stylesheet" href="assets/css/hero-final.css?v=4">
 <link rel="stylesheet" href="assets/css/demo-bar.css?v=15">
@@ -185,7 +185,7 @@
         <div class="svc-left">
           <div class="section-head">
             <span class="eyebrow">What we do</span>
-            <h2>One team for the whole garden</h2>
+            <h2 class="sr-only">Our services</h2>
             <p class="lead">From initial design all the way through to complete implementation at affordable rates — NextLevel Landscaping does it all.</p>
           </div>
           <ul class="svc-list" id="svc-list"></ul>
@@ -210,8 +210,8 @@
         <div class="swiper-wrapper" id="projects-track"></div>
       </div>
       <div class="swiper-controls">
-        <button id="proj-prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
-        <button id="proj-next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
+        <button id="proj-prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+        <button id="proj-next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
       <p style="margin-top:2.5rem" class="reveal"><a class="btn-ghost" href="our-work.html">View all projects</a></p>
     </div>
@@ -241,8 +241,8 @@
         <div class="swiper-wrapper" id="reviews-track"></div>
       </div>
       <div class="swiper-controls">
-        <button id="rev-prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
-        <button id="rev-next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
+        <button id="rev-prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+        <button id="rev-next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
     </div>
   </section>
@@ -262,8 +262,8 @@
   <!-- ===== Image strip — quiet full-bleed photo band before contact ===== -->
   <div class="strip-band" id="project-strip">
     <div class="swiper strip" id="strip"><div class="swiper-wrapper" id="strip-track"></div></div>
-    <button class="strip__nav strip__prev" id="strip-prev" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
-    <button class="strip__nav strip__next" id="strip-next" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
+    <button class="strip__nav strip__prev" id="strip-prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="strip__nav strip__next" id="strip-next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
   </div>
 
   <!-- ===== Contact ===== -->
@@ -307,6 +307,21 @@
               <option>&gt;$100,000</option>
             </select>
             <span class="msg">Please select a budget range.</span>
+          </div>
+          <!-- Services: optional multi-select (client Stage 02 V2). Real checkboxes inside a disclosure panel. -->
+          <div class="field field--multi" data-msel>
+            <span class="field__label" id="f-services-label">Services</span>
+            <button type="button" class="msel__btn" id="f-services-btn" aria-expanded="false" aria-controls="f-services-panel" aria-labelledby="f-services-label f-services-btn"><span class="msel__value" data-placeholder="Select services">Select services</span></button>
+            <div class="msel__panel" id="f-services-panel" role="group" aria-labelledby="f-services-label" hidden>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Landscape Design"><span>Landscape Design</span></label>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Paving"><span>Paving</span></label>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Retaining Wall"><span>Retaining Wall</span></label>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Fencing"><span>Fencing</span></label>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Artificial Grass"><span>Artificial Grass</span></label>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Natural Grass"><span>Natural Grass</span></label>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Irrigation"><span>Irrigation</span></label>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Commercial Maintenance"><span>Commercial Maintenance</span></label>
+            </div>
           </div>
           <div class="field">
             <label for="f-msg">Description</label>
@@ -396,7 +411,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="assets/data.js?v=1791872300"></script>
-<script src="assets/js/main.js?v=1790200030"></script>
+<script src="assets/js/main.js?v=1791874800"></script>
 <script src="assets/js/hero.js?v=2"></script>
 </body>
 </html>

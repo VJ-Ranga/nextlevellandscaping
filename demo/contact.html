@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1791872900">
+<link rel="stylesheet" href="assets/css/style.css?v=1791874800">
 <link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1791871600">
 <link rel="stylesheet" href="assets/css/demo-bar.css?v=15">
 <link rel="stylesheet" href="assets/css/demo-variants.css?v=16">
@@ -91,6 +91,21 @@
             </select>
             <span class="msg">Please select a budget range.</span>
           </div>
+          <!-- Services: optional multi-select (client Stage 02 V2). Real checkboxes inside a disclosure panel. -->
+          <div class="field field--multi" data-msel>
+            <span class="field__label" id="f-services-label">Services</span>
+            <button type="button" class="msel__btn" id="f-services-btn" aria-expanded="false" aria-controls="f-services-panel" aria-labelledby="f-services-label f-services-btn"><span class="msel__value" data-placeholder="Select services">Select services</span></button>
+            <div class="msel__panel" id="f-services-panel" role="group" aria-labelledby="f-services-label" hidden>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Landscape Design"><span>Landscape Design</span></label>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Paving"><span>Paving</span></label>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Retaining Wall"><span>Retaining Wall</span></label>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Fencing"><span>Fencing</span></label>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Artificial Grass"><span>Artificial Grass</span></label>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Natural Grass"><span>Natural Grass</span></label>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Irrigation"><span>Irrigation</span></label>
+              <label class="msel__opt"><input type="checkbox" name="services[]" value="Commercial Maintenance"><span>Commercial Maintenance</span></label>
+            </div>
+          </div>
           <div class="field">
             <label for="f-msg">Description</label>
             <textarea id="f-msg" name="message"></textarea>
@@ -161,7 +176,7 @@
 <div id="site-footer-slot"></div>
 <script src="assets/js/partials.js?v=1791871000"></script>
 <script src="assets/data.js?v=1791872300"></script>
-<script src="assets/js/main.js?v=1790200030"></script>
+<script src="assets/js/main.js?v=1791874800"></script>
 <script>document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});</script>
 </body>
 </html>
