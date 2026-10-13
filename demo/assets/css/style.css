@@ -1312,3 +1312,21 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 }
 .hdr2__util-right a.hdr2__social i{font-size:.9rem;line-height:1}
 .hdr2__util-right a.hdr2__social:hover{color:#C2E807;border-color:#C2E807}
+
+/* =============================================================
+   Service tags as plain text separated by pipes — no pill border
+   (client Stage 02 V2, item 8: "these look like buttons").
+   ============================================================= */
+.chips{gap:.35rem 0}
+.chips li{border:0;border-radius:0;padding:0;font-size:.8rem;letter-spacing:.06em}
+/* trailing (not leading) pipe, so a wrapped line never starts with one */
+.chips li:not(:last-child)::after{content:"|";margin:0 .75em;opacity:.5}
+
+/* Homepage services image — the site's single oversized curved
+   corner, top-right (client Stage 02 V2, item 9). */
+html[data-theme="carbon-soft-v2"] #services .svc-figure{border-radius:0 clamp(72px,12vw,170px) 0 0}
+
+/* Service page actions — quote button + guide download (item 10) */
+.svc-actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem}
+.svc-download{display:inline-flex;align-items:center;gap:.6em}
+.svc-download[hidden]{display:none}
