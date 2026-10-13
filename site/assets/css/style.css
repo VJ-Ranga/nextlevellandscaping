@@ -1283,18 +1283,16 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 
 /* =============================================================
    Header type sizes (client Stage 02 V2, item 3).
-   Main nav ("area 1") up a step; top utility row ("area 2")
-   raised to the size the main nav used to be (17px), as the
-   client asked. Steps down between 993–1200px so the utility
-   links never run into the centred logo.
+   Main nav ("area 1") 17px -> 18px; top utility row ("area 2")
+   12.8px -> 14.5px. The utility row stays clearly below the nav
+   so the two rows keep their hierarchy. One step smaller between
+   993-1200px so nothing gets near the centred logo.
    ============================================================= */
 @media(min-width:993px){
-  .hdr2__nav>a,.hdr2__nav>.hdr2__drop{font-size:1.125rem}
-  .hdr2__util a,.hdr2__util-right a{font-size:.9375rem;letter-spacing:.08em}
-  .hdr2__util-links{gap:1.4rem}
+  .hdr2__nav>a,.hdr2__nav>.hdr2__drop{font-size:1.0625rem}
+  .hdr2__util a,.hdr2__util-right a{font-size:.875rem}
 }
 @media(min-width:1201px){
-  .hdr2__nav>a,.hdr2__nav>.hdr2__drop{font-size:1.1875rem}
-  .hdr2__util a,.hdr2__util-right a{font-size:1.0625rem;letter-spacing:.06em}
-  .hdr2__util-links{gap:1.8rem}
+  .hdr2__nav>a,.hdr2__nav>.hdr2__drop{font-size:1.125rem}
+  .hdr2__util a,.hdr2__util-right a{font-size:.90625rem}
 }
