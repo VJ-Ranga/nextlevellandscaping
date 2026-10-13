@@ -1330,3 +1330,15 @@ html[data-theme="carbon-soft-v2"] #services .svc-figure{border-radius:0 clamp(72
 .svc-actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem}
 .svc-download{display:inline-flex;align-items:center;gap:.6em}
 .svc-download[hidden]{display:none}
+
+/* Service photos on the Services page and each single service page
+   carry the same single oversized curved corner as the homepage
+   services image — always the photo's OUTER top corner: top-left
+   when the photo sits on the left, top-right when it sits on the
+   right (even rows of the Services list). */
+html[data-theme="carbon-soft-v2"] .svc .svc__media .media{
+  border-radius:clamp(64px,10vw,150px) 0 0 0;overflow:hidden;
+}
+html[data-theme="carbon-soft-v2"] .svc:nth-child(even) .svc__media .media{
+  border-radius:0 clamp(64px,10vw,150px) 0 0;
+}
