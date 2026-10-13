@@ -1347,31 +1347,32 @@ html[data-theme="carbon-soft-v2"] .svc:nth-child(even) .svc__media .media{
    Stage 02 V2 — items 13, 14, 15 + service credential line
    ============================================================= */
 
-/* 13. One slide-arrow style everywhere: the original solid
-   off-white round button with a dark chevron (the photo strip's
-   original button), now shared by the carousels and the hero too.
-   Hover turns it lime, as the original did. On light bands the
-   button is ink with a light chevron, since off-white would vanish
-   on the light ground. (`body` in the selectors lifts them above the
-   theme file's own carousel-button rules, which load later.) */
-html[data-theme="carbon-soft-v2"] .swiper-controls{gap:.7rem}
-html[data-theme="carbon-soft-v2"] body .swiper-controls button,
-html[data-theme="carbon-soft-v2"] .strip__nav{
-  border:0;border-radius:50%;padding:0;
-  background:rgba(242,242,236,.92);color:#17190F;
-  box-shadow:0 6px 22px rgba(0,0,0,.22);
-  transition:background-color .25s,color .25s,transform .25s var(--ease);
+/* 13. One arrowhead everywhere: carousel + photo-strip controls
+   use the same bare thin chevron as the hero arrows (no circle). */
+html[data-theme="carbon-soft-v2"] .swiper-controls{gap:.5rem;margin-left:-.6rem}
+html[data-theme="carbon-soft-v2"] .swiper-controls button{
+  width:46px;height:46px;padding:0;
+  border:0;border-radius:0;background:none;font-size:1.15rem;
+  transition:background-color .25s,color .25s;
 }
-html[data-theme="carbon-soft-v2"] body .swiper-controls button{width:50px;height:50px;font-size:1rem}
-html[data-theme="carbon-soft-v2"] .strip__nav{width:54px;height:54px;font-size:1rem}
-html[data-theme="carbon-soft-v2"] body .swiper-controls button:hover,
-html[data-theme="carbon-soft-v2"] .strip__nav:hover{background:#C2E807;color:#17190F}
-html[data-theme="carbon-soft-v2"] body .band:not(.band--dark) .swiper-controls button{background:var(--v2-ink);color:#F2F2EC;box-shadow:none}
-html[data-theme="carbon-soft-v2"] body .band:not(.band--dark) .swiper-controls button:hover{background:#C2E807;color:#17190F}
-html[data-theme="carbon-soft-v2"] body .swiper-controls button:focus-visible,
-html[data-theme="carbon-soft-v2"] .strip__nav:focus-visible{outline:2px solid #C2E807;outline-offset:3px}
+/* hover only: a full SQUARE light box behind a dark chevron (dark
+   box / light chevron on light bands). Nothing shows at rest. */
+html[data-theme="carbon-soft-v2"] .swiper-controls button:hover{background:#F2F2EC;color:#17190F}
+html[data-theme="carbon-soft-v2"] .band:not(.band--dark) .swiper-controls button:hover{background:var(--v2-ink);color:#F2F2EC}
+html[data-theme="carbon-soft-v2"] .swiper-controls button:focus-visible,
+html[data-theme="carbon-soft-v2"] .strip__nav:focus-visible{outline:2px solid #C2E807;outline-offset:2px}
+/* over photos: bare white chevron at rest (shadow keeps it readable on
+   any image); square light box on hover. `body` lifts these above the
+   theme file's own .strip__nav rules, which load later and were leaving
+   the button filled at rest. */
+html[data-theme="carbon-soft-v2"] body .strip__nav{
+  width:56px;height:56px;border:0;border-radius:0;background:none;box-shadow:none;
+  color:#fff;font-size:1.7rem;filter:drop-shadow(0 2px 10px rgba(0,0,0,.65));
+  transition:background-color .25s,color .25s,filter .25s;
+}
+html[data-theme="carbon-soft-v2"] body .strip__nav:hover{background:#F2F2EC;color:#17190F;border-color:transparent;filter:none;transform:translateY(-50%)}
 @media(max-width:640px){
-  html[data-theme="carbon-soft-v2"] .strip__nav{width:44px;height:44px}
+  html[data-theme="carbon-soft-v2"] body .strip__nav{width:44px;height:44px;font-size:1.35rem}
 }
 
 /* 15. "What we do": the big heading is gone (kept for screen
