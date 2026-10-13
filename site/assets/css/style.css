@@ -331,7 +331,9 @@ p:last-child{margin-bottom:0}
 
 /* ---------- 15. Reviews -------------------------------- */
 .rev-swiper{overflow:visible}
-.rev-card{border-top:1px solid var(--line);padding-top:1.6rem}
+/* margin:0 — the card is a <blockquote>, whose browser default 40px side
+   margins were indenting every review and narrowing it by 80px */
+.rev-card{margin:0;border-top:1px solid var(--line);padding-top:1.6rem}
 .rev-card p{font-size:1.02rem;line-height:1.7;margin-bottom:1.4rem;
   display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:6;line-clamp:6;overflow:hidden}
 .rev-card__who{display:flex;align-items:center;gap:.9rem}
