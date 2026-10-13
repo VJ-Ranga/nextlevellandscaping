@@ -35,7 +35,7 @@
 @media(min-width:641px){
   [data-layout="centred"] .hero-car{padding-bottom:clamp(56px,10vh,120px)}
   [data-layout="centred"] .hero-car__nav{
-    transition:top .3s var(--ease,ease),left .3s var(--ease,ease),right .3s var(--ease,ease),color .2s;
+    transition:top .3s var(--ease,ease),left .3s var(--ease,ease),right .3s var(--ease,ease),background-color .25s,color .25s;
   }
 }
 @media(prefers-reduced-motion:reduce){
@@ -49,12 +49,12 @@
 html[data-theme] .hero-car__nav{
   position:relative;z-index:3;
   display:inline-flex;align-items:center;justify-content:center;
-  width:auto;height:auto;min-width:24px;min-height:24px;
-  border:0;background:none;border-radius:0;
-  padding:13px 15px;font-size:1.05rem;
+  width:46px;height:46px;padding:0;
+  border:0;background:none;border-radius:999px;font-size:1.05rem;
 }
-/* same hover as the other carousel arrows: turns lime */
-html[data-theme] .hero-car__nav:hover{background:none;color:#C2E807}
+/* same hover as every other slide arrow and the ghost button: a full
+   light box behind a dark chevron */
+html[data-theme] .hero-car__nav:hover{background:#F2F2EC;color:#17190F}
 .hero-car__nav:focus-visible{outline:2px solid #C2E807;outline-offset:3px}
 
 /* Scroll cue sits opposite the text block (left). */
