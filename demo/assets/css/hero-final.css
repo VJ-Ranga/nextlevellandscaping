@@ -1,0 +1,56 @@
+/* =============================================================
+   Homepage hero — final composition (client pick, Stage 02 V2):
+   A3 text on the right · B2 text-only motion + one fixed button ·
+   D2 bare chevron arrows. Replaces the demo options bar rules.
+   Loaded on index.html only; layout/arrow JS lives in hero.js.
+   ============================================================= */
+
+/* Track is a grid stack: every slide shares one cell, in flow, so
+   the track is as tall as the longest headline and the CTA below
+   it never collides with a wrapped line. */
+[data-layout="centred"] .hero-car__col{
+  flex:1;min-width:0;display:flex;flex-direction:column;
+  gap:28px;align-items:flex-end;
+}
+[data-layout="centred"] .hero-car__track{
+  flex:none;width:100%;display:grid;min-height:220px;
+  grid-template-columns:minmax(0,1fr);
+  align-items:end;justify-items:end;
+}
+[data-layout="centred"] .hero-slide{
+  grid-area:1/1;position:relative;inset:auto;width:100%;min-width:0;
+  align-items:flex-end;text-align:right;
+}
+.hero-slide h1{max-width:min(20ch,100%)}
+
+/* B2: only the headline moves — per-slide buttons are hidden and
+   one static "Get a free quote" button sits under the track. */
+.hero-slide .btn-ghost{display:none}
+.hero-cta-static{display:flex;flex-wrap:wrap;gap:14px;justify-content:flex-end}
+
+/* Text block sits low in the hero, Laguna-style. */
+@media(min-width:641px){
+  [data-layout="centred"] .hero-car{padding-bottom:clamp(56px,10vh,120px)}
+  [data-layout="centred"] .hero-car__nav{
+    transition:top .3s var(--ease,ease),left .3s var(--ease,ease),right .3s var(--ease,ease),opacity .18s;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  [data-layout="centred"] .hero-car__nav{transition:none}
+}
+
+/* D2: bare chevrons — no circle, generous invisible tap padding. */
+html[data-theme] .hero-car__nav{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:auto;height:auto;min-width:24px;min-height:24px;
+  border:0;background:none;border-radius:0;
+  padding:13px 15px;font-size:1.05rem;
+}
+html[data-theme] .hero-car__nav:hover{background:none;opacity:.65}
+.hero-car__nav:focus-visible{outline:2px solid #C2E807;outline-offset:3px}
+
+/* Scroll cue sits opposite the text block (left). */
+[data-layout="centred"] .hero-scroll{left:38px;right:auto}
+@media(min-width:993px) and (max-width:1270px){
+  [data-layout="centred"] .hero-scroll{left:112px}
+}
