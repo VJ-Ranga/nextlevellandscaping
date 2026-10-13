@@ -49,6 +49,8 @@
           '<div class="hdr2__util-right">' +
             '<a href="tel:+61404440222">0404 440 222</a>' +
             '<a href="https://www.instagram.com/nextlevellandscaping41/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>' +
+            /* Facebook: placeholder link — swap href for the client's page URL when supplied */
+            '<a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>' +
           '</div>' +
         '</div>' +
       '</div>' +
