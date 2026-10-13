@@ -56,29 +56,23 @@ html[data-theme] .hero-car__nav:hover{background:none;opacity:.65}
 }
 
 /* Scroll cue (client Stage 02 V2, item 6): larger label, and the
-   symbol is one long line ending in a down arrowhead — the same
-   thin chevron head as the slide arrows, drawn in CSS so it sits
-   exactly on the end of the line. */
+   symbol is a long line with a separate down arrowhead below it —
+   the original cue's line + chevron, longer and bigger, with the
+   chevron moved to the bottom end as the client drew it. */
 [data-layout="centred"] .hero-scroll{
   display:flex;flex-direction:column;align-items:center;
   font-size:.82rem;letter-spacing:.2em;
 }
 /* markup order is label, arrow, then the ::after line — reorder so
-   the arrowhead sits at the bottom end of the line */
+   the arrowhead sits below the line */
 [data-layout="centred"] .hero-scroll span{order:1}
-[data-layout="centred"] .hero-scroll::after{order:2}
-[data-layout="centred"] .hero-scroll__arrow{order:3}
 [data-layout="centred"] .hero-scroll::after{
-  width:1.5px;height:96px;margin:14px 0 0;
-  background:rgba(242,242,236,.85);animation:cue-final 2.2s var(--ease,ease) infinite;
+  order:2;width:1px;height:96px;margin:14px 0 0;
+  background:rgba(242,242,236,.7);
 }
 [data-layout="centred"] .hero-scroll__arrow{
-  width:11px;height:11px;margin:-12px 0 0;font-size:0;
-  border-right:1.5px solid rgba(242,242,236,.85);border-bottom:1.5px solid rgba(242,242,236,.85);
-  transform:rotate(45deg);animation:cue-final 2.2s var(--ease,ease) infinite;
+  order:3;margin-top:8px;font-size:.85rem;color:rgba(242,242,236,.9);
 }
-[data-layout="centred"] .hero-scroll__arrow::before{content:none}
-@keyframes cue-final{0%,100%{opacity:.55}50%{opacity:1}}
 @media(prefers-reduced-motion:reduce){
   [data-layout="centred"] .hero-scroll::after,
   [data-layout="centred"] .hero-scroll__arrow{animation:none}
