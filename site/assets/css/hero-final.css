@@ -42,19 +42,20 @@
   [data-layout="centred"] .hero-car__nav{transition:none}
 }
 
-/* D2: bare chevrons — no circle, generous invisible tap padding. */
+/* Slide arrows: the site-wide solid off-white round button with a
+   dark chevron (same as the carousels and photo strip); lime on hover. */
 /* z-index: the arrows must sit ABOVE the headline track — each
    slide is a full-width block, and it was covering the previous
    arrow, swallowing its clicks and hover. */
 html[data-theme] .hero-car__nav{
   position:relative;z-index:3;
   display:inline-flex;align-items:center;justify-content:center;
-  width:46px;height:46px;padding:0;
-  border:0;background:none;border-radius:999px;font-size:1.05rem;
+  width:50px;height:50px;padding:0;
+  border:0;border-radius:50%;font-size:1rem;
+  background:rgba(242,242,236,.92);color:#17190F;
+  box-shadow:0 6px 22px rgba(0,0,0,.22);
 }
-/* same hover as every other slide arrow and the ghost button: a full
-   light box behind a dark chevron */
-html[data-theme] .hero-car__nav:hover{background:#F2F2EC;color:#17190F}
+html[data-theme] .hero-car__nav:hover{background:#C2E807;color:#17190F}
 .hero-car__nav:focus-visible{outline:2px solid #C2E807;outline-offset:3px}
 
 /* Scroll cue sits opposite the text block (left). */
