@@ -54,12 +54,12 @@
       '</div>' +
       '<div class="container hdr2__main">' +
         '<nav class="hdr2__nav hdr2__nav--l">' +
-          servicesDrop +
           '<a href="our-work.html">Our Work</a>' +
+          '<a href="current-work.html">Current Work</a>' +
         '</nav>' +
         '<a class="hdr2__brand" href="index.html"><img src="assets/img/brand/logo.png" alt="NextLevel Landscaping"></a>' +
         '<nav class="hdr2__nav hdr2__nav--r">' +
-          '<a href="current-work.html">Current Work</a>' +
+          servicesDrop +
           '<a href="contact.html">Contact</a>' +
         '</nav>' +
         '<button class="nav-toggle hdr2__toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>' +

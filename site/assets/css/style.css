@@ -1249,3 +1249,34 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 }
 /* footer lists: keep the visual rhythm now the links are taller */
 .site-footer ul{gap:.35rem}
+
+/* =============================================================
+   Header logo — larger, centred, overlapping both header rows
+   (client Stage 02 V2, item 5). B&W treatment unchanged
+   (grayscale on sub-pages, colour on the homepage).
+   ============================================================= */
+@media(min-width:993px){
+  [data-layout="centred"] .hdr2__brand{
+    position:absolute;left:50%;top:14px;transform:translateX(-50%);z-index:3;
+  }
+  /* brand is out of the grid flow, so pin the nav groups to their columns */
+  [data-layout="centred"] .hdr2__nav--l{grid-column:1}
+  [data-layout="centred"] .hdr2__nav--r{grid-column:3}
+  [data-layout="centred"] .hdr2__brand img,
+  [data-layout="centred"] .pg-home .hdr2__brand img{height:92px}
+  [data-layout="centred"] .hdr2.is-stuck .hdr2__brand{top:8px}
+  [data-layout="centred"] .hdr2.is-stuck .hdr2__brand img,
+  [data-layout="centred"] .pg-home .hdr2.is-stuck .hdr2__brand img{height:72px}
+  /* utility rule stops short of the logo instead of running behind it */
+  [data-layout="centred"] .hdr2__util{border-bottom:0;position:relative}
+  [data-layout="centred"] .hdr2__util::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+    background:linear-gradient(to right,
+      rgba(242,242,236,.16) calc(50% - 120px),transparent calc(50% - 120px),
+      transparent calc(50% + 120px),rgba(242,242,236,.16) calc(50% + 120px));
+  }
+}
+@media(max-width:992px){
+  .hdr2__brand img{height:48px}
+  .pg-home .hdr2__brand img{height:52px}
+}
