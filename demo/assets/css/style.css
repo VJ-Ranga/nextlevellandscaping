@@ -1296,3 +1296,19 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
   .hdr2__nav>a,.hdr2__nav>.hdr2__drop{font-size:1.125rem}
   .hdr2__util a,.hdr2__util-right a{font-size:.90625rem}
 }
+
+/* =============================================================
+   Header social icons — matching bordered circles (Instagram +
+   Facebook read as one pair), slightly larger, closer together.
+   Icon size is set on the <i> so it doesn't follow the utility
+   row's text size.
+   ============================================================= */
+.hdr2__socials{display:inline-flex;align-items:center;gap:.5rem}
+.hdr2__util-right a.hdr2__social{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;min-width:30px;min-height:30px;padding:0;
+  border:1px solid rgba(242,242,236,.45);border-radius:50%;
+  transition:color .25s,border-color .25s,background-color .25s;
+}
+.hdr2__util-right a.hdr2__social i{font-size:.9rem;line-height:1}
+.hdr2__util-right a.hdr2__social:hover{color:#C2E807;border-color:#C2E807}

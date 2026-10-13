@@ -48,9 +48,11 @@
           '</nav>' +
           '<div class="hdr2__util-right">' +
             '<a href="tel:+61404440222">0404 440 222</a>' +
-            '<a href="https://www.instagram.com/nextlevellandscaping41/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>' +
-            /* Facebook: placeholder link — swap href for the client's page URL when supplied */
-            '<a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>' +
+            '<span class="hdr2__socials">' +
+              '<a class="hdr2__social" href="https://www.instagram.com/nextlevellandscaping41/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>' +
+              /* Facebook: placeholder link — swap href for the client's page URL when supplied */
+              '<a class="hdr2__social" href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>' +
+            '</span>' +
           '</div>' +
         '</div>' +
       '</div>' +
