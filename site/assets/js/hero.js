@@ -65,6 +65,10 @@
     if (cue) {
       var l = parseFloat(getComputedStyle(cue).left);
       if (!isNaN(l)) farInset = l;
+      // on narrower desktops the cue and the far arrow share the same
+      // column — keep the arrow clear of the cue's line, to its right
+      var cueRect = cue.getBoundingClientRect();
+      if (cueRect.width) farInset = Math.max(farInset, cueRect.right - carRect.left + 20);
     }
     next.style.position = prev.style.position = "absolute";
     next.style.top = prev.style.top = top + "px";
