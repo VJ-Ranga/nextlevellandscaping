@@ -32,7 +32,7 @@
 @media(min-width:641px){
   [data-layout="centred"] .hero-car{padding-bottom:clamp(56px,10vh,120px)}
   [data-layout="centred"] .hero-car__nav{
-    transition:top .3s var(--ease,ease),left .3s var(--ease,ease),right .3s var(--ease,ease),opacity .18s;
+    transition:top .3s var(--ease,ease),left .3s var(--ease,ease),right .3s var(--ease,ease),color .2s;
   }
 }
 @media(prefers-reduced-motion:reduce){
@@ -46,7 +46,8 @@ html[data-theme] .hero-car__nav{
   border:0;background:none;border-radius:0;
   padding:13px 15px;font-size:1.05rem;
 }
-html[data-theme] .hero-car__nav:hover{background:none;opacity:.65}
+/* same hover as the other carousel arrows: turns lime */
+html[data-theme] .hero-car__nav:hover{background:none;color:#C2E807}
 .hero-car__nav:focus-visible{outline:2px solid #C2E807;outline-offset:3px}
 
 /* Scroll cue sits opposite the text block (left). */
