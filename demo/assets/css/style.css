@@ -1342,3 +1342,110 @@ html[data-theme="carbon-soft-v2"] .svc .svc__media .media{
 html[data-theme="carbon-soft-v2"] .svc:nth-child(even) .svc__media .media{
   border-radius:0 clamp(64px,10vw,150px) 0 0;
 }
+
+/* =============================================================
+   Stage 02 V2 — items 13, 14, 15 + service credential line
+   ============================================================= */
+
+/* 13. One arrowhead everywhere: carousel + photo-strip controls
+   use the same bare thin chevron as the hero arrows (no circle). */
+html[data-theme="carbon-soft-v2"] .swiper-controls{gap:.4rem;margin-left:-.75rem}
+html[data-theme="carbon-soft-v2"] .swiper-controls button{
+  width:auto;height:auto;min-width:44px;min-height:44px;padding:.5rem .75rem;
+  border:0;border-radius:0;background:none;font-size:1.15rem;
+  transition:opacity .2s,color .2s;
+}
+html[data-theme="carbon-soft-v2"] .swiper-controls button:hover{background:none;color:#C2E807}
+html[data-theme="carbon-soft-v2"] .band:not(.band--dark) .swiper-controls button:hover{color:var(--v2-lime-ink);opacity:.7}
+html[data-theme="carbon-soft-v2"] .swiper-controls button:focus-visible,
+html[data-theme="carbon-soft-v2"] .strip__nav:focus-visible{outline:2px solid #C2E807;outline-offset:2px}
+/* over photos: bare white chevron, shadow keeps it readable on any image */
+html[data-theme="carbon-soft-v2"] .strip__nav{
+  width:56px;height:56px;border:0;border-radius:0;background:none;box-shadow:none;
+  color:#fff;font-size:1.7rem;filter:drop-shadow(0 2px 10px rgba(0,0,0,.65));
+}
+html[data-theme="carbon-soft-v2"] .strip__nav:hover{background:none;color:#C2E807;border-color:transparent}
+@media(max-width:640px){
+  html[data-theme="carbon-soft-v2"] .strip__nav{width:44px;height:44px;font-size:1.35rem}
+}
+
+/* 15. "What we do": the big heading is gone (kept for screen
+   readers); the label carries the section, larger and in ink. */
+html[data-theme="carbon-soft-v2"] #services .section-head .eyebrow{
+  font-size:1.05rem;letter-spacing:.2em;font-weight:600;color:var(--v2-ink);margin-bottom:1.3rem;
+}
+
+/* 14. Process steps: no number badge on the photo. Each step now
+   carries a large outlined numeral, and a hairline runs from one
+   numeral to the next so the four steps read as one timeline. */
+.proc-grid:has(.proc--photo){counter-reset:proc-step}
+.proc--photo{counter-increment:proc-step}
+.proc--photo h3{position:relative;padding-top:3.1rem;margin-top:.2rem}
+.proc--photo h3::before{
+  content:"0" counter(proc-step);
+  position:absolute;left:0;top:0;
+  font-size:2.3rem;font-weight:500;line-height:1;letter-spacing:.02em;
+  color:var(--muted);
+}
+@supports (-webkit-text-stroke:1px #000){
+  .proc--photo h3::before{color:transparent;-webkit-text-stroke:1.2px currentColor;-webkit-text-stroke-color:var(--ink)}
+  html[data-theme="carbon-soft-v2"] .band--dark .proc--photo h3::before{-webkit-text-stroke-color:var(--v2-on-night)}
+}
+.proc--photo h3::after{
+  content:"";position:absolute;top:1.15rem;left:3.6rem;right:-1.6rem;height:1px;
+  background:var(--line);
+}
+.band--dark .proc--photo h3::after{background:var(--line-dark)}
+.proc--photo:last-child h3::after{right:0}
+@media(max-width:992px){
+  /* grid wraps here, so each rail stops at its own card */
+  .proc--photo h3::after{right:0}
+}
+
+/* Service page credential line — plain small text, not the dashed
+   "draft note" box it used to borrow. */
+.svc-cred{display:flex;align-items:baseline;gap:.65em;margin-top:1.5rem;font-size:.82rem;line-height:1.6;color:var(--muted)}
+.svc-cred i{color:var(--accent);font-size:.95em}
+
+/* 12. Contour lines (client Stage 02 V2): re-oriented artwork
+   (ridge runs bottom-left to top-right), a little stronger, and
+   pinned to the viewport so the lines run on unbroken from one
+   dark band into the next instead of restarting at every section.
+   (Browsers without fixed backgrounds fall back to a per-band
+   cover image.) Dark bands only, as before. */
+.contour::before{
+  background:url("../img/contour-lines.svg?v=2") center/cover no-repeat fixed;
+  opacity:.2;
+}
+
+/* 16. Contact form — Services multi-select (checkbox dropdown).
+   Matches the other fields: same label, box, radius and caret. */
+.field--multi{position:relative}
+.field .field__label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.5rem}
+.msel__btn{
+  display:block;width:100%;padding:14px 38px 14px 16px;text-align:left;cursor:pointer;
+  border:1px solid var(--line);border-radius:4px;background-color:#fff;
+  font:400 .95rem/1.5 var(--f);color:var(--muted);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 20 20%27><path fill=%27%236E7358%27 d=%27M5 7l5 5 5-5z%27/></svg>");
+  background-repeat:no-repeat;background-position:right 14px center;background-size:14px;
+}
+html[data-theme="carbon-soft-v2"] .msel__btn{border-color:var(--v2-line-ui)}
+html[data-theme="carbon-soft-v2"] .msel__btn:hover{border-color:var(--v2-ink)}
+.field--multi.has-value .msel__btn{color:var(--ink)}
+.msel__btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.msel__value{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.msel__panel{
+  position:absolute;left:0;right:0;top:100%;z-index:20;margin-top:6px;padding:.4rem 0;
+  background:#fff;border:1px solid var(--line);border-radius:4px;
+  box-shadow:0 14px 34px rgba(23,25,15,.16);max-height:24rem;overflow:auto;
+}
+.msel__panel[hidden]{display:none}
+.field .msel__opt{
+  display:flex;align-items:center;gap:.75rem;margin:0;padding:.6rem 1rem;min-height:44px;cursor:pointer;
+  font-size:.95rem;letter-spacing:0;text-transform:none;color:var(--ink);
+}
+.field .msel__opt:hover{background:rgba(23,25,15,.05)}
+.field .msel__opt input{
+  width:18px;height:18px;flex:none;margin:0;padding:0;border-radius:3px;accent-color:#3E4A16;cursor:pointer;
+}
+.field .msel__opt:focus-within{outline:2px solid var(--accent);outline-offset:-2px}

@@ -344,7 +344,7 @@
       // photo-led step (client preference, 2026-09-23); falls back to
       // the original icon medallion if a step has no img yet
       var visual = p.img
-        ? '<div class="proc__media"><img loading="lazy" src="' + esc(p.img) + '" width="' + esc(p.w) + '" height="' + esc(p.h) + '" alt="' + esc(p.alt || "") + '"><span class="proc__step">' + esc(p.no) + '</span></div>'
+        ? '<div class="proc__media"><img loading="lazy" src="' + esc(p.img) + '" width="' + esc(p.w) + '" height="' + esc(p.h) + '" alt="' + esc(p.alt || "") + '"></div>'
         : '<div class="proc__num"><i class="' + esc(p.icon || "fa-solid fa-circle") + '"></i><span>' + esc(p.no) + '</span></div>';
       return '<div class="proc' + (p.img ? ' proc--photo' : '') + ' reveal">' +
         visual +
@@ -389,6 +389,37 @@
   }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
   $$(".reveal").forEach(function (el) { io.observe(el); });
 
+  /* ---- 12a. Services multi-select (contact form) ----------
+     A disclosure button over a group of real checkboxes: click or
+     Enter/Space opens it, Escape or a click outside closes it, and
+     the button shows what is picked. Submits as services[]. */
+  $$("[data-msel]").forEach(function (box) {
+    var btn = $(".msel__btn", box), panel = $(".msel__panel", box), out = $(".msel__value", box);
+    if (!btn || !panel || !out) return;
+    var checks = $$("input[type=checkbox]", panel);
+    function setOpen(open) {
+      panel.hidden = !open;
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      box.classList.toggle("is-open", open);
+    }
+    function summary() {
+      var picked = checks.filter(function (c) { return c.checked; }).map(function (c) { return c.value; });
+      out.textContent = !picked.length ? out.getAttribute("data-placeholder")
+        : picked.length <= 2 ? picked.join(", ")
+        : picked.length + " services selected";
+      box.classList.toggle("has-value", picked.length > 0);
+    }
+    btn.addEventListener("click", function () { setOpen(panel.hidden); });
+    panel.addEventListener("change", summary);
+    box.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !panel.hidden) { setOpen(false); btn.focus(); }
+    });
+    document.addEventListener("click", function (e) { if (!box.contains(e.target)) setOpen(false); });
+    var f = box.closest("form");
+    if (f) f.addEventListener("reset", function () { setTimeout(function () { summary(); setOpen(false); }, 0); });
+    summary();
+  });
+
   /* ---- 12. Contact form (demo validation, no backend) --- */
   var form = $("#quote-form");
   if (form) {
@@ -396,6 +427,7 @@
       e.preventDefault();
       var ok = true;
       $$(".field", form).forEach(function (f) {
+        if (f.hasAttribute("data-msel")) return; // optional checkbox group
         var input = $("input,textarea,select", f);
         if (!input) return;
         var val = input.value.trim();
