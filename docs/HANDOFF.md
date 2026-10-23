@@ -1,7 +1,7 @@
 # NextLevel Landscaping — handoff for Claude Code (cloud)
 
 Read this first. It replaces the Obsidian vault, which lives only on VJ's machine
-(`~/Documents/obsidian-data/clients/next-level-landscaping/`). Updated 2026-10-23.
+(`~/Documents/obsidian-data/clients/next-level-landscaping/`). Updated 2026-10-23 (afternoon).
 
 ## The project
 - Cloudycode client: NextLevel Landscaping, Adelaide SA — landscape design & construction (paving, retaining walls, fencing, turf, irrigation, design) + commercial work. Licensed builder BLD320507, MLSA member.
@@ -29,17 +29,33 @@ Read this first. It replaces the Obsidian vault, which lives only on VJ's machin
 - Don't push the client photo folder `images/` (not in the repo; public repo). Compress any image/video before adding it.
 - Settled design decisions — don't change without asking: hero A3+B2+D2 (text right, one fixed button); slide arrows = bare chevron, **square** light box on **hover only**; footer = E5 "Contour footer"; header nav 18px / top row 14.5px; contour lines opacity .05; pipe-separated service tags; curved outer corner on service photos.
 
-## To do now (Phase 5)
-- [ ] **#72** Safety, Quality & Compliance page — **full client copy below**. New page (e.g. `compliance.html`), follow their developer notes.
-- [ ] **#78** Our Process page: add **Residential | Commercial** tabs near the top. Residential 4 steps unchanged. Commercial copy below (intro, 4 ways to engage, 8 stages, CTA). Don't render the 8 stages as a wide table — needs a clean stage layout that works on mobile.
-- [ ] **#79** Commercial enquiry form on Contact — both new pages link to it ("Request our compliance pack", "Send a tender or EOI"). Fields/email not confirmed yet — ask VJ before building.
-- [ ] **#74** Propose a menu reorganisation that fits Compliance + Commercial Work (propose first, don't build).
-- [ ] **#73** Commercial Work landing page — no content yet.
-- [ ] **#75** Sub-services per service — reuse the homepage "What we do" hover-image list. Lists not supplied yet.
-- [ ] **#76** Certificate logos in the homepage credentials strip (we have `assets/img/brand/mlsa.png`; CITB SA also listed).
-- [ ] **#10** Intro text right-aligned + smaller (old leftover).
+## To do now (Phase 5) — updated 2026-10-23
 
-Waiting on client: compliance hero photo (crew in PPE beside excavator), policy PDFs?, commercial form fields, the "consultant's document", OK to name Saint Ignatius College / RSPCA SA, Facebook URL (links are `#` placeholders), the 5 guide PDFs (placeholders in `assets/downloads/`), sub-service lists, Commercial Work content, certificate logo files.
+**Old feedback is closed.** Rounds #1–#71 are all done; #10 is closed (covered by the A3 hero choice). Only the latest items below matter.
+
+### Build first — #78 Our Process: Residential | Commercial tabs ✅ READY
+- Add a Residential | Commercial switch near the top of `process.html` (under the page hero). Make it linkable: `process.html#commercial`.
+- **Residential side: keep everything exactly as it is** (4 steps, step detail, 10 build stages, CTA).
+- Commercial side, using the client copy at the bottom of this file: label + heading + intro → "Ways to engage us" (4 cards) → the 8 stages as a numbered vertical stage list (title · one-line summary · "What happens") — **not a wide table**, must work on mobile → CTA.
+- CTA buttons: "Send a tender or EOI" → `contact.html` for now (commercial form #79 doesn't exist yet); "Request our compliance pack" → `compliance.html` (built next; until then leave it pointing there).
+- Tabs must be keyboard-accessible (proper tab roles or buttons + aria). Mirror into `demo/`.
+
+### Build second — #72 Safety, Quality & Compliance page ✅ READY (with placeholders)
+- New `compliance.html` from the client copy below (12 sections; follow their "Developer note" lines).
+- Placeholders: stand-in hero photo until the client sends "crew in PPE beside an excavator"; show **all 9** safety points (their note says 8); **leave out the Saint Ignatius College / RSPCA SA proof line** until the client OKs naming them; policies as a plain list (no PDFs yet).
+- Buttons → `contact.html` for now. Add a footer link to the page (menu placement waits for #74).
+
+### Needs answers first — don't build yet
+- **#79 Commercial enquiry form** on Contact — both new pages link to it. Waiting on fields + which email it goes to.
+- **#74 Menu reorganisation** — write a proposal only. Current header: top row = About · Our Process · Reviews · FAQ (plain links, **no About dropdown**); main row = Our Work · Current Work | logo | Services ▾ · Contact. It is 2 + logo + 2, so a 5th main item breaks the balance — account for that.
+
+### Waiting on client content — don't build yet
+- **#73 Commercial Work landing page** — no content.
+- **#75 Sub-services** — NOT a menu/submenu. On each `service.html`, a section copying the homepage **"What we do"** section (numbered list left; photo + title + description + tags right, switching on hover/click). Waiting on the sub-service list per service.
+- **#76 Certificate logos** in the homepage `#credline` strip — only `assets/img/brand/mlsa.png` exists; CITB SA logo needed.
+
+### Still placeholders on the live site
+Facebook links (`#`), the 5 guide PDFs in `assets/downloads/`. Client sign-off still pending on the process-section design and the stock hero video.
 
 ## Later phases
 6 UI sign-off → 7 WordPress build (CPTs `service` + sub-services, `portfolio`, `current_work` with stages; forms; SEO schema; performance) → 8 QA & launch → 9 handover.
