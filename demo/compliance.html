@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en-AU" data-theme="carbon-soft-v2" data-layout="centred" data-hero="sticky" data-intro="split">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<script src="assets/js/demo-bar.js?v=18"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Safety, Quality &amp; Compliance — NextLevel Landscaping</title>
+<meta name="description" content="NextLevel Landscaping is licensed (BLD320507), insured for $20 million public liability and run under a documented WHS system — so builders, councils, schools and facility managers can engage us with confidence.">
+<link rel="icon" href="assets/img/brand/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="assets/css/style.css?v=1792050000">
+<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1791871600">
+<link rel="stylesheet" href="assets/css/demo-bar.css?v=15">
+<link rel="stylesheet" href="assets/css/demo-variants.css?v=16">
+<style>
+/* Page-scoped only (#72), same approach as process.html: existing tokens,
+   hairlines rather than fills, no new radius. Reuses .stats for the tiles. */
+
+.subhero h1{text-wrap:balance}
+/* hero buttons — the subhero is a night band but not .band--dark */
+.subhero .btns{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2rem}
+.subhero .btn-ghost{--c:var(--v2-on-night,#fff)}
+.subhero .btn-ghost:hover{color:var(--v2-ink,var(--ink))}
+.subhero .btn-ghost--fill{--c:var(--v2-lime,var(--accent));color:var(--v2-ink,var(--ink))}
+.subhero .btn-ghost--fill::before{background:var(--v2-on-night,#fff)}
+
+/* (2) at a glance — four tiles in a row, stacked on mobile */
+.stats--4{grid-template-columns:repeat(4,1fr)}
+.stats--4 .stat b{font-size:1.15rem;line-height:1.35}
+.intro-copy{margin-top:3.5rem}
+.intro-copy p + p{margin-top:1rem}
+
+/* (4)(5) credential tables — heading left, table right */
+.cgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:2rem 4rem}
+.cgrid + .cgrid{margin-top:5rem}
+.cgrid .lead{margin-top:.6rem}
+.ctable{width:100%;border-collapse:collapse}
+.ctable th,.ctable td{text-align:left;vertical-align:top;padding:1.1rem 0;border-top:1px solid var(--line)}
+.ctable tr:last-child th,.ctable tr:last-child td{border-bottom:1px solid var(--line)}
+.ctable th{width:38%;padding-right:2rem;font-weight:500;font-size:.78rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);line-height:1.7}
+.ctable td{color:var(--ink)}
+
+/* (6)(9) point cards — two columns, hairline on top */
+.points{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:0 3.5rem}
+.points li{border-top:1px solid var(--line);padding:1.6rem 0 1.8rem}
+.points h3{font-size:1.12rem;margin-bottom:.6rem}
+.points p{color:var(--muted)}
+
+/* (7)(8)(10)(11) tick lists */
+.ticks{list-style:none;padding:0;margin:0}
+.ticks li{position:relative;padding:.85rem 0 .85rem 2rem;border-top:1px solid var(--line)}
+.ticks li:last-child{border-bottom:1px solid var(--line)}
+.ticks li::before{content:"\f00c";font:900 .85rem/1 "Font Awesome 6 Free";color:var(--accent);
+  position:absolute;left:0;top:1.3rem}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:3rem 5rem}
+.cols2 h2{margin-bottom:.8rem}
+.cols2 .lead{margin-bottom:1.6rem}
+
+.cta-btns{display:flex;flex-wrap:wrap;gap:.9rem}
+
+@media(max-width:992px){
+  .stats--4{grid-template-columns:repeat(2,1fr)}
+  .cgrid,.cols2{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .stats--4,.points{grid-template-columns:1fr}
+  /* tables read as label-over-value rows at phone width */
+  .ctable,.ctable tbody,.ctable tr,.ctable th,.ctable td{display:block;width:auto}
+  .ctable th{padding:1.1rem 0 .3rem}
+  .ctable td{border-top:0;padding:0 0 1.1rem}
+  .ctable tr:last-child th{border-bottom:0}
+  .ctable tr:last-child td{border-bottom:1px solid var(--line)}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="site-header-slot"></div>
+
+<main id="main" tabindex="-1">
+  <!-- 1. Hero. Stand-in photo until the client sends "crew in PPE beside an excavator, site fencing in view". -->
+  <section class="subhero subhero--photo">
+    <div class="subhero__media"><img src="assets/img/services/retaining-walls.jpg" alt="" width="1440" height="960" fetchpriority="high" decoding="async"></div>
+    <div class="container">
+      <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Safety, Quality &amp; Compliance</p>
+      <h1>Safe, compliant and accountable on every site</h1>
+      <p class="lead">Licensed, insured and run under a documented WHS system, so builders, councils, schools and facility managers can engage us with confidence.</p>
+      <div class="btns">
+        <a class="btn-ghost btn-ghost--fill" href="contact.html">Request our compliance pack</a>
+        <a class="btn-ghost" href="contact.html">Talk to us about a project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. At a glance + 3. Introduction -->
+  <section class="band" style="--plan-label:'At A Glance'">
+    <div class="container">
+      <h2 class="eyebrow reveal">At a glance</h2>
+      <div class="stats stats--4 reveal">
+        <div class="stat"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><b>$20 million</b><span>Public liability insurance</span></div>
+        <div class="stat"><i class="fa-solid fa-id-card" aria-hidden="true"></i><b>BLD320507</b><span>Licensed builder (SA)</span></div>
+        <div class="stat"><i class="fa-solid fa-award" aria-hidden="true"></i><b>MLSA</b><span>Member of Master Landscapers SA</span></div>
+        <div class="stat"><i class="fa-solid fa-helmet-safety" aria-hidden="true"></i><b>CITB SA</b><span>Registered with CITB South Australia</span></div>
+      </div>
+      <div class="intro-copy reveal">
+        <p class="lead measure">Much of our work happens where people live, learn and work: operating schools, animal shelters, council spaces and occupied homes. Safety and compliance are planned before we arrive, not added on site.</p>
+        <p class="measure">Our team brings decades of combined experience across landscape construction, plant operation, site supervision, quality control and health and safety. Every project has a central point of contact and senior oversight from first site visit to handover.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Licences and registrations + 5. Insurance -->
+  <section class="band band--dark contour" style="--plan-label:'Credentials'">
+    <div class="container">
+      <div class="cgrid reveal">
+        <div><span class="eyebrow">Credentials</span><h2>Licences and registrations</h2></div>
+        <table class="ctable">
+          <tbody>
+            <tr><th scope="row">Building work contractor licence</th><td>BLD320507, Consumer and Business Services SA</td></tr>
+            <tr><th scope="row">Licence conditions held</th><td>Retaining walls; fencing (excluding brick, pool and masonry); stormwater; concrete path paving; brick and segmental paving</td></tr>
+            <tr><th scope="row">Industry membership</th><td>Master Landscapers Association of South Australia</td></tr>
+            <tr><th scope="row">Training registration</th><td>Construction Industry Training Board (CITB) South Australia</td></tr>
+            <tr><th scope="row">Supplier prequalification</th><td>Registered on contractor platforms used by principal contractors, including Felix, Rapid Global, Ventia and ICN</td></tr>
+            <tr><th scope="row">Legal entity</th><td>Adelaide Express Services Pty Ltd trading as NextLevel Landscaping, ABN 15 642 563 513</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cgrid reveal">
+        <div><span class="eyebrow">Cover</span><h2>Insurance</h2>
+          <p class="lead">We carry insurance suited to commercial and institutional work. Current certificates of currency are available on request.</p></div>
+        <table class="ctable">
+          <tbody>
+            <tr><th scope="row">Public liability</th><td>$20 million</td></tr>
+            <tr><th scope="row">Workers compensation</th><td>ReturnToWorkSA</td></tr>
+            <tr><th scope="row">Motor vehicles and plant</th><td>All vehicles and earthmoving equipment comprehensively insured</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. How we manage safety — all nine points (client note says eight) -->
+  <section class="band" style="--plan-label:'Safety'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">WHS system</span><h2>How we manage safety</h2></div>
+      <ul class="points reveal">
+        <li><h3>Safe Work Method Statements</h3><p>Task-specific SWMS for high-risk work such as excavation, trenching and plant operation, reviewed with the crew before work starts.</p></li>
+        <li><h3>Site inductions</h3><p>Every worker and subcontractor is inducted to site rules, hazards, access routes and emergency arrangements.</p></li>
+        <li><h3>Plant pre-start checks</h3><p>Our excavators, Bobcats, Kanga loaders and vehicles are inspected each day before use, using a documented pre-start checklist.</p></li>
+        <li><h3>Principal contractor requirements</h3><p>We work within the safety systems of builders and head contractors, including their inductions, permits to work and site rules.</p></li>
+        <li><h3>Live-site controls</h3><p>Access, noise, plant movement and public-safety controls are planned around school timetables and facility operations.</p></li>
+        <li><h3>Underground services checks</h3><p>Before any excavation we lodge a Before You Dig Australia enquiry and review the asset plans with the crew. Services are located and marked on site before digging starts.</p></li>
+        <li><h3>Incident and hazard reporting</h3><p>Hazards, near misses and incidents are reported, recorded and passed to the client or head contractor promptly.</p></li>
+        <li><h3>Director oversight</h3><p>A director oversees our WHS system and reviews it as the business and our project types change.</p></li>
+        <li><h3>PPE and competency</h3><p>Crews wear PPE suited to the task, and plant is operated only by people who hold the relevant tickets.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7. Working on live sites + 8. Subcontractors.
+       Proof line (Saint Ignatius College / RSPCA SA) left out until the client OKs naming them. -->
+  <section class="band band--dark contour" style="--plan-label:'On Site'">
+    <div class="container">
+      <div class="cols2">
+        <div class="reveal">
+          <span class="eyebrow">Live sites</span>
+          <h2>Working on live sites</h2>
+          <p class="lead">Schools, community facilities and animal shelters stay open while we work. We plan the job around the people using the site.</p>
+          <ul class="ticks">
+            <li>Work zones fenced and signed, with clear separation from students, staff, the public and animals</li>
+            <li>Deliveries and heavy plant scheduled outside peak times where possible</li>
+            <li>Staged delivery, so areas can be handed back and used while the next stage proceeds</li>
+            <li>Underground services identified through Before You Dig Australia before any excavation starts</li>
+            <li>Retained trees protected with tree protection zones, and care taken around existing services and drainage</li>
+            <li>One point of contact for the site manager or facilities team</li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <span class="eyebrow">Specialist trades</span>
+          <h2>Subcontractors</h2>
+          <p class="lead">We self-perform most of our landscaping work with our own crews and plant. Where a specialist trade is needed, subcontractors work under our WHS requirements.</p>
+          <ul class="ticks">
+            <li>Licence, insurance and SWMS checked before they start on site</li>
+            <li>Inducted to the site and to our safety expectations</li>
+            <li>Supervised by our team, with the work checked against the scope</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Quality and handover + 10. Our policies (plain list — no PDFs yet) -->
+  <section class="band" style="--plan-label:'Quality'">
+    <div class="container">
+      <div class="cols2">
+        <div class="reveal">
+          <span class="eyebrow">Quality</span>
+          <h2>Quality and handover</h2>
+          <ul class="ticks" style="margin-top:1.6rem">
+            <li><strong>Design to delivery under one roof.</strong> Our in-house landscape architect produces 2D and 3D designs, and the same team builds them, so the design intent carries through to site.</li>
+            <li>Director-led quality checks at key stages, not only at the end.</li>
+            <li>Clear handover: a final walk-through with the client, plus plant and irrigation care guidance.</li>
+            <li>Local supply: we buy South Australian products where available.</li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <span class="eyebrow">Policies</span>
+          <h2>Our policies</h2>
+          <ul class="ticks" style="margin-top:1.6rem">
+            <li>Work Health and Safety Policy</li>
+            <li>Modern Slavery Policy</li>
+            <li>Quality Policy</li>
+            <li>Environmental Policy</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Compliance documents on request -->
+  <section class="band band--dark contour" style="--plan-label:'Documents'">
+    <div class="container">
+      <div class="cols2">
+        <div class="reveal">
+          <span class="eyebrow">Procurement</span>
+          <h2>Compliance documents on request</h2>
+          <p class="lead">Procurement and contracts teams can request our compliance pack, which includes:</p>
+        </div>
+        <ul class="ticks reveal">
+          <li>Certificates of currency for public liability, workers compensation and vehicles and plant</li>
+          <li>Building work contractor licence</li>
+          <li>WHS policy and sample SWMS</li>
+          <li>Modern slavery policy</li>
+          <li>Capability statement and project references</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. Call to action — button goes to contact.html until the commercial form (#79) exists -->
+  <section class="band" style="--plan-label:'Start Here'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">Get started</span><h2>Need our documents for prequalification or a tender?</h2>
+        <p class="lead">Tell us about your project and we'll send our compliance pack, usually within one business day.</p></div>
+      <p class="reveal cta-btns"><a class="btn-ghost" href="contact.html">Request our compliance pack</a></p>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer-slot"></div>
+<script src="assets/js/partials.js?v=1792060000"></script>
+<script src="assets/data.js?v=1791872300"></script>
+<script src="assets/js/main.js?v=1791874800"></script>
+<script>document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});</script>
+</body>
+</html>
