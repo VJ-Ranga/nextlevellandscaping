@@ -131,7 +131,8 @@
   var credEl = $("#credline");
   if (credEl && D.credentials) {
     credEl.innerHTML = D.credentials.map(function (c) {
-      return '<span><i class="' + esc(c.icon) + '"></i>' + c.text + '</span>';
+      var mark = c.logo ? '<img class="credline__logo' + (c.w && c.h && Math.abs(c.w - c.h) / Math.max(c.w, c.h) <= 0.2 ? ' credline__logo--square' : '') + '" src="' + esc(c.logo) + '" alt="' + esc(c.alt) + '" width="' + c.w + '" height="' + c.h + '">' : '<i class="' + esc(c.icon) + '"></i>';
+      return '<span>' + mark + '<span class="credline__text">' + c.text + '</span></span>';
     }).join("");
   }
 

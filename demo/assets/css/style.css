@@ -548,12 +548,25 @@ p:last-child{margin-bottom:0}
   text-transform:uppercase;letter-spacing:.06em}
 .stat-n b span{display:inline}
 
-.credline{display:flex;flex-wrap:wrap;gap:1rem 2.5rem;margin-top:3.5rem;padding-top:1.8rem;
+.credline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem 2.5rem;margin-top:3.5rem;padding-top:1.8rem;
   border-top:1px solid var(--line);position:relative;z-index:1}
-.credline span{display:flex;align-items:center;gap:.7em;font-size:.82rem;color:var(--muted);
-  text-transform:uppercase;letter-spacing:.05em}
+.credline > span{display:flex;align-items:center;gap:.7em;min-width:0}
+.credline__text{flex:1;min-width:0;font-size:.82rem;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.05em;overflow-wrap:normal}
 .credline i{color:var(--accent);font-size:.95rem}
 .credline b{color:var(--ink);font-weight:500}
+.credline i,.credline__logo{flex:none}
+.credline > span:has(.credline__logo:first-child) .credline__logo{max-width:150px}
+.credline > span:has(.credline__logo--square){gap:.55em}
+.credline__logo{width:auto;height:28px;object-fit:contain;display:block}
+.credline span:has(.credline__logo--square) .credline__logo{height:36px;width:36px}
+
+@media(max-width:1100px){
+  .credline{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:480px){
+  .credline{grid-template-columns:1fr;gap:.9rem}
+}
 
 /* =============================================================
    23. Services explorer (replaces 8 stacked rows)
@@ -1167,9 +1180,9 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 #intro .intro-copy .measure{max-width:44ch}
 #intro .credline{
   margin-top:2.8rem;max-width:none;
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem 2.5rem;align-items:center;
+  align-items:center;
 }
-#intro .credline span{font-size:.8rem}
+#intro .credline__text{font-size:.8rem}
 
 /* --- SPLIT (default) --- */
 :root{--intro:split}
@@ -1199,10 +1212,6 @@ h1,h2,h3,h4,h5,h6{font-weight:var(--h-weight)}
 @media(max-width:340px){
   #intro .statline{grid-template-columns:1fr!important}
 }
-@media(max-width:760px){
-  #intro .credline{grid-template-columns:1fr;gap:.9rem}
-}
-
 /* =============================================================
    42. Carbon soft — rounded top on the "Our Work" band
    The dark projects band curves up out of the light section
