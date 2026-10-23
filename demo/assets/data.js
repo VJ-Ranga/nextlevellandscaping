@@ -25,8 +25,9 @@ window.NLL = {
   /* --- credential line under the numbers -------------------- */
   credentials: [
     { icon: "fa-solid fa-helmet-safety", text: "Licensed builder <b>BLD320507</b>" },
-    { icon: "fa-solid fa-award",         text: "<b>Master Landscapers</b> South Australia" },
-    { icon: "fa-solid fa-seedling",      text: "<b>Lawn Solutions Australia</b> authorised" }
+    { icon: "fa-solid fa-award",         logo: "assets/img/brand/certs/mlsa.png", w: 220, h: 240, alt: "Master Landscapers", text: "<b>Master Landscapers</b> South Australia" },
+    { icon: "fa-solid fa-seedling",      logo: "assets/img/brand/certs/lawn-solutions.svg", w: 71, h: 28, alt: "Lawn Solutions Australia", text: "<b>Lawn Solutions Australia</b> authorised" },
+    { icon: "fa-solid fa-certificate",   logo: "assets/img/brand/certs/citb-sa.svg", w: 96, h: 28, alt: "CITB South Australia", text: "Registered with <b>CITB</b> South Australia" }
   ],
 
   /* --- 7 services (verbatim copy from the live site; Walkways removed per client feedback 2026-09-22) --------- */

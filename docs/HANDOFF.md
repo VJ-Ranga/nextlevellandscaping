@@ -50,9 +50,9 @@ Read this first. It replaces the Obsidian vault, which lives only on VJ's machin
 - **#74 Menu reorganisation** — write a proposal only. Current header: top row = About · Our Process · Reviews · FAQ (plain links, **no About dropdown**); main row = Our Work · Current Work | logo | Services ▾ · Contact. It is 2 + logo + 2, so a 5th main item breaks the balance — account for that.
 
 ### Waiting on client content — don't build yet
-- **#73 Commercial Work landing page** — no content.
+- **#73 Commercial Work landing page** — ✅ DRAFT built 2026-10-23 (`commercial.html`, footer link "Commercial Work"): RSPCA SA (O'Halloran Hill) featured with client photos, Saint Ignatius (text), Penfield before/after, compliance tiles, ways to engage, CTA. Names/photos to be confirmed by the client.
 - **#75 Sub-services** — NOT a menu/submenu. On each `service.html`, a section copying the homepage **"What we do"** section (numbered list left; photo + title + description + tags right, switching on hover/click). Waiting on the sub-service list per service.
-- **#76 Certificate logos** in the homepage `#credline` strip — only `assets/img/brand/mlsa.png` exists; CITB SA logo needed.
+- **#76 Certificate logos** — ✅ built 2026-10-23: official MLSA, Lawn Solutions Australia and CITB SA logos in `assets/img/brand/certs/`, shown in the homepage `#credline` strip (4 columns; CITB added as a 4th credential).
 
 ### Still placeholders on the live site
 Facebook links (`#`), the 5 guide PDFs in `assets/downloads/`. Client sign-off still pending on the process-section design and the stock hero video.

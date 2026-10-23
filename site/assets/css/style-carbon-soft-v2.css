@@ -429,7 +429,7 @@ html[data-theme="carbon-soft-v2"] #intro .stat-n > span{color:var(--v2-muted-nt)
 html[data-theme="carbon-soft-v2"] #intro .stat-n::before{background:var(--v2-line-nt)}
 
 html[data-theme="carbon-soft-v2"] #intro .credline{border-top-color:var(--v2-line-nt)}
-html[data-theme="carbon-soft-v2"] #intro .credline span{color:var(--v2-muted-nt)}
+html[data-theme="carbon-soft-v2"] #intro .credline__text{color:var(--v2-muted-nt)}
 html[data-theme="carbon-soft-v2"] #intro .credline i{color:var(--v2-lime)}
 html[data-theme="carbon-soft-v2"] #intro .credline b{color:var(--v2-on-night)}
 
