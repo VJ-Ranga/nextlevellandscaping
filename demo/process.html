@@ -47,8 +47,46 @@
   text-transform:uppercase;color:var(--muted)}
 .pipeline__name{font-size:1rem;line-height:1.7;color:var(--ink)}
 
+/* (c) Residential | Commercial switch (#78). The two pathways are sets of
+   sibling bands, not one wrapper, because the theme's band colours and
+   scoops are keyed on main > .band. The switch shows one set, hides the
+   other, and the URL hash (#residential / #commercial) picks the start. */
+.path-switch{padding-block:2.75rem 0}
+.path-tabs{display:inline-flex;padding:5px;gap:4px;border:1.5px solid var(--ink);border-radius:999px}
+.path-tabs [role="tab"]{appearance:none;border:0;background:transparent;color:var(--ink);
+  padding:13px 30px;border-radius:999px;font:500 .8rem/1 var(--f);letter-spacing:.06em;
+  text-transform:uppercase;cursor:pointer;transition:background-color .25s var(--ease),color .25s var(--ease)}
+.path-tabs [role="tab"]:hover{background:var(--line)}
+.path-tabs [role="tab"][aria-selected="true"]{background:var(--v2-lime,var(--accent));color:var(--v2-ink,var(--ink))}
+.path-tabs [role="tab"]:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.path-switch__note{margin:1rem 0 0;font-size:.9rem;color:var(--muted)}
+[data-path][hidden]{display:none !important}
+/* the first band of each pathway sits under the switch, not a full band below it */
+html[data-theme] main > .band.path-first{padding-top:3.5rem}
+
+/* (d) ways to engage — four flat cards, hairline on top, same rail as .proc */
+.engage{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem}
+.engage li{border-top:1px solid var(--line);padding-top:1.4rem}
+.engage__no{display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);font-weight:500;margin-bottom:1rem}
+.engage h4{font-size:1.12rem;font-weight:500;margin-bottom:.75rem}
+.engage p{color:var(--muted)}
+.path-btns{display:flex;flex-wrap:wrap;gap:.9rem}
+
+/* (e) commercial stages — reuse the .pdeep row, plus a summary line and a
+   small "What happens" label so the three parts read as one stage */
+.pdeep__sum{font-size:1.05rem;line-height:1.6;color:var(--ink) !important;margin-bottom:1.1rem}
+.pdeep__label{display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);font-weight:500;margin-bottom:.45rem}
+
 @media(max-width:900px){
   .pipeline{grid-template-columns:1fr;gap:0}
+  .engage{grid-template-columns:1fr 1fr;gap:2rem}
+}
+@media(max-width:640px){
+  .engage{grid-template-columns:1fr}
+  .path-tabs{display:flex;width:100%}
+  .path-tabs [role="tab"]{flex:1;padding:13px 10px}
 }
 @media(max-width:640px){
   /* 320px floor: the number rail becomes a label above the prose so
@@ -72,7 +110,16 @@
     </div>
   </section>
 
-  <section class="band" style="--plan-label:'The Four Steps'">
+  <section class="band path-switch" aria-label="Choose a pathway">
+    <div class="container">
+      <div class="path-tabs" role="tablist" aria-label="Project type">
+        <button type="button" role="tab" id="tab-residential" aria-selected="true" aria-controls="res-steps res-detail res-stages res-cta">Residential</button>
+        <button type="button" role="tab" id="tab-commercial" aria-selected="false" aria-controls="com-intro com-stages com-cta" tabindex="-1">Commercial</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="band path-first" id="res-steps" data-path="residential" role="tabpanel" aria-labelledby="tab-residential" style="--plan-label:'The Four Steps'">
     <div class="container">
       <div class="section-head reveal"><span class="eyebrow">How we work</span><h2>The same four steps, every job</h2>
         <p class="lead">Front yard refresh or a full rebuild, the path is identical. Nothing gets handed between trades and lost along the way.</p></div>
@@ -81,7 +128,7 @@
     </div>
   </section>
 
-  <section class="band band--dark contour" style="--plan-label:'Step By Step'">
+  <section class="band band--dark contour" id="res-detail" data-path="residential" style="--plan-label:'Step By Step'">
     <div class="container">
       <div class="section-head reveal"><span class="eyebrow">In detail</span><h2>What each step actually involves</h2>
         <p class="lead">The short version is above. Here is what happens on your property, in order.</p></div>
@@ -89,7 +136,7 @@
     </div>
   </section>
 
-  <section class="band" style="--plan-label:'Build Stages'">
+  <section class="band" id="res-stages" data-path="residential" style="--plan-label:'Build Stages'">
     <div class="container">
       <div class="row-split">
         <div class="reveal">
@@ -106,11 +153,41 @@
     </div>
   </section>
 
-  <section class="band band--dark contour" style="--plan-label:'Start Here'">
+  <section class="band band--dark contour" id="res-cta" data-path="residential" style="--plan-label:'Start Here'">
     <div class="container">
       <div class="section-head reveal"><span class="eyebrow">Get started</span><h2>Step one starts with a conversation</h2>
         <p class="lead">Tell us about your space and we will come out, walk it with you and put a free quote together — no obligation.</p></div>
       <p class="reveal"><a class="btn-ghost" href="contact.html">Book a consultation</a> &nbsp; <a class="btn-ghost" href="tel:+61404440222">Call 0404 440 222</a></p>
+    </div>
+  </section>
+
+  <!-- ===== Commercial pathway (#78) — client copy, Our Process: Commercial pathway ===== -->
+  <section class="band path-first" id="com-intro" data-path="commercial" role="tabpanel" aria-labelledby="tab-commercial" hidden style="--plan-label:'Commercial'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">Commercial projects</span><h2>How we work with builders, councils and project teams</h2>
+        <p class="lead">Commercial work runs to your procurement process, not ours. Whether you invite us to tender, request a quote or want early input on a design, you get a clear price, the documents you need, and one point of contact from first enquiry to the end of the defects period.</p></div>
+      <h3 class="reveal" style="margin:0 0 1.75rem">Ways to engage us</h3>
+      <ul class="engage reveal">
+        <li><span class="engage__no">01</span><h4>Invite us to tender</h4><p>Send your RFQ, RFT or EOI documents and we'll respond within your timeframe, complete and compliant.</p></li>
+        <li><span class="engage__no">02</span><h4>Request a quote</h4><p>For smaller packages or direct engagement, we'll inspect the site and provide an itemised quote.</p></li>
+        <li><span class="engage__no">03</span><h4>Add us to your panel or platform</h4><p>We're set up for supplier prequalification and can complete your onboarding requirements.</p></li>
+        <li><span class="engage__no">04</span><h4>Involve us early</h4><p>Our in-house landscape architect can help develop the design, budget and staging before you go to market.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band band--dark contour" id="com-stages" data-path="commercial" hidden style="--plan-label:'Eight Stages'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">Eight stages</span><h2>Our commercial process</h2></div>
+      <ol class="pdeep" id="com-stage-list"></ol>
+    </div>
+  </section>
+
+  <section class="band" id="com-cta" data-path="commercial" hidden style="--plan-label:'Start Here'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">Get started</span><h2>Have a tender, EOI or package to price?</h2>
+        <p class="lead">Send us your documents or tell us about the project. We'll confirm whether it's a fit and what we need from you.</p></div>
+      <p class="reveal path-btns"><a class="btn-ghost" href="contact.html">Send a tender or EOI</a> <a class="btn-ghost" href="compliance.html">Request our compliance pack</a></p>
     </div>
   </section>
 </main>
@@ -183,6 +260,80 @@
         '<span class="pipeline__name">' + s + '</span></li>';
     }).join('');
   }
+
+  /* Commercial pathway — the eight stages, client copy word for word:
+     [title, one-line summary, what happens]. */
+  var COM_STAGES = [
+    ["Prequalification and registration", "We get approved as your supplier before the work comes up.",
+     "We supply our capability statement, licence, insurance certificates, WHS documents and company details, and complete your supplier or subcontractor prequalification."],
+    ["Invitation and Expression of Interest", "You tell us about the opportunity and we confirm we're the right fit.",
+     "We review your EOI or invitation and respond with relevant experience, resources and availability. If a package isn't the right fit, we'll tell you early."],
+    ["Site inspection and document review", "We understand the scope fully before we price it.",
+     "We attend site meetings or inspections, review drawings and specifications, and raise RFIs on anything unclear so every bidder works from the same information."],
+    ["Tender or quote submission", "You receive a complete price you can compare like for like.",
+     "An itemised price with clear inclusions and exclusions, a proposed programme and staging, methodology, and the compliance documents your tender requires. Value-engineered alternatives are offered as separate options."],
+    ["Clarification, negotiation and award", "We finalise the scope and terms so there are no surprises.",
+     "We answer tender clarifications, attend interviews and work through scope or programme adjustments. On award, we review and sign the contract or subcontract and lodge current certificates of currency."],
+    ["Mobilisation", "Everything is in place before we arrive on site.",
+     "We attend the pre-start meeting, confirm the programme, submit site-specific SWMS, lodge Before You Dig Australia enquiries, complete site inductions and submit material samples for approval. Long-lead materials and plant are ordered and booked."],
+    ["Delivery and reporting", "We build to programme and keep you informed.",
+     "Work proceeds in agreed stages with quality checks at hold points. You receive regular progress updates and photos. Variations are priced and approved in writing before work starts, and progress claims are submitted on the agreed schedule."],
+    ["Practical completion, handover and defects period", "We finish properly and stay responsible after handover.",
+     "We complete a joint inspection, close out any defects and hand over as-built information, warranties, and plant and irrigation care guidance. We remain responsible through the defects liability period, and can provide ongoing maintenance or plant establishment if required."]
+  ];
+  var comList = document.getElementById("com-stage-list");
+  if (comList) {
+    comList.innerHTML = COM_STAGES.map(function (s, i) {
+      var n = (i + 1) < 10 ? "0" + (i + 1) : String(i + 1);
+      return '<li class="reveal">' +
+          '<div><span class="pdeep__no">Stage ' + n + '</span></div>' +
+          '<div><h3>' + s[0] + '</h3>' +
+            '<p class="measure pdeep__sum">' + s[1] + '</p>' +
+            '<span class="pdeep__label">What happens</span>' +
+            '<p class="measure">' + s[2] + '</p></div>' +
+        '</li>';
+    }).join('');
+  }
+
+  /* Residential | Commercial switch. Tabs pattern: arrows / Home / End move
+     between tabs, the hash keeps the choice linkable (process.html#commercial). */
+  var tabs = [].slice.call(document.querySelectorAll('.path-tabs [role="tab"]'));
+  function showPath(path, focus) {
+    tabs.forEach(function (t) {
+      var on = t.id === "tab-" + path;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      if (on && focus) t.focus();
+    });
+    document.querySelectorAll("[data-path]").forEach(function (sec) {
+      sec.hidden = sec.getAttribute("data-path") !== path;
+    });
+  }
+  function pathFromHash() {
+    return location.hash === "#commercial" ? "commercial" : "residential";
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () {
+      var path = t.id.replace("tab-", "");
+      showPath(path);
+      if (history.replaceState) history.replaceState(null, "", "#" + path);
+    });
+    t.addEventListener("keydown", function (e) {
+      var j = null;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") j = (i + 1) % tabs.length;
+      else if (e.key === "ArrowLeft" || e.key === "ArrowUp") j = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === "Home") j = 0;
+      else if (e.key === "End") j = tabs.length - 1;
+      if (j === null) return;
+      e.preventDefault();
+      tabs[j].click();
+      tabs[j].focus();
+    });
+  });
+  window.addEventListener("hashchange", function () {
+    if (location.hash === "#commercial" || location.hash === "#residential") showPath(pathFromHash());
+  });
+  showPath(pathFromHash());
 
   document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
 })();
