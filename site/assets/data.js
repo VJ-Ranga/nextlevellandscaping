@@ -44,15 +44,15 @@ window.NLL = {
       guide: { label: "Download Our Paving Guide", file: "assets/downloads/paving-guide.pdf" } },
     { no: "03", slug: "retaining-walls", name: "Retaining Walls", icon: "fa-solid fa-layer-group",
       desc: "Create garden beds, add a finishing edge, or section a sloping block — built to hold and to look considered.",
-      tags: ["Timber sleepers", "Concrete sleepers", "Blocks", "Brick"], img: "assets/img/services/retaining-walls.jpg",
+      tags: ["Timber sleepers", "Concrete sleepers", "Blocks", "Brick"], img: "assets/img/gallery/landing-page-mixed-sleeper-walls-turf-08.webp",
       guide: { label: "Download Our Retaining Wall Guide", file: "assets/downloads/retaining-wall-guide.pdf" } },
     { no: "04", slug: "fencing", name: "Fencing", icon: "fa-solid fa-grip-lines-vertical",
       desc: "Colorbond solutions including Good Neighbour, tubular and slat fencing — durability, privacy and a modern line to any property.",
-      tags: ["Good Neighbour", "Tubular", "Slat", "Automated gates"], img: "assets/img/services/fencing.jpg",
+      tags: ["Good Neighbour", "Tubular", "Slat", "Automated gates"], img: "assets/img/services/landing-page-mixed-vertical-slat-fence-05.webp",
       guide: { label: "Download Our Fencing Guide", file: "assets/downloads/fencing-guide.pdf" } },
     { no: "05", slug: "natural-artificial-grass", name: "Grass &amp; Soft Landscapes", icon: "fa-solid fa-leaf",
       desc: "Natural grass and artificial turf, custom garden beds, quality edging and expert planting — attractive, low-maintenance landscapes tailored to your property.",
-      tags: ["Natural turf", "Artificial turf", "Garden beds", "Planting"], img: "assets/img/services/grass.jpg",
+      tags: ["Natural turf", "Artificial turf", "Garden beds", "Planting"], img: "assets/img/services/somerton-park-backyard-spa-turf-03.webp",
       guide: { label: "Download Our Lawn and Lawn Care Guide", file: "assets/downloads/lawn-care-guide.pdf" } },
     { no: "06", slug: "irrigation", name: "Irrigation", icon: "fa-solid fa-droplet",
       desc: "Professionally installed systems, from drip lines to sprinklers, designed for your garden's size and needs — saving you time and water.",
@@ -239,6 +239,7 @@ window.NLL = {
       { img: "assets/img/gallery/somerton-4.jpg", w: 1280, h: 853, cap: "Patio paving \u00b7 Somerton Park" }
     ],
     "retaining-walls": [
+      { img: "assets/img/gallery/landing-page-mixed-sleeper-walls-turf-08.webp", w: 1049, h: 787, cap: "Tiered sleeper retaining walls" },
       { img: "assets/img/services/retaining-walls.jpg", w: 1440, h: 960, cap: "Block retaining wall" },
       { img: "assets/img/gallery/grange-2.jpg", w: 1280, h: 853, cap: "Block wall & steps \u00b7 Grange" },
       { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080, cap: "Rendered wall \u00b7 Klemzig" },
@@ -248,6 +249,7 @@ window.NLL = {
       { img: "assets/img/projects/klemzig.jpg", w: 1440, h: 1080, cap: "Feature wall \u00b7 Klemzig" }
     ],
     "fencing": [
+      { img: "assets/img/services/landing-page-mixed-vertical-slat-fence-05.webp", w: 874, h: 1166, cap: "Vertical slat fence" },
       { img: "assets/img/services/fencing.jpg", w: 852, h: 1024, cap: "Laser-cut screen" },
       { img: "assets/img/projects/grange.jpg", w: 1280, h: 853, cap: "Automated gate \u00b7 Grange" },
       { img: "assets/img/gallery/landing-page-mixed-black-picket-boundary-01.webp", w: 1166, h: 875, cap: "Tubular fencing" },
@@ -299,7 +301,7 @@ window.NLL = {
     { no: "2", icon: "fa-solid fa-compass-drafting",  name: "Design",       desc: "A 2D &amp; 3D plan tailored to your space and how you want to use it.",
       img: "assets/img/services/landscape-design.jpg", w: 1440, h: 810, alt: "A 3D landscape design render of a deck, fire pit and planting" },
     { no: "3", icon: "fa-solid fa-trowel-bricks",     name: "Execution",    desc: "On-time, on-budget delivery with clear communication throughout.",
-      img: "assets/img/services/paving.jpg",           w: 1280, h: 853, alt: "Completed driveway paving, edging and planting at an Adelaide home" },
+      img: "assets/img/gallery/campbelltown-sleeper-retaining-wall-01.webp", w: 1049, h: 787, alt: "A concrete sleeper retaining wall being built in an excavated backyard" },
     { no: "4", icon: "fa-solid fa-heart",             name: "Aftercare",    desc: "We stay in touch to make sure you're happy with the result.",
       img: "assets/img/projects/grange.jpg",           w: 1280, h: 853, alt: "An established, maintained garden at the Grange project" }
   ],
