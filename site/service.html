@@ -75,7 +75,7 @@
 <div id="site-footer-slot"></div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="assets/js/partials.js?v=1793000000"></script>
-<script src="assets/data.js?v=1793000100"></script>
+<script src="assets/data.js?v=1793000200"></script>
 <script src="assets/js/main.js?v=1793000100"></script>
 <script>
 (function(){
@@ -93,7 +93,8 @@
     "assets/img/services/fencing.jpg":          [852, 1024],
     "assets/img/services/grass.jpg":            [1440, 1080],
     "assets/img/services/irrigation.jpg":       [1440, 960],
-    "assets/img/services/maintenance.jpg":      [1440, 810]
+    "assets/img/services/maintenance.jpg":      [1440, 810],
+    "assets/img/gallery/penfield-mulched-garden-overview-03.webp": [944, 708]
   };
 
   document.title=plain+' — NextLevel Landscaping';
@@ -110,7 +111,7 @@
   heroImg.height=d[1];
 
   document.getElementById('s-media').innerHTML=
-    '<img loading="lazy" decoding="async" width="'+d[0]+'" height="'+d[1]+'" src="'+s.img+'" alt="'+plain+' by NextLevel Landscaping in Adelaide">';
+    '<img loading="lazy" decoding="async" width="'+d[0]+'" height="'+d[1]+'" src="'+s.img+'" alt="'+(s.alt||plain+' by NextLevel Landscaping in Adelaide')+'">';
 
   document.getElementById('s-tags').innerHTML=s.tags.map(function(t){return '<li>'+t+'</li>';}).join('');
   if(s.guide){
