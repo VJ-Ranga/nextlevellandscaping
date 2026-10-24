@@ -118,7 +118,7 @@ window.NLL = {
       slug: "a-north-haven-highlight", name: "A North Haven Highlight", suburb: "North Haven", date: "August 2025",
       blurb: "A striking, low-maintenance front yard on a large corner block — a designed paving pattern, Versawall raised bed and steps with split caps, artificial grass and LinkEdge aluminium edging around established trees.",
       tags: ["Paving", "Retaining walls", "Artificial grass", "Edging"],
-      img: "assets/img/projects/north-haven.jpg",
+      img: "assets/img/projects/north-haven-patterned-paving-turf-01.webp",
       scope: [
         "Thoughtfully designed paving pattern across the front yard",
         "Raised garden bed and integrated steps in Versawall® blocks with split caps",
@@ -126,7 +126,7 @@ window.NLL = {
         "LinkEdge aluminium edging around existing trees"
       ],
       narrative: "NextLevel Landscaping completed a striking front yard transformation at this new corner property in North Haven. With a large, open space extending to the verge, the goal was a visually appealing, low-maintenance landscape that maximised street presence and function. A carefully selected paving pattern forms the foundation of the front yard, adding elegance, texture and lasting value while guiding movement through the space. To add depth and structure, we built a raised garden bed and integrated steps using Versawall® blocks with matching split caps for a clean, contemporary finish. High-quality artificial grass was installed for a lush green look with minimal upkeep, and LinkEdge aluminium edging was set around the existing trees to neatly separate the grass from the tree surrounds. A prime example of smart design and quality materials turning an underused space into an eye-catching landscape.",
-      gallery: ["assets/img/projects/north-haven.jpg","assets/img/gallery/northhaven-1.jpg","assets/img/gallery/northhaven-2.jpg","assets/img/gallery/northhaven-3.jpg","assets/img/gallery/northhaven-4.jpg"]
+      gallery: ["assets/img/projects/north-haven-patterned-paving-turf-01.webp","assets/img/gallery/northhaven-1.jpg","assets/img/gallery/northhaven-2.jpg","assets/img/gallery/northhaven-3.jpg","assets/img/gallery/northhaven-4.jpg"]
     }
   ],
 
@@ -263,14 +263,13 @@ window.NLL = {
       { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080, cap: "Lawn \u00b7 Klemzig" },
       { img: "assets/img/services/paving.jpg", w: 1280, h: 853, cap: "Garden beds" },
       { img: "assets/img/gallery/somerton-3.jpg", w: 1280, h: 853, cap: "Planting \u00b7 Somerton Park" },
-      { img: "assets/img/projects/north-haven.jpg", w: 1280, h: 853, cap: "Front lawn \u00b7 North Haven" }
+      { img: "assets/img/projects/north-haven-patterned-paving-turf-01.webp", w: 1600, h: 661, cap: "Paving &amp; artificial turf \u00b7 North Haven" }
     ],
     "irrigation": [
       { img: "assets/img/services/irrigation.jpg", w: 1440, h: 960, cap: "Pop-up sprinkler" },
       { img: "assets/img/services/grass.jpg", w: 1440, h: 1080, cap: "Lawn irrigation" },
       { img: "assets/img/gallery/grange-3.jpg", w: 1280, h: 853, cap: "Lawn & garden \u00b7 Grange" },
       { img: "assets/img/gallery/grange-2.jpg", w: 1280, h: 853, cap: "Watered lawn \u00b7 Grange" },
-      { img: "assets/img/projects/north-haven.jpg", w: 1280, h: 853, cap: "Front lawn \u00b7 North Haven" },
       { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080, cap: "Lawn \u00b7 Klemzig" }
     ],
     "commercial-garden-maintenance": [
@@ -296,7 +295,7 @@ window.NLL = {
      step photography — nothing else needs to change. */
   process: [
     { no: "1", icon: "fa-solid fa-comments",          name: "Consultation", desc: "We visit the site and talk through your vision, budget and needs.",
-      img: "assets/img/projects/north-haven.jpg",      w: 1280, h: 853, alt: "A North Haven property NextLevel Landscaping was engaged to transform" },
+      img: "assets/img/projects/north-haven-patterned-paving-turf-01.webp", w: 1600, h: 661, alt: "Patterned paving and artificial turf at a North Haven project" },
     { no: "2", icon: "fa-solid fa-compass-drafting",  name: "Design",       desc: "A 2D &amp; 3D plan tailored to your space and how you want to use it.",
       img: "assets/img/services/landscape-design.jpg", w: 1440, h: 810, alt: "A 3D landscape design render of a deck, fire pit and planting" },
     { no: "3", icon: "fa-solid fa-trowel-bricks",     name: "Execution",    desc: "On-time, on-budget delivery with clear communication throughout.",
