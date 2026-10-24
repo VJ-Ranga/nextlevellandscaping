@@ -44,22 +44,23 @@ window.NLL = {
       guide: { label: "Download Our Paving Guide", file: "assets/downloads/paving-guide.pdf" } },
     { no: "03", slug: "retaining-walls", name: "Retaining Walls", icon: "fa-solid fa-layer-group",
       desc: "Create garden beds, add a finishing edge, or section a sloping block — built to hold and to look considered.",
-      tags: ["Timber sleepers", "Concrete sleepers", "Blocks", "Brick"], img: "assets/img/services/retaining-walls.jpg",
+      tags: ["Timber sleepers", "Concrete sleepers", "Blocks", "Brick"], img: "assets/img/gallery/landing-page-mixed-sleeper-walls-turf-08.webp",
       guide: { label: "Download Our Retaining Wall Guide", file: "assets/downloads/retaining-wall-guide.pdf" } },
     { no: "04", slug: "fencing", name: "Fencing", icon: "fa-solid fa-grip-lines-vertical",
       desc: "Colorbond solutions including Good Neighbour, tubular and slat fencing — durability, privacy and a modern line to any property.",
-      tags: ["Good Neighbour", "Tubular", "Slat", "Automated gates"], img: "assets/img/services/fencing.jpg",
+      tags: ["Good Neighbour", "Tubular", "Slat", "Automated gates"], img: "assets/img/services/landing-page-mixed-vertical-slat-fence-05.webp",
       guide: { label: "Download Our Fencing Guide", file: "assets/downloads/fencing-guide.pdf" } },
     { no: "05", slug: "natural-artificial-grass", name: "Grass &amp; Soft Landscapes", icon: "fa-solid fa-leaf",
       desc: "Natural grass and artificial turf, custom garden beds, quality edging and expert planting — attractive, low-maintenance landscapes tailored to your property.",
-      tags: ["Natural turf", "Artificial turf", "Garden beds", "Planting"], img: "assets/img/services/grass.jpg",
+      tags: ["Natural turf", "Artificial turf", "Garden beds", "Planting"], img: "assets/img/services/somerton-park-backyard-spa-turf-03.webp",
       guide: { label: "Download Our Lawn and Lawn Care Guide", file: "assets/downloads/lawn-care-guide.pdf" } },
     { no: "06", slug: "irrigation", name: "Irrigation", icon: "fa-solid fa-droplet",
       desc: "Professionally installed systems, from drip lines to sprinklers, designed for your garden's size and needs — saving you time and water.",
-      tags: ["Drip systems", "Sprinklers", "Wi-Fi control"], img: "assets/img/services/irrigation.jpg" },
+      tags: ["Drip systems", "Sprinklers", "Wi-Fi control"], img: "assets/img/services/irrigation.jpg",
+      alt: "Pop-up sprinkler watering a lawn (illustrative photo)" },
     { no: "07", slug: "commercial-garden-maintenance", name: "Commercial Maintenance", icon: "fa-solid fa-scissors",
       desc: "Qualified horticulturists keeping commercial properties sharp — pruning, planting, weeding and seasonal care, year-round.",
-      tags: ["Pruning", "Planting", "Weeding", "Seasonal care"], img: "assets/img/services/maintenance.jpg" }
+      tags: ["Pruning", "Planting", "Weeding", "Seasonal care"], img: "assets/img/gallery/penfield-mulched-garden-overview-03.webp" }
   ],
 
   /* --- completed projects (Our Work) ----------------------- */
@@ -118,7 +119,7 @@ window.NLL = {
       slug: "a-north-haven-highlight", name: "A North Haven Highlight", suburb: "North Haven", date: "August 2025",
       blurb: "A striking, low-maintenance front yard on a large corner block — a designed paving pattern, Versawall raised bed and steps with split caps, artificial grass and LinkEdge aluminium edging around established trees.",
       tags: ["Paving", "Retaining walls", "Artificial grass", "Edging"],
-      img: "assets/img/projects/north-haven.jpg",
+      img: "assets/img/projects/north-haven-patterned-paving-turf-01.webp",
       scope: [
         "Thoughtfully designed paving pattern across the front yard",
         "Raised garden bed and integrated steps in Versawall® blocks with split caps",
@@ -126,7 +127,7 @@ window.NLL = {
         "LinkEdge aluminium edging around existing trees"
       ],
       narrative: "NextLevel Landscaping completed a striking front yard transformation at this new corner property in North Haven. With a large, open space extending to the verge, the goal was a visually appealing, low-maintenance landscape that maximised street presence and function. A carefully selected paving pattern forms the foundation of the front yard, adding elegance, texture and lasting value while guiding movement through the space. To add depth and structure, we built a raised garden bed and integrated steps using Versawall® blocks with matching split caps for a clean, contemporary finish. High-quality artificial grass was installed for a lush green look with minimal upkeep, and LinkEdge aluminium edging was set around the existing trees to neatly separate the grass from the tree surrounds. A prime example of smart design and quality materials turning an underused space into an eye-catching landscape.",
-      gallery: ["assets/img/projects/north-haven.jpg","assets/img/gallery/northhaven-1.jpg","assets/img/gallery/northhaven-2.jpg","assets/img/gallery/northhaven-3.jpg","assets/img/gallery/northhaven-4.jpg"]
+      gallery: ["assets/img/projects/north-haven-patterned-paving-turf-01.webp","assets/img/gallery/north-haven-pebble-garden-bed-02.webp","assets/img/gallery/north-haven-raised-bed-steps-03.webp","assets/img/gallery/north-haven-planter-block-wall-04.webp","assets/img/gallery/north-haven-tree-edging-turf-07.webp"]
     }
   ],
 
@@ -195,20 +196,20 @@ window.NLL = {
      gets varied widths at a common height                      */
   projectStrip: [
     { img: "assets/img/projects/grange.jpg", w: 1280, h: 853,       cap: "Grange" },
-    { img: "assets/img/gallery/northhaven-3.jpg", w: 667, h: 1000,  cap: "North Haven" },
+    { img: "assets/img/gallery/north-haven-planter-block-wall-04.webp", w: 1166, h: 1049, cap: "North Haven" },
     { img: "assets/img/gallery/somerton-1.jpg", w: 1280, h: 853,    cap: "Somerton Park" },
-    { img: "assets/img/gallery/cw-a2.jpg", w: 667, h: 1000,         cap: "Detail" },
+    { img: "assets/img/gallery/grange-pool-travertine-detail-04.webp", w: 1600, h: 1067, cap: "Grange" },
     { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080,     cap: "Klemzig" },
-    { img: "assets/img/gallery/northhaven-1.jpg", w: 675, h: 844,  cap: "North Haven" },
+    { img: "assets/img/gallery/north-haven-pebble-garden-bed-02.webp", w: 1600, h: 1368, cap: "North Haven" },
     { img: "assets/img/gallery/grange-2.jpg", w: 1280, h: 853,      cap: "Grange" },
-    { img: "assets/img/gallery/cw-b1.jpg", w: 667, h: 1000,         cap: "Planting" },
+    { img: "assets/img/gallery/penfield-mulched-bed-detail-09.webp", w: 944, h: 708, cap: "Planting" },
     { img: "assets/img/gallery/somerton-3.jpg", w: 1280, h: 853,    cap: "Somerton Park" },
     { img: "assets/img/gallery/klemzig-4.jpg", w: 1440, h: 811,     cap: "Klemzig" },
-    { img: "assets/img/gallery/northhaven-4.jpg", w: 667, h: 1000,  cap: "Edging" },
+    { img: "assets/img/gallery/north-haven-tree-edging-turf-07.webp", w: 822, h: 1296, cap: "Edging" },
     { img: "assets/img/gallery/grange-4.jpg", w: 1280, h: 853,      cap: "Grange" },
-    { img: "assets/img/gallery/cw-c1.jpg", w: 667, h: 1000,         cap: "Paving" },
+    { img: "assets/img/gallery/north-haven-diamond-paving-05.webp", w: 1440, h: 960, cap: "Paving" },
     { img: "assets/img/gallery/somerton-4.jpg", w: 1280, h: 853,    cap: "Somerton Park" },
-    { img: "assets/img/gallery/cw-a1.jpg", w: 1440, h: 960,         cap: "Retaining walls" },
+    { img: "assets/img/gallery/landing-page-mixed-sleeper-walls-turf-08.webp", w: 1049, h: 787, cap: "Retaining walls" },
     { img: "assets/img/gallery/grange-3.jpg", w: 1280, h: 853,      cap: "Grange" }
   ],
 
@@ -222,7 +223,7 @@ window.NLL = {
       { img: "assets/img/gallery/grange-3.jpg", w: 1280, h: 853, cap: "Pool & pergola \u00b7 Grange" },
       { img: "assets/img/gallery/klemzig-4.jpg", w: 1440, h: 811, cap: "Outdoor living \u00b7 Klemzig" },
       { img: "assets/img/gallery/somerton-2.jpg", w: 1280, h: 853, cap: "Courtyard layout \u00b7 Somerton Park" },
-      { img: "assets/img/services/maintenance.jpg", w: 1440, h: 810, cap: "Entertaining area" },
+      { img: "assets/img/services/maintenance.jpg", w: 1440, h: 810, cap: "3D concept render" },
       { img: "assets/img/gallery/grange-4.jpg", w: 1280, h: 853, cap: "Feature paving \u00b7 Grange" },
       { img: "assets/img/gallery/somerton-3.jpg", w: 1280, h: 853, cap: "Raised planters \u00b7 Somerton Park" },
       { img: "assets/img/projects/klemzig.jpg", w: 1440, h: 1080, cap: "Travertine terrace \u00b7 Klemzig" }
@@ -238,6 +239,7 @@ window.NLL = {
       { img: "assets/img/gallery/somerton-4.jpg", w: 1280, h: 853, cap: "Patio paving \u00b7 Somerton Park" }
     ],
     "retaining-walls": [
+      { img: "assets/img/gallery/landing-page-mixed-sleeper-walls-turf-08.webp", w: 1049, h: 787, cap: "Tiered sleeper retaining walls" },
       { img: "assets/img/services/retaining-walls.jpg", w: 1440, h: 960, cap: "Block retaining wall" },
       { img: "assets/img/gallery/grange-2.jpg", w: 1280, h: 853, cap: "Block wall & steps \u00b7 Grange" },
       { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080, cap: "Rendered wall \u00b7 Klemzig" },
@@ -247,9 +249,10 @@ window.NLL = {
       { img: "assets/img/projects/klemzig.jpg", w: 1440, h: 1080, cap: "Feature wall \u00b7 Klemzig" }
     ],
     "fencing": [
+      { img: "assets/img/services/landing-page-mixed-vertical-slat-fence-05.webp", w: 874, h: 1166, cap: "Vertical slat fence" },
       { img: "assets/img/services/fencing.jpg", w: 852, h: 1024, cap: "Laser-cut screen" },
       { img: "assets/img/projects/grange.jpg", w: 1280, h: 853, cap: "Automated gate \u00b7 Grange" },
-      { img: "assets/img/gallery/cw-a1.jpg", w: 1440, h: 960, cap: "Tubular fencing" },
+      { img: "assets/img/gallery/landing-page-mixed-black-picket-boundary-01.webp", w: 1166, h: 875, cap: "Tubular fencing" },
       { img: "assets/img/gallery/grange-2.jpg", w: 1280, h: 853, cap: "Colorbond fencing \u00b7 Grange" },
       { img: "assets/img/gallery/grange-4.jpg", w: 1280, h: 853, cap: "Boundary fencing \u00b7 Grange" },
       { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080, cap: "Boundary fencing \u00b7 Klemzig" },
@@ -257,31 +260,29 @@ window.NLL = {
     ],
     "natural-artificial-grass": [
       { img: "assets/img/services/grass.jpg", w: 1440, h: 1080, cap: "Natural turf" },
-      { img: "assets/img/gallery/northhaven-2.jpg", w: 675, h: 844, cap: "Turf laying" },
+      { img: "assets/img/gallery/landing-page-mixed-sleeper-walls-turf-08.webp", w: 1049, h: 787, cap: "New turf below sleeper walls" },
       { img: "assets/img/gallery/somerton-2.jpg", w: 1280, h: 853, cap: "Artificial turf \u00b7 Somerton Park" },
       { img: "assets/img/gallery/grange-2.jpg", w: 1280, h: 853, cap: "Lawn & garden \u00b7 Grange" },
       { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080, cap: "Lawn \u00b7 Klemzig" },
       { img: "assets/img/services/paving.jpg", w: 1280, h: 853, cap: "Garden beds" },
       { img: "assets/img/gallery/somerton-3.jpg", w: 1280, h: 853, cap: "Planting \u00b7 Somerton Park" },
-      { img: "assets/img/projects/north-haven.jpg", w: 1280, h: 853, cap: "Front lawn \u00b7 North Haven" }
+      { img: "assets/img/projects/north-haven-patterned-paving-turf-01.webp", w: 1600, h: 661, cap: "Paving &amp; artificial turf \u00b7 North Haven" }
     ],
     "irrigation": [
-      { img: "assets/img/services/irrigation.jpg", w: 1440, h: 960, cap: "Pop-up sprinkler" },
+      { img: "assets/img/services/irrigation.jpg", w: 1440, h: 960, cap: "Pop-up sprinkler (illustrative)" },
       { img: "assets/img/services/grass.jpg", w: 1440, h: 1080, cap: "Lawn irrigation" },
       { img: "assets/img/gallery/grange-3.jpg", w: 1280, h: 853, cap: "Lawn & garden \u00b7 Grange" },
       { img: "assets/img/gallery/grange-2.jpg", w: 1280, h: 853, cap: "Watered lawn \u00b7 Grange" },
-      { img: "assets/img/projects/north-haven.jpg", w: 1280, h: 853, cap: "Front lawn \u00b7 North Haven" },
       { img: "assets/img/gallery/klemzig-3.jpg", w: 1440, h: 1080, cap: "Lawn \u00b7 Klemzig" }
     ],
     "commercial-garden-maintenance": [
-      { img: "assets/img/services/maintenance.jpg", w: 1440, h: 810, cap: "Commercial outdoor area" },
-      { img: "assets/img/gallery/cw-a1.jpg", w: 1440, h: 960, cap: "Planter displays" },
-      { img: "assets/img/gallery/cw-b1.jpg", w: 667, h: 1000, cap: "Feature planting" },
-      { img: "assets/img/gallery/cw-b2.jpg", w: 667, h: 1000, cap: "Indoor plant styling" },
-      { img: "assets/img/gallery/cw-c1.jpg", w: 667, h: 1000, cap: "Indoor plant styling" },
-      { img: "assets/img/gallery/cw-c2.jpg", w: 667, h: 1000, cap: "Indoor plant styling" },
-      { img: "assets/img/gallery/cw-a2.jpg", w: 667, h: 1000, cap: "Indoor plant styling" },
-      { img: "assets/img/gallery/northhaven-4.jpg", w: 667, h: 1000, cap: "Feature planting" },
+      { img: "assets/img/gallery/penfield-mulched-garden-overview-03.webp", w: 944, h: 708, cap: "New planting under established trees \u00b7 Penfield" },
+      { img: "assets/img/gallery/penfield-succulent-planting-04.webp", w: 944, h: 708, cap: "Succulent planting \u00b7 Penfield" },
+      { img: "assets/img/gallery/penfield-garden-feature-cart-05.webp", w: 944, h: 708, cap: "Restored garden beds \u00b7 Penfield" },
+      { img: "assets/img/gallery/penfield-mass-planting-layout-07.webp", w: 944, h: 787, cap: "Mass planting \u00b7 Penfield" },
+      { img: "assets/img/gallery/penfield-border-planting-08.webp", w: 708, h: 944, cap: "Border planting \u00b7 Penfield" },
+      { img: "assets/img/gallery/penfield-front-garden-planting-06.webp", w: 944, h: 753, cap: "Garden planting \u00b7 Penfield" },
+      { img: "assets/img/gallery/penfield-mulched-bed-detail-09.webp", w: 944, h: 708, cap: "Freshly mulched bed \u00b7 Penfield" },
       { img: "assets/img/gallery/somerton-3.jpg", w: 1280, h: 853, cap: "Garden beds \u00b7 Somerton Park" }
     ]
   },
@@ -296,11 +297,11 @@ window.NLL = {
      step photography — nothing else needs to change. */
   process: [
     { no: "1", icon: "fa-solid fa-comments",          name: "Consultation", desc: "We visit the site and talk through your vision, budget and needs.",
-      img: "assets/img/projects/north-haven.jpg",      w: 1280, h: 853, alt: "A North Haven property NextLevel Landscaping was engaged to transform" },
+      img: "assets/img/projects/north-haven-patterned-paving-turf-01.webp", w: 1600, h: 661, alt: "Patterned paving and artificial turf at a North Haven project" },
     { no: "2", icon: "fa-solid fa-compass-drafting",  name: "Design",       desc: "A 2D &amp; 3D plan tailored to your space and how you want to use it.",
       img: "assets/img/services/landscape-design.jpg", w: 1440, h: 810, alt: "A 3D landscape design render of a deck, fire pit and planting" },
     { no: "3", icon: "fa-solid fa-trowel-bricks",     name: "Execution",    desc: "On-time, on-budget delivery with clear communication throughout.",
-      img: "assets/img/services/paving.jpg",           w: 1280, h: 853, alt: "Completed driveway paving, edging and planting at an Adelaide home" },
+      img: "assets/img/gallery/campbelltown-sleeper-retaining-wall-01.webp", w: 1049, h: 787, alt: "A concrete sleeper retaining wall being built in an excavated backyard" },
     { no: "4", icon: "fa-solid fa-heart",             name: "Aftercare",    desc: "We stay in touch to make sure you're happy with the result.",
       img: "assets/img/projects/grange.jpg",           w: 1280, h: 853, alt: "An established, maintained garden at the Grange project" }
   ],
