@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1793000500">
+<link rel="stylesheet" href="assets/css/style.css?v=1793000800">
 <link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1791871600">
 </head>
 <body>
@@ -34,9 +34,11 @@
         <div class="svc__media"><div class="media" id="s-media"></div></div>
         <div class="svc__body">
           <span class="svc__no"><i id="s-icon" aria-hidden="true"></i><span id="s-no"></span></span>
-          <h2>Options &amp; materials</h2>
-          <p class="measure" id="s-more"></p>
-          <ul class="chips" id="s-tags"></ul>
+          <div id="s-panel" role="tabpanel">
+            <h2 id="s-heading"></h2>
+            <p class="measure" id="s-more"></p>
+          </div>
+          <div class="svc-tabs" id="s-tabs" role="tablist"></div>
           <p class="svc-actions"><a class="btn-ghost btn-ghost--fill" href="contact.html">Get a free quote</a>
             <!-- guide download: shown only for services with a `guide` in data.js; PDFs are placeholders until the client supplies them -->
             <a class="btn-ghost svc-download" id="s-download" href="#" download hidden><i class="fa-solid fa-download" aria-hidden="true"></i><span id="s-download-label"></span></a></p>
@@ -74,7 +76,7 @@
 <div id="site-footer-slot"></div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="assets/js/partials.js?v=1793000000"></script>
-<script src="assets/data.js?v=1793000300"></script>
+<script src="assets/data.js?v=1793000800"></script>
 <script src="assets/js/main.js?v=1793000100"></script>
 <script>
 (function(){
@@ -112,18 +114,89 @@
   heroImg.width=d[0];
   heroImg.height=d[1];
 
-  document.getElementById('s-media').innerHTML=
-    '<img loading="lazy" decoding="async" width="'+d[0]+'" height="'+d[1]+'" src="'+s.img+'" alt="'+(s.alt||plain+' by NextLevel Landscaping in Adelaide')+'">';
-
-  document.getElementById('s-tags').innerHTML=s.tags.map(function(t){return '<li>'+t+'</li>';}).join('');
+  var mainText='Every job starts with an on-site consultation and a 2D & 3D design, so you can see the finished space before we begin. One team handles the whole build.';
+  var tabs=[{label:plain,heading:plain,text:mainText,img:s.img,w:d[0],h:d[1]}].concat((s.subs||[]).map(function(sub){
+    var photo=sub.img||s.img;
+    var size=(sub.w&&sub.h)?[sub.w,sub.h]:(DIM[photo]||[1440,960]);
+    return {label:sub.label.replace(/&amp;/g,'&'),heading:sub.label.replace(/&amp;/g,'&'),text:sub.text,img:photo,fallback:sub.img&&sub.img!==s.img?s.img:null,w:size[0],h:size[1]};
+  }));
+  var tabList=document.getElementById('s-tabs');
+  var heading=document.getElementById('s-heading');
+  var more=document.getElementById('s-more');
+  var media=document.getElementById('s-media');
+  var panel=document.getElementById('s-panel');
+  var slugify=function(value){return value.toLowerCase().replace(/&amp;/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');};
+  tabList.innerHTML=tabs.map(function(tab,i){
+    return '<button type="button" role="tab" id="s-tab-'+i+'" aria-controls="s-panel" aria-selected="false" tabindex="-1">'+tab.label+'</button>';
+  }).join('');
+  var tabButtons=tabList.querySelectorAll('[role="tab"]');
+  var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fadeTimer;
+  var selectionToken=0;
+  if(/\billustrative\b/i.test(s.alt||'')){
+    media.insertAdjacentHTML('afterend','<p class="svc-illus">Illustrative photo</p>');
+  }
+  var selectTab=function(index,updateHash,animate){
+    var token=++selectionToken;
+    var tab=tabs[index];
+    tabButtons.forEach(function(button,i){
+      var active=i===index;
+      button.setAttribute('aria-selected',active?'true':'false');
+      button.tabIndex=active?0:-1;
+    });
+    panel.setAttribute('aria-labelledby','s-tab-'+index);
+    heading.textContent=tab.heading;
+    more.textContent=tab.text;
+    window.clearTimeout(fadeTimer);
+    var swap=function(){
+      if(token!==selectionToken)return;
+      var image=document.createElement('img');
+      image.loading='lazy';
+      image.decoding='async';
+      image.width=tab.w;
+      image.height=tab.h;
+      image.alt=tab.heading+' by NextLevel Landscaping in Adelaide';
+      var fallbackAttempted=false;
+      image.addEventListener('error',function(){
+        if(token!==selectionToken||fallbackAttempted||!tab.fallback)return;
+        fallbackAttempted=true;
+        image.removeAttribute('src');
+        image.src=tab.fallback;
+      });
+      image.src=tab.img;
+      media.replaceChildren(image);
+      media.classList.remove('is-fading');
+    };
+    if(reduceMotion||!animate){swap();}else{
+      var currentImage=media.querySelector('img');
+      if(currentImage)currentImage.classList.add('is-fading');
+      fadeTimer=window.setTimeout(swap,180);
+    }
+    if(updateHash) history.replaceState(null,'','#sub='+encodeURIComponent(slugify(tab.label)));
+  };
+  tabButtons.forEach(function(button,i){
+    button.addEventListener('click',function(){selectTab(i,true,true);});
+    button.addEventListener('keydown',function(event){
+      var next=i;
+      if(event.key==='ArrowLeft') next=(i-1+tabs.length)%tabs.length;
+      else if(event.key==='ArrowRight') next=(i+1)%tabs.length;
+      else if(event.key==='Home') next=0;
+      else if(event.key==='End') next=tabs.length-1;
+      else return;
+      event.preventDefault();
+      tabButtons[next].focus();
+      selectTab(next,true,true);
+    });
+  });
+  var requested=new URLSearchParams(location.hash.slice(1)).get('sub');
+  var initial=tabs.findIndex(function(tab){return slugify(tab.label)===requested;});
+  selectTab(initial>-1?initial:0,false,false);
   if(s.guide){
     var dl=document.getElementById('s-download');
     dl.href=s.guide.file;
     document.getElementById('s-download-label').textContent=s.guide.label;
     dl.hidden=false;
   }
-  document.getElementById('s-more').innerHTML='Every job starts with an on-site consultation and a 2D &amp; 3D design, so you can see the finished space before we begin. One team handles the whole build.';
-
   // related projects: match a service tag against project tags
   var key=plain.split(' ')[0].toLowerCase();
   var rel=(D.projects||[]).filter(function(p){
