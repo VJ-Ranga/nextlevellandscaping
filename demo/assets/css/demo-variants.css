@@ -203,3 +203,19 @@ html[data-theme="carbon-soft-v2"][data-overlay="dark"] .subhero--photo .subhero_
   html[data-hdr-menu="mega"] .mega a::before{content:none !important;display:none !important}
   html[data-hdr-menu="mega"] .mega a{counter-increment:none !important}
 }
+
+/* ---- K: sub-page hero height (original / +30 / +50 / +80) ---------- */
+html[data-theme][data-hero-h="0"]  .subhero--photo{min-height:clamp(380px,56vh,600px)}
+html[data-theme][data-hero-h="30"] .subhero--photo{min-height:clamp(410px,calc(56vh + 30px),630px)}
+html[data-theme][data-hero-h="50"] .subhero--photo{min-height:clamp(430px,calc(56vh + 50px),650px)}
+html[data-theme][data-hero-h="80"] .subhero--photo{min-height:clamp(460px,calc(56vh + 80px),680px)}
+html[data-theme][data-hero-h="0"]  .subhero:not(.subhero--photo){padding-bottom:64px}
+html[data-theme][data-hero-h="30"] .subhero:not(.subhero--photo){padding-bottom:94px}
+html[data-theme][data-hero-h="50"] .subhero:not(.subhero--photo){padding-bottom:114px}
+html[data-theme][data-hero-h="80"] .subhero:not(.subhero--photo){padding-bottom:144px}
+@media(max-width:640px){
+  html[data-theme][data-hero-h="0"]  .subhero--photo{min-height:clamp(320px,46vh,420px)}
+  html[data-theme][data-hero-h="30"] .subhero--photo{min-height:clamp(350px,calc(46vh + 30px),450px)}
+  html[data-theme][data-hero-h="50"] .subhero--photo{min-height:clamp(370px,calc(46vh + 50px),470px)}
+  html[data-theme][data-hero-h="80"] .subhero--photo{min-height:clamp(400px,calc(46vh + 80px),500px)}
+}
