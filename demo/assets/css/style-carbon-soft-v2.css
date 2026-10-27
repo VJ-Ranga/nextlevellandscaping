@@ -938,3 +938,41 @@ html[data-theme="carbon-soft-v2"] .subhero--photo .container{
     padding-bottom:48px;
   }
 }
+
+
+/* =============================================================
+   23. Values row on a dark band (about.html "What we stand for")
+   Icon was olive-on-night (invisible) and the 4-col process grid
+   left an empty fourth column. Three columns, lime icon, hairline
+   ring, numeral badge on night.
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] .band--dark .proc__num{
+  border-color:var(--v2-line-nt);
+  color:var(--v2-lime);
+  font-size:1.6rem;
+}
+html[data-theme="carbon-soft-v2"] .band--dark .proc__num span{
+  background:var(--v2-lime);
+  color:#17190F;
+  border:2px solid var(--v2-night);
+  font-size:.75rem;
+  font-weight:500;
+}
+@media(min-width:901px){
+  html[data-theme="carbon-soft-v2"] .proc-grid--3{grid-template-columns:repeat(3,1fr);gap:4rem}
+}
+
+/* =============================================================
+   24. Sub-page heroes: 30px taller on every page
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] .subhero--photo{
+  min-height:clamp(410px,calc(56vh + 30px),630px);
+}
+html[data-theme="carbon-soft-v2"] .subhero:not(.subhero--photo){
+  padding-bottom:94px;
+}
+@media(max-width:640px){
+  html[data-theme="carbon-soft-v2"] .subhero--photo{
+    min-height:clamp(350px,calc(46vh + 30px),450px);
+  }
+}
