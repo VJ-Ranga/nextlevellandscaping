@@ -1421,8 +1421,6 @@ html[data-theme="carbon-soft-v2"] #services .section-head .eyebrow{
 
 /* Service page credential line — plain small text, not the dashed
    "draft note" box it used to borrow. */
-.svc-cred{display:flex;align-items:baseline;gap:.65em;margin-top:1.5rem;font-size:.82rem;line-height:1.6;color:var(--muted)}
-.svc-cred i{color:var(--accent);font-size:.95em}
 
 /* 12. Contour lines (client Stage 02 V2): re-oriented artwork
    (ridge runs bottom-left to top-right), a little stronger, and
