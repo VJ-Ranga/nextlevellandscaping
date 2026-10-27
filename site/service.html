@@ -121,7 +121,8 @@
   heroImg.height=d[1];
 
   var mainText='Every job starts with an on-site consultation and a 2D & 3D design, so you can see the finished space before we begin. One team handles the whole build.';
-  var items=[{label:plain,heading:plain,text:mainText,img:s.img,w:d[0],h:d[1],fallback:null}].concat((s.subs||[]).map(function(sub){
+  var dec=function(h){var t=document.createElement('textarea');t.innerHTML=h;return t.value;};
+  var items=[{label:plain,heading:plain,text:dec(s.desc),img:s.img,w:d[0],h:d[1],fallback:null}].concat((s.subs||[]).map(function(sub){
     var photo=sub.img||s.img;
     var size=(sub.w&&sub.h)?[sub.w,sub.h]:(DIM[photo]||[1440,960]);
     var lab=sub.label.replace(/&amp;/g,'&');
@@ -135,7 +136,7 @@
   var copyInner=document.querySelector('#s-copy .svc-copy__inner');
   document.getElementById('s-eyebrow').textContent='Options & materials';
   document.getElementById('s-heading').textContent=plain;
-  var leadEl=document.getElementById('s-lead'); if(leadEl) leadEl.hidden=true;
+  var leadEl=document.getElementById('s-lead'); if(leadEl) leadEl.textContent=mainText;
   listEl.innerHTML=items.map(function(it,i){
     return '<li><button class="svc-item" type="button" data-i="'+i+'" aria-pressed="false"><span class="svc-item__no">'+pad(i+1)+'</span><span class="svc-item__name">'+esc(it.label)+'</span><span class="svc-item__go"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></button><div class="svc-accordion-media"><div class="inner"><div class="media"><img loading="lazy" decoding="async" src="'+esc(it.img)+'" alt="" width="'+it.w+'" height="'+it.h+'"></div><p>'+esc(it.text)+'</p></div></div></li>';
   }).join('');

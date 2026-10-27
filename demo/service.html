@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="robots" content="noindex">
-<script src="assets/js/demo-bar.js?v=18"></script>
+<script src="assets/js/demo-bar.js?v=19"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Service — NextLevel Landscaping</title>
 <meta name="description" content="Landscaping services across Adelaide by NextLevel Landscaping — licensed builder BLD320507.">
@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="assets/css/style.css?v=1793001000">
 <link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1791871600">
 <link rel="stylesheet" href="assets/css/demo-bar.css?v=15">
-<link rel="stylesheet" href="assets/css/demo-variants.css?v=16">
+<link rel="stylesheet" href="assets/css/demo-variants.css?v=19">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -125,7 +125,8 @@
   heroImg.height=d[1];
 
   var mainText='Every job starts with an on-site consultation and a 2D & 3D design, so you can see the finished space before we begin. One team handles the whole build.';
-  var items=[{label:plain,heading:plain,text:mainText,img:s.img,w:d[0],h:d[1],fallback:null}].concat((s.subs||[]).map(function(sub){
+  var dec=function(h){var t=document.createElement('textarea');t.innerHTML=h;return t.value;};
+  var items=[{label:plain,heading:plain,text:dec(s.desc),img:s.img,w:d[0],h:d[1],fallback:null}].concat((s.subs||[]).map(function(sub){
     var photo=sub.img||s.img;
     var size=(sub.w&&sub.h)?[sub.w,sub.h]:(DIM[photo]||[1440,960]);
     var lab=sub.label.replace(/&amp;/g,'&');
@@ -139,7 +140,7 @@
   var copyInner=document.querySelector('#s-copy .svc-copy__inner');
   document.getElementById('s-eyebrow').textContent='Options & materials';
   document.getElementById('s-heading').textContent=plain;
-  var leadEl=document.getElementById('s-lead'); if(leadEl) leadEl.hidden=true;
+  var leadEl=document.getElementById('s-lead'); if(leadEl) leadEl.textContent=mainText;
   listEl.innerHTML=items.map(function(it,i){
     return '<li><button class="svc-item" type="button" data-i="'+i+'" aria-pressed="false"><span class="svc-item__no">'+pad(i+1)+'</span><span class="svc-item__name">'+esc(it.label)+'</span><span class="svc-item__go"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></button><div class="svc-accordion-media"><div class="inner"><div class="media"><img loading="lazy" decoding="async" src="'+esc(it.img)+'" alt="" width="'+it.w+'" height="'+it.h+'"></div><p>'+esc(it.text)+'</p></div></div></li>';
   }).join('');

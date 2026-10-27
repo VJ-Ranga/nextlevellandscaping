@@ -8,9 +8,10 @@
    A3 + B2 + D2 (Stage 02 V2), which is now built into the page
    itself (hero-final.css + hero.js, same as site/).
 
-   Sets three attributes on <html>, persisted in localStorage:
+   Sets four attributes on <html>, persisted in localStorage:
      data-hdr-util  12.8 | 13.5 | 14.5 | 15.5   header top row text
      data-hdr-nav   17 | 17.5 | 18 | 19         header main menu text
+     data-hdr-menu  flat | grid | bar | min | old  Services dropdown style
      data-overlay   normal | dark               sub-page hero overlay
 
    The attribute write below runs the instant this file is parsed
@@ -22,10 +23,12 @@
 
   var UTIL_KEY = "nll-demo-hdr-util";
   var NAV_KEY = "nll-demo-hdr-nav";
+  var MENU_KEY = "nll-demo-hdr-menu";
   var OVERLAY_KEY = "nll-demo-overlay";
 
   var UTIL_OPTS = ["12.8", "13.5", "14.5", "15.5"];
   var NAV_OPTS = ["17", "17.5", "18", "19"];
+  var MENU_OPTS = ["flat", "grid", "bar", "min", "old"];
   var OVERLAY_OPTS = ["normal", "dark"];
 
   function readStored(key, allowed, def) {
@@ -41,12 +44,14 @@
   var state = {
     util: readStored(UTIL_KEY, UTIL_OPTS, "14.5"),
     nav: readStored(NAV_KEY, NAV_OPTS, "18"),
+    menu: readStored(MENU_KEY, MENU_OPTS, "flat"),
     overlay: readStored(OVERLAY_KEY, OVERLAY_OPTS, "normal")
   };
 
   function applyAttrs() {
     html.setAttribute("data-hdr-util", state.util);
     html.setAttribute("data-hdr-nav", state.nav);
+    html.setAttribute("data-hdr-menu", state.menu);
     html.setAttribute("data-overlay", state.overlay);
   }
   applyAttrs(); // runs immediately, pre-paint
@@ -69,6 +74,16 @@
       { code: "G4", val: "19", label: "19px" }
     ]
   };
+  var GROUP_H = {
+    code: "H", label: "Services menu", key: "menu", storeKey: MENU_KEY,
+    opts: [
+      { code: "H1", val: "flat", label: "Flat list" },
+      { code: "H2", val: "grid", label: "Two columns" },
+      { code: "H3", val: "bar", label: "Full-width bar" },
+      { code: "H4", val: "min", label: "Minimal" },
+      { code: "H0", val: "old", label: "Old (current)" }
+    ]
+  };
   var GROUP_C = {
     code: "C", label: "Overlay", key: "overlay", storeKey: OVERLAY_KEY,
     opts: [
@@ -77,7 +92,7 @@
     ]
   };
 
-  /* F/G (header text sizes) show on every page; C (overlay) only
+  /* F/G/H (header options) show on every page; C (overlay) only
      on sub-pages, whose photo heroes it affects. Detected
      structurally (no #hero-car-track means "not the homepage"). */
   // NOTE: computed lazily inside buildBar(), not here — this file
@@ -97,8 +112,8 @@
 
   function buildBar() {
     var isHome = !!document.getElementById("hero-car-track");
-    GROUPS = isHome ? [GROUP_F, GROUP_G] : [GROUP_F, GROUP_G, GROUP_C];
-    HINT_TEXT = isHome ? "Tell us your pick, e.g. F2 + G3" : "Tell us your pick, e.g. F2 + G3 + C1";
+    GROUPS = isHome ? [GROUP_F, GROUP_G, GROUP_H] : [GROUP_F, GROUP_G, GROUP_H, GROUP_C];
+    HINT_TEXT = isHome ? "Tell us your pick, e.g. F2 + G3 + H1" : "Tell us your pick, e.g. F2 + G3 + H1 + C1";
 
     var bar = document.createElement("div");
     bar.className = "demo-bar";
