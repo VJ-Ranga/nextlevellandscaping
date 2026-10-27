@@ -162,9 +162,10 @@ html[data-theme="carbon-soft-v2"][data-overlay="dark"] .subhero--photo .subhero_
   }
   html[data-hdr-menu="mega"] .mega__no{color:#C2E807;font-size:.72rem;letter-spacing:.14em;width:1.6rem}
   html[data-hdr-menu="mega"] .mega__svc i{display:none}
-  html[data-hdr-icons="on"][data-hdr-menu="mega"] .mega__svc i{
-    display:inline-block;width:1.4em;text-align:center;color:#C2E807;font-size:.9em;
+  html[data-hdr-icons="on"][data-hdr-menu="mega"] .hdr2__drop-panel .mega__svc i{
+    display:inline-block;width:1.4em;text-align:center;color:#C2E807;font-size:.95em;
   }
+  html[data-hdr-icons="on"][data-hdr-menu="mega"] .mega__no{display:none}
   html[data-hdr-menu="mega"] .mega__svc:hover,
   html[data-hdr-menu="mega"] .mega__svc.is-on{color:#C2E807;padding-left:.35rem}
   html[data-hdr-menu="mega"] .mega__all{
