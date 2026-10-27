@@ -90,7 +90,7 @@
       var pImg = mega.querySelector('.mega__fig img');
       if (svc.img) pImg.setAttribute('src', svc.img);
       else pImg.removeAttribute('src');
-      pImg.loading = i === 0 ? 'eager' : 'lazy';
+      pImg.loading = 'eager';
 
       mega.querySelector('.mega__desc').textContent = decode(svc.desc);
       var v = mega.querySelector('.mega__view');
