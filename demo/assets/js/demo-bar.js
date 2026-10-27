@@ -8,11 +8,13 @@
    A3 + B2 + D2 (Stage 02 V2), which is now built into the page
    itself (hero-final.css + hero.js, same as site/).
 
-   Sets four attributes on <html>, persisted in localStorage:
+   Sets six attributes on <html>, persisted in localStorage:
      data-hdr-util  12.8 | 13.5 | 14.5 | 15.5   header top row text
      data-hdr-nav   17 | 17.5 | 18 | 19         header main menu text
-     data-hdr-menu  flat | grid | bar | min | old  Services dropdown style
+     data-hdr-menu  flat | grid | bar | min | mega | old  Services dropdown style
      data-overlay   normal | dark               sub-page hero overlay
+     data-hdr-open  transparent | solid         header background when menu open
+     data-hdr-icons off | on                    menu icons (off = numbers)
 
    The attribute write below runs the instant this file is parsed
    — before <body> exists — so the page never paints the default
@@ -25,11 +27,15 @@
   var NAV_KEY = "nll-demo-hdr-nav";
   var MENU_KEY = "nll-demo-hdr-menu";
   var OVERLAY_KEY = "nll-demo-overlay";
+  var OPEN_KEY = "nll-demo-hdr-open";
+  var ICONS_KEY = "nll-demo-hdr-icons";
 
   var UTIL_OPTS = ["12.8", "13.5", "14.5", "15.5"];
   var NAV_OPTS = ["17", "17.5", "18", "19"];
-  var MENU_OPTS = ["flat", "grid", "bar", "min", "old"];
+  var MENU_OPTS = ["flat", "grid", "bar", "min", "mega", "old"];
   var OVERLAY_OPTS = ["normal", "dark"];
+  var OPEN_OPTS = ["transparent", "solid"];
+  var ICONS_OPTS = ["off", "on"];
 
   function readStored(key, allowed, def) {
     var v = null;
@@ -45,7 +51,9 @@
     util: readStored(UTIL_KEY, UTIL_OPTS, "14.5"),
     nav: readStored(NAV_KEY, NAV_OPTS, "18"),
     menu: readStored(MENU_KEY, MENU_OPTS, "flat"),
-    overlay: readStored(OVERLAY_KEY, OVERLAY_OPTS, "normal")
+    overlay: readStored(OVERLAY_KEY, OVERLAY_OPTS, "normal"),
+    open: readStored(OPEN_KEY, OPEN_OPTS, "solid"),
+    icons: readStored(ICONS_KEY, ICONS_OPTS, "off")
   };
 
   function applyAttrs() {
@@ -53,6 +61,8 @@
     html.setAttribute("data-hdr-nav", state.nav);
     html.setAttribute("data-hdr-menu", state.menu);
     html.setAttribute("data-overlay", state.overlay);
+    html.setAttribute("data-hdr-open", state.open);
+    html.setAttribute("data-hdr-icons", state.icons);
   }
   applyAttrs(); // runs immediately, pre-paint
 
@@ -81,6 +91,7 @@
       { code: "H2", val: "grid", label: "Two columns" },
       { code: "H3", val: "bar", label: "Full-width bar" },
       { code: "H4", val: "min", label: "Minimal" },
+      { code: "H5", val: "mega", label: "Mega menu" },
       { code: "H0", val: "old", label: "Old (current)" }
     ]
   };
@@ -89,6 +100,20 @@
     opts: [
       { code: "C1", val: "normal", label: "Normal" },
       { code: "C2", val: "dark", label: "Dark" }
+    ]
+  };
+  var GROUP_I = {
+    code: "I", label: "Header when menu open", key: "open", storeKey: OPEN_KEY,
+    opts: [
+      { code: "I1", val: "transparent", label: "Transparent" },
+      { code: "I2", val: "solid", label: "Solid dark" }
+    ]
+  };
+  var GROUP_J = {
+    code: "J", label: "Menu icons", key: "icons", storeKey: ICONS_KEY,
+    opts: [
+      { code: "J1", val: "off", label: "Off (numbers)" },
+      { code: "J2", val: "on", label: "On" }
     ]
   };
 
@@ -112,8 +137,8 @@
 
   function buildBar() {
     var isHome = !!document.getElementById("hero-car-track");
-    GROUPS = isHome ? [GROUP_F, GROUP_G, GROUP_H] : [GROUP_F, GROUP_G, GROUP_H, GROUP_C];
-    HINT_TEXT = isHome ? "Tell us your pick, e.g. F2 + G3 + H1" : "Tell us your pick, e.g. F2 + G3 + H1 + C1";
+    GROUPS = isHome ? [GROUP_F, GROUP_G, GROUP_H, GROUP_I, GROUP_J] : [GROUP_F, GROUP_G, GROUP_H, GROUP_I, GROUP_J, GROUP_C];
+    HINT_TEXT = isHome ? "Tell us your pick, e.g. F2 + G3 + H3 + I2 + J1" : "Tell us your pick, e.g. F2 + G3 + H3 + I2 + J1 + C1";
 
     var bar = document.createElement("div");
     bar.className = "demo-bar";
