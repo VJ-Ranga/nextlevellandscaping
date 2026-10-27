@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link rel="stylesheet" href="assets/css/style.css?v=1793000800">
+<link rel="stylesheet" href="assets/css/style.css?v=1793001000">
 <link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1791871600">
 <link rel="stylesheet" href="assets/css/demo-bar.css?v=15">
 <link rel="stylesheet" href="assets/css/demo-variants.css?v=16">
@@ -32,22 +32,30 @@
     </div>
   </section>
 
-  <section class="band" style="--plan-label:'Detail'">
+  <section class="band svc-detail" id="service-detail" style="--plan-label:'Detail'">
     <div class="container">
-      <article class="svc reveal" style="margin-bottom:0">
-        <div class="svc__media"><div class="media" id="s-media"></div></div>
-        <div class="svc__body">
-          <span class="svc__no"><i id="s-icon" aria-hidden="true"></i><span id="s-no"></span></span>
-          <div id="s-panel" role="tabpanel">
-            <h2 id="s-heading"></h2>
-            <p class="measure" id="s-more"></p>
+      <div class="svc-explorer reveal">
+        <div class="svc-left">
+          <div class="section-head">
+            <span class="eyebrow" id="s-eyebrow"></span>
+            <h2 class="sr-only" id="s-heading"></h2>
+            <p class="lead" id="s-lead"></p>
           </div>
-          <div class="svc-tabs" id="s-tabs" role="tablist"></div>
+          <ul class="svc-list" id="s-list"></ul>
+        </div>
+        <div class="svc-stage">
+          <div class="svc-figure" id="s-media"></div>
+          <div class="svc-copy" id="s-copy">
+            <div class="svc-copy__inner is-on">
+              <h3 id="s-title"></h3>
+              <p id="s-more"></p>
+            </div>
+          </div>
           <p class="svc-actions"><a class="btn-ghost btn-ghost--fill" href="contact.html">Get a free quote</a>
             <!-- guide download: shown only for services with a `guide` in data.js; PDFs are placeholders until the client supplies them -->
             <a class="btn-ghost svc-download" id="s-download" href="#" download hidden><i class="fa-solid fa-download" aria-hidden="true"></i><span id="s-download-label"></span></a></p>
         </div>
-      </article>
+      </div>
     </div>
   </section>
 
@@ -109,8 +117,6 @@
   document.getElementById('crumb-name').textContent=plain;
   document.getElementById('s-name').innerHTML=s.name;
   document.getElementById('s-desc').innerHTML=s.desc;
-  document.getElementById('s-icon').className=s.icon;
-  document.getElementById('s-no').textContent=s.no+' / 07';
 
   var d=DIM[s.img]||[1440,960];
   var heroImg=document.getElementById('s-subhero-img');
@@ -119,82 +125,64 @@
   heroImg.height=d[1];
 
   var mainText='Every job starts with an on-site consultation and a 2D & 3D design, so you can see the finished space before we begin. One team handles the whole build.';
-  var tabs=[{label:plain,heading:plain,text:mainText,img:s.img,w:d[0],h:d[1]}].concat((s.subs||[]).map(function(sub){
+  var items=[{label:plain,heading:plain,text:mainText,img:s.img,w:d[0],h:d[1],fallback:null}].concat((s.subs||[]).map(function(sub){
     var photo=sub.img||s.img;
     var size=(sub.w&&sub.h)?[sub.w,sub.h]:(DIM[photo]||[1440,960]);
-    return {label:sub.label.replace(/&amp;/g,'&'),heading:sub.label.replace(/&amp;/g,'&'),text:sub.text,img:photo,fallback:sub.img&&sub.img!==s.img?s.img:null,w:size[0],h:size[1]};
+    var lab=sub.label.replace(/&amp;/g,'&');
+    return {label:lab,heading:lab,text:sub.text,img:photo,fallback:sub.img&&sub.img!==s.img?s.img:null,w:size[0],h:size[1]};
   }));
-  var tabList=document.getElementById('s-tabs');
-  var heading=document.getElementById('s-heading');
-  var more=document.getElementById('s-more');
-  var media=document.getElementById('s-media');
-  var panel=document.getElementById('s-panel');
-  var slugify=function(value){return value.toLowerCase().replace(/&amp;/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');};
-  tabList.innerHTML=tabs.map(function(tab,i){
-    return '<button type="button" role="tab" id="s-tab-'+i+'" aria-controls="s-panel" aria-selected="false" tabindex="-1">'+tab.label+'</button>';
+  var slugify=function(v){return v.toLowerCase().replace(/&amp;/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');};
+  var esc=function(t){return String(t).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');};
+  var pad=function(n){return n<10?'0'+n:''+n;};
+  var listEl=document.getElementById('s-list'), media=document.getElementById('s-media');
+  var titleEl=document.getElementById('s-title'), moreEl=document.getElementById('s-more');
+  var copyInner=document.querySelector('#s-copy .svc-copy__inner');
+  document.getElementById('s-eyebrow').textContent='Options & materials';
+  document.getElementById('s-heading').textContent=plain;
+  var leadEl=document.getElementById('s-lead'); if(leadEl) leadEl.hidden=true;
+  listEl.innerHTML=items.map(function(it,i){
+    return '<li><button class="svc-item" type="button" data-i="'+i+'" aria-pressed="false"><span class="svc-item__no">'+pad(i+1)+'</span><span class="svc-item__name">'+esc(it.label)+'</span><span class="svc-item__go"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></button><div class="svc-accordion-media"><div class="inner"><div class="media"><img loading="lazy" decoding="async" src="'+esc(it.img)+'" alt="" width="'+it.w+'" height="'+it.h+'"></div><p>'+esc(it.text)+'</p></div></div></li>';
   }).join('');
-  var tabButtons=tabList.querySelectorAll('[role="tab"]');
-  var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var fadeTimer;
-  var selectionToken=0;
+  media.innerHTML=items.map(function(it,i){
+    return '<img'+(i?' loading="lazy"':'')+' decoding="async" class="'+(i?'':'is-on')+'" src="'+esc(it.img)+'" alt="'+esc(it.label+' by NextLevel Landscaping in Adelaide')+'" width="'+it.w+'" height="'+it.h+'">';
+  }).join('');
+  [media,listEl].forEach(function(box){
+    box.querySelectorAll('img').forEach(function(im,k){
+      im.addEventListener('error',function(){var it=items[box===media?k:k];if(it&&it.fallback&&im.getAttribute('src')!==it.fallback)im.src=it.fallback;});
+    });
+  });
   if(/\billustrative\b/i.test(s.alt||'')){
     media.insertAdjacentHTML('afterend','<p class="svc-illus">Illustrative photo</p>');
   }
-  var selectTab=function(index,updateHash,animate){
-    var token=++selectionToken;
-    var tab=tabs[index];
-    tabButtons.forEach(function(button,i){
-      var active=i===index;
-      button.setAttribute('aria-selected',active?'true':'false');
-      button.tabIndex=active?0:-1;
-    });
-    panel.setAttribute('aria-labelledby','s-tab-'+index);
-    heading.textContent=tab.heading;
-    more.textContent=tab.text;
-    window.clearTimeout(fadeTimer);
-    var swap=function(){
-      if(token!==selectionToken)return;
-      var image=document.createElement('img');
-      image.loading='lazy';
-      image.decoding='async';
-      image.width=tab.w;
-      image.height=tab.h;
-      image.alt=tab.heading+' by NextLevel Landscaping in Adelaide';
-      var fallbackAttempted=false;
-      image.addEventListener('error',function(){
-        if(token!==selectionToken||fallbackAttempted||!tab.fallback)return;
-        fallbackAttempted=true;
-        image.removeAttribute('src');
-        image.src=tab.fallback;
-      });
-      image.src=tab.img;
-      media.replaceChildren(image);
-      media.classList.remove('is-fading');
-    };
-    if(reduceMotion||!animate){swap();}else{
-      var currentImage=media.querySelector('img');
-      if(currentImage)currentImage.classList.add('is-fading');
-      fadeTimer=window.setTimeout(swap,180);
-    }
-    if(updateHash) history.replaceState(null,'','#sub='+encodeURIComponent(slugify(tab.label)));
-  };
-  tabButtons.forEach(function(button,i){
-    button.addEventListener('click',function(){selectTab(i,true,true);});
-    button.addEventListener('keydown',function(event){
-      var next=i;
-      if(event.key==='ArrowLeft') next=(i-1+tabs.length)%tabs.length;
-      else if(event.key==='ArrowRight') next=(i+1)%tabs.length;
-      else if(event.key==='Home') next=0;
-      else if(event.key==='End') next=tabs.length-1;
-      else return;
-      event.preventDefault();
-      tabButtons[next].focus();
-      selectTab(next,true,true);
-    });
+  var btns=listEl.querySelectorAll('.svc-item'), figs=media.querySelectorAll('img');
+  var wide=window.matchMedia('(min-width: 901px)');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cur=-1, fadeT;
+  function paint(i,updateHash,instant){
+    if(i===cur||!items[i])return;
+    cur=i; var it=items[i];
+    btns.forEach(function(b,k){var on=k===i;b.classList.toggle('is-active',on);b.setAttribute('aria-pressed',on?'true':'false');});
+    figs.forEach(function(im,k){im.classList.toggle('is-on',k===i);});
+    clearTimeout(fadeT);
+    var apply=function(){titleEl.textContent=it.heading;moreEl.textContent=it.text;copyInner.classList.add('is-on');};
+    if(instant||reduce){apply();}else{copyInner.classList.remove('is-on');fadeT=setTimeout(apply,160);}
+    if(updateHash)history.replaceState(null,'','#sub='+encodeURIComponent(slugify(it.label)));
+  }
+  listEl.addEventListener('click',function(e){
+    var b=e.target.closest('.svc-item'); if(!b)return;
+    if(!wide.matches&&b.classList.contains('is-active')){b.classList.remove('is-active');b.setAttribute('aria-pressed','false');cur=-1;return;}
+    paint(+b.dataset.i,true,false);
+  });
+  listEl.addEventListener('mouseover',function(e){var b=e.target.closest('.svc-item');if(b&&wide.matches)paint(+b.dataset.i,true,false);});
+  listEl.addEventListener('keydown',function(e){
+    var b=e.target.closest('.svc-item'); if(!b)return;
+    var i=+b.dataset.i,n=btns.length,t=-1;
+    if(e.key==='ArrowDown')t=(i+1)%n; else if(e.key==='ArrowUp')t=(i-1+n)%n; else if(e.key==='Home')t=0; else if(e.key==='End')t=n-1; else return;
+    e.preventDefault(); btns[t].focus(); if(wide.matches)paint(t,true,false);
   });
   var requested=new URLSearchParams(location.hash.slice(1)).get('sub');
-  var initial=tabs.findIndex(function(tab){return slugify(tab.label)===requested;});
-  selectTab(initial>-1?initial:0,false,false);
+  var initial=items.findIndex(function(it){return slugify(it.label)===requested;});
+  paint(initial>-1?initial:0,false,true);
   if(s.guide){
     var dl=document.getElementById('s-download');
     dl.href=s.guide.file;
