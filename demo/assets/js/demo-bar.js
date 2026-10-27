@@ -56,7 +56,7 @@
     overlay: readStored(OVERLAY_KEY, OVERLAY_OPTS, "normal"),
     open: readStored(OPEN_KEY, OPEN_OPTS, "solid"),
     icons: readStored(ICONS_KEY, ICONS_OPTS, "off"),
-    heroh: readStored(HEROH_KEY, HEROH_OPTS, "30")
+    heroh: readStored(HEROH_KEY, HEROH_OPTS, "80")
   };
 
   function applyAttrs() {

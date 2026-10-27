@@ -963,16 +963,16 @@ html[data-theme="carbon-soft-v2"] .band--dark .proc__num span{
 }
 
 /* =============================================================
-   24. Sub-page heroes: 30px taller on every page
+   24. Sub-page heroes: 80px taller on every page
    ============================================================= */
 html[data-theme="carbon-soft-v2"] .subhero--photo{
-  min-height:clamp(410px,calc(56vh + 30px),630px);
+  min-height:clamp(460px,calc(56vh + 80px),680px);
 }
 html[data-theme="carbon-soft-v2"] .subhero:not(.subhero--photo){
-  padding-bottom:94px;
+  padding-bottom:144px;
 }
 @media(max-width:640px){
   html[data-theme="carbon-soft-v2"] .subhero--photo{
-    min-height:clamp(350px,calc(46vh + 30px),450px);
+    min-height:clamp(400px,calc(46vh + 80px),500px);
   }
 }
