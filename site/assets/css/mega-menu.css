@@ -2,6 +2,8 @@
 .mega{display:none}
 @media(min-width:993px){
   html[data-theme] .hdr2:has(.hdr2__drop:hover),html[data-theme] .hdr2:has(.hdr2__drop:focus-within){background-color:#17190F;box-shadow:0 1px 0 rgba(255,255,255,.12);transition:background-color .2s}
+  /* Hover zone: full button height + bridge down to the panel, so the menu doesn't flicker shut on the way */
+  html[data-theme] .hdr2__nav > .hdr2__drop > a{position:relative;padding:36px 16px;margin:-36px -16px;z-index:2}
   html[data-theme] .mega{display:grid}
   html[data-theme] .hdr2__drop-panel > a{display:none}
   html[data-theme] .hdr2__nav>.hdr2__drop{position:static}
