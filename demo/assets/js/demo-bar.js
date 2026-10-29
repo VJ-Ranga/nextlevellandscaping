@@ -30,6 +30,7 @@
   var OPEN_KEY = "nll-demo-hdr-open";
   var ICONS_KEY = "nll-demo-hdr-icons";
   var HEROH_KEY = "nll-demo-hero-h";
+  var CRED_KEY = "nll-demo-cred";
 
   var UTIL_OPTS = ["12.8", "13.5", "14.5", "15.5"];
   var NAV_OPTS = ["17", "17.5", "18", "19"];
@@ -38,6 +39,7 @@
   var OPEN_OPTS = ["transparent", "solid"];
   var ICONS_OPTS = ["off", "on"];
   var HEROH_OPTS = ["0", "30", "50", "80"];
+  var CRED_OPTS = ["0", "1", "2", "3"];
 
   function readStored(key, allowed, def) {
     var v = null;
@@ -56,7 +58,8 @@
     overlay: readStored(OVERLAY_KEY, OVERLAY_OPTS, "normal"),
     open: readStored(OPEN_KEY, OPEN_OPTS, "solid"),
     icons: readStored(ICONS_KEY, ICONS_OPTS, "off"),
-    heroh: readStored(HEROH_KEY, HEROH_OPTS, "80")
+    heroh: readStored(HEROH_KEY, HEROH_OPTS, "80"),
+    cred: readStored(CRED_KEY, CRED_OPTS, "0")
   };
 
   function applyAttrs() {
@@ -67,6 +70,7 @@
     html.setAttribute("data-hdr-open", state.open);
     html.setAttribute("data-hdr-icons", state.icons);
     html.setAttribute("data-hero-h", state.heroh);
+    html.setAttribute("data-cred", state.cred);
   }
   applyAttrs(); // runs immediately, pre-paint
 
@@ -131,6 +135,16 @@
     ]
   };
 
+  var GROUP_L = {
+    code: "L", label: "Credentials strip", key: "cred", storeKey: CRED_KEY,
+    opts: [
+      { code: "L0", val: "0", label: "Current" },
+      { code: "L1", val: "1", label: "Light tiles" },
+      { code: "L2", val: "2", label: "Light band" },
+      { code: "L3", val: "3", label: "Dark tiles" }
+    ]
+  };
+
   /* F/G/H (header options) show on every page; C (overlay) only
      on sub-pages, whose photo heroes it affects. Detected
      structurally (no #hero-car-track means "not the homepage"). */
@@ -151,7 +165,7 @@
 
   function buildBar() {
     var isHome = !!document.getElementById("hero-car-track");
-    GROUPS = isHome ? [GROUP_F, GROUP_G, GROUP_H, GROUP_I, GROUP_J] : [GROUP_F, GROUP_G, GROUP_H, GROUP_I, GROUP_J, GROUP_K, GROUP_C];
+    GROUPS = isHome ? [GROUP_F, GROUP_G, GROUP_H, GROUP_I, GROUP_J, GROUP_L] : [GROUP_F, GROUP_G, GROUP_H, GROUP_I, GROUP_J, GROUP_K, GROUP_C];
     HINT_TEXT = isHome ? "Tell us your pick, e.g. F2 + G3 + H3 + I2 + J1" : "Tell us your pick, e.g. F2 + G3 + H3 + I2 + J1 + C1";
 
     var bar = document.createElement("div");
