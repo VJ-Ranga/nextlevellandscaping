@@ -281,3 +281,64 @@ html[data-theme][data-cred="3"] #intro .credline__logo{filter:brightness(0) inve
   html[data-theme][data-cred="2"] #intro .credline > span{border-left:0;padding-left:0;border-top:1px solid rgba(23,25,15,.16);padding-top:1rem}
   html[data-theme][data-cred="2"] #intro .credline > span:first-of-type{border-top:0;padding-top:.2rem}
 }
+
+/* ---- M: stats higher + credentials box under the stats ------------ */
+.credbox{display:none}
+html[data-theme]:not([data-credm="0"]) #intro .credline{display:none}
+html[data-theme]:not([data-credm="0"]) #intro .intro-grid{align-items:start}
+html[data-theme]:not([data-credm="0"]) #intro .intro-figures{align-self:start;padding-top:.5rem}
+html[data-theme]:not([data-credm="0"]) #intro .statline{margin-top:0}
+html[data-theme]:is([data-credm="1"],[data-credm="2"],[data-credm="3"]) .credbox{display:block;margin-top:2.6rem}
+.credbox__label{margin:0 0 1rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#C2E807;font-weight:500}
+.credbox__mark img{display:block;width:auto;max-width:100%;filter:brightness(0) invert(1)}
+.credbox__mark i{color:#C2E807;font-size:1.7rem;line-height:1;display:block}
+.credbox__text{font-size:.74rem;line-height:1.55;letter-spacing:.06em;text-transform:uppercase;color:rgba(242,242,236,.7)}
+.credbox__text b{color:#F2F2EC;font-weight:500}
+.credbox__dots{display:none}
+
+/* M1: logo tiles (2 x 2) */
+html[data-theme][data-credm="1"] .credbox__list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+html[data-theme][data-credm="1"] .credbox__item{
+  display:flex;flex-direction:column;gap:.8rem;justify-content:space-between;min-width:0;
+  border:1px solid rgba(242,242,236,.16);border-radius:0 26px 0 0;padding:1.1rem 1.1rem 1rem;position:relative;transition:border-color .2s;
+}
+html[data-theme][data-credm="1"] .credbox__item::before{content:"";position:absolute;left:1.1rem;top:-1px;width:28px;height:3px;background:#C2E807}
+html[data-theme][data-credm="1"] .credbox__item:hover{border-color:#C2E807}
+html[data-theme][data-credm="1"] .credbox__mark{height:38px;display:flex;align-items:center}
+html[data-theme][data-credm="1"] .credbox__mark img{height:36px}
+
+/* M2: single logo row */
+html[data-theme][data-credm="2"] .credbox{border-top:1px solid rgba(242,242,236,.16);padding-top:1.3rem}
+html[data-theme][data-credm="2"] .credbox__list{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem 2rem}
+html[data-theme][data-credm="2"] .credbox__item{display:flex;align-items:center;gap:.7rem}
+html[data-theme][data-credm="2"] .credbox__item:has(img) .credbox__text{display:none}
+html[data-theme][data-credm="2"] .credbox__mark img{height:30px}
+html[data-theme][data-credm="2"] .credbox__item:not(:has(img)) .credbox__text{font-size:.7rem;max-width:18ch}
+html[data-theme][data-credm="2"] .credbox__mark i{font-size:1.4rem}
+
+/* M3: rotating badge */
+html[data-theme][data-credm="3"] .credbox{
+  border:1px solid rgba(242,242,236,.16);border-radius:0 40px 0 0;padding:1.4rem 1.6rem 1.2rem;position:relative;
+}
+html[data-theme][data-credm="3"] .credbox::before{content:"";position:absolute;left:1.6rem;top:-1px;width:36px;height:3px;background:#C2E807}
+html[data-theme][data-credm="3"] .credbox__list{position:relative;min-height:128px}
+html[data-theme][data-credm="3"] .credbox__item{
+  position:absolute;inset:0;display:flex;flex-direction:column;gap:1rem;justify-content:center;
+  opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s;
+}
+html[data-theme][data-credm="3"] .credbox__item.is-on{opacity:1;visibility:visible}
+html[data-theme][data-credm="3"] .credbox__mark{height:56px;display:flex;align-items:center}
+html[data-theme][data-credm="3"] .credbox__mark img{height:54px;max-width:210px}
+html[data-theme][data-credm="3"] .credbox__mark i{font-size:2.4rem}
+html[data-theme][data-credm="3"] .credbox__text{font-size:.8rem}
+html[data-theme][data-credm="3"] .credbox__dots{display:flex;gap:8px;margin-top:.9rem}
+html[data-theme][data-credm="3"] .credbox__dots i{width:22px;height:3px;background:rgba(242,242,236,.22);transition:background .3s}
+html[data-theme][data-credm="3"] .credbox__dots i.is-on{background:#C2E807}
+@media(prefers-reduced-motion:reduce){
+  html[data-theme][data-credm="3"] .credbox__list{min-height:0;display:grid;gap:1.2rem}
+  html[data-theme][data-credm="3"] .credbox__item{position:static;opacity:1;visibility:visible;transition:none}
+  html[data-theme][data-credm="3"] .credbox__dots{display:none}
+}
+@media(max-width:900px){
+  html[data-theme]:not([data-credm="0"]) #intro .intro-figures{padding-top:0}
+}
