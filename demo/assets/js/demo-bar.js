@@ -54,8 +54,8 @@
 
   var html = document.documentElement;
   var state = {
-    util: readStored(UTIL_KEY, UTIL_OPTS, "14.5"),
-    nav: readStored(NAV_KEY, NAV_OPTS, "18"),
+    util: "14.5" /* F removed: locked */,
+    nav: "18" /* G removed: locked */,
     menu: readStored(MENU_KEY, MENU_OPTS, "flat"),
     overlay: readStored(OVERLAY_KEY, OVERLAY_OPTS, "normal"),
     open: readStored(OPEN_KEY, OPEN_OPTS, "solid"),
@@ -179,8 +179,8 @@
 
   function buildBar() {
     var isHome = !!document.getElementById("hero-car-track");
-    GROUPS = isHome ? [GROUP_F, GROUP_G, GROUP_H, GROUP_I, GROUP_J, GROUP_L, GROUP_M] : [GROUP_F, GROUP_G, GROUP_H, GROUP_I, GROUP_J, GROUP_K, GROUP_C];
-    HINT_TEXT = isHome ? "Tell us your pick, e.g. F2 + G3 + H3 + I2 + J1" : "Tell us your pick, e.g. F2 + G3 + H3 + I2 + J1 + C1";
+    GROUPS = isHome ? [GROUP_H, GROUP_I, GROUP_J, GROUP_L, GROUP_M] : [GROUP_H, GROUP_I, GROUP_J, GROUP_K, GROUP_C];
+    HINT_TEXT = isHome ? "Tell us your pick, e.g. H5 + I2 + J2 + L1 + M1" : "Tell us your pick, e.g. H5 + I2 + J2 + K3 + C1";
 
     var bar = document.createElement("div");
     bar.className = "demo-bar";
