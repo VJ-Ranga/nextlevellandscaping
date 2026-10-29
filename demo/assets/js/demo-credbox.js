@@ -7,7 +7,7 @@
     if (!host || !D || !Array.isArray(D.credentials) || host.querySelector('.credbox')) return;
 
     var box = document.createElement('div');
-    box.className = 'credbox reveal d2';
+    box.className = 'credbox';
     box.id = 'credbox';
 
     var label = document.createElement('p');
