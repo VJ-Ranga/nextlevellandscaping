@@ -219,3 +219,65 @@ html[data-theme][data-hero-h="80"] .subhero:not(.subhero--photo){padding-bottom:
   html[data-theme][data-hero-h="50"] .subhero--photo{min-height:clamp(370px,calc(46vh + 50px),470px)}
   html[data-theme][data-hero-h="80"] .subhero--photo{min-height:clamp(400px,calc(46vh + 80px),500px)}
 }
+
+/* ---- L: homepage credentials strip (logos) ------------------------ */
+/* Shared: logos become one-colour marks so white and coloured logos sit together */
+html[data-theme]:is([data-cred="1"],[data-cred="2"],[data-cred="3"]) #intro .credline{
+  border-top:0;padding-top:0;margin-top:3rem;align-items:stretch;
+}
+html[data-theme]:is([data-cred="1"],[data-cred="2"],[data-cred="3"]) #intro .credline > span{
+  flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:1rem;
+}
+html[data-theme]:is([data-cred="1"],[data-cred="2"],[data-cred="3"]) #intro .credline__text{
+  flex:none;font-size:.78rem;line-height:1.55;letter-spacing:.06em;
+}
+html[data-theme]:is([data-cred="1"],[data-cred="2"],[data-cred="3"]) #intro .credline__logo,
+html[data-theme]:is([data-cred="1"],[data-cred="2"],[data-cred="3"]) #intro .credline span:has(.credline__logo--square) .credline__logo{
+  height:44px;width:auto;max-width:150px;
+}
+html[data-theme]:is([data-cred="1"],[data-cred="2"],[data-cred="3"]) #intro .credline i{font-size:1.6rem;height:44px;display:flex;align-items:center}
+
+/* L1: light tiles */
+html[data-theme][data-cred="1"] #intro .credline{gap:1rem}
+html[data-theme][data-cred="1"] #intro .credline > span{
+  background:#F2F2EC;padding:1.5rem 1.4rem 1.4rem;border-radius:0 32px 0 0;
+}
+html[data-theme][data-cred="1"] #intro .credline__logo{filter:brightness(0)}
+html[data-theme][data-cred="1"] #intro .credline__text{color:#4a4d3e}
+html[data-theme][data-cred="1"] #intro .credline b{color:#17190F}
+html[data-theme][data-cred="1"] #intro .credline i{color:#3E4A16}
+
+/* L2: one light band with a title and dividers */
+html[data-theme][data-cred="2"] #intro .credline{
+  background:#F2F2EC;border-radius:0 64px 0 0;padding:1.6rem 2rem 1.8rem;gap:1.2rem 0;
+}
+html[data-theme][data-cred="2"] #intro .credline::before{
+  content:"Licensed & accredited";grid-column:1/-1;font-size:.72rem;letter-spacing:.16em;
+  text-transform:uppercase;color:#3E4A16;font-weight:500;
+}
+html[data-theme][data-cred="2"] #intro .credline > span{padding:.2rem 1.6rem;border-left:1px solid rgba(23,25,15,.16)}
+html[data-theme][data-cred="2"] #intro .credline > span:first-of-type{border-left:0;padding-left:0}
+html[data-theme][data-cred="2"] #intro .credline__logo{filter:brightness(0)}
+html[data-theme][data-cred="2"] #intro .credline__text{color:#4a4d3e}
+html[data-theme][data-cred="2"] #intro .credline b{color:#17190F}
+html[data-theme][data-cred="2"] #intro .credline i{color:#3E4A16}
+
+/* L3: dark outlined tiles, white marks, lime on hover */
+html[data-theme][data-cred="3"] #intro .credline{gap:1rem}
+html[data-theme][data-cred="3"] #intro .credline > span{
+  border:1px solid rgba(242,242,236,.16);border-radius:0 32px 0 0;padding:1.5rem 1.4rem 1.4rem;
+  position:relative;transition:border-color .2s;
+}
+html[data-theme][data-cred="3"] #intro .credline > span::after{
+  content:"";position:absolute;left:1.4rem;top:-1px;width:36px;height:3px;background:#C2E807;
+}
+html[data-theme][data-cred="3"] #intro .credline > span:hover{border-color:#C2E807}
+html[data-theme][data-cred="3"] #intro .credline__logo{filter:brightness(0) invert(1)}
+
+@media(max-width:1100px){
+  html[data-theme][data-cred="2"] #intro .credline > span:nth-of-type(odd){border-left:0;padding-left:0}
+}
+@media(max-width:480px){
+  html[data-theme][data-cred="2"] #intro .credline > span{border-left:0;padding-left:0;border-top:1px solid rgba(23,25,15,.16);padding-top:1rem}
+  html[data-theme][data-cred="2"] #intro .credline > span:first-of-type{border-top:0;padding-top:.2rem}
+}
