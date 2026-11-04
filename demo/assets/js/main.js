@@ -62,7 +62,7 @@
   if (carTrack && D.heroSlides && D.heroSlides.length) {
     carTrack.innerHTML = D.heroSlides.map(function (s, i) {
       return '<div class="hero-slide' + (i ? "" : " is-on") + '">' +
-        '<h1>' + s.line + '</h1>' +
+        (i ? '<p class="hero-slide__line">' + s.line + '</p>' : '<h1>' + s.line + '</h1>') +
         (s.cta ? '<a class="btn-ghost btn-ghost--fill" href="' + esc(s.href || "#") + '">' + esc(s.cta) + '</a>' : '') +
       '</div>';
     }).join("");
@@ -244,7 +244,7 @@
   /* ---- 5. Render: projects (swiper) --------------------- */
   var projWrap = $("#projects-track");
   if (projWrap && D.projects) {
-    projWrap.innerHTML = D.projects.map(function (p) {
+    projWrap.innerHTML = D.projects.filter(function (p) { return !p.inProgress; }).map(function (p) {
       return '' +
         '<div class="swiper-slide">' +
           '<a class="proj-card" href="project.html?slug=' + esc(p.slug) + '">' +

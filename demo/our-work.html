@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
-<script src="assets/js/demo-bar.js?v=26"></script>
+<script src="assets/js/demo-bar.js?v=38"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Our Work — NextLevel Landscaping</title>
 <meta name="description" content="Completed landscaping projects by NextLevel Landscaping across metro Adelaide — paving, retaining walls, fencing, turf and full backyard transformations.">
@@ -14,9 +14,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <link rel="stylesheet" href="assets/css/style.css?v=1793001000">
-<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1793300000">
+<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1793600001">
 <link rel="stylesheet" href="assets/css/demo-bar.css?v=15">
-<link rel="stylesheet" href="assets/css/demo-variants.css?v=26">
+<link rel="stylesheet" href="assets/css/demo-variants.css?v=55">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -28,7 +28,7 @@
     <div class="container">
       <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Our Work</p>
       <h1>Our Work</h1>
-      <p class="lead">Full-property builds across metro Adelaide — each one designed, engineered and finished by our own team. Explore selected views from four recent transformations.</p>
+      <p class="lead">Full-property builds across metro Adelaide — each one designed, engineered and finished by our own team. Explore selected views from recent transformations.</p>
     </div>
   </section>
 
@@ -67,9 +67,9 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="assets/js/partials.js?v=1793000000"></script>
-<script src="assets/data.js?v=1793100100"></script>
-<script src="assets/js/main.js?v=1793000100"></script>
+<script src="assets/js/partials.js?v=1793500001"></script>
+<script src="assets/data.js?v=1793600000"></script>
+<script src="assets/js/main.js?v=1793600000"></script>
 <script src="assets/js/demo-mega.js?v=2" defer></script>
 <script>
 (function(){
@@ -87,7 +87,14 @@
     {project:0,image:4,layout:'detail',caption:true},
     {project:1,image:3,layout:'wide',caption:false},
     {project:2,image:0,layout:'detail',caption:false},
-    {project:3,image:4,layout:'tall',caption:false}
+    {project:3,image:4,layout:'tall',caption:false},
+    {project:4,image:0,layout:'feature',caption:true},
+    {project:4,image:1,layout:'tall',caption:false},
+    {project:5,image:1,layout:'detail',caption:false},
+    {project:6,image:0,layout:'detail',caption:true},
+    {project:5,image:2,layout:'detail',caption:false},
+    {project:5,image:0,layout:'wide',caption:true},
+    {project:4,image:6,layout:'detail',caption:false}
   ];
   function esc(value){return String(value).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function renderTiles(){
@@ -95,7 +102,7 @@
       var p=projects[tile.project];
       if(!p)return '';
       var image=p.gallery&&p.gallery[tile.image]||p.img;
-      var caption=tile.caption?'<div class="work-tile__caption"><span class="work-tile__project">'+esc(p.name)+'</span><span class="work-tile__place">'+esc(p.suburb)+' <b aria-hidden="true">/</b> Project view '+(index+1)+'</span></div>':'';
+      var caption=tile.caption?'<div class="work-tile__caption"><span class="work-tile__project">'+esc(p.name)+'</span><span class="work-tile__place">'+esc(p.suburb)+'</span></div>':'';
       return '<a class="work-tile work-tile--'+tile.layout+' reveal" href="project.html?slug='+esc(p.slug)+'">'+
         '<article>'+
           '<div class="work-tile__media"><img loading="lazy" decoding="async" src="'+esc(image)+'" alt="Selected project view from '+esc(p.name)+' in '+esc(p.suburb)+'">'+caption+'</div>'+

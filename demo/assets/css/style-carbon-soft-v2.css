@@ -976,3 +976,139 @@ html[data-theme="carbon-soft-v2"] .subhero:not(.subhero--photo){
     min-height:clamp(400px,calc(46vh + 80px),500px);
   }
 }
+
+/* =============================================================
+   17. UX PASS (2026-11-03)
+   Closing CTA + footer read as two things, not one 1000px dark
+   slab; footer no longer tall; no two CTAs or stacked paddings.
+   ============================================================= */
+/* Footer sits on a deeper ground with no contour lines, so the
+   contour band above it has a clear edge. */
+html[data-theme="carbon-soft-v2"] .site-footer--scoop{
+  background:#0D0E08;
+  background-color:#0D0E08;
+  padding-top:56px;
+}
+html[data-theme="carbon-soft-v2"] .footer-grid{grid-template-columns:1.5fr .8fr 1fr 1.4fr;gap:2.5rem 3rem}
+html[data-theme="carbon-soft-v2"] .site-footer h4{margin-bottom:.9rem}
+html[data-theme="carbon-soft-v2"] .site-footer ul{gap:.15rem}
+html[data-theme="carbon-soft-v2"] .site-footer .brand.ftr5__logo img{height:84px}
+html[data-theme="carbon-soft-v2"] .site-footer .footer-brand p{margin-top:.8rem}
+html[data-theme="carbon-soft-v2"] .ftr5__split{
+  margin-top:40px;padding:18px 0 0;
+  border-top:1px solid var(--v2-line-nt);
+}
+html[data-theme="carbon-soft-v2"] .site-footer.is-e5 .footer-bar{margin-top:6px;padding:0 0 22px;border-top:0}
+@media(max-width:992px){
+  html[data-theme="carbon-soft-v2"] .footer-grid{grid-template-columns:1fr 1fr;gap:2rem 1.4rem}
+  html[data-theme="carbon-soft-v2"] .footer-grid > :first-child,
+  html[data-theme="carbon-soft-v2"] .footer-grid > :last-child{grid-column:1 / -1}
+}
+@media(max-width:640px){
+  html[data-theme="carbon-soft-v2"] .site-footer--scoop{padding-top:44px}
+  html[data-theme="carbon-soft-v2"] .site-footer .brand.ftr5__logo img{height:60px}
+  html[data-theme="carbon-soft-v2"] .site-footer ul{gap:0}
+  /* 40px rows: comfortable thumb targets without a tall list */
+  html[data-theme="carbon-soft-v2"] .site-footer ul a{display:flex;align-items:center;min-height:40px;padding-block:0}
+  html[data-theme="carbon-soft-v2"] .site-footer ul li:not(:has(a)){padding-block:.5rem}
+  html[data-theme="carbon-soft-v2"] .ftr5__split{flex-direction:column;gap:.2rem;margin-top:24px;padding-top:14px}
+  html[data-theme="carbon-soft-v2"] .site-footer.is-e5 .footer-bar{flex-direction:row;flex-wrap:wrap;justify-content:space-between;gap:.2rem 1rem;margin-top:.4rem}
+}
+
+/* Closing CTA: one compact row (copy left, buttons right) so the
+   last section is a call to action, not another full-height band. */
+html[data-theme="carbon-soft-v2"] .band.cta-close{padding-block:72px}
+.cta-close > .container{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1.6rem 4rem;align-items:center}
+.cta-close .section-head{margin:0;max-width:60ch}
+.cta-close .cta-close__btns{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:flex-end;margin:0}
+.cta-close .cta-close__btns .btn-ghost{white-space:nowrap}
+@media(max-width:768px){
+  html[data-theme="carbon-soft-v2"] .band.cta-close{padding-block:56px}
+  .cta-close > .container{grid-template-columns:1fr}
+  .cta-close .cta-close__btns{justify-content:flex-start}
+}
+
+/* Two light bands in a row must not stack bottom + top padding
+   (192px of nothing between sections on the Commercial page). */
+html[data-theme="carbon-soft-v2"] main > .band:not(.band--dark):not([hidden]) + .band:not(.band--dark):not(.band--tight):not(.path-first):not(.cta-close){padding-top:0}
+
+/* Rows of 3 or 4 fill the row instead of leaving an orphan. */
+@media(min-width:769px){
+  #p-related{grid-template-columns:repeat(3,1fr);gap:2rem}
+  .gallery-grid:has(> :nth-child(4):last-child){grid-template-columns:repeat(4,1fr)}
+}
+
+/* About: team as a scannable list, not a run-on sentence. */
+.team-list{list-style:none;margin:2.5rem 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem 2rem}
+.team-list li{border-top:1px solid var(--v2-line-nt);padding-top:.9rem}
+.team-list b{display:block;font-weight:500;color:var(--v2-on-night)}
+.team-list span{font-size:.85rem;color:var(--v2-muted-nt)}
+@media(max-width:768px){.team-list{grid-template-columns:1fr 1fr}}
+
+@media(max-width:640px){
+  /* Process steps: photo beside text. Four full-width 3:4 photos
+     made this one section nearly 3000px tall on a phone. */
+  html[data-theme="carbon-soft-v2"] .proc-grid:has(.proc--photo){grid-template-columns:1fr;gap:1.4rem}
+  html[data-theme="carbon-soft-v2"] .proc--photo{display:grid;grid-template-columns:104px minmax(0,1fr);column-gap:1rem;align-items:start}
+  html[data-theme="carbon-soft-v2"] .proc--photo .proc__media{grid-row:1 / span 2;margin:0;border-radius:4px}
+  html[data-theme="carbon-soft-v2"] .proc--photo .proc__media img{aspect-ratio:1/1}
+  html[data-theme="carbon-soft-v2"] .proc--photo h3{padding-top:0;margin:0 0 .3rem}
+  html[data-theme="carbon-soft-v2"] .proc--photo h3::before{position:static;display:block;font-size:1.25rem;margin-bottom:.25rem}
+  html[data-theme="carbon-soft-v2"] .proc--photo h3::after{display:none}
+  /* inline text links get a real tap height */
+  .svc__link .tlink,.stats-link a{display:inline-flex;align-items:center;min-height:40px}
+}
+
+/* Home has one h1: later hero slides and the intro headline keep the same look. */
+.hero-slide .hero-slide__line{
+  margin:0;color:#fff;font-family:inherit;font-weight:400;text-transform:uppercase;
+  font-size:clamp(1.9rem,4.4vw,3.4rem);line-height:1.08;max-width:min(20ch,100%);
+  text-shadow:0 2px 26px rgba(20,22,18,.5);
+}
+#intro .headline .h1{margin-bottom:1.4rem}
+
+/* Footer detail: both bottom rows share edges and baselines. */
+html[data-theme="carbon-soft-v2"] .site-footer.is-e5 .footer-bar{align-items:center}
+html[data-theme="carbon-soft-v2"] .site-footer.is-e5 .footer-bar a{padding-block:0;min-height:0}
+@media(max-width:640px){
+  /* logo plus links is enough on a phone; the tagline only adds height */
+  html[data-theme="carbon-soft-v2"] .site-footer .footer-brand p{display:none}
+  html[data-theme="carbon-soft-v2"] .ftr5__split,
+  html[data-theme="carbon-soft-v2"] .site-footer.is-e5 .footer-bar{font-size:.72rem;letter-spacing:0}
+  html[data-theme="carbon-soft-v2"] .site-footer.is-e5 .footer-bar a{display:inline-flex;align-items:center;min-height:32px}
+  .cta-close .cta-close__btns .btn-ghost{flex:1 1 100%;justify-content:center;text-align:center}
+}
+
+/* FAQ: heading beside the answers, not a half-empty 1150px row. */
+@media(min-width:993px){
+  .faq-band > .container{display:grid;grid-template-columns:5fr 7fr;gap:4rem;align-items:start}
+  .faq-band .section-head{margin:0;position:sticky;top:120px}
+  .faq-band .faq-list{max-width:none;width:100%;margin:0}
+}
+
+/* RSPCA photos: 3 over 2 with no empty cell. */
+@media(min-width:769px){
+  .feature-grid:has(> :nth-child(5):last-child){grid-template-columns:repeat(6,1fr)}
+  .feature-grid:has(> :nth-child(5):last-child) > *{grid-column:span 2}
+  .feature-grid:has(> :nth-child(5):last-child) > :nth-child(n+4){grid-column:span 3}
+}
+
+/* Process: commercial "Ways to engage us" uses the residential photo cards. */
+html[data-theme="carbon-soft-v2"] .engage-title{font-size:1.4rem;line-height:1.2;margin:0 0 1.75rem}
+/* Copy and list stacked in one grid need air, or the button sits on the first hairline. */
+.row-split{row-gap:2.5rem}
+
+/* Photo set 2026-11-03: gallery opener, commercial row, Our Work mosaic rows 6-8. */
+.gallery-more{margin:2rem 0 0;text-align:center}
+.work-grid--more{margin-top:3rem}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(13){grid-column:1/3;grid-row:6/8}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(14){grid-column:3/4;grid-row:6/8}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(15){grid-column:4/5;grid-row:6/7}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(16){grid-column:4/5;grid-row:7/8}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(17){grid-column:1/2;grid-row:8/9}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(18){grid-column:2/4;grid-row:8/9}
+html[data-theme="carbon-soft-v2"] .work-tile:nth-child(19){grid-column:4/5;grid-row:8/9}
+@media(max-width:768px){
+  html[data-theme="carbon-soft-v2"] .work-tile:nth-child(n+13){grid-column:auto;grid-row:auto}
+  html[data-theme="carbon-soft-v2"] .work-tile:nth-child(19){grid-column:1 / -1}
+}

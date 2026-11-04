@@ -41,40 +41,47 @@
       item.appendChild(text);
       list.appendChild(item);
     });
+
+    /* M3/M4 loop endlessly: items sit in a track, followed by aria-hidden clones */
+    var track = document.createElement('div');
+    track.className = 'credbox__track';
+    Array.prototype.slice.call(list.children).forEach(function (it) { track.appendChild(it); });
+    Array.prototype.slice.call(track.children).forEach(function (it) {
+      var c = it.cloneNode(true);
+      c.classList.add('is-clone');
+      c.classList.remove('is-on');
+      c.setAttribute('aria-hidden', 'true');
+      track.appendChild(c);
+    });
+    list.appendChild(track);
     box.appendChild(list);
-
-    var dots = document.createElement('div');
-    dots.className = 'credbox__dots';
-    dots.setAttribute('aria-hidden', 'true');
-    D.credentials.forEach(function (_, i) {
-      var d = document.createElement('i');
-      if (i === 0) d.className = 'is-on';
-      dots.appendChild(d);
-    });
-    box.appendChild(dots);
     host.appendChild(box);
-
-    /* M3 only: fade through the credentials one at a time */
-    var n = 0, items = list.children, dotEls = dots.children;
-    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function show(k) {
-      for (var j = 0; j < items.length; j++) {
-        items[j].classList.toggle('is-on', j === k);
-        dotEls[j].className = j === k ? 'is-on' : '';
-      }
-    }
-    if (!reduce) {
-      setInterval(function () {
-        if (document.documentElement.getAttribute('data-credm') !== '3' || document.hidden) return;
-        n = (n + 1) % items.length;
-        show(n);
-      }, 3500);
-    }
-    list.addEventListener('mouseover', function (e) {
-      var it = e.target.closest && e.target.closest('.credbox__item');
-      if (!it || document.documentElement.getAttribute('data-credm') !== '3') return;
-      n = Array.prototype.indexOf.call(items, it); show(n);
-    });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+
+  /* L4/L5: clip wrapper around #credline plus clones of its spans, so the marquee loops seamlessly. */
+  function initMarquee() {
+    var line = document.getElementById('credline');
+    if (!line || line.parentNode.classList.contains('credline-clip')) return;
+    var spans = Array.prototype.slice.call(line.children);
+    if (!spans.length) return;
+    var clip = document.createElement('div');
+    clip.className = 'credline-clip';
+    line.parentNode.insertBefore(clip, line);
+    clip.appendChild(line);
+    spans.forEach(function (sp) {
+      var c = sp.cloneNode(true);
+      c.className = 'is-clone';
+      c.setAttribute('aria-hidden', 'true');
+      line.appendChild(c);
+    });
+  }
+  function waitCredline() {
+    var line = document.getElementById('credline');
+    if (!line) return;
+    if (line.children.length) { initMarquee(); return; }
+    new MutationObserver(function (m, ob) { if (line.children.length) { ob.disconnect(); initMarquee(); } })
+      .observe(line, { childList: true });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', waitCredline); else waitCredline();
 })();

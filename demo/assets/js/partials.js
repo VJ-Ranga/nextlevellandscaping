@@ -9,7 +9,9 @@
     ["services.html", "Services"],
     ["our-work.html", "Our Work"],
     ["current-work.html", "Current Work"],
+    ["commercial.html", "Commercial Work"],
     ["process.html", "Our Process"],
+    ["compliance.html", "Safety &amp; Compliance"],
     ["about.html", "About"],
     ["reviews.html", "Reviews"],
     ["faq.html", "FAQ"],
@@ -82,7 +84,7 @@
     /* Footer = option E5 "Contour footer" (client pick, 2026-10-13): larger
        logo, contour lines behind, and the company / licence lines moved out
        of the contact column into their own row above the bottom bar. */
-    '<footer class="site-footer site-footer--scoop is-e5 contour">' +
+    '<footer class="site-footer site-footer--scoop is-e5">' +
       '<div class="container">' +
         '<div class="footer-grid ftr5">' +
           '<div class="footer-brand">' +
@@ -93,18 +95,18 @@
             '<li><a href="services.html">Services</a></li>' +
             '<li><a href="our-work.html">Our Work</a></li>' +
             '<li><a href="current-work.html">Current Work</a></li>' +
-            '<li><a href="process.html">Our Process</a></li>' +
             '<li><a href="commercial.html">Commercial Work</a></li>' +
-            '<li><a href="compliance.html">Safety &amp; Compliance</a></li>' +
-            '<li><a href="about.html">About</a></li>' +
+            '<li><a href="process.html">Our Process</a></li>' +
           '</ul></div>' +
-          '<div><h4>SUPPORT</h4><ul>' +
+          '<div><h4>COMPANY</h4><ul>' +
+            '<li><a href="about.html">About</a></li>' +
+            '<li><a href="compliance.html">Safety &amp; Compliance</a></li>' +
             '<li><a href="reviews.html">Reviews</a></li>' +
             '<li><a href="faq.html">FAQ</a></li>' +
             '<li><a href="contact.html">Contact</a></li>' +
           '</ul></div>' +
-          '<div><h4>NEXTLEVEL LANDSCAPING</h4><ul>' +
-            '<li>1/41 Woodlands Terrace, Edwardstown SA 5039</li>' +
+          '<div><h4>CONTACT</h4><ul>' +
+            '<li>1/41 Woodlands Terrace,<br>Edwardstown SA 5039</li>' +
             '<li><a href="tel:+61404440222">0404 440 222</a></li>' +
             '<li><a href="mailto:info@nextlevellandscaping.com.au">info@nextlevellandscaping.com.au</a></li>' +
           '</ul></div>' +

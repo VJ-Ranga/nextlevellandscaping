@@ -71,9 +71,11 @@ html[data-theme="carbon-soft-v2"][data-overlay="dark"] .subhero--photo .subhero_
   html[data-hdr-menu="flat"] .hdr2__drop-panel a:last-child{border-bottom:0}
 
   /* H2: Two columns */
+  html[data-hdr-menu="grid"][data-theme] .hdr2__nav--r{position:relative;align-self:stretch;align-items:center}
+  html[data-hdr-menu="grid"][data-theme] .hdr2__nav>.hdr2__drop{position:static}
   html[data-hdr-menu="grid"][data-theme] .hdr2__drop-panel{
-    width:520px;margin-top:.35rem;padding:1rem 1.5rem;background:#17190F;color:#F2F2EC;
-    border:0;border-radius:0 0 0 44px;box-shadow:none;display:grid;
+    width:520px;margin-top:0;top:100%;left:auto;right:0;padding:1rem 1.5rem;background:#17190F;color:#F2F2EC;
+    border:1px solid rgba(242,242,236,.4);border-top:0;border-radius:0 0 0 44px;box-shadow:none;display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));gap:0 2rem;
   }
   html[data-hdr-menu="grid"] .hdr2__drop-panel a{
@@ -91,7 +93,7 @@ html[data-theme="carbon-soft-v2"][data-overlay="dark"] .subhero--photo .subhero_
   html[data-hdr-menu="bar"][data-theme] .hdr2__nav>.hdr2__drop{position:static}
   html[data-hdr-menu="bar"][data-theme] .hdr2__drop-panel{
     position:absolute;left:0;right:0;top:100%;width:auto;margin:0;padding:2rem clamp(20px,4vw,56px);
-    background:#17190F;color:#F2F2EC;border:0;border-top:1px solid rgba(255,255,255,.12);
+    background:#17190F;color:#F2F2EC;border:0;border-top:1px solid rgba(242,242,236,.28);border-bottom:1px solid rgba(242,242,236,.45);
     border-radius:0;box-shadow:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 3rem;
   }
   html[data-hdr-menu="bar"] .hdr2__drop-panel a{
@@ -146,7 +148,7 @@ html[data-theme="carbon-soft-v2"][data-overlay="dark"] .subhero--photo .subhero_
   html[data-hdr-menu="mega"][data-theme] .hdr2__drop-panel{
     position:absolute;left:0;right:0;top:100%;width:auto;margin:0;
     padding:2.75rem clamp(20px,4vw,56px) 3.25rem;
-    background:#17190F;color:#F2F2EC;border:0;border-top:1px solid rgba(255,255,255,.12);
+    background:#17190F;color:#F2F2EC;border:0;border-top:1px solid rgba(242,242,236,.28);border-bottom:1px solid rgba(242,242,236,.45);
     border-radius:0;box-shadow:none;
   }
   html[data-hdr-menu="mega"] .mega{
@@ -222,45 +224,20 @@ html[data-theme][data-hero-h="80"] .subhero:not(.subhero--photo){padding-bottom:
 
 /* ---- L: homepage credentials strip (logos) ------------------------ */
 /* Shared: logos become one-colour marks so white and coloured logos sit together */
-html[data-theme]:is([data-cred="1"],[data-cred="2"],[data-cred="3"]) #intro .credline{
+html[data-theme]:is([data-cred="3"],[data-cred="4"],[data-cred="5"]) #intro .credline{
   border-top:0;padding-top:0;margin-top:3rem;align-items:stretch;
 }
-html[data-theme]:is([data-cred="1"],[data-cred="2"],[data-cred="3"]) #intro .credline > span{
+html[data-theme]:is([data-cred="3"],[data-cred="4"],[data-cred="5"]) #intro .credline > span{
   flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:1rem;
 }
-html[data-theme]:is([data-cred="1"],[data-cred="2"],[data-cred="3"]) #intro .credline__text{
+html[data-theme]:is([data-cred="3"],[data-cred="4"],[data-cred="5"]) #intro .credline__text{
   flex:none;font-size:.78rem;line-height:1.55;letter-spacing:.06em;
 }
-html[data-theme]:is([data-cred="1"],[data-cred="2"],[data-cred="3"]) #intro .credline__logo,
-html[data-theme]:is([data-cred="1"],[data-cred="2"],[data-cred="3"]) #intro .credline span:has(.credline__logo--square) .credline__logo{
+html[data-theme]:is([data-cred="3"],[data-cred="4"],[data-cred="5"]) #intro .credline__logo,
+html[data-theme]:is([data-cred="3"],[data-cred="4"],[data-cred="5"]) #intro .credline span:has(.credline__logo--square) .credline__logo{
   height:44px;width:auto;max-width:150px;
 }
-html[data-theme]:is([data-cred="1"],[data-cred="2"],[data-cred="3"]) #intro .credline i{font-size:1.6rem;height:44px;display:flex;align-items:center}
-
-/* L1: light tiles */
-html[data-theme][data-cred="1"] #intro .credline{gap:1rem}
-html[data-theme][data-cred="1"] #intro .credline > span{
-  background:#F2F2EC;padding:1.5rem 1.4rem 1.4rem;border-radius:0 32px 0 0;
-}
-html[data-theme][data-cred="1"] #intro .credline__logo{filter:brightness(0)}
-html[data-theme][data-cred="1"] #intro .credline__text{color:#4a4d3e}
-html[data-theme][data-cred="1"] #intro .credline b{color:#17190F}
-html[data-theme][data-cred="1"] #intro .credline i{color:#3E4A16}
-
-/* L2: one light band with a title and dividers */
-html[data-theme][data-cred="2"] #intro .credline{
-  background:#F2F2EC;border-radius:0 64px 0 0;padding:1.6rem 2rem 1.8rem;gap:1.2rem 0;
-}
-html[data-theme][data-cred="2"] #intro .credline::before{
-  content:"Licensed & accredited";grid-column:1/-1;font-size:.72rem;letter-spacing:.16em;
-  text-transform:uppercase;color:#3E4A16;font-weight:500;
-}
-html[data-theme][data-cred="2"] #intro .credline > span{padding:.2rem 1.6rem;border-left:1px solid rgba(23,25,15,.16)}
-html[data-theme][data-cred="2"] #intro .credline > span:first-of-type{border-left:0;padding-left:0}
-html[data-theme][data-cred="2"] #intro .credline__logo{filter:brightness(0)}
-html[data-theme][data-cred="2"] #intro .credline__text{color:#4a4d3e}
-html[data-theme][data-cred="2"] #intro .credline b{color:#17190F}
-html[data-theme][data-cred="2"] #intro .credline i{color:#3E4A16}
+html[data-theme]:is([data-cred="3"],[data-cred="4"],[data-cred="5"]) #intro .credline i{font-size:1.6rem;height:44px;display:flex;align-items:center}
 
 /* L3: dark outlined tiles, white marks, lime on hover */
 html[data-theme][data-cred="3"] #intro .credline{gap:1rem}
@@ -272,14 +249,32 @@ html[data-theme][data-cred="3"] #intro .credline > span::after{
   content:"";position:absolute;left:1.4rem;top:-1px;width:36px;height:3px;background:#C2E807;
 }
 html[data-theme][data-cred="3"] #intro .credline > span:hover{border-color:#C2E807}
-html[data-theme][data-cred="3"] #intro .credline__logo{filter:brightness(0) invert(1)}
 
-@media(max-width:1100px){
-  html[data-theme][data-cred="2"] #intro .credline > span:nth-of-type(odd){border-left:0;padding-left:0}
+/* L4 / L5: infinite marquee of the credentials (L4 = framed dark tiles, L5 = no frame).
+   demo-credbox.js wraps #credline in .credline-clip and appends aria-hidden clones of its spans. */
+#credline > .is-clone{display:none}
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) .credline-clip{
+  overflow:hidden;margin-top:8rem;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
 }
-@media(max-width:480px){
-  html[data-theme][data-cred="2"] #intro .credline > span{border-left:0;padding-left:0;border-top:1px solid rgba(23,25,15,.16);padding-top:1rem}
-  html[data-theme][data-cred="2"] #intro .credline > span:first-of-type{border-top:0;padding-top:.2rem}
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline{
+  display:flex;width:max-content;margin-top:0;animation:nll-cred-marquee 38s linear infinite;
+}
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) .credline-clip:hover .credline{animation-play-state:paused}
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline > span,
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline > .is-clone{display:flex;flex:none;width:270px;margin-right:1rem}
+@keyframes nll-cred-marquee{to{transform:translateX(-50%)}}
+html[data-theme][data-cred="4"] #intro .credline > span{
+  border:1px solid rgba(242,242,236,.16);border-radius:0 32px 0 0;padding:1.5rem 1.4rem 1.4rem;position:relative;
+}
+html[data-theme][data-cred="4"] #intro .credline > span::after{
+  content:"";position:absolute;left:1.4rem;top:-1px;width:36px;height:3px;background:#C2E807;
+}
+html[data-theme][data-cred="5"] #intro .credline > span{padding:.4rem 1.2rem .4rem 0;margin-right:2.6rem}
+@media(prefers-reduced-motion:reduce){
+  html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline{animation:none;width:auto;flex-wrap:wrap;gap:1rem}
+  html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline > .is-clone{display:none}
 }
 
 /* ---- M: stats higher + credentials box under the stats ------------ */
@@ -288,57 +283,137 @@ html[data-theme]:not([data-credm="0"]) #intro .credline{display:none}
 html[data-theme]:not([data-credm="0"]) #intro .intro-grid{align-items:start}
 html[data-theme]:not([data-credm="0"]) #intro .intro-figures{align-self:start;padding-top:.5rem}
 html[data-theme]:not([data-credm="0"]) #intro .statline{margin-top:0}
-html[data-theme]:is([data-credm="1"],[data-credm="2"],[data-credm="3"]) .credbox{display:block;margin-top:2.6rem}
+html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox{display:block;margin-top:2.6rem}
 .credbox__label{margin:0 0 1rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#C2E807;font-weight:500}
-.credbox__mark img{display:block;width:auto;max-width:100%;filter:brightness(0) invert(1)}
+.credbox__mark img{display:block;width:auto;max-width:100%}
 .credbox__mark i{color:#C2E807;font-size:1.7rem;line-height:1;display:block}
 .credbox__text{font-size:.74rem;line-height:1.55;letter-spacing:.06em;text-transform:uppercase;color:rgba(242,242,236,.7)}
 .credbox__text b{color:#F2F2EC;font-weight:500}
 .credbox__dots{display:none}
 
-/* M1: logo tiles (2 x 2) */
-html[data-theme][data-credm="1"] .credbox__list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-html[data-theme][data-credm="1"] .credbox__item{
-  display:flex;flex-direction:column;gap:.8rem;justify-content:space-between;min-width:0;
-  border:1px solid rgba(242,242,236,.16);border-radius:0 26px 0 0;padding:1.1rem 1.1rem 1rem;position:relative;transition:border-color .2s;
+/* M3 / M4: credentials loop endlessly (marquee) under the stats.
+   demo-credbox.js wraps the items in .credbox__track and appends aria-hidden clones.
+   M3 = boxed, ~1.7 items visible. M4 = quiet row, 2 visible. */
+.credbox__track{display:flex;width:max-content}
+.credbox__item.is-clone{display:none}
+html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox__list{overflow:hidden;container-type:inline-size}
+html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox__track{animation:nll-credbox-loop var(--loop,16s) linear infinite}
+html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox:hover .credbox__track{animation-play-state:paused}
+html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox__item{
+  flex:none;box-sizing:border-box;padding-right:1.6rem;display:flex;align-items:center;gap:.9rem;
 }
-html[data-theme][data-credm="1"] .credbox__item::before{content:"";position:absolute;left:1.1rem;top:-1px;width:28px;height:3px;background:#C2E807}
-html[data-theme][data-credm="1"] .credbox__item:hover{border-color:#C2E807}
-html[data-theme][data-credm="1"] .credbox__mark{height:38px;display:flex;align-items:center}
-html[data-theme][data-credm="1"] .credbox__mark img{height:36px}
+html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox__item.is-clone{display:flex}
+html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox__mark{height:56px;display:flex;align-items:center}
+html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox__mark img{height:54px;max-width:210px}
+html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox__mark i{font-size:2.4rem}
+@keyframes nll-credbox-loop{to{transform:translateX(-50%)}}
 
-/* M2: single logo row */
-html[data-theme][data-credm="2"] .credbox{border-top:1px solid rgba(242,242,236,.16);padding-top:1.3rem}
-html[data-theme][data-credm="2"] .credbox__list{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem 2rem}
-html[data-theme][data-credm="2"] .credbox__item{display:flex;align-items:center;gap:.7rem}
-html[data-theme][data-credm="2"] .credbox__item:has(img) .credbox__text{display:none}
-html[data-theme][data-credm="2"] .credbox__mark img{height:30px}
-html[data-theme][data-credm="2"] .credbox__item:not(:has(img)) .credbox__text{font-size:.7rem;max-width:18ch}
-html[data-theme][data-credm="2"] .credbox__mark i{font-size:1.4rem}
-
-/* M3: rotating badge */
+/* M3: boxed, logo above text */
 html[data-theme][data-credm="3"] .credbox{
   border:1px solid rgba(242,242,236,.16);border-radius:0 40px 0 0;padding:1.4rem 1.6rem 1.2rem;position:relative;
 }
 html[data-theme][data-credm="3"] .credbox::before{content:"";position:absolute;left:1.6rem;top:-1px;width:36px;height:3px;background:#C2E807}
-html[data-theme][data-credm="3"] .credbox__list{position:relative;min-height:128px}
-html[data-theme][data-credm="3"] .credbox__item{
-  position:absolute;inset:0;display:flex;flex-direction:column;gap:1rem;justify-content:center;
-  opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s;
-}
-html[data-theme][data-credm="3"] .credbox__item.is-on{opacity:1;visibility:visible}
-html[data-theme][data-credm="3"] .credbox__mark{height:56px;display:flex;align-items:center}
-html[data-theme][data-credm="3"] .credbox__mark img{height:54px;max-width:210px}
-html[data-theme][data-credm="3"] .credbox__mark i{font-size:2.4rem}
+html[data-theme][data-credm="3"] .credbox__track{--loop:14s}
+html[data-theme][data-credm="3"] .credbox__item{width:60cqw;flex-direction:column;align-items:flex-start;gap:1rem}
 html[data-theme][data-credm="3"] .credbox__text{font-size:.8rem}
-html[data-theme][data-credm="3"] .credbox__dots{display:flex;gap:8px;margin-top:.9rem}
-html[data-theme][data-credm="3"] .credbox__dots i{width:22px;height:3px;background:rgba(242,242,236,.22);transition:background .3s}
-html[data-theme][data-credm="3"] .credbox__dots i.is-on{background:#C2E807}
+
+/* M4: quiet row (top rule, no box), logos only, fading edges */
+html[data-theme]:is([data-credm="4"]) .credbox{border-top:1px solid rgba(242,242,236,.16);padding-top:1.3rem}
+html[data-theme]:is([data-credm="4"]) .credbox__list{
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+}
+html[data-theme]:is([data-credm="4"]) .credbox__item:has(img) .credbox__text{display:none}
+html[data-theme]:is([data-credm="4"]) .credbox__item:not(:has(img)) .credbox__text{font-size:.78rem;max-width:16ch}
+html[data-theme][data-credm="4"] .credbox__track{--loop:12s}
+html[data-theme][data-credm="4"] .credbox__item{width:50cqw}
 @media(prefers-reduced-motion:reduce){
-  html[data-theme][data-credm="3"] .credbox__list{min-height:0;display:grid;gap:1.2rem}
-  html[data-theme][data-credm="3"] .credbox__item{position:static;opacity:1;visibility:visible;transition:none}
-  html[data-theme][data-credm="3"] .credbox__dots{display:none}
+  html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox__track{animation:none;width:auto;flex-wrap:wrap;gap:1rem 0}
+  html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox__item.is-clone{display:none}
+  html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox__item{width:auto}
 }
 @media(max-width:900px){
   html[data-theme]:not([data-credm="0"]) #intro .intro-figures{padding-top:0}
 }
+
+/* ---- P: credential proof options (demo-proof.js builds the blocks) ---- */
+.proof-a,.proof-b,.proof-c__line,.proof-c__card{display:none}
+html[data-theme][data-proof="1"] .proof-a,
+html[data-theme]:is([data-proof="2"],[data-proof="4"]) .proof-b,
+html[data-theme]:is([data-proof="3"],[data-proof="4"]) .proof-c__line{display:block}
+html[data-theme][data-proof="3"] .proof-c__card{display:block}
+/* any P option replaces the L strip and the M box */
+html[data-theme][data-proof]:not([data-proof="0"]) .credline-clip,
+html[data-theme][data-proof]:not([data-proof="0"]) #credline,
+html[data-theme][data-proof]:not([data-proof="0"]) #credbox{display:none !important}
+
+/* P1: slim proof line under the hero */
+html[data-theme][data-proof="1"] .proof-a{
+  display:flex;flex-wrap:wrap;align-items:center;gap:1rem 2.4rem;margin-top:4.5rem;padding-top:1.5rem;
+  border-top:1px solid rgba(242,242,236,.16);
+}
+.proof-a__label{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#C2E807;font-weight:500}
+.proof-a__lic{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(242,242,236,.72)}
+.proof-a__lic b{color:#F2F2EC;font-weight:500}
+.proof-a__verify,.proof-c__verify{color:#C2E807;text-decoration:underline;text-underline-offset:3px;margin-left:.4rem}
+.proof-a__marks{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:1rem 0}
+.proof-a__marks li{padding:0 1.6rem;border-left:1px solid rgba(242,242,236,.18);display:flex;align-items:center}
+.proof-a__marks img{height:30px;width:auto;max-width:130px}
+
+/* P2: proof band between reviews and process */
+html[data-theme] .proof-b{background:#E7E7DC;color:#17190F;border-top:1px solid rgba(23,25,15,.12);border-bottom:1px solid rgba(23,25,15,.12)}
+html[data-theme]:is([data-proof="2"],[data-proof="4"]) .proof-b{display:block}
+.proof-b__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:3rem 4rem;align-items:center}
+.proof-b__lead .eyebrow{color:#3E4A16}
+.proof-b__lead h2{margin:.4rem 0 .8rem}
+.proof-b__lead .lead{margin-bottom:1.4rem}
+.proof-b__cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.proof-b__cards li{border:1px solid rgba(23,25,15,.18);border-radius:0 28px 0 0;padding:1.4rem 1.2rem 1.2rem;position:relative;background:rgba(242,242,236,.6)}
+.proof-b__cards li::before{content:"";position:absolute;left:1.2rem;top:-1px;width:28px;height:3px;background:#17190F}
+.proof-b__mark{display:flex;align-items:center;height:48px;margin-bottom:.9rem}
+.proof-b__cards .proof-plate{margin-bottom:.9rem}
+.proof-b__text{font-size:.78rem;line-height:1.55;letter-spacing:.05em;text-transform:uppercase;color:#4a4d3e}
+@media(max-width:900px){.proof-b__grid{grid-template-columns:1fr}.proof-b__cards{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.proof-b__cards{grid-template-columns:1fr}}
+
+/* P3: proof at the decision points */
+html[data-theme]:is([data-proof="3"],[data-proof="4"]) .proof-c__line{margin-top:1.6rem;font-size:.82rem;letter-spacing:.04em;color:rgba(242,242,236,.75)}
+.proof-c__line i{color:#C2E807;margin-right:.35rem}
+.proof-c__line b{color:#F2F2EC;font-weight:500}
+.proof-c__card{background:#17190F;color:#F2F2EC;border-radius:0 28px 0 0;padding:1.4rem 1.5rem 1.3rem;margin:0 0 1.6rem;position:relative}
+.proof-c__card::before{content:"";position:absolute;left:1.5rem;top:0;width:32px;height:3px;background:#C2E807}
+.proof-c__title{margin:0 0 .3rem;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:#C2E807;font-weight:500}
+.proof-c__sub{margin:0 0 1rem;font-size:.88rem;color:rgba(242,242,236,.75)}
+.proof-c__marks{list-style:none;margin:0 0 1rem;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.6rem}
+.proof-c__marks img{height:28px;width:auto;max-width:120px}
+.svc-actions + .proof-c__card{margin-top:1.6rem}
+
+/* Logos are never recoloured. demo-proof.js / data.js pick the supplied version for the surface:
+   white (reversed) logos on dark, black logos on light. No plates, no boxes. */
+.proof-plate{display:inline-flex;align-items:center;justify-content:center;height:56px}
+.proof-plate img{display:block;height:44px;width:auto;max-width:170px;object-fit:contain}
+.proof-plate--badge img{height:56px;max-width:170px}
+.proof-a__marks li{padding:0 1.4rem;border-left:1px solid rgba(242,242,236,.18)}
+.proof-a__marks{gap:.8rem 0}
+.proof-b__cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+.proof-b__cards li{display:flex;flex-direction:column;align-items:flex-start}
+.proof-b__cards .proof-plate{height:64px;margin-bottom:.9rem}
+.proof-b__cards .proof-plate img{height:48px}
+.proof-b__cards .proof-plate--badge img{height:64px;max-width:200px}
+.proof-c__marks{gap:.8rem 1.8rem}
+.proof-c__marks .proof-plate{height:48px}
+.proof-c__marks .proof-plate img{height:36px}
+.proof-c__marks .proof-plate--badge img{height:48px}
+@media(max-width:520px){.proof-b__cards{grid-template-columns:1fr}}
+
+/* L / M strips: credline / credbox use the dark-surface (white) logo from data.js */
+html[data-theme] #intro .credline__logo,
+html[data-theme] .credbox__mark img{filter:none}
+html[data-theme] #intro .credline__logo[src*="icn"],
+html[data-theme] .credbox__mark img[src*="icn"]{height:56px;width:auto;max-width:none}
+.proof-plate img[src*="mlsa"]{height:54px}
+.proof-b__cards .proof-plate img[src*="mlsa"]{height:60px}
+.proof-c__marks .proof-plate img[src*="mlsa"]{height:44px}
+
+/* Homepage intro: credentials sit closer to the bottom edge of the dark band (was ~120px, now ~56px). */
+html[data-theme="carbon-soft-v2"] body.pg-home main > #intro{padding-bottom:calc(var(--pad-home) + var(--v2-scoop) - 64px)}

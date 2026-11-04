@@ -11,8 +11,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="assets/css/style.css?v=1793001000">
-<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1793300000">
-<link rel="stylesheet" href="assets/css/mega-menu.css?v=3">
+<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1793600001">
+<link rel="stylesheet" href="assets/css/mega-menu.css?v=6">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -61,9 +61,9 @@
   <button class="lb-next" aria-label="Next">&rarr;</button>
 </div>
 
-<script src="assets/js/partials.js?v=1793000000"></script>
-<script src="assets/data.js?v=1793100200"></script>
-<script src="assets/js/main.js?v=1793000100"></script>
+<script src="assets/js/partials.js?v=1793500001"></script>
+<script src="assets/data.js?v=1793600000"></script>
+<script src="assets/js/main.js?v=1793600000"></script>
 <script src="assets/js/mega-menu.js?v=1" defer></script>
 <script>
 (function(){
@@ -77,20 +77,31 @@
   document.getElementById('subhero-media').innerHTML='<img src="'+p.img+'" alt="">';
   document.getElementById('p-meta').innerHTML=
     '<span>Location <b>'+p.suburb+', SA</b></span>'+
-    '<span>Completed <b>'+p.date+'</b></span>'+
+    '<span>'+(p.dateLabel||'Completed')+' <b>'+p.date+'</b></span>'+
     '<span>Scope <b>'+p.tags.join(' · ')+'</b></span>';
-  document.getElementById('p-narrative').innerHTML='<p>'+p.narrative+'</p>';
+  document.getElementById('p-narrative').innerHTML='<p>'+p.narrative+'</p>'+
+    (p.draft?'<p class="ba-note">Draft — project name, suburb, date and scope are written from the photos and still need confirming by the client.</p>':'');
   document.getElementById('p-spec').innerHTML=
     '<dt>Suburb</dt><dd>'+p.suburb+'</dd>'+
-    '<dt>Completed</dt><dd>'+p.date+'</dd>'+
+    '<dt>'+(p.dateLabel||'Completed')+'</dt><dd>'+p.date+'</dd>'+
     '<dt>Services</dt><dd>'+p.tags.join(', ')+'</dd>';
   document.getElementById('p-scope').innerHTML='<li style="margin-bottom:.4rem;color:var(--ink);font-weight:500;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase">What we did</li>'+
     p.scope.map(function(s){return '<li><i class="fa-solid fa-circle"></i><span>'+s+'</span></li>';}).join('');
 
   var g=document.getElementById('p-gallery');
+  /* Large photo sets start at 12 tiles; hidden tiles don't load until opened. */
+  var GALLERY_FIRST=12;
   g.innerHTML=p.gallery.map(function(src,idx){
-    return '<button data-i="'+idx+'"><img loading="lazy" src="'+src+'" alt="'+p.name+' photo '+(idx+1)+'"></button>';
+    var alt=(p.galleryAlt&&p.galleryAlt[idx])||(p.name+' photo '+(idx+1));
+    return '<button data-i="'+idx+'"'+(idx>=GALLERY_FIRST?' hidden':'')+'><img loading="lazy" src="'+src+'" alt="'+alt+'"></button>';
   }).join('');
+  if(p.gallery.length>GALLERY_FIRST){
+    g.insertAdjacentHTML('afterend','<p class="gallery-more"><button type="button" class="btn-ghost">Show all '+p.gallery.length+' photos</button></p>');
+    g.nextElementSibling.querySelector('button').addEventListener('click',function(){
+      g.querySelectorAll('button[hidden]').forEach(function(b){b.hidden=false;});
+      g.nextElementSibling.remove();
+    });
+  }
   var open=window.NLLlightbox(p.gallery);
   g.addEventListener('click',function(e){
     var b=e.target.closest('button'); if(b&&open) open(+b.dataset.i);
