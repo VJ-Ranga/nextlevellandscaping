@@ -455,3 +455,7 @@ Renamed/resized copies of the following source scenes were found by perceptual c
 - All manifest image links resolve; each main image has one 600px-wide companion.
 - The three copied descriptions match their source bytes.
 - Only `media-library/` is included in this commit. Website files, handoff and ignore rules are unchanged.
+
+## Location 1–3 photo sets (2026-11-03)
+
+Originals are in `Jpeg_compressed.zip` and `PNG_compressed.zip` (gitignored, 557 MB) and are not copied here. 108 of 142 went straight into `site/assets/img/gallery/` and `demo/assets/img/gallery/`. Selection and skip reasons: `docs/NEW-PHOTOS-PLAN-2026-11-03.md`, section 6.

@@ -4,14 +4,24 @@
     {
       "name": "site-static",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8098", "--directory", "site"],
-      "port": 8098
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8500",
+        "--directory",
+        "site"
+      ],
+      "port": 8500
     },
     {
       "name": "repo-static",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8099"],
-      "port": 8099
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8501"
+      ],
+      "port": 8501
     }
   ]
 }

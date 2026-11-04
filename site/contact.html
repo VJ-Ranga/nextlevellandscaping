@@ -12,19 +12,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <link rel="stylesheet" href="assets/css/style.css?v=1793001000">
-<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1793300000">
-<link rel="stylesheet" href="assets/css/mega-menu.css?v=3">
+<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1793600001">
+<link rel="stylesheet" href="assets/css/mega-menu.css?v=6">
 <style>
   /* Page-scoped: the map slot. No embed is available yet (no API key, client
      has not confirmed the listing), so the block reserves the space the map
      will occupy instead of shipping a third-party iframe. Hairline + dashed
      edge only — no fill, no elevation, per the card rule in the style guide. */
   .map-slot{margin-top:2.5rem;display:grid;place-items:center;text-align:center;
-    aspect-ratio:16/7;border:1px dashed var(--line);border-radius:6px;padding:1.5rem}
+    min-height:240px;border:1px dashed var(--line);border-radius:6px;padding:1.5rem}
   .map-slot i{font-size:1.6rem;color:var(--accent);margin-bottom:.9rem;display:block}
   .map-slot .ba-note{margin-top:0;max-width:46ch}
-  @media(max-width:640px){.map-slot{aspect-ratio:4/3}}
-  /* Page-scoped: the contact <dl> uses icons as its terms, so each <dt> needs a
+    /* Page-scoped: the contact <dl> uses icons as its terms, so each <dt> needs a
      text label for screen readers. No visually-hidden utility exists in the
      shared CSS, so it lives here rather than in a shared file. */
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
@@ -169,9 +168,9 @@
 </main>
 
 <div id="site-footer-slot"></div>
-<script src="assets/js/partials.js?v=1793000000"></script>
-<script src="assets/data.js?v=1793100200"></script>
-<script src="assets/js/main.js?v=1793000100"></script>
+<script src="assets/js/partials.js?v=1793500001"></script>
+<script src="assets/data.js?v=1793600000"></script>
+<script src="assets/js/main.js?v=1793600000"></script>
 <script src="assets/js/mega-menu.js?v=1" defer></script>
 <script>document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});</script>
 </body>

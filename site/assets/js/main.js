@@ -62,7 +62,7 @@
   if (carTrack && D.heroSlides && D.heroSlides.length) {
     carTrack.innerHTML = D.heroSlides.map(function (s, i) {
       return '<div class="hero-slide' + (i ? "" : " is-on") + '">' +
-        '<h1>' + s.line + '</h1>' +
+        (i ? '<p class="hero-slide__line">' + s.line + '</p>' : '<h1>' + s.line + '</h1>') +
         (s.cta ? '<a class="btn-ghost btn-ghost--fill" href="' + esc(s.href || "#") + '">' + esc(s.cta) + '</a>' : '') +
       '</div>';
     }).join("");
@@ -134,6 +134,17 @@
       var mark = c.logo ? '<img class="credline__logo' + (c.w && c.h && Math.abs(c.w - c.h) / Math.max(c.w, c.h) <= 0.2 ? ' credline__logo--square' : '') + '" src="' + esc(c.logo) + '" alt="' + esc(c.alt) + '" width="' + c.w + '" height="' + c.h + '">' : '<i class="' + esc(c.icon) + '"></i>';
       return '<span>' + mark + '<span class="credline__text">' + c.text + '</span></span>';
     }).join("");
+    /* Endless loop: wrap in a clip and append aria-hidden clones so the marquee repeats seamlessly. */
+    var credClip = document.createElement("div");
+    credClip.className = "credline-clip";
+    credEl.parentNode.insertBefore(credClip, credEl);
+    credClip.appendChild(credEl);
+    Array.prototype.slice.call(credEl.children).forEach(function (sp) {
+      var clone = sp.cloneNode(true);
+      clone.className = "is-clone";
+      clone.setAttribute("aria-hidden", "true");
+      credEl.appendChild(clone);
+    });
   }
 
   /* ---- 4. Services explorer (hover/click to swap) -------- */
@@ -244,7 +255,7 @@
   /* ---- 5. Render: projects (swiper) --------------------- */
   var projWrap = $("#projects-track");
   if (projWrap && D.projects) {
-    projWrap.innerHTML = D.projects.map(function (p) {
+    projWrap.innerHTML = D.projects.filter(function (p) { return !p.inProgress; }).map(function (p) {
       return '' +
         '<div class="swiper-slide">' +
           '<a class="proj-card" href="project.html?slug=' + esc(p.slug) + '">' +

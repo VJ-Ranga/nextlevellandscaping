@@ -10,7 +10,7 @@
   html[data-theme] .hdr2__drop-panel{
     position:absolute;left:0;right:0;top:100%;width:auto;margin:0;
     padding:2.75rem clamp(20px,4vw,56px) 3.25rem;
-    background:#17190F;color:#F2F2EC;border:0;border-top:1px solid rgba(255,255,255,.12);
+    background:#17190F;color:#F2F2EC;border:0;border-top:1px solid rgba(242,242,236,.28);border-bottom:1px solid rgba(242,242,236,.45);
     border-radius:0;box-shadow:none;
   }
   html[data-theme] .mega{

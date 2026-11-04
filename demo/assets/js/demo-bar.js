@@ -32,16 +32,18 @@
   var HEROH_KEY = "nll-demo-hero-h";
   var CRED_KEY = "nll-demo-cred";
   var CREDM_KEY = "nll-demo-credm";
+  var PROOF_KEY = "nll-demo-proof";
 
   var UTIL_OPTS = ["12.8", "13.5", "14.5", "15.5"];
   var NAV_OPTS = ["17", "17.5", "18", "19"];
-  var MENU_OPTS = ["flat", "grid", "bar", "min", "mega", "old"];
+  var MENU_OPTS = ["grid", "mega"];
   var OVERLAY_OPTS = ["normal", "dark"];
-  var OPEN_OPTS = ["transparent", "solid"];
-  var ICONS_OPTS = ["off", "on"];
+  var OPEN_OPTS = ["solid"];
+  var ICONS_OPTS = ["on"];
   var HEROH_OPTS = ["0", "30", "50", "80"];
-  var CRED_OPTS = ["0", "1", "2", "3"];
-  var CREDM_OPTS = ["0", "1", "2", "3"];
+  var CRED_OPTS = ["3", "4", "5"];
+  var CREDM_OPTS = ["0", "3", "4"];
+  var PROOF_OPTS = ["0", "1", "2", "3", "4"];
 
   function readStored(key, allowed, def) {
     var v = null;
@@ -56,13 +58,14 @@
   var state = {
     util: "14.5" /* F removed: locked */,
     nav: "18" /* G removed: locked */,
-    menu: readStored(MENU_KEY, MENU_OPTS, "flat"),
+    menu: readStored(MENU_KEY, MENU_OPTS, "mega"),
     overlay: readStored(OVERLAY_KEY, OVERLAY_OPTS, "normal"),
-    open: readStored(OPEN_KEY, OPEN_OPTS, "solid"),
-    icons: readStored(ICONS_KEY, ICONS_OPTS, "off"),
+    open: "solid" /* I removed: locked, same as site */,
+    icons: "on" /* J removed: locked, same as site */,
     heroh: readStored(HEROH_KEY, HEROH_OPTS, "80"),
-    cred: readStored(CRED_KEY, CRED_OPTS, "0"),
-    credm: readStored(CREDM_KEY, CREDM_OPTS, "0")
+    cred: readStored(CRED_KEY, CRED_OPTS, "3"),
+    credm: readStored(CREDM_KEY, CREDM_OPTS, "0"),
+    proof: readStored(PROOF_KEY, PROOF_OPTS, "1")
   };
 
   function applyAttrs() {
@@ -75,6 +78,7 @@
     html.setAttribute("data-hero-h", state.heroh);
     html.setAttribute("data-cred", state.cred);
     html.setAttribute("data-credm", state.credm);
+    html.setAttribute("data-proof", state.proof);
   }
   applyAttrs(); // runs immediately, pre-paint
 
@@ -99,12 +103,8 @@
   var GROUP_H = {
     code: "H", label: "Services menu", key: "menu", storeKey: MENU_KEY,
     opts: [
-      { code: "H1", val: "flat", label: "Flat list" },
       { code: "H2", val: "grid", label: "Two columns" },
-      { code: "H3", val: "bar", label: "Full-width bar" },
-      { code: "H4", val: "min", label: "Minimal" },
-      { code: "H5", val: "mega", label: "Mega menu" },
-      { code: "H0", val: "old", label: "Old (current)" }
+      { code: "H5", val: "mega", label: "Mega menu" }
     ]
   };
   var GROUP_C = {
@@ -117,14 +117,12 @@
   var GROUP_I = {
     code: "I", label: "Header when menu open", key: "open", storeKey: OPEN_KEY,
     opts: [
-      { code: "I1", val: "transparent", label: "Transparent" },
       { code: "I2", val: "solid", label: "Solid dark" }
     ]
   };
   var GROUP_J = {
     code: "J", label: "Menu icons", key: "icons", storeKey: ICONS_KEY,
     opts: [
-      { code: "J1", val: "off", label: "Off (numbers)" },
       { code: "J2", val: "on", label: "On" }
     ]
   };
@@ -142,10 +140,20 @@
   var GROUP_L = {
     code: "L", label: "Credentials strip", key: "cred", storeKey: CRED_KEY,
     opts: [
-      { code: "L0", val: "0", label: "Current" },
-      { code: "L1", val: "1", label: "Light tiles" },
-      { code: "L2", val: "2", label: "Light band" },
-      { code: "L3", val: "3", label: "Dark tiles" }
+      { code: "L3", val: "3", label: "Dark tiles" },
+      { code: "L4", val: "4", label: "Infinite loop, framed" },
+      { code: "L5", val: "5", label: "Infinite loop, no frame" }
+    ]
+  };
+
+  var GROUP_P = {
+    code: "P", label: "Credential proof", key: "proof", storeKey: PROOF_KEY,
+    opts: [
+      { code: "P0", val: "0", label: "Off (use L / M)" },
+      { code: "P1", val: "1", label: "A · Proof line" },
+      { code: "P2", val: "2", label: "B · Proof band" },
+      { code: "P3", val: "3", label: "C · At decision points" },
+      { code: "P4", val: "4", label: "C + B · Line on top, band below" }
     ]
   };
 
@@ -153,9 +161,8 @@
     code: "M", label: "Stats + credentials", key: "credm", storeKey: CREDM_KEY,
     opts: [
       { code: "M0", val: "0", label: "Current" },
-      { code: "M1", val: "1", label: "Logo tiles" },
-      { code: "M2", val: "2", label: "Logo row" },
-      { code: "M3", val: "3", label: "Rotating badge" }
+      { code: "M3", val: "3", label: "Infinite loop, boxed" },
+      { code: "M4", val: "4", label: "Infinite loop, 2 at a time" }
     ]
   };
 
@@ -179,8 +186,8 @@
 
   function buildBar() {
     var isHome = !!document.getElementById("hero-car-track");
-    GROUPS = isHome ? [GROUP_H, GROUP_I, GROUP_J, GROUP_L, GROUP_M] : [GROUP_H, GROUP_I, GROUP_J, GROUP_K, GROUP_C];
-    HINT_TEXT = isHome ? "Tell us your pick, e.g. H5 + I2 + J2 + L1 + M1" : "Tell us your pick, e.g. H5 + I2 + J2 + K3 + C1";
+    GROUPS = isHome ? [GROUP_H, GROUP_P, GROUP_L, GROUP_M] : [GROUP_H, GROUP_P, GROUP_K, GROUP_C];
+    HINT_TEXT = isHome ? "Tell us your pick, e.g. H5 + P1" : "Tell us your pick, e.g. H5 + P3 + K3 + C1";
 
     var bar = document.createElement("div");
     bar.className = "demo-bar";
