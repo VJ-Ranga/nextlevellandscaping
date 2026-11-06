@@ -41,9 +41,9 @@
   var OPEN_OPTS = ["solid"];
   var ICONS_OPTS = ["on"];
   var HEROH_OPTS = ["0", "30", "50", "80"];
-  var CRED_OPTS = ["3", "4", "5"];
+  var CRED_OPTS = ["4", "5"];
   var CREDM_OPTS = ["0", "3", "4"];
-  var PROOF_OPTS = ["0", "1", "2", "3", "4"];
+  var PROOF_OPTS = ["0", "1", "2", "4"];
 
   function readStored(key, allowed, def) {
     var v = null;
@@ -63,9 +63,9 @@
     open: "solid" /* I removed: locked, same as site */,
     icons: "on" /* J removed: locked, same as site */,
     heroh: readStored(HEROH_KEY, HEROH_OPTS, "80"),
-    cred: readStored(CRED_KEY, CRED_OPTS, "3"),
+    cred: readStored(CRED_KEY, CRED_OPTS, "5"),
     credm: readStored(CREDM_KEY, CREDM_OPTS, "0"),
-    proof: readStored(PROOF_KEY, PROOF_OPTS, "1")
+    proof: readStored(PROOF_KEY, PROOF_OPTS, "0")
   };
 
   function applyAttrs() {
@@ -103,8 +103,8 @@
   var GROUP_H = {
     code: "H", label: "Services menu", key: "menu", storeKey: MENU_KEY,
     opts: [
-      { code: "H2", val: "grid", label: "Two columns" },
-      { code: "H5", val: "mega", label: "Mega menu" }
+      { code: "H1", val: "grid", label: "Two columns" },
+      { code: "H2", val: "mega", label: "Mega menu" }
     ]
   };
   var GROUP_C = {
@@ -137,32 +137,33 @@
     ]
   };
 
-  var GROUP_L = {
-    code: "L", label: "Credentials strip", key: "cred", storeKey: CRED_KEY,
+  /* Codes are what the client sees; val is the stored/CSS value, so they differ.
+     Any P other than P1 hides the logo strip, so L and M only apply with P1;
+     any M other than M1 replaces the strip, so L only applies with M1. */
+  var GROUP_P = {
+    code: "P", label: "Where credentials show", key: "proof", storeKey: PROOF_KEY,
     opts: [
-      { code: "L3", val: "3", label: "Dark tiles" },
-      { code: "L4", val: "4", label: "Infinite loop, framed" },
-      { code: "L5", val: "5", label: "Infinite loop, no frame" }
+      { code: "P1", val: "0", label: "Logo strip (choose L + M)" },
+      { code: "P2", val: "1", label: "Top section: line with logos" },
+      { code: "P3", val: "2", label: "Separate section: band before quote form" },
+      { code: "P4", val: "4", label: "Both: text line at top + separate section", apart: true }
     ]
   };
 
-  var GROUP_P = {
-    code: "P", label: "Credential proof", key: "proof", storeKey: PROOF_KEY,
+  var GROUP_L = {
+    code: "L", label: "Logo strip style (P1 + M1 only)", key: "cred", storeKey: CRED_KEY,
     opts: [
-      { code: "P0", val: "0", label: "Off (use L / M)" },
-      { code: "P1", val: "1", label: "A · Proof line" },
-      { code: "P2", val: "2", label: "B · Proof band" },
-      { code: "P3", val: "3", label: "C · At decision points" },
-      { code: "P4", val: "4", label: "C + B · Line on top, band below" }
+      { code: "L1", val: "4", label: "Moving, framed" },
+      { code: "L2", val: "5", label: "Moving, no frame" }
     ]
   };
 
   var GROUP_M = {
-    code: "M", label: "Stats + credentials", key: "credm", storeKey: CREDM_KEY,
+    code: "M", label: "Logo strip position (P1 only)", key: "credm", storeKey: CREDM_KEY,
     opts: [
-      { code: "M0", val: "0", label: "Current" },
-      { code: "M3", val: "3", label: "Infinite loop, boxed" },
-      { code: "M4", val: "4", label: "Infinite loop, 2 at a time" }
+      { code: "M1", val: "0", label: "Below the intro" },
+      { code: "M2", val: "3", label: "Under stats, boxed" },
+      { code: "M3", val: "4", label: "Under stats, 2 at a time" }
     ]
   };
 
@@ -178,6 +179,16 @@
     return window.__nllFooter ? window.__nllFooter.read() : "e1";
   }
 
+  function applies(key) {
+    if (key === "credm") return state.proof === "0";
+    if (key === "cred") return state.proof === "0" && state.credm === "0";
+    return true;
+  }
+
+  function summary() {
+    return GROUPS.filter(function (g) { return applies(g.key); }).map(currentCode).join(" + ");
+  }
+
   function currentCode(group) {
     var current = group.key === "footer" ? footerVal() : state[group.key];
     var opt = group.opts.filter(function (o) { return o.val === current; })[0];
@@ -186,8 +197,8 @@
 
   function buildBar() {
     var isHome = !!document.getElementById("hero-car-track");
-    GROUPS = isHome ? [GROUP_H, GROUP_P, GROUP_L, GROUP_M] : [GROUP_H, GROUP_P, GROUP_K, GROUP_C];
-    HINT_TEXT = isHome ? "Tell us your pick, e.g. H5 + P1" : "Tell us your pick, e.g. H5 + P3 + K3 + C1";
+    GROUPS = isHome ? [GROUP_H, GROUP_P, GROUP_L, GROUP_M] : [GROUP_H, GROUP_K, GROUP_C];
+    HINT_TEXT = isHome ? "Tell us your pick, e.g. H2 + P1 + L2 + M1" : "Tell us your pick, e.g. H2 + K4 + C1";
 
     var bar = document.createElement("div");
     bar.className = "demo-bar";
@@ -200,7 +211,7 @@
     toggle.setAttribute("aria-expanded", "true");
     toggle.innerHTML =
       '<span class="demo-bar__toggle-label">Demo options &mdash; ' +
-      GROUPS.map(currentCode).join(" + ") +
+      summary() +
       '</span><i class="fa-solid fa-chevron-up" aria-hidden="true"></i>';
     bar.appendChild(toggle);
 
@@ -219,7 +230,7 @@
       group.opts.forEach(function (opt) {
         var b = document.createElement("button");
         b.type = "button";
-        b.className = "demo-bar__opt";
+        b.className = "demo-bar__opt" + (opt.apart ? " demo-bar__opt--apart" : "");
         b.dataset.group = group.key;
         b.dataset.val = opt.val;
         b.dataset.storeKey = group.storeKey;
@@ -251,9 +262,10 @@
         var b = btns[i];
         var cur = b.dataset.group === "footer" ? fv : state[b.dataset.group];
         b.setAttribute("aria-pressed", cur === b.dataset.val ? "true" : "false");
+        b.disabled = !applies(b.dataset.group);
       }
       toggle.querySelector(".demo-bar__toggle-label").innerHTML =
-        "Demo options &mdash; " + GROUPS.map(currentCode).join(" + ");
+        "Demo options &mdash; " + summary();
     }
 
     bar.addEventListener("click", function (e) {
@@ -286,6 +298,7 @@
       toggle.setAttribute("aria-expanded", "false");
     }
 
+    setPressed();
     updateHeight();
     var resizeTimer;
     window.addEventListener("resize", function () {

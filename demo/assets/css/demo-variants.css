@@ -139,7 +139,7 @@ html[data-theme="carbon-soft-v2"][data-overlay="dark"] .subhero--photo .subhero_
   html[data-hdr-icons="on"]:is([data-hdr-menu="flat"],[data-hdr-menu="grid"],[data-hdr-menu="bar"],[data-hdr-menu="min"]) .hdr2__drop-panel .hdr2__drop-all i{display:none}
 }
 
-/* H5: mega menu */
+/* H2 (mega): mega menu */
 .mega{display:none}
 @media(min-width:993px){
   html[data-hdr-menu="mega"] .mega{display:grid}
@@ -224,33 +224,23 @@ html[data-theme][data-hero-h="80"] .subhero:not(.subhero--photo){padding-bottom:
 
 /* ---- L: homepage credentials strip (logos) ------------------------ */
 /* Shared: logos become one-colour marks so white and coloured logos sit together */
-html[data-theme]:is([data-cred="3"],[data-cred="4"],[data-cred="5"]) #intro .credline{
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline{
   border-top:0;padding-top:0;margin-top:3rem;align-items:stretch;
 }
-html[data-theme]:is([data-cred="3"],[data-cred="4"],[data-cred="5"]) #intro .credline > span{
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline > span{
   flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:1rem;
 }
-html[data-theme]:is([data-cred="3"],[data-cred="4"],[data-cred="5"]) #intro .credline__text{
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline__text{
   flex:none;font-size:.78rem;line-height:1.55;letter-spacing:.06em;
 }
-html[data-theme]:is([data-cred="3"],[data-cred="4"],[data-cred="5"]) #intro .credline__logo,
-html[data-theme]:is([data-cred="3"],[data-cred="4"],[data-cred="5"]) #intro .credline span:has(.credline__logo--square) .credline__logo{
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline__logo,
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline span:has(.credline__logo--square) .credline__logo{
   height:44px;width:auto;max-width:150px;
 }
-html[data-theme]:is([data-cred="3"],[data-cred="4"],[data-cred="5"]) #intro .credline i{font-size:1.6rem;height:44px;display:flex;align-items:center}
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline i{font-size:1.6rem;height:44px;display:flex;align-items:center}
 
-/* L3: dark outlined tiles, white marks, lime on hover */
-html[data-theme][data-cred="3"] #intro .credline{gap:1rem}
-html[data-theme][data-cred="3"] #intro .credline > span{
-  border:1px solid rgba(242,242,236,.16);border-radius:0 32px 0 0;padding:1.5rem 1.4rem 1.4rem;
-  position:relative;transition:border-color .2s;
-}
-html[data-theme][data-cred="3"] #intro .credline > span::after{
-  content:"";position:absolute;left:1.4rem;top:-1px;width:36px;height:3px;background:#C2E807;
-}
-html[data-theme][data-cred="3"] #intro .credline > span:hover{border-color:#C2E807}
 
-/* L4 / L5: infinite marquee of the credentials (L4 = framed dark tiles, L5 = no frame).
+/* L1 / L2: infinite marquee of the credentials (L1 = framed dark tiles, L2 = no frame).
    demo-credbox.js wraps #credline in .credline-clip and appends aria-hidden clones of its spans. */
 #credline > .is-clone{display:none}
 html[data-theme]:is([data-cred="4"],[data-cred="5"]) .credline-clip{
@@ -291,9 +281,9 @@ html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox{display:block;ma
 .credbox__text b{color:#F2F2EC;font-weight:500}
 .credbox__dots{display:none}
 
-/* M3 / M4: credentials loop endlessly (marquee) under the stats.
+/* M2 / M3: credentials loop endlessly (marquee) under the stats.
    demo-credbox.js wraps the items in .credbox__track and appends aria-hidden clones.
-   M3 = boxed, ~1.7 items visible. M4 = quiet row, 2 visible. */
+   M2 = boxed, ~1.7 items visible. M3 = quiet row, 2 visible. */
 .credbox__track{display:flex;width:max-content}
 .credbox__item.is-clone{display:none}
 html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox__list{overflow:hidden;container-type:inline-size}
@@ -308,7 +298,7 @@ html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox__mark img{height
 html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox__mark i{font-size:2.4rem}
 @keyframes nll-credbox-loop{to{transform:translateX(-50%)}}
 
-/* M3: boxed, logo above text */
+/* M2: boxed, logo above text */
 html[data-theme][data-credm="3"] .credbox{
   border:1px solid rgba(242,242,236,.16);border-radius:0 40px 0 0;padding:1.4rem 1.6rem 1.2rem;position:relative;
 }
@@ -317,7 +307,7 @@ html[data-theme][data-credm="3"] .credbox__track{--loop:14s}
 html[data-theme][data-credm="3"] .credbox__item{width:60cqw;flex-direction:column;align-items:flex-start;gap:1rem}
 html[data-theme][data-credm="3"] .credbox__text{font-size:.8rem}
 
-/* M4: quiet row (top rule, no box), logos only, fading edges */
+/* M3: quiet row (top rule, no box), logos only, fading edges */
 html[data-theme]:is([data-credm="4"]) .credbox{border-top:1px solid rgba(242,242,236,.16);padding-top:1.3rem}
 html[data-theme]:is([data-credm="4"]) .credbox__list{
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
@@ -337,11 +327,10 @@ html[data-theme][data-credm="4"] .credbox__item{width:50cqw}
 }
 
 /* ---- P: credential proof options (demo-proof.js builds the blocks) ---- */
-.proof-a,.proof-b,.proof-c__line,.proof-c__card{display:none}
+.proof-a,.proof-b,.proof-c__line{display:none}
 html[data-theme][data-proof="1"] .proof-a,
 html[data-theme]:is([data-proof="2"],[data-proof="4"]) .proof-b,
-html[data-theme]:is([data-proof="3"],[data-proof="4"]) .proof-c__line{display:block}
-html[data-theme][data-proof="3"] .proof-c__card{display:block}
+html[data-theme][data-proof="4"] .proof-c__line{display:block}
 /* any P option replaces the L strip and the M box */
 html[data-theme][data-proof]:not([data-proof="0"]) .credline-clip,
 html[data-theme][data-proof]:not([data-proof="0"]) #credline,
@@ -376,17 +365,10 @@ html[data-theme]:is([data-proof="2"],[data-proof="4"]) .proof-b{display:block}
 @media(max-width:900px){.proof-b__grid{grid-template-columns:1fr}.proof-b__cards{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.proof-b__cards{grid-template-columns:1fr}}
 
-/* P3: proof at the decision points */
-html[data-theme]:is([data-proof="3"],[data-proof="4"]) .proof-c__line{margin-top:1.6rem;font-size:.82rem;letter-spacing:.04em;color:rgba(242,242,236,.75)}
+/* P4: text line under the hero buttons */
+html[data-theme][data-proof="4"] .proof-c__line{margin-top:1.6rem;font-size:.82rem;letter-spacing:.04em;color:rgba(242,242,236,.75)}
 .proof-c__line i{color:#C2E807;margin-right:.35rem}
 .proof-c__line b{color:#F2F2EC;font-weight:500}
-.proof-c__card{background:#17190F;color:#F2F2EC;border-radius:0 28px 0 0;padding:1.4rem 1.5rem 1.3rem;margin:0 0 1.6rem;position:relative}
-.proof-c__card::before{content:"";position:absolute;left:1.5rem;top:0;width:32px;height:3px;background:#C2E807}
-.proof-c__title{margin:0 0 .3rem;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:#C2E807;font-weight:500}
-.proof-c__sub{margin:0 0 1rem;font-size:.88rem;color:rgba(242,242,236,.75)}
-.proof-c__marks{list-style:none;margin:0 0 1rem;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.6rem}
-.proof-c__marks img{height:28px;width:auto;max-width:120px}
-.svc-actions + .proof-c__card{margin-top:1.6rem}
 
 /* Logos are never recoloured. demo-proof.js / data.js pick the supplied version for the surface:
    white (reversed) logos on dark, black logos on light. No plates, no boxes. */
@@ -400,10 +382,6 @@ html[data-theme]:is([data-proof="3"],[data-proof="4"]) .proof-c__line{margin-top
 .proof-b__cards .proof-plate{height:64px;margin-bottom:.9rem}
 .proof-b__cards .proof-plate img{height:48px}
 .proof-b__cards .proof-plate--badge img{height:64px;max-width:200px}
-.proof-c__marks{gap:.8rem 1.8rem}
-.proof-c__marks .proof-plate{height:48px}
-.proof-c__marks .proof-plate img{height:36px}
-.proof-c__marks .proof-plate--badge img{height:48px}
 @media(max-width:520px){.proof-b__cards{grid-template-columns:1fr}}
 
 /* L / M strips: credline / credbox use the dark-surface (white) logo from data.js */
@@ -413,7 +391,6 @@ html[data-theme] #intro .credline__logo[src*="icn"],
 html[data-theme] .credbox__mark img[src*="icn"]{height:56px;width:auto;max-width:none}
 .proof-plate img[src*="mlsa"]{height:54px}
 .proof-b__cards .proof-plate img[src*="mlsa"]{height:60px}
-.proof-c__marks .proof-plate img[src*="mlsa"]{height:44px}
 
 /* Homepage intro: credentials sit closer to the bottom edge of the dark band (was ~120px, now ~56px). */
 html[data-theme="carbon-soft-v2"] body.pg-home main > #intro{padding-bottom:calc(var(--pad-home) + var(--v2-scoop) - 64px)}

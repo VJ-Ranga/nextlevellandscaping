@@ -1,6 +1,6 @@
 /* Demo only: credential "proof" options (group P).
-   P1 = slim proof line under the hero, P2 = proof band before the quote form,
-   P3 = proof at the decision points (hero line, quote-form card, service-page card).
+   P2 = slim proof line in the top section, P3 = proof band before the quote form,
+   P4 = text line under the hero buttons + the band (stored values 1, 2, 4).
    CSS in demo-variants.css shows/hides each block from html[data-proof]. */
 (function () {
   'use strict';
@@ -55,7 +55,7 @@
     var intro = document.getElementById('intro');
     if (!intro) return;
 
-    /* P1: slim proof line */
+    /* P2: slim proof line */
     var a = el('div', 'proof-a');
     a.appendChild(el('span', 'proof-a__label', 'Licensed &amp; accredited'));
     var lic = el('span', 'proof-a__lic', 'Licensed builder <b>' + LIC + '</b> ');
@@ -64,7 +64,7 @@
     a.appendChild(marksList(marks, 'proof-a__marks', 'dark'));
     intro.querySelector('.container').appendChild(a);
 
-    /* P3: one line under the hero buttons */
+    /* P4: one line under the hero buttons */
     var btns = intro.querySelector('.btns');
     if (btns) {
       var line = el('p', 'proof-c__line',
@@ -73,7 +73,7 @@
       btns.insertAdjacentElement('afterend', line);
     }
 
-    /* P2: proof band right before the quote section (the neighbours there don't overlap) */
+    /* P3, P4: proof band right before the quote section (the neighbours there don't overlap) */
     var after = document.getElementById('contact');
     if (after) {
       var sec = el('section', 'band proof-b');
@@ -109,32 +109,6 @@
     }
   }
 
-  /* P3 card: sits next to the quote form and on service pages */
-  function card(list, withTitle) {
-    var c = el('aside', 'proof-c__card');
-    c.appendChild(el('p', 'proof-c__title', withTitle || 'Licensed builder ' + LIC));
-    var p = el('p', 'proof-c__sub', 'Check it on the SA Consumer and Business Services register.');
-    c.appendChild(p);
-    c.appendChild(marksList(list, 'proof-c__marks', 'dark'));
-    c.appendChild(verifyLink('Verify the licence &rarr;', 'proof-c__verify'));
-    return c;
-  }
-  function buildCards() {
-    var form = document.getElementById('quote-form');
-    if (form) form.insertBefore(card(marks), form.firstChild);
-
-    var actions = document.querySelector('.svc-actions');
-    if (actions) {
-      var slug = new URLSearchParams(location.search).get('slug') || '';
-      var list = marks.filter(function (c) {
-        var alt = (c.alt || '').toLowerCase();
-        if (alt.indexOf('lawn') > -1) return slug === 'natural-artificial-grass';
-        return true;
-      });
-      actions.insertAdjacentElement('afterend', card(list));
-    }
-  }
-
-  function init() { buildHome(); buildCards(); }
+  function init() { buildHome(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

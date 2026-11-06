@@ -119,3 +119,17 @@ Local WP sites use nginx on 8081, 8085, 8086, 8090–8096, 8098–8103, 8300, 83
 4. Remaining roadmap items: header menu reorganisation (#74), commercial enquiry form (#79), sub-service content (#75).
 5. The old live `site/` pages' other filtered-logo uses: none left on the homepage; check footer/other pages for old `mlsa.png` use.
 6. Test the demo options on tablet/phone widths (only 1440 and 375 checked).
+
+## Update 2026-11-05: demo options renumbered
+The codes above are the old ones. In `demo-bar.js` (`?v=40`) they are now:
+
+| Group | Old code | New code | Meaning |
+|---|---|---|---|
+| H Services menu | H2 / H5 | H1 / H2 | Two columns / Mega menu |
+| P Where credentials show | P0 / P1 / P2 / P4 | P1 / P2 / P3 / P4 | Logo strip / Top section line with logos / Separate section before the quote form / Both |
+| L Logo strip style | L4 / L5 | L1 / L2 | Moving, framed / Moving, no frame |
+| M Logo strip position | M0 / M3 / M4 | M1 / M2 / M3 | Below the intro / Under stats, boxed / Under stats, 2 at a time |
+
+Removed: old L3 (dark tiles) and old P3 (decision points). L applies only with P1 + M1, and M only with P1; other choices grey those buttons out. K and C codes are unchanged. The website currently uses H2, P1, L2, M1, K4, C1 in the new codes.
+
+Status: local only until committed and deployed.

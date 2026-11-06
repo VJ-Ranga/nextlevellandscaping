@@ -7,25 +7,23 @@ Redesign project for [nextlevellandscaping.com.au](https://nextlevellandscaping.
 | Path | What | Status |
 |---|---|---|
 | **`site/`** | **The real build.** One locked design, 15 pages. Everything live happens here. | active |
-| `demo/` | The multi-theme options showcase (6 themes + switcher) originally shown to the client | **frozen** — parts-bin only |
+| `demo/` | Copy of `site/` plus an options bar for client choices (H, P, L, M, K, C) | active; mirror `site/` changes here |
 
 The client picked **Carbon** (`carbon-soft-v2`) with the centred header, sticky hero and split intro. `site/` hardcodes exactly that — no theme switcher, no alternate looks.
 
-`demo/` is kept only so individual sections can be lifted out of the other themes and re-skinned into `site/`. Don't build there.
-
 ## Documentation
 
-Most of the thinking lives in the Obsidian vault, not in these root files.
+Most of the thinking lives in the Obsidian vault, outside this repo. See [`VAULT.md`](VAULT.md) for its location.
 
 | Path | What |
 |---|---|
-| **`vault/`** | **Obsidian vault — start at `00 Home.md`.** Business facts, competitor research, the design system rulebook, build logs, and the client requirements tracker |
-| [`vault/03 Design System/Style Guide.md`](vault/03%20Design%20System/Style%20Guide.md) | **The design rulebook.** Values pulled from the live CSS. If you change a token, update it here too |
-| [`vault/05 Client/Client Requirements Inbox.md`](vault/05%20Client/Client%20Requirements%20Inbox.md) | Every client request, its status, and where it landed |
-| [`vault/04 Website Build/Site Build Log.md`](vault/04%20Website%20Build/Site%20Build%20Log.md) | What changed each round and how it was verified |
-| [`BUSINESS.md`](BUSINESS.md) | Verified business profile — full crawl of the live site |
-| [`REDESIGN-PLAN.md`](REDESIGN-PLAN.md) | Original plan (Sept 2026). Partly superseded — the vault is current |
-| [`RESEARCH-REPORT.md`](RESEARCH-REPORT.md) | 19 AU landscaping sites + 15 premium studios + 2025–26 standards |
+| Vault `00 Home.md` | **Start here.** Business facts, competitor research, design rules, build logs, client requirements |
+| Vault `03 Design System/Style Guide.md` | **The design rulebook.** Values pulled from the live CSS. If you change a token, update it here too |
+| Vault `05 Client/Client Requirements Inbox.md` | Every client request, its status, and where it landed |
+| Vault `04 Website Build/Site Build Log.md` | What changed each round and how it was verified |
+| Vault `04 Website Build/WordPress Plan.md` | WordPress build direction |
+| [`docs/HANDOFF.md`](docs/HANDOFF.md) | Short handoff for sessions without the vault |
+| Vault `Project Docs/` | Business profile and the original redesign plan (partly superseded) |
 
 ## `site/` — stack & structure
 
@@ -34,8 +32,8 @@ Static HTML, no build step.
 ```
 site/
   index.html  services.html  service.html?slug=  our-work.html  project.html?slug=
-  current-work.html  current-work-detail.html?slug=  process.html  store.html
-  product.html?slug=  about.html  reviews.html  faq.html  contact.html  privacy.html
+  current-work.html  current-work-detail.html?slug=  process.html  commercial.html
+  compliance.html  about.html  reviews.html  faq.html  contact.html  privacy.html
   assets/
     css/style.css                  base design system + components
     css/style-carbon-soft-v2.css   the Carbon theme (the only one that ships)
@@ -58,13 +56,13 @@ site/
 ## Run locally
 
 ```bash
-cd site && python3 -m http.server 8000
-# open http://localhost:8000
+cd site && python3 -m http.server 8500
+# open http://localhost:8500  (ports 8500+ only; 80xx-83xx are Local WP sites)
 ```
 
 ## Deploy
 
-**Live:** https://vj-ranga.github.io/nextlevellandscaping/ — a small landing page linking `/site/` (the real build) and `/demo/` (the theme reference), both served in full.
+**Live:** https://vj-ranga.github.io/nextlevellandscaping/ — a small landing page linking `/site/` (the real build) and `/demo/` (the client options version), both served in full.
 
 `gh-pages` is a **standalone history**, not a subtree split — it shares no commits with `main`. To redeploy after changing `site/` or `demo/`, copy the current folders into a scratch directory, commit fresh, and force-push:
 
@@ -84,4 +82,4 @@ GitHub Pages takes ~10–60s to rebuild — verify with `curl` before calling it
 
 ## Next phase
 
-Once `site/` is signed off, port to WordPress using **only the core block editor** (no page builder). See `vault/04 Website Build/WordPress Plan.md`.
+Once `site/` is signed off, port to WordPress using the **core block editor**, no page builder and no pro plugins, with a custom core plugin and theme. Fully in WordPress is recommended over an Astro front end; not yet confirmed. See the vault's `04 Website Build/WordPress Plan.md`.

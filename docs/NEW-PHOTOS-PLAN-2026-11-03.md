@@ -1,7 +1,7 @@
 ---
 tags: [build, photos, plan]
 date: 2026-11-03
-status: implemented locally 2026-11-03 — not committed or deployed; client confirmation pending
+status: implemented, committed (`55c04ee`) and deployed (`5ec0f7c`) 2026-11-04; client confirmation pending
 ---
 
 # New photo sets (2 zips) — review and implementation plan
@@ -76,7 +76,7 @@ Effort estimate: steps 1, 3–7 about half a day; step 2 depends on the client.
 - Do any photos exist from before the work started (for before/after)? None in these zips.
 - Any crew-in-PPE photo for the Compliance page hero?
 
-## 6. Implemented 2026-11-03 (local only: not committed or deployed)
+## 6. Implemented 2026-11-03 (committed and deployed 2026-11-04)
 **108 of 142 photos processed and added to `site/` and `demo/`** as WebP, at most 1600 px long edge and under 250 KB, metadata stripped, in `assets/img/gallery/`. Originals stay in the two zips (gitignored); they were not copied into `media-library/`.
 
 | Set | Project page (draft names) | Used | Left out |

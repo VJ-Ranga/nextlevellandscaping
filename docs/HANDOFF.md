@@ -1,17 +1,17 @@
 # NextLevel Landscaping — handoff for Claude Code (cloud)
 
 Read this first. It replaces the Obsidian vault, which lives only on VJ's machine
-(`~/Documents/obsidian-data/clients/next-level-landscaping/`). Updated 2026-10-23 (afternoon).
+(`~/Documents/obsidian-data/clients/next-level-landscaping/`). Updated 2026-11-05.
 
 ## The project
 - Cloudycode client: NextLevel Landscaping, Adelaide SA — landscape design & construction (paving, retaining walls, fencing, turf, irrigation, design) + commercial work. Licensed builder BLD320507, MLSA member.
 - Full redesign of their WordPress/Elementor site. Style reference: Laguna Pools (cinematic, photo-led, big single-corner "scoop" curves, video hero). Theme = **Carbon** (`style-carbon-soft-v2.css`).
-- **End goal:** sign off the HTML design → **convert to WordPress** with an editable backend (theme approach: block theme — to confirm) → launch → handover.
+- **End goal:** sign off the HTML design → **convert to WordPress**: core block editor, no pro plugins, custom core plugin + theme (fully WordPress recommended over Astro, not yet confirmed) → launch → handover.
 - **Current stage: Phase 5 — UI finalising.**
 
 ## Repo layout
-- `site/` — **the real build. Edit here.** 13 static pages, Bootstrap 5 + Font Awesome + Poppins + Swiper. Content in `site/assets/data.js`.
-- `demo/` — copy of `site/` plus an options bar (`demo-bar.js`, `demo-variants.css`) letting the client compare header font sizes (F/G). **Mirror every `site/` change into `demo/`** (copy shared CSS/JS; edit HTML in both).
+- `site/` — **the real build. Edit here.** 15 static pages, Bootstrap 5 + Font Awesome + Poppins + Swiper. Content in `site/assets/data.js`.
+- `demo/` — copy of `site/` plus an options bar (`demo-bar.js`, `demo-variants.css`) letting the client compare options (H, P, L, M, K, C; codes renumbered 2026-11-04). **Mirror every `site/` change into `demo/`** (copy shared CSS/JS; edit HTML in both).
 - Shared header/footer for sub-pages: `site/assets/js/partials.js`. **The homepage (`index.html`) has its own inline header AND footer** — edit both places.
 - Extra CSS layers appended to `site/assets/css/style.css` (Stage 02 V2 blocks at the end), `hero-final.css` (homepage hero), theme file `style-carbon-soft-v2.css` loads after `style.css` (same-specificity rules there win — use `body` / more specific selectors to override).
 - **Cache-busting:** bump the `?v=` on every changed CSS/JS link in all pages (site + demo), or the client sees old files.
@@ -29,7 +29,12 @@ Read this first. It replaces the Obsidian vault, which lives only on VJ's machin
 - Don't push the client photo folder `images/` (not in the repo; public repo). Compress any image/video before adding it.
 - Settled design decisions — don't change without asking: hero A3+B2+D2 (text right, one fixed button); slide arrows = bare chevron, **square** light box on **hover only**; footer = E5 "Contour footer"; header nav 18px / top row 14.5px; contour lines opacity .05; pipe-separated service tags; curved outer corner on service photos.
 
-## To do now (Phase 5) — updated 2026-10-23
+## Latest status (2026-11-05)
+- Live: UX pass, 108 new photos and 3 draft project pages (`55c04ee`, gh-pages `5ec0f7c`). Compliance, Commercial and Process tabs below are built; the sections below are kept for their history and copy.
+- Not committed or deployed: renumbered demo options (`demo-bar.js`, `demo-proof.js`, `demo-variants.css`, `demo-bar.css`, and `?v=` bumps in `demo/*.html`).
+- Waiting on client: option picks; names, suburbs and dates for the 3 project pages; turf type; whether Location 2 is the RSPCA job; homeowner consent for Locations 1 and 3.
+
+## To do (Phase 5) — as of 2026-10-23
 
 **Old feedback is closed.** Rounds #1–#71 are all done; #10 is closed (covered by the A3 hero choice). Only the latest items below matter.
 
@@ -58,7 +63,7 @@ Read this first. It replaces the Obsidian vault, which lives only on VJ's machin
 Facebook links (`#`), the 5 guide PDFs in `assets/downloads/`. Client sign-off still pending on the process-section design and the stock hero video.
 
 ## Later phases
-6 UI sign-off → 7 WordPress build (CPTs `service` + sub-services, `portfolio`, `current_work` with stages; forms; SEO schema; performance) → 8 QA & launch → 9 handover.
+6 UI sign-off → 7 WordPress build (custom core plugin with CPTs `service` + sub-services, `portfolio`, `current_work` with stages, own custom fields and forms; SEO schema; performance) → 8 QA & launch → 9 handover.
 
 ---
 
