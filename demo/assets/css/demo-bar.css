@@ -59,3 +59,10 @@
 @media(min-width:760px){
   .demo-bar__panel{display:flex !important}
 }
+
+/* Options that don't apply to the current pick, and the combined option set apart. */
+.demo-bar__opt[disabled]{opacity:.35;cursor:not-allowed}
+.demo-bar__opt--apart{margin-left:.9rem;position:relative}
+.demo-bar__opt--apart::before{content:"";position:absolute;left:-.7rem;top:15%;bottom:15%;width:1px;background:rgba(255,255,255,.4)}
+.demo-bar__opt[disabled][aria-pressed="true"]{background:none;color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.28)}
+@media(max-width:760px){.demo-bar__opt--apart{margin-left:0}.demo-bar__opt--apart::before{display:none}}
