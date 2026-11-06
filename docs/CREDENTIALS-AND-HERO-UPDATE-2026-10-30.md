@@ -132,4 +132,4 @@ The codes above are the old ones. In `demo-bar.js` (`?v=40`) they are now:
 
 Removed: old L3 (dark tiles) and old P3 (decision points). L applies only with P1 + M1, and M only with P1; other choices grey those buttons out. K and C codes are unchanged. The website currently uses H2, P1, L2, M1, K4, C1 in the new codes.
 
-Status: local only until committed and deployed.
+Status: deployed 2026-11-06 (gh-pages `b83e72c`).

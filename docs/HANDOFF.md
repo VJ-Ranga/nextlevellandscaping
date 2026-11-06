@@ -31,7 +31,7 @@ Read this first. It replaces the Obsidian vault, which lives only on VJ's machin
 
 ## Latest status (2026-11-05)
 - Live: UX pass, 108 new photos and 3 draft project pages (`55c04ee`, gh-pages `5ec0f7c`). Compliance, Commercial and Process tabs below are built; the sections below are kept for their history and copy.
-- Not committed or deployed: renumbered demo options (`demo-bar.js`, `demo-proof.js`, `demo-variants.css`, `demo-bar.css`, and `?v=` bumps in `demo/*.html`).
+- Renumbered demo options deployed 2026-11-06 (`360a011`, gh-pages `b83e72c`).
 - Waiting on client: option picks; names, suburbs and dates for the 3 project pages; turf type; whether Location 2 is the RSPCA job; homeowner consent for Locations 1 and 3.
 
 ## To do (Phase 5) — as of 2026-10-23
