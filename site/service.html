@@ -84,9 +84,9 @@
 
 <div id="site-footer-slot"></div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="assets/js/partials.js?v=1793500001"></script>
-<script src="assets/data.js?v=1793600000"></script>
-<script src="assets/js/main.js?v=1793600000"></script>
+<script src="assets/js/partials.js?v=1794226071"></script>
+<script src="assets/data.js?v=1794223399"></script>
+<script src="assets/js/main.js?v=1794223399"></script>
 <script src="assets/js/mega-menu.js?v=1" defer></script>
 <script>
 (function(){
@@ -198,7 +198,7 @@
     return '<div class="swiper-slide">' +
       '<a class="proj-card" href="project.html?slug='+r.slug+'">' +
         '<div class="media"><img loading="lazy" src="'+r.img+'" alt="'+r.name+'"></div>' +
-        '<div class="proj-card__meta"><span>'+r.suburb+'</span><span>&bull;</span><span>'+r.date+'</span></div>' +
+        '<div class="proj-card__meta"><span>'+r.suburb+'</span>'+(r.date?'<span>&bull;</span><span>'+r.date+'</span>':'')+'</div>' +
         '<h3>'+r.name+'</h3>' +
         '<p>'+r.blurb+'</p>' +
         '<ul class="chips">'+r.tags.map(function(t){return '<li>'+t+'</li>';}).join('')+'</ul>' +

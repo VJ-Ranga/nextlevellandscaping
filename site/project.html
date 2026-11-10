@@ -61,9 +61,9 @@
   <button class="lb-next" aria-label="Next">&rarr;</button>
 </div>
 
-<script src="assets/js/partials.js?v=1793500001"></script>
-<script src="assets/data.js?v=1793600000"></script>
-<script src="assets/js/main.js?v=1793600000"></script>
+<script src="assets/js/partials.js?v=1794226071"></script>
+<script src="assets/data.js?v=1794223399"></script>
+<script src="assets/js/main.js?v=1794223399"></script>
 <script src="assets/js/mega-menu.js?v=1" defer></script>
 <script>
 (function(){
@@ -77,13 +77,12 @@
   document.getElementById('subhero-media').innerHTML='<img src="'+p.img+'" alt="">';
   document.getElementById('p-meta').innerHTML=
     '<span>Location <b>'+p.suburb+', SA</b></span>'+
-    '<span>'+(p.dateLabel||'Completed')+' <b>'+p.date+'</b></span>'+
+    (p.date?'<span>'+(p.dateLabel||'Completed')+' <b>'+p.date+'</b></span>':'')+
     '<span>Scope <b>'+p.tags.join(' · ')+'</b></span>';
-  document.getElementById('p-narrative').innerHTML='<p>'+p.narrative+'</p>'+
-    (p.draft?'<p class="ba-note">Draft — project name, suburb, date and scope are written from the photos and still need confirming by the client.</p>':'');
+  document.getElementById('p-narrative').innerHTML='<p>'+p.narrative+'</p>';
   document.getElementById('p-spec').innerHTML=
     '<dt>Suburb</dt><dd>'+p.suburb+'</dd>'+
-    '<dt>'+(p.dateLabel||'Completed')+'</dt><dd>'+p.date+'</dd>'+
+    (p.date?'<dt>'+(p.dateLabel||'Completed')+'</dt><dd>'+p.date+'</dd>':'')+
     '<dt>Services</dt><dd>'+p.tags.join(', ')+'</dd>';
   document.getElementById('p-scope').innerHTML='<li style="margin-bottom:.4rem;color:var(--ink);font-weight:500;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase">What we did</li>'+
     p.scope.map(function(s){return '<li><i class="fa-solid fa-circle"></i><span>'+s+'</span></li>';}).join('');
@@ -111,7 +110,7 @@
   document.getElementById('p-related').innerHTML=rel.map(function(r){
     return '<a href="project.html?slug='+r.slug+'"><article class="work-card">'+
       '<div class="media"><img loading="lazy" src="'+r.img+'" alt="'+r.name+'"></div>'+
-      '<div class="work-card__meta"><span>'+r.suburb+'</span><span>&bull;</span><span>'+r.date+'</span></div>'+
+      '<div class="work-card__meta"><span>'+r.suburb+'</span>'+(r.date?'<span>&bull;</span><span>'+r.date+'</span>':'')+'</div>'+
       '<h3>'+r.name+'</h3></article></a>';
   }).join('');
 

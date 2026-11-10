@@ -76,9 +76,9 @@
 </main>
 
 <div id="site-footer-slot"></div>
-<script src="assets/js/partials.js?v=1793500001"></script>
-<script src="assets/data.js?v=1793600000"></script>
-<script src="assets/js/main.js?v=1793600000"></script>
+<script src="assets/js/partials.js?v=1794226071"></script>
+<script src="assets/data.js?v=1794223399"></script>
+<script src="assets/js/main.js?v=1794223399"></script>
 <script src="assets/js/mega-menu.js?v=1" defer></script>
 <script>
 /* FAQ accordion — native <details>/<summary>, works without JS once rendered.
@@ -88,14 +88,9 @@
   var host = document.getElementById('faq-list');
   var faqs = (window.NLL && window.NLL.faqs) || [];
   if (!host || !faqs.length) return;
-  host.innerHTML = faqs.map(function (f) {
+  host.innerHTML = faqs.filter(function (f) { return f.a; }).map(function (f) {
     var body = '';
     if (f.a) { body += '<p>' + f.a + '</p>'; }
-    if (f.confirm) {
-      body += '<p class="ba-note"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>' +
-              '<b>Draft — not yet confirmed by the client.</b> ' + f.confirm + '</p>';
-    }
-    if (!body) { body = '<p class="ba-note">Answer still to be confirmed.</p>'; }
     return '<details class="faq">' +
              '<summary><span class="faq__q">' + f.q + '</span>' +
              '<i class="faq__ico fa-solid fa-plus" aria-hidden="true"></i></summary>' +

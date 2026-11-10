@@ -82,4 +82,4 @@ GitHub Pages takes ~10–60s to rebuild — verify with `curl` before calling it
 
 ## Next phase
 
-Once `site/` is signed off, port to WordPress using the **core block editor**, no page builder and no pro plugins, with a custom core plugin and theme. Fully in WordPress is recommended over an Astro front end; not yet confirmed. See the vault's `04 Website Build/WordPress Plan.md`.
+Once `site/` is signed off, build the final site. Leaning to an **Astro front end** with a **headless WordPress back end** on an `admin.` subdomain (core block editor, no pro plugins, custom core plugin, "Publish website" button that triggers a rebuild). Fully WordPress is the fallback; decided after a client call. See the vault's `04 Website Build/WordPress Plan.md`.

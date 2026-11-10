@@ -394,3 +394,10 @@ html[data-theme] .credbox__mark img[src*="icn"]{height:56px;width:auto;max-width
 
 /* Homepage intro: credentials sit closer to the bottom edge of the dark band (was ~120px, now ~56px). */
 html[data-theme="carbon-soft-v2"] body.pg-home main > #intro{padding-bottom:calc(var(--pad-home) + var(--v2-scoop) - 64px)}
+
+/* ---- W: Safety & Compliance link in the header top row ---- */
+.util-whs{display:none}
+html[data-whs="short"] .util-whs,
+html[data-whs="long"] .util-whs{display:inline-flex}
+html[data-whs="short"] .util-whs__long,
+html[data-whs="long"] .util-whs__short{display:none}

@@ -1,12 +1,12 @@
 # NextLevel Landscaping — handoff for Claude Code (cloud)
 
 Read this first. It replaces the Obsidian vault, which lives only on VJ's machine
-(`~/Documents/obsidian-data/clients/next-level-landscaping/`). Updated 2026-11-05.
+(`~/Documents/obsidian-data/clients/next-level-landscaping/`). Updated 2026-11-09.
 
 ## The project
 - Cloudycode client: NextLevel Landscaping, Adelaide SA — landscape design & construction (paving, retaining walls, fencing, turf, irrigation, design) + commercial work. Licensed builder BLD320507, MLSA member.
 - Full redesign of their WordPress/Elementor site. Style reference: Laguna Pools (cinematic, photo-led, big single-corner "scoop" curves, video hero). Theme = **Carbon** (`style-carbon-soft-v2.css`).
-- **End goal:** sign off the HTML design → **convert to WordPress**: core block editor, no pro plugins, custom core plugin + theme (fully WordPress recommended over Astro, not yet confirmed) → launch → handover.
+- **End goal:** sign off the HTML design → **build the final site**: leaning Astro front end + headless WordPress back end on `admin.` (core block editor, no pro plugins, custom core plugin, "Publish website" rebuild button); fully WordPress is the fallback; decided after a client call → launch → handover.
 - **Current stage: Phase 5 — UI finalising.**
 
 ## Repo layout
@@ -63,7 +63,7 @@ Read this first. It replaces the Obsidian vault, which lives only on VJ's machin
 Facebook links (`#`), the 5 guide PDFs in `assets/downloads/`. Client sign-off still pending on the process-section design and the stock hero video.
 
 ## Later phases
-6 UI sign-off → 7 WordPress build (custom core plugin with CPTs `service` + sub-services, `portfolio`, `current_work` with stages, own custom fields and forms; SEO schema; performance) → 8 QA & launch → 9 handover.
+6 UI sign-off + client call on build approach → 7 build (Astro front end and/or WordPress; custom core plugin with CPTs `service` + sub-services, `portfolio`, `current_work` with stages, own custom fields and forms; SEO schema; performance) → 8 QA & launch → 9 handover.
 
 ---
 
