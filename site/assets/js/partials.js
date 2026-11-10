@@ -47,6 +47,7 @@
             '<a href="process.html">Our Process</a>' +
             '<a href="reviews.html">Reviews</a>' +
             '<a href="faq.html">FAQ</a>' +
+            '<a href="compliance.html" title="Safety &amp; Compliance">WHS</a>' +
           '</nav>' +
           '<div class="hdr2__util-right">' +
             '<a href="tel:+61404440222">0404 440 222</a>' +
@@ -116,7 +117,7 @@
           '<span>Builders Licence BLD320507 &bull; MLSA member</span>' +
         '</div>' +
         '<div class="footer-bar">' +
-          '<span>&copy; <span id="year">2026</span> NextLevel Landscaping. Demo design by Cloudycode.</span>' +
+          '<span>&copy; <span id="year">2026</span> NextLevel Landscaping. Design by Cloudycode.</span>' +
           '<span><a href="privacy.html">Privacy &amp; Security</a></span>' +
         '</div>' +
       '</div>' +

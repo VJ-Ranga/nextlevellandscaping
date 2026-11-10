@@ -260,7 +260,7 @@
         '<div class="swiper-slide">' +
           '<a class="proj-card" href="project.html?slug=' + esc(p.slug) + '">' +
             '<div class="media"><img loading="lazy" src="' + esc(p.img) + '" alt="' + esc(p.name) + '"></div>' +
-            '<div class="proj-card__meta"><span>' + esc(p.suburb) + '</span><span>&bull;</span><span>' + esc(p.date) + '</span></div>' +
+            '<div class="proj-card__meta"><span>' + esc(p.suburb) + '</span>' + (p.date ? '<span>&bull;</span><span>' + esc(p.date) + '</span>' : '') + '</div>' +
             '<h3>' + esc(p.name) + '</h3>' +
             '<p>' + esc(p.blurb) + '</p>' +
             '<ul class="chips">' + p.tags.map(function (t) { return "<li>" + t + "</li>"; }).join("") + '</ul>' +

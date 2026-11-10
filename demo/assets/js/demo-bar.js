@@ -33,6 +33,7 @@
   var CRED_KEY = "nll-demo-cred";
   var CREDM_KEY = "nll-demo-credm";
   var PROOF_KEY = "nll-demo-proof";
+  var WHS_KEY = "nll-demo-whs";
 
   var UTIL_OPTS = ["12.8", "13.5", "14.5", "15.5"];
   var NAV_OPTS = ["17", "17.5", "18", "19"];
@@ -44,6 +45,7 @@
   var CRED_OPTS = ["4", "5"];
   var CREDM_OPTS = ["0", "3", "4"];
   var PROOF_OPTS = ["0", "1", "2", "4"];
+  var WHS_OPTS = ["off", "short", "long"];
 
   function readStored(key, allowed, def) {
     var v = null;
@@ -65,7 +67,8 @@
     heroh: readStored(HEROH_KEY, HEROH_OPTS, "80"),
     cred: readStored(CRED_KEY, CRED_OPTS, "5"),
     credm: readStored(CREDM_KEY, CREDM_OPTS, "0"),
-    proof: readStored(PROOF_KEY, PROOF_OPTS, "0")
+    proof: readStored(PROOF_KEY, PROOF_OPTS, "0"),
+    whs: readStored(WHS_KEY, WHS_OPTS, "short")
   };
 
   function applyAttrs() {
@@ -79,6 +82,7 @@
     html.setAttribute("data-cred", state.cred);
     html.setAttribute("data-credm", state.credm);
     html.setAttribute("data-proof", state.proof);
+    html.setAttribute("data-whs", state.whs);
   }
   applyAttrs(); // runs immediately, pre-paint
 
@@ -105,6 +109,16 @@
     opts: [
       { code: "H1", val: "grid", label: "Two columns" },
       { code: "H2", val: "mega", label: "Mega menu" }
+    ]
+  };
+  /* W: client asked (2026-11-09) for Safety & Compliance in the top
+     menu, "WHS" if the full name is too long. Top row only. */
+  var GROUP_W = {
+    code: "W", label: "Safety & Compliance in top row", key: "whs", storeKey: WHS_KEY,
+    opts: [
+      { code: "W1", val: "off", label: "Not in top row" },
+      { code: "W2", val: "short", label: "WHS" },
+      { code: "W3", val: "long", label: "Safety & Compliance" }
     ]
   };
   var GROUP_C = {
@@ -197,7 +211,7 @@
 
   function buildBar() {
     var isHome = !!document.getElementById("hero-car-track");
-    GROUPS = isHome ? [GROUP_H, GROUP_P, GROUP_L, GROUP_M] : [GROUP_H, GROUP_K, GROUP_C];
+    GROUPS = isHome ? [GROUP_H, GROUP_W, GROUP_P, GROUP_L, GROUP_M] : [GROUP_H, GROUP_W, GROUP_K, GROUP_C];
     HINT_TEXT = isHome ? "Tell us your pick, e.g. H2 + P1 + L2 + M1" : "Tell us your pick, e.g. H2 + K4 + C1";
 
     var bar = document.createElement("div");
