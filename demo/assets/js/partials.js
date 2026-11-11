@@ -8,9 +8,9 @@
   var nav = [
     ["services.html", "Services"],
     ["portfolio.html", "Portfolio"],
-    ["current-work.html", "Current Work"],
-    ["commercial.html", "Commercial Work"],
     ["process.html", "Our Process"],
+    ["commercial.html", "Commercial Work"],
+    ["current-work.html", "Current Work"],
     ["compliance.html", "Safety &amp; Compliance"],
     ["about.html", "About"],
     ["reviews.html", "Reviews"],
@@ -44,7 +44,7 @@
         '<div class="container hdr2__util-row">' +
           '<nav class="hdr2__util-links">' +
             '<a href="about.html">About</a>' +
-            '<a href="process.html">Our Process</a>' +
+            '<a href="current-work.html">Current Work</a>' +
             '<a href="reviews.html">Reviews</a>' +
             '<a href="faq.html">FAQ</a>' +
             '<a class="util-whs" href="compliance.html"><span class="util-whs__short">WHS</span><span class="util-whs__long">Safety &amp; Compliance</span></a>' +
@@ -62,7 +62,7 @@
       '<div class="container hdr2__main">' +
         '<nav class="hdr2__nav hdr2__nav--l">' +
           '<a href="portfolio.html">Portfolio</a>' +
-          '<a href="current-work.html">Current Work</a>' +
+          '<a href="process.html">Our Process</a>' +
         '</nav>' +
         '<a class="hdr2__brand" href="index.html"><img src="assets/img/brand/logo.png" alt="NextLevel Landscaping"></a>' +
         '<nav class="hdr2__nav hdr2__nav--r">' +
