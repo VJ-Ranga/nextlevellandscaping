@@ -71,9 +71,9 @@
     open: "solid" /* I removed: locked, same as site */,
     icons: "on" /* J removed: locked, same as site */,
     heroh: readStored(HEROH_KEY, HEROH_OPTS, "80"),
-    cred: readStored(CRED_KEY, CRED_OPTS, "5"),
-    credm: readStored(CREDM_KEY, CREDM_OPTS, "0"),
-    proof: readStored(PROOF_KEY, PROOF_OPTS, "0"),
+    cred: "5" /* L removed: locked to L2, same as site */,
+    credm: "0" /* M removed: locked to M1 */,
+    proof: "0" /* P removed: client picked P1 + licence line (2026-11-11) */,
     whs: readStored(WHS_KEY, WHS_OPTS, "short"),
     bg: readStored(BG_KEY, BG_OPTS, "approved"),
     laptop: readStored(LAPTOP_KEY, LAPTOP_OPTS, "off")
@@ -243,8 +243,8 @@
 
   function buildBar() {
     var isHome = !!document.getElementById("hero-car-track");
-    GROUPS = isHome ? [GROUP_N, GROUP_R, GROUP_H, GROUP_W, GROUP_P, GROUP_L, GROUP_M] : [GROUP_N, GROUP_R, GROUP_H, GROUP_W, GROUP_K, GROUP_C];
-    HINT_TEXT = isHome ? "Tell us your pick, e.g. N1 + R2 + H2 + P1 + L2 + M1" : "Tell us your pick, e.g. N1 + R2 + H2 + K4 + C1";
+    GROUPS = isHome ? [GROUP_N, GROUP_R, GROUP_H, GROUP_W] : [GROUP_N, GROUP_R, GROUP_H, GROUP_W, GROUP_K, GROUP_C];
+    HINT_TEXT = isHome ? "Tell us your pick, e.g. N1 + R2 + H2 + W2" : "Tell us your pick, e.g. N1 + R2 + H2 + K4 + C1";
 
     var bar = document.createElement("div");
     bar.className = "demo-bar";
