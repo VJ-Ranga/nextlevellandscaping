@@ -74,7 +74,7 @@ html[data-theme="carbon-soft-v2"][data-overlay="dark"] .subhero--photo .subhero_
   html[data-hdr-menu="grid"][data-theme] .hdr2__nav--r{position:relative;align-self:stretch;align-items:center}
   html[data-hdr-menu="grid"][data-theme] .hdr2__nav>.hdr2__drop{position:static}
   html[data-hdr-menu="grid"][data-theme] .hdr2__drop-panel{
-    width:520px;margin-top:0;top:100%;left:auto;right:0;padding:1rem 1.5rem;background:#17190F;color:#F2F2EC;
+    width:520px;margin-top:0;top:100%;left:auto;right:0;padding:1rem 1.5rem;background:var(--v2-night,#17190F);color:#F2F2EC;
     border:1px solid rgba(242,242,236,.4);border-top:0;border-radius:0 0 0 44px;box-shadow:none;display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));gap:0 2rem;
   }
@@ -93,7 +93,7 @@ html[data-theme="carbon-soft-v2"][data-overlay="dark"] .subhero--photo .subhero_
   html[data-hdr-menu="bar"][data-theme] .hdr2__nav>.hdr2__drop{position:static}
   html[data-hdr-menu="bar"][data-theme] .hdr2__drop-panel{
     position:absolute;left:0;right:0;top:100%;width:auto;margin:0;padding:2rem clamp(20px,4vw,56px);
-    background:#17190F;color:#F2F2EC;border:0;border-top:1px solid rgba(242,242,236,.28);border-bottom:1px solid rgba(242,242,236,.45);
+    background:var(--v2-night,#17190F);color:#F2F2EC;border:0;border-top:1px solid rgba(242,242,236,.28);border-bottom:1px solid rgba(242,242,236,.45);
     border-radius:0;box-shadow:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 3rem;
   }
   html[data-hdr-menu="bar"] .hdr2__drop-panel a{
@@ -107,7 +107,7 @@ html[data-theme="carbon-soft-v2"][data-overlay="dark"] .subhero--photo .subhero_
 
   /* H4: Minimal */
   html[data-hdr-menu="min"][data-theme] .hdr2__drop-panel{
-    min-width:220px;right:0;padding:.5rem 1.25rem;background:#17190F;color:#F2F2EC;border:0;border-radius:0;box-shadow:none;text-shadow:none;
+    min-width:220px;right:0;padding:.5rem 1.25rem;background:var(--v2-night,#17190F);color:#F2F2EC;border:0;border-radius:0;box-shadow:none;text-shadow:none;
   }
   html[data-hdr-menu="min"][data-theme] .hdr2__drop-panel a{
     min-height:44px;padding:.55rem 0;display:flex;align-items:center;justify-content:flex-end;
@@ -124,7 +124,7 @@ html[data-theme="carbon-soft-v2"][data-overlay="dark"] .subhero--photo .subhero_
   /* I: solid header while a Services dropdown is open (all variants except flat and old) */
   html[data-theme][data-hdr-open="solid"]:not([data-hdr-menu="flat"]):not([data-hdr-menu="old"]) .hdr2:has(.hdr2__drop:hover),
   html[data-theme][data-hdr-open="solid"]:not([data-hdr-menu="flat"]):not([data-hdr-menu="old"]) .hdr2:has(.hdr2__drop:focus-within){
-    background-color:#17190F;
+    background-color:var(--v2-night,#17190F);
     box-shadow:0 1px 0 rgba(255,255,255,.12);
     transition:background-color .2s;
   }
@@ -148,7 +148,7 @@ html[data-theme="carbon-soft-v2"][data-overlay="dark"] .subhero--photo .subhero_
   html[data-hdr-menu="mega"][data-theme] .hdr2__drop-panel{
     position:absolute;left:0;right:0;top:100%;width:auto;margin:0;
     padding:2.75rem clamp(20px,4vw,56px) 3.25rem;
-    background:#17190F;color:#F2F2EC;border:0;border-top:1px solid rgba(242,242,236,.28);border-bottom:1px solid rgba(242,242,236,.45);
+    background:var(--v2-night,#17190F);color:#F2F2EC;border:0;border-top:1px solid rgba(242,242,236,.28);border-bottom:1px solid rgba(242,242,236,.45);
     border-radius:0;box-shadow:none;
   }
   html[data-hdr-menu="mega"] .mega{
@@ -401,3 +401,40 @@ html[data-whs="short"] .util-whs,
 html[data-whs="long"] .util-whs{display:inline-flex}
 html[data-whs="short"] .util-whs__long,
 html[data-whs="long"] .util-whs__short{display:none}
+
+/* ---- N: dark background colour (client picks; same values as recall-demo) ----
+   Only swaps --v2-night, so every scoop/overlap stays continuous.
+   N1 = approved olive-black, no override. Footer gets a slightly deeper tone. */
+html[data-theme="carbon-soft-v2"][data-bg="charcoal"]{--v2-night:#191a18;--nll-footer:#111210}
+html[data-theme="carbon-soft-v2"][data-bg="graphite"]{--v2-night:#1d2020;--nll-footer:#141616}
+html[data-theme="carbon-soft-v2"][data-bg="iron"]{--v2-night:#1a1e22;--nll-footer:#111519}
+html[data-theme="carbon-soft-v2"][data-bg="basalt"]{--v2-night:#211e20;--nll-footer:#171416}
+html[data-theme="carbon-soft-v2"][data-bg="dark-bark"]{--v2-night:#251f1b;--nll-footer:#1b1511}
+html[data-theme="carbon-soft-v2"][data-bg]:not([data-bg="approved"]) .site-footer--scoop{background-color:var(--nll-footer)}
+.demo-bar__swatch{display:inline-block;width:.75rem;height:.75rem;margin-right:.35rem;border-radius:50%;border:1px solid rgba(242,242,236,.6);vertical-align:-1px}
+
+/* =============================================================
+   R: laptop tier (R2 = data-laptop="on"), 993-1439px only.
+   Tighter scoop + section padding, wider side gap, ~10% smaller
+   headings. >=1440 and <=992 untouched.
+   ============================================================= */
+@media (min-width:993px) and (max-width:1439px){
+  html[data-theme="carbon-soft-v2"][data-laptop="on"]{
+    --v2-scoop:clamp(150px,12.5vw,180px);
+    --pad-home:88px;
+    --container:1180px;
+    --gutter:clamp(40px,4vw,64px);
+  }
+  html[data-theme="carbon-soft-v2"][data-laptop="on"] h1,
+  html[data-theme="carbon-soft-v2"][data-laptop="on"] .h1{font-size:2.7rem}
+  html[data-theme="carbon-soft-v2"][data-laptop="on"] h2,
+  html[data-theme="carbon-soft-v2"][data-laptop="on"] .h2{font-size:2.35rem}
+  html[data-theme="carbon-soft-v2"][data-laptop="on"] .lead{font-size:1.15rem}
+  html[data-theme="carbon-soft-v2"][data-laptop="on"] .hero-slide h1,
+  html[data-theme="carbon-soft-v2"][data-laptop="on"] .hero-slide .hero-slide__line{font-size:clamp(1.9rem,3.9vw,3rem)}
+  html[data-theme="carbon-soft-v2"][data-laptop="on"] .stat-n b{font-size:3.2rem}
+  html[data-theme="carbon-soft-v2"][data-laptop="on"][data-intro="split"] #intro .stat-n b{font-size:2.7rem}
+}
+@media (min-width:993px) and (max-width:1439px) and (max-height:820px){
+  html[data-theme="carbon-soft-v2"][data-laptop="on"]{--pad-home:76px}
+}

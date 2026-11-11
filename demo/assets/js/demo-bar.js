@@ -15,6 +15,8 @@
      data-overlay   normal | dark               sub-page hero overlay
      data-hdr-open  transparent | solid         header background when menu open
      data-hdr-icons off | on                    menu icons (off = numbers)
+     data-bg        approved | charcoal | graphite | iron | basalt | dark-bark  dark band colour (N)
+     data-laptop    off | on                    laptop sizing tier, 1,000-1,439px screens (R)
 
    The attribute write below runs the instant this file is parsed
    — before <body> exists — so the page never paints the default
@@ -34,6 +36,8 @@
   var CREDM_KEY = "nll-demo-credm";
   var PROOF_KEY = "nll-demo-proof";
   var WHS_KEY = "nll-demo-whs";
+  var BG_KEY = "nll-demo-bg";
+  var LAPTOP_KEY = "nll-demo-laptop";
 
   var UTIL_OPTS = ["12.8", "13.5", "14.5", "15.5"];
   var NAV_OPTS = ["17", "17.5", "18", "19"];
@@ -46,6 +50,8 @@
   var CREDM_OPTS = ["0", "3", "4"];
   var PROOF_OPTS = ["0", "1", "2", "4"];
   var WHS_OPTS = ["off", "short", "long"];
+  var LAPTOP_OPTS = ["off", "on"];
+  var BG_OPTS = ["approved", "charcoal", "graphite", "iron", "basalt", "dark-bark"];
 
   function readStored(key, allowed, def) {
     var v = null;
@@ -68,7 +74,9 @@
     cred: readStored(CRED_KEY, CRED_OPTS, "5"),
     credm: readStored(CREDM_KEY, CREDM_OPTS, "0"),
     proof: readStored(PROOF_KEY, PROOF_OPTS, "0"),
-    whs: readStored(WHS_KEY, WHS_OPTS, "short")
+    whs: readStored(WHS_KEY, WHS_OPTS, "short"),
+    bg: readStored(BG_KEY, BG_OPTS, "approved"),
+    laptop: readStored(LAPTOP_KEY, LAPTOP_OPTS, "off")
   };
 
   function applyAttrs() {
@@ -83,6 +91,8 @@
     html.setAttribute("data-credm", state.credm);
     html.setAttribute("data-proof", state.proof);
     html.setAttribute("data-whs", state.whs);
+    html.setAttribute("data-bg", state.bg);
+    html.setAttribute("data-laptop", state.laptop);
   }
   applyAttrs(); // runs immediately, pre-paint
 
@@ -119,6 +129,28 @@
       { code: "W1", val: "off", label: "Not in top row" },
       { code: "W2", val: "short", label: "WHS" },
       { code: "W3", val: "long", label: "Safety & Compliance" }
+    ]
+  };
+  /* N: dark background colour (2026-11-10), same six as recall-demo.
+     Swaps --v2-night only, so curves and overlaps are untouched. */
+  var GROUP_N = {
+    code: "N", label: "Dark background colour", key: "bg", storeKey: BG_KEY,
+    opts: [
+      { code: "N1", val: "approved", label: "Olive black (current)", swatch: "#17190f" },
+      { code: "N2", val: "charcoal", label: "Charcoal", swatch: "#191a18" },
+      { code: "N3", val: "graphite", label: "Graphite", swatch: "#1d2020" },
+      { code: "N4", val: "iron", label: "Iron", swatch: "#1a1e22" },
+      { code: "N5", val: "basalt", label: "Basalt", swatch: "#211e20" },
+      { code: "N6", val: "dark-bark", label: "Dark bark", swatch: "#251f1b" }
+    ]
+  };
+  /* R: laptop tier (2026-11-11). Tighter scoop, padding, headings and
+     wider side gap on 993-1,439px screens only. */
+  var GROUP_R = {
+    code: "R", label: "Laptop sizing (1,000\u20131,439px screens)", key: "laptop", storeKey: LAPTOP_KEY,
+    opts: [
+      { code: "R1", val: "off", label: "Current (same as big screens)" },
+      { code: "R2", val: "on", label: "Laptop tuned" }
     ]
   };
   var GROUP_C = {
@@ -211,8 +243,8 @@
 
   function buildBar() {
     var isHome = !!document.getElementById("hero-car-track");
-    GROUPS = isHome ? [GROUP_H, GROUP_W, GROUP_P, GROUP_L, GROUP_M] : [GROUP_H, GROUP_W, GROUP_K, GROUP_C];
-    HINT_TEXT = isHome ? "Tell us your pick, e.g. H2 + P1 + L2 + M1" : "Tell us your pick, e.g. H2 + K4 + C1";
+    GROUPS = isHome ? [GROUP_N, GROUP_R, GROUP_H, GROUP_W, GROUP_P, GROUP_L, GROUP_M] : [GROUP_N, GROUP_R, GROUP_H, GROUP_W, GROUP_K, GROUP_C];
+    HINT_TEXT = isHome ? "Tell us your pick, e.g. N1 + R2 + H2 + P1 + L2 + M1" : "Tell us your pick, e.g. N1 + R2 + H2 + K4 + C1";
 
     var bar = document.createElement("div");
     bar.className = "demo-bar";
@@ -250,7 +282,7 @@
         b.dataset.storeKey = group.storeKey;
         var initialCur = group.key === "footer" ? footerVal() : state[group.key];
         b.setAttribute("aria-pressed", initialCur === opt.val ? "true" : "false");
-        b.innerHTML = '<span class="demo-bar__opt-code">' + opt.code + '</span><span class="demo-bar__opt-label">' + opt.label + '</span>';
+        b.innerHTML = '<span class="demo-bar__opt-code">' + opt.code + '</span><span class="demo-bar__opt-label">' + (opt.swatch ? '<span class="demo-bar__swatch" style="background:' + opt.swatch + '" aria-hidden="true"></span>' : '') + opt.label + '</span>';
         opts.appendChild(b);
       });
       g.appendChild(opts);
