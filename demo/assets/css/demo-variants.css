@@ -413,32 +413,6 @@ html[data-theme="carbon-soft-v2"][data-bg="dark-bark"]{--v2-night:#251f1b;--nll-
 html[data-theme="carbon-soft-v2"][data-bg]:not([data-bg="approved"]) .site-footer--scoop{background-color:var(--nll-footer)}
 .demo-bar__swatch{display:inline-block;width:.75rem;height:.75rem;margin-right:.35rem;border-radius:50%;border:1px solid rgba(242,242,236,.6);vertical-align:-1px}
 
-/* =============================================================
-   R: laptop tier (R2 = data-laptop="on"), 993-1439px only.
-   Tighter scoop + section padding, wider side gap, ~10% smaller
-   headings. >=1440 and <=992 untouched.
-   ============================================================= */
-@media (min-width:993px) and (max-width:1439px){
-  html[data-theme="carbon-soft-v2"][data-laptop="on"]{
-    --v2-scoop:clamp(150px,12.5vw,180px);
-    --pad-home:88px;
-    --container:1180px;
-    --gutter:clamp(40px,4vw,64px);
-  }
-  html[data-theme="carbon-soft-v2"][data-laptop="on"] h1,
-  html[data-theme="carbon-soft-v2"][data-laptop="on"] .h1{font-size:2.7rem}
-  html[data-theme="carbon-soft-v2"][data-laptop="on"] h2,
-  html[data-theme="carbon-soft-v2"][data-laptop="on"] .h2{font-size:2.35rem}
-  html[data-theme="carbon-soft-v2"][data-laptop="on"] .lead{font-size:1.15rem}
-  html[data-theme="carbon-soft-v2"][data-laptop="on"] .hero-slide h1,
-  html[data-theme="carbon-soft-v2"][data-laptop="on"] .hero-slide .hero-slide__line{font-size:clamp(1.9rem,3.9vw,3rem)}
-  html[data-theme="carbon-soft-v2"][data-laptop="on"] .stat-n b{font-size:3.2rem}
-  html[data-theme="carbon-soft-v2"][data-laptop="on"][data-intro="split"] #intro .stat-n b{font-size:2.7rem}
-}
-@media (min-width:993px) and (max-width:1439px) and (max-height:820px){
-  html[data-theme="carbon-soft-v2"][data-laptop="on"]{--pad-home:76px}
-}
-
 /* ---- Homepage licence line above the logo strip (client pick: P1 + this line, 2026-11-11) ---- */
 html[data-theme="carbon-soft-v2"] #intro .cred-lic{
   display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 2.4rem;margin-top:6rem;padding-top:1.5rem;
@@ -452,3 +426,24 @@ html[data-theme] #intro .cred-lic + .credline-clip{margin-top:2.25rem}
 #intro .cred-lic__no a:hover{text-decoration-thickness:2px}
 #intro .cred-lic__no a:focus-visible{outline:2px solid #C2E807;outline-offset:3px}
 @media(max-width:640px){html[data-theme="carbon-soft-v2"] #intro .cred-lic{margin-top:4rem;gap:.4rem 1.5rem}}
+
+/* J (2026-11-11): dropdown icons. J1 icons, J2 plain text, J3 small lime dot.
+   Covers the Services mega menu (H2), the two-column panel (H1) and the
+   Our Process sub-menu. */
+@media(min-width:993px){
+  html[data-hdr-icons]:not([data-hdr-icons="on"]) .hdr2__sub-panel a i,
+  html[data-hdr-icons]:not([data-hdr-icons="on"]) .hdr2__drop-panel a i{display:none}
+  html[data-hdr-icons="off"][data-hdr-menu="mega"] .mega__no{display:none}
+  html[data-hdr-icons="off"] .hdr2__drop-panel a:not(.hdr2__drop-all)::before{content:none}
+  html[data-hdr-icons="dot"][data-hdr-menu="mega"] .mega__no{
+    display:inline-block;font-size:0;width:6px;height:6px;flex:0 0 6px;border-radius:50%;background:#C2E807;
+  }
+  html[data-hdr-icons="dot"]:not([data-hdr-menu="mega"]) .hdr2__drop-panel a:not(.hdr2__drop-all)::before,
+  html[data-hdr-icons="dot"] .hdr2__sub-panel a::before{
+    content:"";display:inline-block;width:6px;height:6px;flex:0 0 6px;border-radius:50%;background:#C2E807;margin-right:.75em;
+  }
+}
+
+/* B2 (2026-11-12): softer contour lines, same value as the recall-demo
+   "Polished" layout (.032, site is .05). */
+html[data-lines="recall"] .contour::before{opacity:.032}

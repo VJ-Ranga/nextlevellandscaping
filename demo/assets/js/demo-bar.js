@@ -37,6 +37,8 @@
   var PROOF_KEY = "nll-demo-proof";
   var WHS_KEY = "nll-demo-whs";
   var BG_KEY = "nll-demo-bg";
+  var LINES_KEY = "nll-demo-lines";
+  var LINES_OPTS = ["current", "recall"];
   var LAPTOP_KEY = "nll-demo-laptop";
 
   var UTIL_OPTS = ["12.8", "13.5", "14.5", "15.5"];
@@ -44,7 +46,7 @@
   var MENU_OPTS = ["grid", "mega"];
   var OVERLAY_OPTS = ["normal", "dark"];
   var OPEN_OPTS = ["solid"];
-  var ICONS_OPTS = ["on"];
+  var ICONS_OPTS = ["on", "off", "dot"];
   var HEROH_OPTS = ["0", "30", "50", "80"];
   var CRED_OPTS = ["4", "5"];
   var CREDM_OPTS = ["0", "3", "4"];
@@ -66,17 +68,18 @@
   var state = {
     util: "14.5" /* F removed: locked */,
     nav: "18" /* G removed: locked */,
-    menu: readStored(MENU_KEY, MENU_OPTS, "mega"),
+    menu: "mega", /* H removed 2026-11-11: client picked H2 mega menu */
     overlay: readStored(OVERLAY_KEY, OVERLAY_OPTS, "normal"),
     open: "solid" /* I removed: locked, same as site */,
-    icons: "on" /* J removed: locked, same as site */,
+    icons: "off", /* J removed 2026-11-12: no icons in dropdowns (site same). Icon list kept in memory. */
     heroh: readStored(HEROH_KEY, HEROH_OPTS, "80"),
     cred: "5" /* L removed: locked to L2, same as site */,
     credm: "0" /* M removed: locked to M1 */,
     proof: "0" /* P removed: client picked P1 + licence line (2026-11-11) */,
-    whs: readStored(WHS_KEY, WHS_OPTS, "short"),
+    whs: "short", /* W removed 2026-11-11: client picked W2 (WHS) */
     bg: readStored(BG_KEY, BG_OPTS, "approved"),
-    laptop: readStored(LAPTOP_KEY, LAPTOP_OPTS, "off")
+    lines: readStored(LINES_KEY, LINES_OPTS, "current"),
+    laptop: "off" /* R removed 2026-11-11: locked to R1 (current sizing) */
   };
 
   function applyAttrs() {
@@ -92,6 +95,7 @@
     html.setAttribute("data-proof", state.proof);
     html.setAttribute("data-whs", state.whs);
     html.setAttribute("data-bg", state.bg);
+    html.setAttribute("data-lines", state.lines);
     html.setAttribute("data-laptop", state.laptop);
   }
   applyAttrs(); // runs immediately, pre-paint
@@ -133,6 +137,15 @@
   };
   /* N: dark background colour (2026-11-10), same six as recall-demo.
      Swaps --v2-night only, so curves and overlaps are untouched. */
+  /* B (2026-11-12): contour line strength on dark sections.
+     B1 = site now (.05), B2 = recall-demo "Polished" (.032). */
+  var GROUP_B = {
+    code: "B", label: "Background lines", key: "lines", storeKey: LINES_KEY,
+    opts: [
+      { code: "B1", val: "current", label: "Current" },
+      { code: "B2", val: "recall", label: "Softer (recall demo)" }
+    ]
+  };
   var GROUP_N = {
     code: "N", label: "Dark background colour", key: "bg", storeKey: BG_KEY,
     opts: [
@@ -167,9 +180,11 @@
     ]
   };
   var GROUP_J = {
-    code: "J", label: "Menu icons", key: "icons", storeKey: ICONS_KEY,
+    code: "J", label: "Dropdown menu icons", key: "icons", storeKey: ICONS_KEY,
     opts: [
-      { code: "J2", val: "on", label: "On" }
+      { code: "J1", val: "on", label: "Icons" },
+      { code: "J2", val: "off", label: "No icon" },
+      { code: "J3", val: "dot", label: "Small dot" }
     ]
   };
 
@@ -243,8 +258,8 @@
 
   function buildBar() {
     var isHome = !!document.getElementById("hero-car-track");
-    GROUPS = isHome ? [GROUP_N, GROUP_R, GROUP_H, GROUP_W] : [GROUP_N, GROUP_R, GROUP_H, GROUP_W, GROUP_K, GROUP_C];
-    HINT_TEXT = isHome ? "Tell us your pick, e.g. N1 + R2 + H2 + W2" : "Tell us your pick, e.g. N1 + R2 + H2 + K4 + C1";
+    GROUPS = isHome ? [GROUP_N, GROUP_B] : [GROUP_N, GROUP_B, GROUP_K, GROUP_C];
+    HINT_TEXT = isHome ? "Tell us your pick, e.g. N1 + B1" : "Tell us your pick, e.g. N1 + B1 + K4 + C1";
 
     var bar = document.createElement("div");
     bar.className = "demo-bar";
@@ -269,7 +284,8 @@
       g.className = "demo-bar__group";
       var h = document.createElement("span");
       h.className = "demo-bar__group-label";
-      h.textContent = group.code + " · " + group.label;
+      h.textContent = group.code;
+      h.title = group.label;
       g.appendChild(h);
       var opts = document.createElement("div");
       opts.className = "demo-bar__opts";
@@ -282,7 +298,10 @@
         b.dataset.storeKey = group.storeKey;
         var initialCur = group.key === "footer" ? footerVal() : state[group.key];
         b.setAttribute("aria-pressed", initialCur === opt.val ? "true" : "false");
-        b.innerHTML = '<span class="demo-bar__opt-code">' + opt.code + '</span><span class="demo-bar__opt-label">' + (opt.swatch ? '<span class="demo-bar__swatch" style="background:' + opt.swatch + '" aria-hidden="true"></span>' : '') + opt.label + '</span>';
+        /* 2026-11-12: buttons show the code only (options are explained in the email). */
+        b.title = opt.label;
+        b.setAttribute("aria-label", opt.code + " " + opt.label);
+        b.innerHTML = (opt.swatch ? '<span class="demo-bar__swatch" style="background:' + opt.swatch + '" aria-hidden="true"></span>' : '') + '<span class="demo-bar__opt-code">' + opt.code + '</span>';
         opts.appendChild(b);
       });
       g.appendChild(opts);
