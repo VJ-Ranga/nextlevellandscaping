@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en-AU" data-theme="carbon-soft-v2" data-layout="centred" data-hero="sticky" data-intro="split">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Residential Landscaping Process — How Your Adelaide Project Runs — NextLevel Landscaping</title>
+<meta name="description" content="How NextLevel Landscaping runs a residential landscaping project in Adelaide — on-site consultation, 2D &amp; 3D design, execution with council approvals handled, and aftercare. Follow your own job through all ten build stages.">
+<link rel="icon" href="assets/img/brand/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="assets/css/style.css?v=1793001000">
+<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1794485757">
+<link rel="stylesheet" href="assets/css/mega-menu.css?v=6">
+<style>
+/* Page-scoped only. Two patterns exist nowhere else in the system:
+   (a) a long-form "what actually happens in this step" row, and
+   (b) the flat 10-stage pipeline list. The closest built things are
+   .timeline (date-led, for job updates) and the .cw-card .stepper bar
+   (card-scoped, driven by main.js) — neither fits, so these live here
+   rather than growing style.css for one page.
+   Every colour is an existing token so the light/dark band flip holds
+   (Style Guide §1 r3), no fills, no borders on the blocks themselves —
+   hairlines only (§4 r4), and no new radius (§12 r6). */
+
+/* (a) step detail rows — number rail + prose, hairline between rows */
+.pdeep{list-style:none;padding:0;margin:0}
+.pdeep > li{display:grid;grid-template-columns:5.5rem 1fr;gap:1.5rem 2.5rem;
+  padding:3rem 0;border-top:1px solid var(--line)}
+.pdeep > li:first-child{border-top:0;padding-top:0}
+.pdeep__no{display:inline-flex;align-items:center;gap:.6em;font-size:.8rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent);font-weight:500}
+.pdeep__no i{font-size:1.4rem}
+.pdeep h3{margin-bottom:1rem}
+.pdeep p{color:var(--muted)}
+.pdeep p + p{margin-top:1rem}
+
+/* (b) the 10-stage pipeline — two flat columns, hairline per row */
+.pipeline{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:0 3rem}
+.pipeline li{display:flex;gap:1.25rem;padding:1.1rem 0;border-top:1px solid var(--line)}
+.pipeline__no{flex:none;min-width:2.4em;font-size:.72rem;line-height:1.9;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted)}
+.pipeline__name{font-size:1rem;line-height:1.7;color:var(--ink)}
+
+/* (c) Residential | Commercial switch — two separate pages now; the pill
+   is a pair of links, aria-current marks the page you are on. */
+.path-switch{padding-block:2.75rem 0}
+.path-tabs{display:inline-flex;padding:5px;gap:4px;border:1.5px solid var(--ink);border-radius:999px}
+.path-tabs a{color:var(--ink);text-decoration:none;
+  padding:13px 30px;border-radius:999px;font:500 .8rem/1 var(--f);letter-spacing:.06em;
+  text-transform:uppercase;transition:background-color .25s var(--ease),color .25s var(--ease)}
+.path-tabs a:hover{background:var(--line)}
+.path-tabs a[aria-current="page"]{background:var(--v2-lime,var(--accent));color:var(--v2-ink,var(--ink))}
+.path-tabs a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+/* the first band of each pathway sits under the switch, not a full band below it */
+html[data-theme] main > .band.path-first{padding-top:3.5rem}
+
+/* (d) ways to engage — four flat cards, hairline on top, same rail as .proc */
+.engage{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,1fr);gap:2.5rem}
+.engage li{border-top:1px solid var(--line);padding-top:1.4rem}
+.engage__no{display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);font-weight:500;margin-bottom:1rem}
+.engage h4{font-size:1.12rem;font-weight:500;margin-bottom:.75rem}
+.engage p{color:var(--muted)}
+.path-btns{display:flex;flex-wrap:wrap;gap:.9rem}
+
+/* (e) commercial stages — reuse the .pdeep row, plus a summary line and a
+   small "What happens" label so the three parts read as one stage */
+.pdeep__sum{font-size:1.05rem;line-height:1.6;color:var(--ink) !important;margin-bottom:1.1rem}
+.pdeep__label{display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);font-weight:500;margin-bottom:.45rem}
+
+@media(max-width:900px){
+  .pipeline{grid-template-columns:1fr;gap:0}
+  .engage{grid-template-columns:1fr 1fr;gap:2rem}
+}
+@media(max-width:640px){
+  .engage{grid-template-columns:1fr}
+  .path-tabs{display:flex;width:100%}
+  .path-tabs a{flex:1;padding:13px 10px;text-align:center}
+}
+@media(max-width:640px){
+  /* 320px floor: the number rail becomes a label above the prose so
+     nothing is forced to shrink below the 11px text minimum (§11). */
+  .pdeep > li{grid-template-columns:1fr;gap:.9rem;padding:2.25rem 0}
+  .pipeline__no{min-width:2.8em}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="site-header-slot"></div>
+
+<main id="main" tabindex="-1">
+  <section class="subhero subhero--photo">
+    <div class="subhero__media"><img src="assets/img/gallery/landing-page-mixed-tiered-garden-stairs-09.webp" alt="" width="1049" height="787" fetchpriority="high" decoding="async"></div>
+    <div class="container">
+      <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Our Process &nbsp;/&nbsp; Residential</p>
+      <h1>Residential Process</h1>
+      <p class="lead">Four steps on the surface, ten build stages underneath — so you always know exactly where your Adelaide project is up to.</p>
+    </div>
+  </section>
+
+  <section class="band path-switch" aria-label="Residential or commercial process">
+    <div class="container">
+      <nav class="path-tabs" aria-label="Process type">
+        <a aria-current="page" href="process-residential.html">Residential</a>
+        <a href="process-commercial.html">Commercial</a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="band path-first" id="res-steps" style="--plan-label:'The Four Steps'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">How we work</span><h2>The same four steps, every job</h2>
+        <p class="lead">Front yard refresh or a full rebuild, the path is identical. Nothing gets handed between trades and lost along the way.</p></div>
+      <div class="proc-grid" id="proc-steps"></div>
+    </div>
+  </section>
+
+  <section class="band band--dark contour" id="res-detail" style="--plan-label:'Step By Step'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">In detail</span><h2>What each step actually involves</h2>
+        <p class="lead">The short version is above. Here is what happens on your property, in order.</p></div>
+      <ol class="pdeep" id="proc-detail"></ol>
+    </div>
+  </section>
+
+  <section class="band" id="res-stages" style="--plan-label:'Build Stages'">
+    <div class="container">
+      <div class="row-split">
+        <div class="reveal">
+          <span class="eyebrow">Build stages</span>
+          <h2>Ten stages, and you can watch yours move</h2>
+          <p class="lead measure">Every build runs through the same ten stages. We track your job against them as it goes, and publish where it is up to — so you can see the progress without having to ring and ask.</p>
+          <p class="measure">No other landscaper in Adelaide does this. Our live jobs are on the site right now, each one showing its current stage and the latest update from site.</p>
+          <p><a class="btn-ghost" href="current-work.html">See work in progress</a></p>
+        </div>
+        <div class="reveal">
+          <ol class="pipeline" id="stage-list"></ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--dark contour cta-close" id="res-cta" style="--plan-label:'Start Here'">
+    <div class="container">
+      <div class="section-head reveal"><span class="eyebrow">Get started</span><h2>Step one starts with a conversation</h2>
+        <p class="lead">Tell us about your space and we will come out, walk it with you and put a free quote together — no obligation.</p></div>
+      <p class="cta-close__btns reveal"><a class="btn-ghost btn-ghost--fill" href="contact.html">Book a consultation</a><a class="btn-ghost" href="tel:+61404440222">Call 0404 440 222</a></p>
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer-slot"></div>
+<script src="assets/js/partials.js?v=1794373926"></script>
+<script src="assets/data.js?v=1794364968"></script>
+<script src="assets/js/main.js?v=1794223399"></script>
+<script src="assets/js/mega-menu.js?v=1" defer></script>
+<script>
+(function(){
+  var D = window.NLL || {}, steps = D.process || [], stages = D.stages || [];
+
+  /* The headline cards use the SAME markup main.js writes into #process-list
+     elsewhere; this page uses its own id so main.js doesn't also render here.
+     data.js strings carry entities (e.g. "2D &amp; 3D") — they go in via
+     innerHTML untouched, never re-escaped. */
+  var host = document.getElementById("proc-steps");
+  if (host) {
+    host.innerHTML = steps.map(function (p) {
+      // photo-led (client preference 2026-09-23); icon medallion is the
+      // fallback if a step has no image yet
+      var visual = p.img
+        ? '<div class="proc__media"><img loading="lazy" src="' + p.img + '" width="' + p.w + '" height="' + p.h + '" alt="' + (p.alt || '') + '"></div>'
+        : '<div class="proc__num"><i class="' + p.icon + '" aria-hidden="true"></i><span>' + p.no + '</span></div>';
+      return '<div class="proc' + (p.img ? ' proc--photo' : '') + ' reveal">' +
+        visual +
+        '<h3>' + p.name + '</h3><p>' + p.desc + '</p></div>';
+    }).join('');
+  }
+
+  /* Long-form expansion, keyed by the step name in data.js so the two stay
+     in step. Verified facts only — nothing here that isn't on the record. */
+  var DETAIL = {
+    "Consultation": [
+      "We come out to the property. Walking the space with you is the only way to read the levels, the drainage, the aspect and what is already worth keeping — none of that comes through a photo or a phone call.",
+      "We talk through your vision, what the space has to do for you, and the budget you are working to, so the design that follows is aimed at a real number rather than a wish."
+    ],
+    "Design": [
+      "You get a plan in 2D and 3D. That means you see the finished space — levels, materials, paving patterns, planting — before you commit to anything being built.",
+      "Almost no landscaper in Adelaide puts a render in front of a client. It is the part of our process people tell us made the decision easy, because there is no guessing what you are going to end up with."
+    ],
+    "Execution": [
+      "On-time, on-budget delivery with clear communication the whole way through. You are told what is happening this week and who will be on site.",
+      "We manage the trades ourselves — lighting, stormwater, shed installs and the rest are subcontracted but coordinated by us, so you are never the one chasing a sparky. Where a project needs development approval, we handle the council approvals on your behalf, as we did start to finish for our Somerton Park clients."
+    ],
+    "Aftercare": [
+      "We stay in touch after handover to make sure the space is doing what you wanted it to do, and that you are happy with the result.",
+      "NextLevel Outdoors is also there for anything the garden needs afterwards — plants, turf, fertiliser, mulch and lawn care."
+    ]
+  };
+
+  var detail = document.getElementById("proc-detail");
+  if (detail) {
+    detail.innerHTML = steps.map(function (p) {
+      var body = (DETAIL[p.name] || []).map(function (t) {
+        return '<p class="measure">' + t + '</p>';
+      }).join('');
+      return '<li class="reveal">' +
+          '<div><span class="pdeep__no"><i class="' + p.icon + '" aria-hidden="true"></i>' + p.no + '</span></div>' +
+          '<div><h3>' + p.name + '</h3>' + body + '</div>' +
+        '</li>';
+    }).join('');
+  }
+
+  var pipe = document.getElementById("stage-list");
+  if (pipe) {
+    pipe.innerHTML = stages.map(function (s, i) {
+      var n = (i + 1) < 10 ? "0" + (i + 1) : String(i + 1);
+      return '<li><span class="pipeline__no">' + n + '</span>' +
+        '<span class="pipeline__name">' + s + '</span></li>';
+    }).join('');
+  }
+
+  /* Commercial pathway — the eight stages, client copy word for word:
+     [title, one-line summary, what happens]. */
+  var COM_STAGES = [
+    ["Prequalification and registration", "We get approved as your supplier before the work comes up.",
+     "We supply our capability statement, licence, insurance certificates, WHS documents and company details, and complete your supplier or subcontractor prequalification."],
+    ["Invitation and Expression of Interest", "You tell us about the opportunity and we confirm we're the right fit.",
+     "We review your EOI or invitation and respond with relevant experience, resources and availability. If a package isn't the right fit, we'll tell you early."],
+    ["Site inspection and document review", "We understand the scope fully before we price it.",
+     "We attend site meetings or inspections, review drawings and specifications, and raise RFIs on anything unclear so every bidder works from the same information."],
+    ["Tender or quote submission", "You receive a complete price you can compare like for like.",
+     "An itemised price with clear inclusions and exclusions, a proposed programme and staging, methodology, and the compliance documents your tender requires. Value-engineered alternatives are offered as separate options."],
+    ["Clarification, negotiation and award", "We finalise the scope and terms so there are no surprises.",
+     "We answer tender clarifications, attend interviews and work through scope or programme adjustments. On award, we review and sign the contract or subcontract and lodge current certificates of currency."],
+    ["Mobilisation", "Everything is in place before we arrive on site.",
+     "We attend the pre-start meeting, confirm the programme, submit site-specific SWMS, lodge Before You Dig Australia enquiries, complete site inductions and submit material samples for approval. Long-lead materials and plant are ordered and booked."],
+    ["Delivery and reporting", "We build to programme and keep you informed.",
+     "Work proceeds in agreed stages with quality checks at hold points. You receive regular progress updates and photos. Variations are priced and approved in writing before work starts, and progress claims are submitted on the agreed schedule."],
+    ["Practical completion, handover and defects period", "We finish properly and stay responsible after handover.",
+     "We complete a joint inspection, close out any defects and hand over as-built information, warranties, and plant and irrigation care guidance. We remain responsible through the defects liability period, and can provide ongoing maintenance or plant establishment if required."]
+  ];
+  var comList = document.getElementById("com-stage-list");
+  if (comList) {
+    comList.innerHTML = COM_STAGES.map(function (s, i) {
+      var n = (i + 1) < 10 ? "0" + (i + 1) : String(i + 1);
+      return '<li class="reveal">' +
+          '<div><span class="pdeep__no">Stage ' + n + '</span></div>' +
+          '<div><h3>' + s[0] + '</h3>' +
+            '<p class="measure pdeep__sum">' + s[1] + '</p>' +
+            '<span class="pdeep__label">What happens</span>' +
+            '<p class="measure">' + s[2] + '</p></div>' +
+        '</li>';
+    }).join('');
+  }
+
+  document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+})();
+</script>
+</body>
+</html>

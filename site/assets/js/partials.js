@@ -8,8 +8,8 @@
   var nav = [
     ["services.html", "Services"],
     ["portfolio.html", "Portfolio"],
-    ["process.html", "Our Process"],
-    ["commercial.html", "Commercial Work"],
+    ["process-residential.html", "Residential Process"],
+    ["process-commercial.html", "Commercial Process"],
     ["current-work.html", "Current Work"],
     ["compliance.html", "Safety &amp; Compliance"],
     ["about.html", "About"],
@@ -62,7 +62,13 @@
       '<div class="container hdr2__main">' +
         '<nav class="hdr2__nav hdr2__nav--l">' +
           '<a href="portfolio.html">Portfolio</a>' +
-          '<a href="process.html">Our Process</a>' +
+          '<div class="hdr2__drop hdr2__drop--sub">' +
+            '<a href="process-residential.html">Our Process <i class="fa-solid fa-chevron-down hdr2__drop-arrow" aria-hidden="true"></i></a>' +
+            '<div class="hdr2__sub-panel">' +
+              '<a href="process-residential.html"><i class="fa-solid fa-house" aria-hidden="true"></i>Residential</a>' +
+              '<a href="process-commercial.html"><i class="fa-solid fa-building" aria-hidden="true"></i>Commercial</a>' +
+            '</div>' +
+          '</div>' +
         '</nav>' +
         '<a class="hdr2__brand" href="index.html"><img src="assets/img/brand/logo.png" alt="NextLevel Landscaping"></a>' +
         '<nav class="hdr2__nav hdr2__nav--r">' +
@@ -96,8 +102,7 @@
             '<li><a href="services.html">Services</a></li>' +
             '<li><a href="portfolio.html">Portfolio</a></li>' +
             '<li><a href="current-work.html">Current Work</a></li>' +
-            '<li><a href="commercial.html">Commercial Work</a></li>' +
-            '<li><a href="process.html">Our Process</a></li>' +
+            '<li><a href="process-residential.html">Our Process</a></li>' +
           '</ul></div>' +
           '<div><h4>COMPANY</h4><ul>' +
             '<li><a href="about.html">About</a></li>' +
