@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
-<script src="assets/js/demo-bar.js?v=1794485757"></script>
+<script src="assets/js/demo-bar.js?v=1794490555"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Contact Us — NextLevel Landscaping, Adelaide</title>
 <meta name="description" content="Contact NextLevel Landscaping in Adelaide — call 0404 440 222, email us, or send your project details through. Landscaping design and construction across metropolitan Adelaide and the Adelaide Hills.">
@@ -14,9 +14,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <link rel="stylesheet" href="assets/css/style.css?v=1793001000">
-<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1794485757">
+<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1794533800">
 <link rel="stylesheet" href="assets/css/demo-bar.css?v=17">
-<link rel="stylesheet" href="assets/css/demo-variants.css?v=1794485594">
+<link rel="stylesheet" href="assets/css/demo-variants.css?v=1794490460">
 <style>
   /* Page-scoped: the map slot. No embed is available yet (no API key, client
      has not confirmed the listing), so the block reserves the space the map
@@ -57,6 +57,14 @@
       <div class="contact-wrap">
         <form id="quote-form" class="reveal" novalidate>
           <div id="form-ok" class="form-ok">Thanks — your enquiry has been received. We'll be in touch shortly. <em>(Demo form — nothing was sent.)</em></div>
+          <fieldset class="field field--seg">
+            <legend class="field__label">Project type</legend>
+            <div class="seg">
+              <label><input type="radio" name="enquiry_type" value="residential" checked><span>Residential</span></label>
+              <label><input type="radio" name="enquiry_type" value="commercial"><span>Commercial</span></label>
+            </div>
+            <p class="seg-note" id="seg-note" hidden>Tender, EOI or panel enquiry? Our <a href="commercial.html#contact">commercial enquiry form</a> asks for the details your project needs.</p>
+          </fieldset>
           <div class="field">
             <label for="f-name">Name</label>
             <input type="text" id="f-name" name="name">
@@ -171,11 +179,24 @@
 </main>
 
 <div id="site-footer-slot"></div>
-<script src="assets/js/partials.js?v=1794373926"></script>
-<script src="assets/data.js?v=1794364968"></script>
+<script src="assets/js/partials.js?v=1794533800"></script>
+<script src="assets/data.js?v=1794533800"></script>
 <script src="assets/js/main.js?v=1793600000"></script>
 <script src="assets/js/demo-proof.js?v=8" defer></script>
 <script src="assets/js/demo-mega.js?v=2" defer></script>
+<script>
+/* Residential / Commercial choice: ?type=commercial preselects Commercial. */
+(function(){
+  var radios=document.querySelectorAll('input[name="enquiry_type"]');
+  var note=document.getElementById('seg-note');
+  if(!radios.length)return;
+  if(/[?&]type=commercial\b/.test(location.search))radios[1].checked=true;
+  function sync(){if(note)note.hidden=!radios[1].checked;}
+  radios.forEach(function(r){r.addEventListener('change',sync);});
+  document.getElementById('quote-form').addEventListener('reset',function(){setTimeout(sync,0);});
+  sync();
+})();
+</script>
 <script>document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});</script>
 </body>
 </html>

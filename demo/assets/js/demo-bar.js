@@ -38,7 +38,7 @@
   var WHS_KEY = "nll-demo-whs";
   var BG_KEY = "nll-demo-bg";
   var LINES_KEY = "nll-demo-lines";
-  var LINES_OPTS = ["current", "recall"];
+  var LINES_OPTS = ["current", "recall", "half", "quarter"];
   var LAPTOP_KEY = "nll-demo-laptop";
 
   var UTIL_OPTS = ["12.8", "13.5", "14.5", "15.5"];
@@ -77,8 +77,8 @@
     credm: "0" /* M removed: locked to M1 */,
     proof: "0" /* P removed: client picked P1 + licence line (2026-11-11) */,
     whs: "short", /* W removed 2026-11-11: client picked W2 (WHS) */
-    bg: readStored(BG_KEY, BG_OPTS, "approved"),
-    lines: readStored(LINES_KEY, LINES_OPTS, "current"),
+    bg: readStored(BG_KEY, BG_OPTS, "iron"), /* default N4 (VJ pick 2026-11-12) */
+    lines: readStored(LINES_KEY, LINES_OPTS, "half"), /* default B3 (VJ pick 2026-11-12) */
     laptop: "off" /* R removed 2026-11-11: locked to R1 (current sizing) */
   };
 
@@ -138,12 +138,14 @@
   /* N: dark background colour (2026-11-10), same six as recall-demo.
      Swaps --v2-night only, so curves and overlaps are untouched. */
   /* B (2026-11-12): contour line strength on dark sections.
-     B1 = site now (.05), B2 = recall-demo "Polished" (.032). */
+     B1 = site now (.05), B2 = recall-demo "Polished" (.032), B3 = .016, B4 = .008. */
   var GROUP_B = {
     code: "B", label: "Background lines", key: "lines", storeKey: LINES_KEY,
     opts: [
       { code: "B1", val: "current", label: "Current" },
-      { code: "B2", val: "recall", label: "Softer (recall demo)" }
+      { code: "B2", val: "recall", label: "Softer (recall demo)" },
+      { code: "B3", val: "half", label: "Half of B2" },
+      { code: "B4", val: "quarter", label: "Half of B3" }
     ]
   };
   var GROUP_N = {
@@ -259,7 +261,7 @@
   function buildBar() {
     var isHome = !!document.getElementById("hero-car-track");
     GROUPS = isHome ? [GROUP_N, GROUP_B] : [GROUP_N, GROUP_B, GROUP_K, GROUP_C];
-    HINT_TEXT = isHome ? "Tell us your pick, e.g. N1 + B1" : "Tell us your pick, e.g. N1 + B1 + K4 + C1";
+    HINT_TEXT = isHome ? "Tell us your pick, e.g. N4 + B3" : "Tell us your pick, e.g. N4 + B3 + K4 + C1";
 
     var bar = document.createElement("div");
     bar.className = "demo-bar";

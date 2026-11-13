@@ -1430,7 +1430,7 @@ html[data-theme="carbon-soft-v2"] #services .section-head .eyebrow{
    cover image.) Dark bands only, as before. */
 .contour::before{
   background:url("../img/contour-lines.svg?v=2") center/cover no-repeat fixed;
-  opacity:.05; /* .2 -> .1 -> .05 on review — the thicker lines read too strong */
+  opacity:.016; /* .2 -> .1 -> .05 -> .016 (B3, picked 2026-11-12) */
 }
 
 /* 16. Contact form — Services multi-select (checkbox dropdown).

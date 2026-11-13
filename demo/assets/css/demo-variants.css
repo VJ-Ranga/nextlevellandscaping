@@ -447,3 +447,5 @@ html[data-theme] #intro .cred-lic + .credline-clip{margin-top:2.25rem}
 /* B2 (2026-11-12): softer contour lines, same value as the recall-demo
    "Polished" layout (.032, site is .05). */
 html[data-lines="recall"] .contour::before{opacity:.032}
+html[data-lines="half"] .contour::before{opacity:.016}    /* B3 = half of B2 */
+html[data-lines="quarter"] .contour::before{opacity:.008} /* B4 = half of B3 */

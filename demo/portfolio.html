@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
-<script src="assets/js/demo-bar.js?v=1794485757"></script>
+<script src="assets/js/demo-bar.js?v=1794490555"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Landscaping Projects in Adelaide | NextLevel Landscaping</title>
 <meta name="description" content="Completed paving, retaining wall, fencing, turf and garden projects across Adelaide by NextLevel Landscaping, with photos of each job.">
@@ -14,9 +14,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <link rel="stylesheet" href="assets/css/style.css?v=1793001000">
-<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1794485757">
+<link rel="stylesheet" href="assets/css/style-carbon-soft-v2.css?v=1794533800">
 <link rel="stylesheet" href="assets/css/demo-bar.css?v=17">
-<link rel="stylesheet" href="assets/css/demo-variants.css?v=1794485594">
+<link rel="stylesheet" href="assets/css/demo-variants.css?v=1794490460">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -67,8 +67,8 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="assets/js/partials.js?v=1794373926"></script>
-<script src="assets/data.js?v=1794364968"></script>
+<script src="assets/js/partials.js?v=1794533800"></script>
+<script src="assets/data.js?v=1794533800"></script>
 <script src="assets/js/main.js?v=1793600000"></script>
 <script src="assets/js/demo-mega.js?v=2" defer></script>
 <script>
@@ -102,15 +102,36 @@
       var p=projects[tile.project];
       if(!p)return '';
       var image=p.gallery&&p.gallery[tile.image]||p.img;
+      var isCom=p.type==='commercial';
+      var tag=isCom?'<span class="work-tile__tag">Commercial</span>':'';
       var caption=tile.caption?'<div class="work-tile__caption"><span class="work-tile__project">'+esc(p.name)+'</span><span class="work-tile__place">'+esc(p.suburb)+'</span></div>':'';
-      return '<a class="work-tile work-tile--'+tile.layout+' reveal" href="project.html?slug='+esc(p.slug)+'">'+
+      return '<a class="work-tile work-tile--'+tile.layout+' reveal" data-type="'+(isCom?'commercial':'residential')+'" href="project.html?slug='+esc(p.slug)+'">'+
         '<article>'+
-          '<div class="work-tile__media"><img loading="lazy" decoding="async" src="'+esc(image)+'" alt="Selected project view from '+esc(p.name)+' in '+esc(p.suburb)+'">'+caption+'</div>'+
+          '<div class="work-tile__media">'+tag+'<img loading="lazy" decoding="async" src="'+esc(image)+'" alt="Selected project view from '+esc(p.name)+' in '+esc(p.suburb)+'">'+caption+'</div>'+
         '</article></a>';
     }).join('');
     grid.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
   }
   renderTiles();
+
+  /* All / Residential / Commercial filter. Shown only once there are 3+
+     commercial projects in data.js (type: "commercial"); until then the
+     commercial jobs sit in the grid with a "Commercial" tag. */
+  var comCount=projects.filter(function(p){return p.type==='commercial';}).length;
+  if(comCount>=3){
+    var bar=document.createElement('div');
+    bar.className='work-filter';bar.setAttribute('role','group');bar.setAttribute('aria-label','Filter projects');
+    bar.innerHTML=[['all','All'],['residential','Residential'],['commercial','Commercial']].map(function(f,i){
+      return '<button type="button" data-filter="'+f[0]+'" aria-pressed="'+(i?'false':'true')+'">'+f[1]+'</button>';
+    }).join('');
+    grid.parentNode.insertBefore(bar,grid);
+    bar.addEventListener('click',function(e){
+      var b=e.target.closest('button');if(!b)return;
+      var v=b.dataset.filter;
+      bar.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});
+      grid.querySelectorAll('.work-tile').forEach(function(t){t.hidden=v!=='all'&&t.dataset.type!==v;});
+    });
+  }
 })();
 </script>
 </body>
