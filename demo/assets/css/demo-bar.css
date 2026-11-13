@@ -42,6 +42,9 @@
 
 /* push the fixed site header down by the bar's actual (measured) height */
 [data-layout="centred"] .hdr2{top:var(--demo-bar-h,0)}
+/* ...and push the PAGE down by the same amount, so the bar never eats
+   into the hero: header-to-content spacing stays identical to site/ */
+body{padding-top:var(--demo-bar-h,0)}
 
 @media(max-width:759px){
   .demo-bar__toggle{display:flex}
@@ -66,3 +69,7 @@
 .demo-bar__opt--apart::before{content:"";position:absolute;left:-.7rem;top:15%;bottom:15%;width:1px;background:rgba(255,255,255,.4)}
 .demo-bar__opt[disabled][aria-pressed="true"]{background:none;color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.28)}
 @media(max-width:760px){.demo-bar__opt--apart{margin-left:0}.demo-bar__opt--apart::before{display:none}}
+/* full-screen heroes (home, commercial): fill the screen BELOW the bar,
+   and pin under it in sticky mode — same visible hero as site/ */
+html[data-theme] body .hero{min-height:calc(100svh - var(--demo-bar-h,0px))}
+html[data-hero="sticky"] body .hero{top:var(--demo-bar-h,0)}

@@ -224,20 +224,20 @@ html[data-theme][data-hero-h="80"] .subhero:not(.subhero--photo){padding-bottom:
 
 /* ---- L: homepage credentials strip (logos) ------------------------ */
 /* Shared: logos become one-colour marks so white and coloured logos sit together */
-html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline{
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) :is(#intro,.intro-twin) .credline{
   border-top:0;padding-top:0;margin-top:3rem;align-items:stretch;
 }
-html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline > span{
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) :is(#intro,.intro-twin) .credline > span{
   flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:1rem;
 }
-html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline__text{
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) :is(#intro,.intro-twin) .credline__text{
   flex:none;font-size:.78rem;line-height:1.55;letter-spacing:.06em;
 }
-html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline__logo,
-html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline span:has(.credline__logo--square) .credline__logo{
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) :is(#intro,.intro-twin) .credline__logo,
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) :is(#intro,.intro-twin) .credline span:has(.credline__logo--square) .credline__logo{
   height:44px;width:auto;max-width:150px;
 }
-html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline i{font-size:1.6rem;height:44px;display:flex;align-items:center}
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) :is(#intro,.intro-twin) .credline i{font-size:1.6rem;height:44px;display:flex;align-items:center}
 
 
 /* L1 / L2: infinite marquee of the credentials (L1 = framed dark tiles, L2 = no frame).
@@ -248,31 +248,31 @@ html[data-theme]:is([data-cred="4"],[data-cred="5"]) .credline-clip{
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
 }
-html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline{
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) :is(#intro,.intro-twin) .credline{
   display:flex;width:max-content;margin-top:0;animation:nll-cred-marquee 38s linear infinite;
 }
 html[data-theme]:is([data-cred="4"],[data-cred="5"]) .credline-clip:hover .credline{animation-play-state:paused}
-html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline > span,
-html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline > .is-clone{display:flex;flex:none;width:270px;margin-right:1rem}
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) :is(#intro,.intro-twin) .credline > span,
+html[data-theme]:is([data-cred="4"],[data-cred="5"]) :is(#intro,.intro-twin) .credline > .is-clone{display:flex;flex:none;width:270px;margin-right:1rem}
 @keyframes nll-cred-marquee{to{transform:translateX(-50%)}}
-html[data-theme][data-cred="4"] #intro .credline > span{
+html[data-theme][data-cred="4"] :is(#intro,.intro-twin) .credline > span{
   border:1px solid rgba(242,242,236,.16);border-radius:0 32px 0 0;padding:1.5rem 1.4rem 1.4rem;position:relative;
 }
-html[data-theme][data-cred="4"] #intro .credline > span::after{
+html[data-theme][data-cred="4"] :is(#intro,.intro-twin) .credline > span::after{
   content:"";position:absolute;left:1.4rem;top:-1px;width:36px;height:3px;background:#C2E807;
 }
-html[data-theme][data-cred="5"] #intro .credline > span{padding:.4rem 1.2rem .4rem 0;margin-right:2.6rem}
+html[data-theme][data-cred="5"] :is(#intro,.intro-twin) .credline > span{padding:.4rem 1.2rem .4rem 0;margin-right:2.6rem}
 @media(prefers-reduced-motion:reduce){
-  html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline{animation:none;width:auto;flex-wrap:wrap;gap:1rem}
-  html[data-theme]:is([data-cred="4"],[data-cred="5"]) #intro .credline > .is-clone{display:none}
+  html[data-theme]:is([data-cred="4"],[data-cred="5"]) :is(#intro,.intro-twin) .credline{animation:none;width:auto;flex-wrap:wrap;gap:1rem}
+  html[data-theme]:is([data-cred="4"],[data-cred="5"]) :is(#intro,.intro-twin) .credline > .is-clone{display:none}
 }
 
 /* ---- M: stats higher + credentials box under the stats ------------ */
 .credbox{display:none}
-html[data-theme]:not([data-credm="0"]) #intro .credline{display:none}
-html[data-theme]:not([data-credm="0"]) #intro .intro-grid{align-items:start}
-html[data-theme]:not([data-credm="0"]) #intro .intro-figures{align-self:start;padding-top:.5rem}
-html[data-theme]:not([data-credm="0"]) #intro .statline{margin-top:0}
+html[data-theme]:not([data-credm="0"]) :is(#intro,.intro-twin) .credline{display:none}
+html[data-theme]:not([data-credm="0"]) :is(#intro,.intro-twin) .intro-grid{align-items:start}
+html[data-theme]:not([data-credm="0"]) :is(#intro,.intro-twin) .intro-figures{align-self:start;padding-top:.5rem}
+html[data-theme]:not([data-credm="0"]) :is(#intro,.intro-twin) .statline{margin-top:0}
 html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox{display:block;margin-top:2.6rem}
 .credbox__label{margin:0 0 1rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#C2E807;font-weight:500}
 .credbox__mark img{display:block;width:auto;max-width:100%}
@@ -323,7 +323,7 @@ html[data-theme][data-credm="4"] .credbox__item{width:50cqw}
   html[data-theme]:is([data-credm="3"],[data-credm="4"]) .credbox__item{width:auto}
 }
 @media(max-width:900px){
-  html[data-theme]:not([data-credm="0"]) #intro .intro-figures{padding-top:0}
+  html[data-theme]:not([data-credm="0"]) :is(#intro,.intro-twin) .intro-figures{padding-top:0}
 }
 
 /* ---- P: credential proof options (demo-proof.js builds the blocks) ---- */
@@ -385,9 +385,9 @@ html[data-theme][data-proof="4"] .proof-c__line{margin-top:1.6rem;font-size:.82r
 @media(max-width:520px){.proof-b__cards{grid-template-columns:1fr}}
 
 /* L / M strips: credline / credbox use the dark-surface (white) logo from data.js */
-html[data-theme] #intro .credline__logo,
+html[data-theme] :is(#intro,.intro-twin) .credline__logo,
 html[data-theme] .credbox__mark img{filter:none}
-html[data-theme] #intro .credline__logo[src*="icn"],
+html[data-theme] :is(#intro,.intro-twin) .credline__logo[src*="icn"],
 html[data-theme] .credbox__mark img[src*="icn"]{height:56px;width:auto;max-width:none}
 .proof-plate img[src*="mlsa"]{height:54px}
 .proof-b__cards .proof-plate img[src*="mlsa"]{height:60px}
@@ -414,18 +414,18 @@ html[data-theme="carbon-soft-v2"][data-bg]:not([data-bg="approved"]) .site-foote
 .demo-bar__swatch{display:inline-block;width:.75rem;height:.75rem;margin-right:.35rem;border-radius:50%;border:1px solid rgba(242,242,236,.6);vertical-align:-1px}
 
 /* ---- Homepage licence line above the logo strip (client pick: P1 + this line, 2026-11-11) ---- */
-html[data-theme="carbon-soft-v2"] #intro .cred-lic{
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .cred-lic{
   display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 2.4rem;margin-top:6rem;padding-top:1.5rem;
   border-top:1px solid rgba(242,242,236,.16);
 }
-html[data-theme] #intro .cred-lic + .credline-clip{margin-top:2.25rem}
-#intro .cred-lic__label{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#C2E807;font-weight:500}
-#intro .cred-lic__no{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(242,242,236,.72)}
-#intro .cred-lic__no b{color:#F2F2EC;font-weight:500}
-#intro .cred-lic__no a{color:#C2E807;text-decoration:underline;text-underline-offset:3px;margin-left:.4rem}
-#intro .cred-lic__no a:hover{text-decoration-thickness:2px}
-#intro .cred-lic__no a:focus-visible{outline:2px solid #C2E807;outline-offset:3px}
-@media(max-width:640px){html[data-theme="carbon-soft-v2"] #intro .cred-lic{margin-top:4rem;gap:.4rem 1.5rem}}
+html[data-theme] :is(#intro,.intro-twin) .cred-lic + .credline-clip{margin-top:2.25rem}
+:is(#intro,.intro-twin) .cred-lic__label{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#C2E807;font-weight:500}
+:is(#intro,.intro-twin) .cred-lic__no{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(242,242,236,.72)}
+:is(#intro,.intro-twin) .cred-lic__no b{color:#F2F2EC;font-weight:500}
+:is(#intro,.intro-twin) .cred-lic__no a{color:#C2E807;text-decoration:underline;text-underline-offset:3px;margin-left:.4rem}
+:is(#intro,.intro-twin) .cred-lic__no a:hover{text-decoration-thickness:2px}
+:is(#intro,.intro-twin) .cred-lic__no a:focus-visible{outline:2px solid #C2E807;outline-offset:3px}
+@media(max-width:640px){html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .cred-lic{margin-top:4rem;gap:.4rem 1.5rem}}
 
 /* J (2026-11-11): dropdown icons. J1 icons, J2 plain text, J3 small lime dot.
    Covers the Services mega menu (H2), the two-column panel (H1) and the

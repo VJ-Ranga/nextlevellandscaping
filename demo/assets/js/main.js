@@ -3,7 +3,9 @@
    ============================================================= */
 (function () {
   "use strict";
-  var D = window.NLL || {};
+  /* a page can swap in its own content (e.g. commercial.html sets
+     window.NLL_PAGE = NLL.commercial); everything else falls back to NLL */
+  var D = Object.assign({}, window.NLL || {}, window.NLL_PAGE || {});
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var esc = function (s) { return String(s); }; // data is trusted (local file)
@@ -175,7 +177,7 @@
           svcCopy.innerHTML = '<div class="svc-copy__inner">' +
             '<h3>' + s.name + '</h3><p>' + s.desc + '</p>' +
             '<ul class="chips">' + s.tags.map(function (t) { return "<li>" + t + "</li>"; }).join("") + '</ul>' +
-            '<p style="margin-top:1.3rem"><a class="tlink" href="service.html?slug=' + esc(s.slug) + '">Explore ' + s.name +
+            '<p style="margin-top:1.3rem"><a class="tlink" href="' + esc(s.href || ("service.html?slug=" + s.slug)) + '">Explore ' + s.name +
             ' <i class="fa-solid fa-arrow-right"></i></a></p></div>';
           requestAnimationFrame(function () { $(".svc-copy__inner", svcCopy).classList.add("is-on"); });
         }, inner ? 160 : 0);
@@ -247,13 +249,13 @@
     projWrap.innerHTML = D.projects.filter(function (p) { return !p.inProgress; }).map(function (p) {
       return '' +
         '<div class="swiper-slide">' +
-          '<a class="proj-card" href="project.html?slug=' + esc(p.slug) + '">' +
+          (p.href === null ? '<div class="proj-card">' : '<a class="proj-card" href="' + esc(p.href || ("project.html?slug=" + p.slug)) + '">') +
             '<div class="media"><img loading="lazy" src="' + esc(p.img) + '" alt="' + esc(p.name) + '"></div>' +
             '<div class="proj-card__meta"><span>' + esc(p.suburb) + '</span><span>&bull;</span><span>' + esc(p.date) + '</span></div>' +
             '<h3>' + esc(p.name) + '</h3>' +
             '<p>' + esc(p.blurb) + '</p>' +
             '<ul class="chips">' + p.tags.map(function (t) { return "<li>" + t + "</li>"; }).join("") + '</ul>' +
-          '</a>' +
+          (p.href === null ? '</div>' : '</a>') +
         '</div>';
     }).join("");
   }

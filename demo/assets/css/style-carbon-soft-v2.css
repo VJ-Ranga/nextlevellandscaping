@@ -12,7 +12,7 @@
    42 rule). v2 generalises that one move to the whole page:
 
      hero (bottom)        . . . bottom-LEFT on the media  0 0 0 V
-     #intro   (dark)      . . . flat — meets the hero     0 0 0 0
+     :is(#intro,.intro-twin)   (dark)      . . . flat — meets the hero     0 0 0 0
      #services(light)     . . . top-RIGHT + bottom-LEFT   0 V 0 V
      #projects(dark)      . . . flat — #services curves over it  0 0 0 0
      #current (light)     . . . top-RIGHT + bottom-LEFT   0 V 0 V
@@ -24,7 +24,7 @@
      (V = var(--v2-scoop))
 
    PALETTE (Carbon soft's) — two grounds:
-     night  #17190F  . . . #intro #projects #reviews #store,
+     night  #17190F  . . . :is(#intro,.intro-twin) #projects #reviews #store,
                              .hero, .site-footer — off-white text
      ground #F2F2EC  . . . #services #current #process #contact
    Lime is FILLS + MARKS only. Accent TEXT is olive #3E4A16 on
@@ -166,7 +166,7 @@ html[data-theme="carbon-soft-v2"] .subhero{
    the band above with a negative margin, its OWN single corner
    rounding to reveal the band underneath through the curve.
 
-   - #intro meets the hero flat (the hero owns the curve).
+   - :is(#intro,.intro-twin) meets the hero flat (the hero owns the curve).
    - the light bands #services and #current each own a BOTTOM-LEFT
      seam curve; the dark band under each (#projects, #reviews) is
      flat and tucks up behind it (same idea as hero/#intro).
@@ -204,7 +204,7 @@ html[data-theme="carbon-soft-v2"] main > #projects{ margin-top:calc(-1 * var(--v
 
 /* #services owns the seam curve at its BOTTOM-LEFT and sits ON TOP;
    #projects (flat) tucks up behind so the night ground shows through
-   the notch — like the hero owns its curve and #intro stays flat. */
+   the notch — like the hero owns its curve and :is(#intro,.intro-twin) stays flat. */
 html[data-theme="carbon-soft-v2"] main > #services{
   z-index:2;
   padding-bottom:calc(var(--pad-band) + var(--v2-scoop));
@@ -219,7 +219,7 @@ html[data-theme="carbon-soft-v2"] main > #contact{  border-radius:0 0 0 0;  /* f
 html[data-theme="carbon-soft-v2"] main > #contact{ margin-top:0; padding-top:var(--pad-band-lg); }
 
 /* the band ABOVE each scoop needs room to be pulled into.
-   #intro also gets it (services sweeps up over its bottom).
+   :is(#intro,.intro-twin) also gets it (services sweeps up over its bottom).
    #process no longer reserves this — the #store band it used to
    be pulled into by has been removed from the page. */
 html[data-theme="carbon-soft-v2"] main > #intro,
@@ -262,7 +262,7 @@ html[data-theme="carbon-soft-v2"] #store.contour::before{
    keeps its pinned behaviour — square the hero media once covered */
 html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > .band{position:relative;z-index:1}
 html[data-theme="carbon-soft-v2"][data-hero="sticky"] .hero__media{border-radius:0}
-/* client asked for the scoop back at the hero/#intro seam even in
+/* client asked for the scoop back at the hero/:is(#intro,.intro-twin) seam even in
    sticky mode — #intro's top-left corner is cut out, revealing the
    pinned hero underneath as it slides up to cover it */
 html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > #intro{border-radius:var(--v2-scoop) 0 0 0}
@@ -412,7 +412,7 @@ html[data-theme="carbon-soft-v2"] .section-head{max-width:54ch}
 html[data-theme="carbon-soft-v2"] .lead{color:var(--v2-muted)}
 html[data-theme="carbon-soft-v2"] .band--dark .lead,
 html[data-theme="carbon-soft-v2"] .subhero .lead,
-html[data-theme="carbon-soft-v2"] main > #intro .lead{color:var(--v2-muted-nt)}
+html[data-theme="carbon-soft-v2"] main > :is(#intro,.intro-twin) .lead{color:var(--v2-muted-nt)}
 
 html[data-theme="carbon-soft-v2"] .band--dark p{color:var(--v2-on-night)}
 
@@ -422,29 +422,29 @@ html[data-theme="carbon-soft-v2"] .band--dark p{color:var(--v2-on-night)}
    Base rules give this section dark stat/cred colours; v2 keeps the
    split/stacked layouts and re-inks every literal to off-white.
    ============================================================= */
-html[data-theme="carbon-soft-v2"] #intro .statline{margin-top:3.5rem}
-html[data-theme="carbon-soft-v2"] #intro .stat-n b{color:var(--v2-on-night)}
-html[data-theme="carbon-soft-v2"] #intro .stat-n b i{color:var(--v2-lime)}
-html[data-theme="carbon-soft-v2"] #intro .stat-n > span{color:var(--v2-muted-nt)}
-html[data-theme="carbon-soft-v2"] #intro .stat-n::before{background:var(--v2-line-nt)}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .statline{margin-top:3.5rem}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .stat-n b{color:var(--v2-on-night)}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .stat-n b i{color:var(--v2-lime)}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .stat-n > span{color:var(--v2-muted-nt)}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .stat-n::before{background:var(--v2-line-nt)}
 
-html[data-theme="carbon-soft-v2"] #intro .credline{border-top-color:var(--v2-line-nt)}
-html[data-theme="carbon-soft-v2"] #intro .credline__text{color:var(--v2-muted-nt)}
-html[data-theme="carbon-soft-v2"] #intro .credline i{color:var(--v2-lime)}
-html[data-theme="carbon-soft-v2"] #intro .credline b{color:var(--v2-on-night)}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .credline{border-top-color:var(--v2-line-nt)}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .credline__text{color:var(--v2-muted-nt)}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .credline i{color:var(--v2-lime)}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .credline b{color:var(--v2-on-night)}
 
-html[data-theme="carbon-soft-v2"] #intro .headline h1{color:var(--v2-on-night)}
-html[data-theme="carbon-soft-v2"] #intro .eyebrow{color:var(--v2-lime)}
-html[data-theme="carbon-soft-v2"] #intro .btn-ghost--fill{
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .headline h1{color:var(--v2-on-night)}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .eyebrow{color:var(--v2-lime)}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .btn-ghost--fill{
   background:#C2E807;border-color:#C2E807;color:#17190F;--c:#C2E807;
 }
-html[data-theme="carbon-soft-v2"] #intro .btn-ghost--fill:hover{color:#C2E807}
-html[data-theme="carbon-soft-v2"] #intro .btn-ghost--fill::before{background:#17190F}
-html[data-theme="carbon-soft-v2"] #intro .btn-ghost:not(.btn-ghost--fill){border-color:rgba(242,242,236,.85);color:#F2F2EC;--c:#F2F2EC}
-html[data-theme="carbon-soft-v2"] #intro .btn-ghost:not(.btn-ghost--fill):hover{color:#17190F}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .btn-ghost--fill:hover{color:#C2E807}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .btn-ghost--fill::before{background:#17190F}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .btn-ghost:not(.btn-ghost--fill){border-color:rgba(242,242,236,.85);color:#F2F2EC;--c:#F2F2EC}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .btn-ghost:not(.btn-ghost--fill):hover{color:#17190F}
 
 /* the intro figures sit right of the copy in split layout */
-html[data-theme="carbon-soft-v2"] #intro .intro-figures{align-self:center}
+html[data-theme="carbon-soft-v2"] :is(#intro,.intro-twin) .intro-figures{align-self:center}
 
 
 /* =============================================================
@@ -887,7 +887,7 @@ html[data-theme="carbon-soft-v2"] .work-tile[hidden]{display:none}
    HOMEPAGE BAND SPACING — exactly 120px visible above and below the
    content of every text band (client, 2026-09-26). Homepage only.
    The scoop bands overlap their neighbour by --v2-scoop, so a band
-   that is COVERED by its neighbour (#intro bottom, #projects and
+   that is COVERED by its neighbour (:is(#intro,.intro-twin) bottom, #projects and
    #reviews top+bottom) reserves 120px + the scoop; a band sitting
    on top of its neighbours gets a plain 120px. The full-bleed photo strip has no padding by design.
    ============================================================= */
@@ -1065,7 +1065,7 @@ html[data-theme="carbon-soft-v2"] main > .band:not(.band--dark):not([hidden]) + 
   font-size:clamp(1.9rem,4.4vw,3.4rem);line-height:1.08;max-width:min(20ch,100%);
   text-shadow:0 2px 26px rgba(20,22,18,.5);
 }
-#intro .headline .h1{margin-bottom:1.4rem}
+:is(#intro,.intro-twin) .headline .h1{margin-bottom:1.4rem}
 
 /* Footer detail: both bottom rows share edges and baselines. */
 html[data-theme="carbon-soft-v2"] .site-footer.is-e5 .footer-bar{align-items:center}
@@ -1193,3 +1193,68 @@ html[data-theme] .work-filter{display:flex;flex-wrap:wrap;gap:.5rem;margin-botto
 html[data-theme] .work-filter button{font:inherit;font-size:.88rem;font-weight:500;padding:.5rem 1.1rem;border-radius:999px;border:1px solid var(--v2-line-ui);background:transparent;color:var(--v2-ink);cursor:pointer}
 html[data-theme] .work-filter button[aria-pressed="true"]{background:var(--v2-ink);color:var(--v2-on-night);border-color:var(--v2-ink)}
 html[data-theme] .work-tile[hidden]{display:none}
+
+
+/* =============================================================
+   Shared ribbon curves for inner "home-style" pages (demo,
+   2026-11-13). Same geometry as the home #services/#projects pair,
+   but class-based so any page can use it without borrowing home ids:
+     .v2-lead  dark band straight after the hero (flat, reserves room)
+     .v2-ride  light band, rides up: top-RIGHT + bottom-LEFT scoop
+     .v2-tuck  dark band, flat, tucks up behind the ride above it
+     .v2-ride--end  last light band: top-RIGHT only, normal bottom
+   ============================================================= */
+html[data-theme="carbon-soft-v2"] main > .band.v2-lead{
+  padding-top:var(--pad-band-lg);
+  padding-bottom:calc(var(--pad-band) + var(--v2-scoop));
+}
+html[data-theme="carbon-soft-v2"][data-hero="sticky"] main > .band.v2-lead{border-radius:var(--v2-scoop) 0 0 0}
+html[data-theme="carbon-soft-v2"] main > .band.v2-ride{
+  background-color:var(--v2-ground);
+  color:var(--v2-ink);
+  z-index:2;
+  margin-top:calc(-1 * var(--v2-scoop));
+  padding-top:calc(var(--pad-band) + var(--v2-scoop) * .45);
+  padding-bottom:calc(var(--pad-band) + var(--v2-scoop));
+  border-radius:0 var(--v2-scoop) 0 var(--v2-scoop);
+  overflow:clip;
+}
+html[data-theme="carbon-soft-v2"] main > .band.v2-tuck{
+  z-index:1;
+  margin-top:calc(-1 * var(--v2-scoop));
+  padding-top:calc(var(--pad-band) + var(--v2-scoop));
+  padding-bottom:calc(var(--pad-band) + var(--v2-scoop));
+  border-radius:0;
+}
+html[data-theme="carbon-soft-v2"] main > .band.v2-ride.v2-ride--end,
+html[data-theme="carbon-soft-v2"] main > #contact.v2-ride.v2-ride--end{
+  margin-top:calc(-1 * var(--v2-scoop));
+  padding-top:calc(var(--pad-band-lg) + var(--v2-scoop) * .45);
+  padding-bottom:var(--pad-band-lg);
+  border-radius:0 var(--v2-scoop) 0 0;
+}
+
+/* commercial hero: home video hero, centred static headline */
+html[data-theme="carbon-soft-v2"] .com-hero{align-items:flex-end;justify-content:center}  /* sits low like the home hero */
+.com-hero__content{
+  position:relative;z-index:2;text-align:center;color:#fff;
+  max-width:960px;padding-block:200px clamp(56px,10vh,120px);
+}
+.com-hero__kicker{display:block;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,242,236,.78)}
+.com-hero__content h1{color:#fff;margin:.9rem auto 0;max-width:20ch;text-shadow:0 2px 26px rgba(23,25,15,.55)}
+html[data-theme="carbon-soft-v2"] .com-hero__content .lead{color:rgba(242,242,236,.9);margin:1.1rem auto 0;max-width:58ch}
+.com-hero__content .btns{justify-content:center;margin-top:1.8rem}
+@media(max-width:767px){
+  html[data-layout] .com-hero .hero-scroll{display:none}
+  .com-hero__content{padding-block:150px 64px}
+}
+/* centred copy sits over the busiest part of the video — darker scrim */
+html[data-theme="carbon-soft-v2"] .com-hero .hero__overlay{background:rgba(23,25,15,.5)}
+.com-hero__content .lead,.com-hero__kicker{text-shadow:0 1px 14px rgba(23,25,15,.7)}
+/* hero buttons: same hover pair as the home :is(#intro,.intro-twin) (outline fills
+   off-white with dark text; lime pill fills dark with lime text) */
+html[data-theme="carbon-soft-v2"] .com-hero .btn-ghost--fill{background:#C2E807;border-color:#C2E807;color:#17190F;--c:#C2E807}
+html[data-theme="carbon-soft-v2"] .com-hero .btn-ghost--fill::before{background:#17190F}
+html[data-theme="carbon-soft-v2"] .com-hero .btn-ghost--fill:hover{color:#C2E807;border-color:#17190F}
+html[data-theme="carbon-soft-v2"] .com-hero .btn-ghost:not(.btn-ghost--fill){border-color:rgba(242,242,236,.85);color:#F2F2EC;--c:#F2F2EC}
+html[data-theme="carbon-soft-v2"] .com-hero .btn-ghost:not(.btn-ghost--fill):hover{color:#17190F}
