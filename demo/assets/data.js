@@ -398,3 +398,95 @@ window.NLL = {
       a: "", confirm: "Client has not confirmed a warranty or workmanship guarantee period. Only 1 of 19 competitors states one — stating it would be a real differentiator. Answer intentionally left blank until confirmed." }
   ]
 };
+
+/* =============================================================
+   Commercial landing page (commercial.html) — same home sections,
+   commercial content. commercial.html sets window.NLL_PAGE to this
+   object and main.js reads it over the defaults for that page only.
+   Facts only from the record (compliance page, commercial process,
+   project photos). Items marked WAITING need client confirmation.
+   ============================================================= */
+window.NLL.commercial = {
+
+  /* "What we deliver" — the home services explorer */
+  services: [
+    { no: "01", name: "Landscape design &amp; construction", href: "service.html?slug=landscape-design",
+      desc: "Our in-house landscape architect produces 2D and 3D designs, and the same team builds them. Bring us in early to shape the design, budget and staging, or give us your drawings to build to.",
+      tags: ["In-house landscape architect", "2D &amp; 3D design", "Design &amp; construct"],
+      img: "assets/img/commercial/rspca-site-aerial.jpg" },
+    { no: "02", name: "Earthworks &amp; site preparation", href: "compliance.html",
+      desc: "Our own excavators, Bobcats and Kanga loaders, inspected each day on a documented pre-start checklist. A Before You Dig Australia enquiry is lodged and services are marked before any digging starts.",
+      tags: ["Own plant", "Daily pre-start checks", "Before You Dig"],
+      img: "assets/img/commercial/rspca-ohalloran-hill-excavator-site-works-12.webp" },
+    { no: "03", name: "Commercial fencing", href: "service.html?slug=fencing",
+      desc: "Steel and mesh fencing for working sites, including 375m of jump-proof fencing at RSPCA South Australia, O'Halloran Hill.",
+      tags: ["Jump-proof fencing", "Mesh enclosures", "Steel fencing"],
+      img: "assets/img/commercial/rspca-crew-fencing.jpg" },
+    { no: "04", name: "Paving, paths &amp; retaining walls", href: "service.html?slug=paving",
+      desc: "Brick, segmental and concrete paving, steel edged paths and retaining walls, built to the specification.",
+      tags: ["Concrete paths", "Steel edging", "Retaining walls"],
+      img: "assets/img/gallery/animal-care-grounds-steel-edged-path-being-formed-beside-the-yards-32.webp" },
+    { no: "05", name: "Turf, planting &amp; grounds", href: "service.html?slug=natural-artificial-grass",
+      desc: "Turf, garden beds, mulch and planting, established so the grounds are ready to hand back.",
+      tags: ["Turf", "Planting", "Mulch &amp; beds"],
+      img: "assets/img/gallery/animal-care-grounds-turfed-yard-with-mesh-topped-steel-fencing-01.webp" },
+    { no: "06", name: "Trades coordinated for you", href: "process-commercial.html",
+      desc: "Stormwater, lighting and other trades are subcontracted and coordinated by us, so you deal with one contact, not several.",
+      tags: ["Stormwater", "Lighting", "One contact"],
+      img: "assets/img/gallery/animal-care-grounds-concrete-path-along-the-shelter-block-08.webp" },
+    { no: "07", name: "Grounds maintenance", href: "service.html?slug=commercial-garden-maintenance",
+      desc: "After handover, qualified horticulturists keep the grounds sharp year-round: pruning, planting, weeding and seasonal care.",
+      tags: ["Pruning", "Planting", "Weeding", "Seasonal care"],
+      img: "assets/img/gallery/penfield-mulched-garden-overview-03.webp" }
+  ],
+
+  /* "Commercial projects" — the home projects carousel.
+     href: null = no project page yet (card is not a link). */
+  projects: [
+    { name: "RSPCA South Australia", suburb: "O'Halloran Hill", date: "Animal care facility", href: null,
+      blurb: "Animal shelters, a large animal shelter, 375m of jump-proof fencing and new grounds, built while the site kept caring for animals.",
+      tags: ["Animal shelters", "Jump-proof fence", "Grounds", "Live site"],
+      img: "assets/img/commercial/rspca-finished-shelter.jpg" },
+    { name: "Animal Care Facility Grounds", suburb: "Animal care facility", date: "In progress", slug: "animal-care-facility-grounds",
+      blurb: "Fenced yards with mesh tops, turf, mulched beds and steel edged paths, photographed while the work was underway.",
+      tags: ["Fencing", "Turf", "Garden beds"],
+      img: "assets/img/gallery/animal-care-grounds-finished-turf-yard-with-mesh-topped-fencing-25.webp" },
+    { name: "Commercial grounds", suburb: "Penfield", date: "Before &amp; after", href: null,
+      blurb: "Tired commercial grounds brought back with new planting, restored beds and fresh mulch.",
+      tags: ["Planting", "Garden beds", "Mulch"],
+      img: "assets/img/commercial/penfield-after-1.jpg" },
+    { name: "RSPCA South Australia", suburb: "O'Halloran Hill", date: "Site works", href: null,
+      blurb: "Earthworks with our own plant, then enclosure fencing installed across the site.",
+      tags: ["Earthworks", "Own plant", "Enclosure fencing"],
+      img: "assets/img/commercial/rspca-ohalloran-hill-enclosure-fence-install-02.webp" }
+  ],
+
+  /* "How to engage us" — the home process cards */
+  process: [
+    { no: "01", name: "Invite us to tender", img: "assets/img/commercial/rspca-finished-shelter.jpg", w: 1600, h: 901, alt: "Finished animal shelter at the RSPCA South Australia site",
+      desc: "Send your RFQ, RFT or EOI documents and we'll respond within your timeframe, complete and compliant." },
+    { no: "02", name: "Request a quote", img: "assets/img/gallery/animal-care-grounds-levelled-ground-in-front-of-the-yard-fencing-06.webp", w: 1600, h: 1066, alt: "Levelled ground in front of steel yard fencing",
+      desc: "For smaller packages or direct engagement, we'll inspect the site and provide an itemised quote." },
+    { no: "03", name: "Add us to your panel", img: "assets/img/gallery/animal-care-grounds-fence-corner-with-red-mulch-and-steel-edging-37.webp", w: 1600, h: 1066, alt: "Fence corner with red mulch and steel edging",
+      desc: "We're set up for supplier prequalification and can complete your onboarding requirements." },
+    { no: "04", name: "Involve us early", img: "assets/img/commercial/rspca-site-aerial.jpg", w: 1600, h: 1200, alt: "Elevated view across the RSPCA South Australia site",
+      desc: "Our in-house landscape architect can help develop the design, budget and staging before you go to market." }
+  ],
+
+  /* the full-bleed photo strip before the form */
+  projectStrip: [
+    { img: "assets/img/commercial/rspca-large-shelter.jpg", w: 1600, h: 1200, cap: "Large animal shelter · RSPCA SA" },
+    { img: "assets/img/commercial/rspca-crew-detail.jpg", w: 900, h: 1600, cap: "Our crew on site · RSPCA SA" },
+    { img: "assets/img/gallery/animal-care-grounds-wide-view-of-the-yards-across-the-site-29.webp", w: 1600, h: 1066, cap: "Yards across the site" },
+    { img: "assets/img/commercial/penfield-after-2.jpg", w: 1200, h: 900, cap: "Commercial grounds · Penfield" },
+    { img: "assets/img/gallery/animal-care-grounds-skid-steer-finishing-the-ground-beside-the-yards-27.webp", w: 1600, h: 1066, cap: "Finishing the ground" },
+    { img: "assets/img/gallery/penfield-border-planting-08.webp", w: 708, h: 944, cap: "Border planting · Penfield" },
+    { img: "assets/img/commercial/rspca-shelters.jpg", w: 1600, h: 1200, cap: "Animal shelters · RSPCA SA" },
+    { img: "assets/img/gallery/animal-care-grounds-mulch-bed-and-steel-edged-path-along-the-fence-33.webp", w: 1600, h: 1066, cap: "Steel edged path & mulch" },
+    { img: "assets/img/gallery/penfield-mass-planting-layout-07.webp", w: 944, h: 787, cap: "Mass planting · Penfield" },
+    { img: "assets/img/gallery/animal-care-grounds-shelter-bays-and-concrete-apron-16.webp", w: 1600, h: 1066, cap: "Shelter bays & concrete apron" }
+  ],
+
+  /* the home reviews slot shows these instead (no commercial reviews yet — WAITING) */
+  reviews: null
+};

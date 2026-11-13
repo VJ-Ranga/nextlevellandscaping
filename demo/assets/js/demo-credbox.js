@@ -3,7 +3,7 @@
   'use strict';
   var D = window.NLL;
   function init() {
-    var host = document.querySelector('#intro .intro-figures');
+    var host = document.querySelector(':is(#intro,.intro-twin) .intro-figures');
     if (!host || !D || !Array.isArray(D.credentials) || host.querySelector('.credbox')) return;
 
     var box = document.createElement('div');
