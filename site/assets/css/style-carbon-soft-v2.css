@@ -54,7 +54,7 @@ html[data-theme="carbon-soft-v2"]{
 
   /* --- the two grounds -------------------------------------- */
   --v2-ground   : #F2F2EC;   /* warm light ground for the light bands */
-  --v2-night    : #17190F;   /* near-black for the dark bands          */
+  --v2-night    : #1a1e22;   /* dark bands: N4 Iron (picked 2026-11-12, was #17190F) */
   --v2-ink      : #17190F;   /* text on light                          */
   --v2-on-night : #F2F2EC;   /* text on dark                           */
   --v2-muted    : #6B6F62;   /* secondary on light   (4.59:1 on ground)*/
@@ -633,7 +633,6 @@ html[data-theme="carbon-soft-v2"] .site-header.is-stuck{
 }
 html[data-theme="carbon-soft-v2"] .hdr2:not(.is-stuck){background-color:transparent}
 html[data-theme="carbon-soft-v2"][data-layout="centred"] .hdr2.is-stuck{
-  background-color:#17190F;
   background-color:var(--v2-night);
   box-shadow:0 1px 0 rgba(242,242,236,.08);
 }
@@ -1017,8 +1016,8 @@ html[data-theme="carbon-soft-v2"] body.pg-home main > #intro{padding-bottom:calc
 /* Footer sits on a deeper ground with no contour lines, so the
    contour band above it has a clear edge. */
 html[data-theme="carbon-soft-v2"] .site-footer--scoop{
-  background:#0D0E08;
-  background-color:#0D0E08;
+  background:#111519;
+  background-color:#111519; /* footer for N4 Iron (was #0D0E08) */
   padding-top:56px;
 }
 html[data-theme="carbon-soft-v2"] .footer-grid{grid-template-columns:1.5fr .8fr 1fr 1.4fr;gap:2.5rem 3rem}

@@ -1,7 +1,7 @@
 /* Services mega menu (desktop >=993px). Chosen: H5 mega + solid header when open + service icons. */
 .mega{display:none}
 @media(min-width:993px){
-  html[data-theme] .hdr2:has(.hdr2__drop:hover),html[data-theme] .hdr2:has(.hdr2__drop:focus-within){background-color:#17190F;box-shadow:0 1px 0 rgba(255,255,255,.12);transition:background-color .2s}
+  html[data-theme] .hdr2:has(.hdr2__drop:hover),html[data-theme] .hdr2:has(.hdr2__drop:focus-within){background-color:var(--v2-night,#1a1e22);box-shadow:0 1px 0 rgba(255,255,255,.12);transition:background-color .2s}
   /* Hover zone: full button height + bridge down to the panel, so the menu doesn't flicker shut on the way */
   html[data-theme] .hdr2__nav > .hdr2__drop > a{position:relative;padding:36px 16px;margin:-36px -16px;z-index:2}
   html[data-theme] .mega{display:grid}
@@ -10,7 +10,7 @@
   html[data-theme] .hdr2__drop-panel{
     position:absolute;left:0;right:0;top:100%;width:auto;margin:0;
     padding:2.75rem clamp(20px,4vw,56px) 3.25rem;
-    background:#17190F;color:#F2F2EC;border:0;border-top:1px solid rgba(242,242,236,.28);border-bottom:1px solid rgba(242,242,236,.45);
+    background:var(--v2-night,#1a1e22);color:#F2F2EC;border:0;border-top:1px solid rgba(242,242,236,.28);border-bottom:1px solid rgba(242,242,236,.45);
     border-radius:0;box-shadow:none;
   }
   html[data-theme] .mega{

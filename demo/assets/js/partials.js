@@ -7,6 +7,7 @@
 
   var nav = [
     ["services.html", "Services"],
+    ["commercial.html", "Commercial"],
     ["portfolio.html", "Portfolio"],
     ["process-residential.html", "Residential Process"],
     ["process-commercial.html", "Commercial Process"],
@@ -73,6 +74,7 @@
         '<a class="hdr2__brand" href="index.html"><img src="assets/img/brand/logo.png" alt="NextLevel Landscaping"></a>' +
         '<nav class="hdr2__nav hdr2__nav--r">' +
           servicesDrop +
+          '<a href="commercial.html">Commercial</a>' +
           '<a href="contact.html">Contact</a>' +
         '</nav>' +
         '<button class="nav-toggle hdr2__toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>' +
@@ -100,6 +102,7 @@
           '</div>' +
           '<div><h4>EXPLORE</h4><ul>' +
             '<li><a href="services.html">Services</a></li>' +
+            '<li><a href="commercial.html">Commercial</a></li>' +
             '<li><a href="portfolio.html">Portfolio</a></li>' +
             '<li><a href="current-work.html">Current Work</a></li>' +
             '<li><a href="process-residential.html">Our Process</a></li>' +

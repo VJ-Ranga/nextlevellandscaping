@@ -151,7 +151,7 @@ window.NLL = {
       galleryAlt: ["Backyard turf and aggregate path around the alfresco", "Crazy paving feature corner", "Hexagon stepping stones and flowering hedge", "Exposed aggregate driveway and front garden", "White slat fence with kangaroo paw", "Hexagon stepping stones across the front lawn", "Alfresco slab with exposed aggregate edging", "Side lawn along the alfresco and fencing", "Alfresco and turf beside charcoal fencing", "Exposed aggregate path beside the alfresco", "Side lawn beside planted border", "Side passage turf with aggregate path", "Planted border along charcoal fencing", "Front lawn with stepping stones beside the driveway", "Front garden beside the entry path", "Stepping stones and planting by the entry", "Front garden behind the white fence", "White fence along the aggregate driveway", "White fence and gate from the street", "Driveway and white fence from the front", "White fence and gate beside the driveway", "Kangaroo paw planted along the fence line", "Aggregate driveway with side fencing", "Front elevation behind the white fence", "Front garden behind the white slat fence"]
     },
     {
-      slug: "animal-care-facility-grounds", name: "Animal Care Facility Grounds", suburb: "Suburb TBC", date: "In progress",
+      slug: "animal-care-facility-grounds", type: "commercial", name: "Animal Care Facility Grounds", suburb: "Suburb TBC", date: "In progress",
       dateLabel: "Status", inProgress: true,
       /* Photo set supplied 2026-11-03. Name, suburb, date and scope are drafted from the photos — waiting on client. */
       draft: true,
