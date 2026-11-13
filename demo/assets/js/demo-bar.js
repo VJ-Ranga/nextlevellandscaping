@@ -72,7 +72,7 @@
     overlay: "normal" /* C removed 2026-11-14: locked to C1, same as site */,
     open: "solid" /* I removed: locked, same as site */,
     icons: "off", /* J removed 2026-11-12: no icons in dropdowns (site same). Icon list kept in memory. */
-    heroh: readStored(HEROH_KEY, HEROH_OPTS, "80"),
+    heroh: "80" /* K removed 2026-11-14: locked to K4 (+80px), same as site */,
     cred: "5" /* L removed: locked to L2, same as site */,
     credm: "0" /* M removed: locked to M1 */,
     proof: "0" /* P removed: client picked P1 + licence line (2026-11-11) */,
@@ -260,8 +260,8 @@
 
   function buildBar() {
     var isHome = !!document.getElementById("hero-car-track");
-    GROUPS = isHome ? [GROUP_N, GROUP_B] : [GROUP_N, GROUP_B, GROUP_K];
-    HINT_TEXT = isHome ? "Tell us your pick, e.g. N4 + B3" : "Tell us your pick, e.g. N4 + B3 + K4";
+    GROUPS = [GROUP_N, GROUP_B];
+    HINT_TEXT = "Tell us your pick, e.g. N4 + B3";
 
     var bar = document.createElement("div");
     bar.className = "demo-bar";
