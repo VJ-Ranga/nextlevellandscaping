@@ -69,7 +69,7 @@
     util: "14.5" /* F removed: locked */,
     nav: "18" /* G removed: locked */,
     menu: "mega", /* H removed 2026-11-11: client picked H2 mega menu */
-    overlay: readStored(OVERLAY_KEY, OVERLAY_OPTS, "normal"),
+    overlay: "normal" /* C removed 2026-11-14: locked to C1, same as site */,
     open: "solid" /* I removed: locked, same as site */,
     icons: "off", /* J removed 2026-11-12: no icons in dropdowns (site same). Icon list kept in memory. */
     heroh: readStored(HEROH_KEY, HEROH_OPTS, "80"),
@@ -260,8 +260,8 @@
 
   function buildBar() {
     var isHome = !!document.getElementById("hero-car-track");
-    GROUPS = isHome ? [GROUP_N, GROUP_B] : [GROUP_N, GROUP_B, GROUP_K, GROUP_C];
-    HINT_TEXT = isHome ? "Tell us your pick, e.g. N4 + B3" : "Tell us your pick, e.g. N4 + B3 + K4 + C1";
+    GROUPS = isHome ? [GROUP_N, GROUP_B] : [GROUP_N, GROUP_B, GROUP_K];
+    HINT_TEXT = isHome ? "Tell us your pick, e.g. N4 + B3" : "Tell us your pick, e.g. N4 + B3 + K4";
 
     var bar = document.createElement("div");
     bar.className = "demo-bar";
